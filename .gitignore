@@ -4,6 +4,10 @@
 ### Java ###
 # Compiled class file
 *.class
+.idea
+server/src/main/resources/application.yml
+*.yml
+
 
 # Log file
 *.log

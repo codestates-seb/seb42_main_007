@@ -1,14 +1,14 @@
-package server.member.controller;
+package server.MainProject007.member.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import server.member.dto.MemberPatchDto;
-import server.member.dto.MemberPostDto;
-import server.member.entity.Member;
-import server.member.mapper.MemberMapper;
-import server.member.service.MemberService;
+import server.MainProject007.member.entity.Member;
+import server.MainProject007.member.service.MemberService;
+import server.MainProject007.member.dto.MemberPatchDto;
+import server.MainProject007.member.dto.MemberPostDto;
+import server.MainProject007.member.mapper.MemberMapper;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

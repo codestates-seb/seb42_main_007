@@ -1,11 +1,11 @@
-package server.member.service;
+package server.MainProject007.member.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import server.exception.BusinessLogicException;
-import server.exception.ExceptionCode;
-import server.member.entity.Member;
-import server.member.repository.MemberRepository;
+import server.MainProject007.member.repository.MemberRepository;
+import server.MainProject007.exception.BusinessLogicException;
+import server.MainProject007.exception.ExceptionCode;
+import server.MainProject007.member.entity.Member;
 
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public class MemberService {
         verifyExistEmail(member.getEmail());
 
         member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
-        member.setRole("ROLE_USER");
+        member.setRoles(member.getRoles());
 
         return memberRepository.save(member);
     }

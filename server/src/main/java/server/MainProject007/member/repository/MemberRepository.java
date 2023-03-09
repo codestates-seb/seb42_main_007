@@ -1,8 +1,8 @@
-package server.member.repository;
+package server.MainProject007.member.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import server.member.entity.Member;
+import server.MainProject007.member.entity.Member;
 
 import java.util.Optional;
 

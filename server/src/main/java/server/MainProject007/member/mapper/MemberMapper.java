@@ -1,10 +1,10 @@
-package server.member.mapper;
+package server.MainProject007.member.mapper;
 
 import org.mapstruct.Mapper;
-import server.member.dto.MemberPatchDto;
-import server.member.dto.MemberPostDto;
-import server.member.dto.MemberResponseDto;
-import server.member.entity.Member;
+import server.MainProject007.member.dto.MemberPatchDto;
+import server.MainProject007.member.dto.MemberPostDto;
+import server.MainProject007.member.dto.MemberResponseDto;
+import server.MainProject007.member.entity.Member;
 
 @Mapper(componentModel = "Spring")
 public interface MemberMapper {

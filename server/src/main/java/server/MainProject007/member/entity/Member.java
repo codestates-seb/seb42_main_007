@@ -1,4 +1,4 @@
-package server.member.entity;
+package server.MainProject007.member.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,12 +6,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "MEMBERS")
+@Table(name = "members")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +47,14 @@ public class Member {
         this.password = password;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "member_roles",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),
         MEMBER_EXIST("활동중인 회원");
@@ -57,6 +67,5 @@ public class Member {
         }
     }
 
-    @Column(nullable = true)
-    private String role;
+
 }

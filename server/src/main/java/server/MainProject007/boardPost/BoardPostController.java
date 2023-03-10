@@ -31,7 +31,7 @@ public class BoardPostController {
 
     // 게시글 등록
     @PostMapping
-    public ResoponseEntity postBoardPost(@RequestBody @Valid BoardPostDto.Post postDto) {
+    public ResponseEntity postBoardPost(@RequestBody @Valid BoardPostDto.Post postDto) {
 
         BoardPost createdBoardPost = boardPostService.createBoardPost(mapper.boardPostPostDtoToBoardPost(postDto));
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(createdBoardPost);

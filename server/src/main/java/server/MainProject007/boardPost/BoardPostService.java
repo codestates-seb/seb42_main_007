@@ -27,16 +27,16 @@ public class BoardPostService {
 
     // 수정
     public BoardPost updateBoardPost(BoardPost boardPost) {
-        BoardPost existBoardPost = findVerifiedExistBoardPost(boardPost);
+        BoardPost existBoardPost = findVerifiedExistBoardPost(boardPost.getBoardPostId());
 
         Optional.ofNullable(boardPost.getTitle())
-                .ifPresent(title -> existBoardPost.setTitle());
+                .ifPresent(title -> existBoardPost.setTitle(title));
 
         Optional.ofNullable(boardPost.getContent())
-                .ifPresent(content -> existBoardPost.setContent());
+                .ifPresent(content -> existBoardPost.setContent(content));
 
         Optional.ofNullable(boardPost.getUpdatedAt())
-                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt());
+                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
 
         BoardPost response = boardPostRepository.save(existBoardPost);
 

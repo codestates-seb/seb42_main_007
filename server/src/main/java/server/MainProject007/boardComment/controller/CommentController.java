@@ -1,15 +1,15 @@
-package server.MainProject007.comment.controller;
+package server.MainProject007.boardComment.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import server.MainProject007.comment.dto.BoardCommentPatchDto;
-import server.MainProject007.comment.dto.BoardCommentPostDto;
-import server.MainProject007.comment.entity.BoardComment;
-import server.MainProject007.comment.mapper.BoardCommentMapper;
-import server.MainProject007.comment.response.MultiResponseDto;
-import server.MainProject007.comment.service.BoardCommentService;
+import server.MainProject007.boardComment.dto.BoardCommentPatchDto;
+import server.MainProject007.boardComment.dto.BoardCommentPostDto;
+import server.MainProject007.boardComment.entity.BoardComment;
+import server.MainProject007.boardComment.mapper.BoardCommentMapper;
+import server.MainProject007.boardComment.response.MultiResponseDto;
+import server.MainProject007.boardComment.service.BoardCommentService;
 import server.MainProject007.utils.UriCreator;
 
 import javax.validation.Valid;

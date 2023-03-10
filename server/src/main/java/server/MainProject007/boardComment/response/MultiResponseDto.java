@@ -1,4 +1,4 @@
-package server.MainProject007.comment.response;
+package server.MainProject007.boardComment.response;
 
 import lombok.Getter;
 import org.springframework.data.domain.Page;

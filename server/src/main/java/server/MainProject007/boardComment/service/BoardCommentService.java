@@ -1,13 +1,13 @@
-package server.MainProject007.comment.service;
+package server.MainProject007.boardComment.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import server.MainProject007.comment.entity.BoardComment;
-import server.MainProject007.comment.exception.BuisnessLogicException;
-import server.MainProject007.comment.exception.ExceptionCode;
-import server.MainProject007.comment.repository.BoardCommentRepository;
+import server.MainProject007.boardComment.entity.BoardComment;
+import server.MainProject007.boardComment.exception.BuisnessLogicException;
+import server.MainProject007.boardComment.exception.ExceptionCode;
+import server.MainProject007.boardComment.repository.BoardCommentRepository;
 
 import java.util.Optional;
 

@@ -1,11 +1,11 @@
-package server.MainProject007.comment.mapper;
+package server.MainProject007.boardComment.mapper;
 
 import org.mapstruct.Mapper;
-import server.MainProject007.comment.dto.BoardCommentPatchDto;
-import server.MainProject007.comment.dto.BoardCommentPostDto;
-import server.MainProject007.comment.dto.BoardCommentResponseDto;
+import server.MainProject007.boardComment.dto.BoardCommentPatchDto;
+import server.MainProject007.boardComment.dto.BoardCommentPostDto;
+import server.MainProject007.boardComment.dto.BoardCommentResponseDto;
 
-import server.MainProject007.comment.entity.BoardComment;
+import server.MainProject007.boardComment.entity.BoardComment;
 
 import java.util.List;
 

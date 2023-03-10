@@ -1,4 +1,4 @@
-package server.MainProject007.comment.dto;
+package server.MainProject007.boardComment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

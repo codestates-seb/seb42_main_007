@@ -1,4 +1,4 @@
-package server.MainProject007.comment.exception;
+package server.MainProject007.boardComment.exception;
 
 import lombok.Getter;
 

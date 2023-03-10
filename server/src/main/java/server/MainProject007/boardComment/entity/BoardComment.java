@@ -1,4 +1,4 @@
-package server.MainProject007.comment.entity;
+package server.MainProject007.boardComment.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

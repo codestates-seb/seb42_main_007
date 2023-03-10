@@ -1,7 +1,10 @@
 package server.MainProject007.member.service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import server.MainProject007.member.repository.MemberRepository;
 import server.MainProject007.exception.BusinessLogicException;
 import server.MainProject007.exception.ExceptionCode;
@@ -59,7 +62,10 @@ public class MemberService {
         }
         return findMember;
     }
-
+    @ExceptionHandler(BusinessLogicException.class)
+    public ResponseEntity<String> handleBusinessLogicException(BusinessLogicException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
     private void verifyExistEmail(String email){
         Optional<Member> member = memberRepository.findByEmail(email);
         if(member.isPresent())

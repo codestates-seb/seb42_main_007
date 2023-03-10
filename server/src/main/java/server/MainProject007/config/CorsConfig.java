@@ -16,7 +16,7 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000","https://8286-58-231-49-222.jp.ngrok.io"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         config.addAllowedOriginPattern("*");
         config.addExposedHeader("Authorization");
         config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PATCH", "DELETE", "PUT"));

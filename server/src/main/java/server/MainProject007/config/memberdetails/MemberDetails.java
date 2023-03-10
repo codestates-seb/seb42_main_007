@@ -7,4 +7,5 @@ public interface MemberDetails extends UserDetails {
     String getEmail();
     String getDisplayName();
 
+
 }

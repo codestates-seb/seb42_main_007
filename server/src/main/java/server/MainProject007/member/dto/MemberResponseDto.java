@@ -12,6 +12,8 @@ public class MemberResponseDto {
     private long memberId;
     private String displayName;
     private String email;
-    private Member.MemberStatus memberStatus;
     private String password;
+    private String aboutMe;
+    private Member.MemberStatus memberStatus;
+
 }

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png"
 import { Menu } from "@styled-icons/ionicons-solid/Menu"
+import { Link } from 'react-router-dom';
+
 
 const HeaderContainer = styled.div`
     width: 100%;
@@ -100,7 +102,9 @@ const Header = () => {
             <div className="header-wrapper">
             <MenuItems>
             <MenuItem>🌊 서핑스팟 찾기</MenuItem>
-            <MenuItem>😎 커뮤니티</MenuItem>
+            {/* <MenuItem>😎 커뮤니티</MenuItem> */}
+            <MenuItem>
+            <Link to="../../pages/Edit">😎 커뮤니티</Link></MenuItem>
             <MenuItem>🏄‍♀️ 강습예약</MenuItem>
             </MenuItems>
             <ButtonContainer>

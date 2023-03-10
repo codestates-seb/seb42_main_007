@@ -1,5 +1,8 @@
 import './App.css';
 import GlobalStyle from './styles/GlobalStyle';
+import { Link } from 'react-router-dom';
+import AskButton from './components/Board/AskButton';
+
 
 function App() {
   return (

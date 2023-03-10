@@ -8,8 +8,8 @@ import server.MainProject007.boardComment.dto.BoardCommentPatchDto;
 import server.MainProject007.boardComment.dto.BoardCommentPostDto;
 import server.MainProject007.boardComment.entity.BoardComment;
 import server.MainProject007.boardComment.mapper.BoardCommentMapper;
-import server.MainProject007.boardComment.response.MultiResponseDto;
 import server.MainProject007.boardComment.service.BoardCommentService;
+import server.MainProject007.responseDto.MultiResponseEntity;
 import server.MainProject007.utils.UriCreator;
 
 import javax.validation.Valid;
@@ -19,12 +19,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/board-comments")
-public class CommentController {
+public class BoardCommentController {
     private final static String BOARD_COMMENT_DEFAULT_URL = "/board-comments";
     private final BoardCommentService boardCommentService;
     private final BoardCommentMapper mapper;
 
-    public CommentController(BoardCommentService boardCommentService, BoardCommentMapper mapper) {
+    public BoardCommentController(BoardCommentService boardCommentService, BoardCommentMapper mapper) {
         this.boardCommentService = boardCommentService;
         this.mapper = mapper;
     }
@@ -62,7 +62,7 @@ public class CommentController {
                                            @Positive @RequestParam int size) {
         Page<BoardComment> pageBoardComments = boardCommentService.findBoardComments(page - 1, size);
         List<BoardComment> boardcomments = pageBoardComments.getContent();
-        return new ResponseEntity<>(new MultiResponseDto<>(mapper.commentToCommentResponseDtos(boardcomments), pageBoardComments), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.commentToCommentResponseDtos(boardcomments), pageBoardComments), HttpStatus.OK);
     }
 
     @DeleteMapping("/{comment-id}")

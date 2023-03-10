@@ -4,8 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import server.MainProject007.advice.BusinessLogicException;
-import server.MainProject007.advice.ExceptionCode;
+import server.MainProject007.exception.BusinessLogicException;
+import server.MainProject007.exception.ExceptionCode;
 
 import javax.transaction.Transactional;
 import java.util.Optional;

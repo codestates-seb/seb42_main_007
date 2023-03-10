@@ -5,9 +5,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import server.MainProject007.boardComment.entity.BoardComment;
-import server.MainProject007.boardComment.exception.BuisnessLogicException;
-import server.MainProject007.boardComment.exception.ExceptionCode;
 import server.MainProject007.boardComment.repository.BoardCommentRepository;
+import server.MainProject007.exception.BusinessLogicException;
+import server.MainProject007.exception.ExceptionCode;
 
 import java.util.Optional;
 
@@ -48,7 +48,7 @@ public class BoardCommentService {
 
     public BoardComment findVerifiedBoardComment(long boardCommentId) {
         Optional<BoardComment> optionalBoardComment = boardCommentRepository.findById(boardCommentId);
-        BoardComment findBoardComment = optionalBoardComment.orElseThrow(() -> new BuisnessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
+        BoardComment findBoardComment = optionalBoardComment.orElseThrow(() -> new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
 
         return findBoardComment;
     }

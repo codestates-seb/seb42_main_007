@@ -1,6 +1,7 @@
 package server.MainProject007.boardPost;
 
 import org.mapstruct.Mapper;
+import server.MainProject007.member.entity.Member;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface BoardPostMapper {
         boardPost.setContent(boardPostPost.getContent());
         boardPost.setCreatedAt(boardPostPost.getCreatedAt());
 
-        boardPost.setMember(member);
+//        boardPost.setMember(member);
 
         return boardPost;
     }

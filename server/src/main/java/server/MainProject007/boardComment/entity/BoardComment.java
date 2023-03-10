@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
+@Entity(name = "BOARD_COMMENT")
 public class BoardComment extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

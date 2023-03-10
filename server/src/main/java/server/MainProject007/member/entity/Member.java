@@ -3,6 +3,7 @@ package server.MainProject007.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import server.MainProject007.audit.Auditable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name = "members")
-public class Member {
+public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
@@ -34,12 +35,6 @@ public class Member {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String aboutMe;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
 
     public Member(long memberId, String email, String password) {
         this.memberId = memberId;

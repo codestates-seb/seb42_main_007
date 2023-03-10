@@ -133,6 +133,7 @@ fabric.properties
 # Compiled class file
 *.class
 build/
+.gradle
 
 # Log file
 *.log

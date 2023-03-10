@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TextIncrease.js",
+  "module": "./TextIncrease.esm.js",
+  "types": "./TextIncrease.d.ts"
+}

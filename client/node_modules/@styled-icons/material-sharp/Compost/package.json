@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Compost.js",
+  "module": "./Compost.esm.js",
+  "types": "./Compost.d.ts"
+}

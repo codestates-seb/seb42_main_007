@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ConnectingAirports.js",
+  "module": "./ConnectingAirports.esm.js",
+  "types": "./ConnectingAirports.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NetworkPing.js",
+  "module": "./NetworkPing.esm.js",
+  "types": "./NetworkPing.d.ts"
+}

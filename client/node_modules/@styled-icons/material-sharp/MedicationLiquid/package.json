@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./MedicationLiquid.js",
+  "module": "./MedicationLiquid.esm.js",
+  "types": "./MedicationLiquid.d.ts"
+}

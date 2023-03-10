@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./JoinLeft.js",
+  "module": "./JoinLeft.esm.js",
+  "types": "./JoinLeft.d.ts"
+}

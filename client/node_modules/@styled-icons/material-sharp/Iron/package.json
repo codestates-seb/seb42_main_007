@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Iron.js",
+  "module": "./Iron.esm.js",
+  "types": "./Iron.d.ts"
+}

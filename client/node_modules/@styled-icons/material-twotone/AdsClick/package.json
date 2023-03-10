@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AdsClick.js",
+  "module": "./AdsClick.esm.js",
+  "types": "./AdsClick.d.ts"
+}

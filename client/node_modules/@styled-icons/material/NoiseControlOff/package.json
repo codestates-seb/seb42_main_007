@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NoiseControlOff.js",
+  "module": "./NoiseControlOff.esm.js",
+  "types": "./NoiseControlOff.d.ts"
+}

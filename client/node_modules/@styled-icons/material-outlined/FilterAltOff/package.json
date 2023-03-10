@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FilterAltOff.js",
+  "module": "./FilterAltOff.esm.js",
+  "types": "./FilterAltOff.d.ts"
+}

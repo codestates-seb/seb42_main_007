@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ExpandCircleDown.js",
+  "module": "./ExpandCircleDown.esm.js",
+  "types": "./ExpandCircleDown.d.ts"
+}

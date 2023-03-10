@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WifiPassword.js",
+  "module": "./WifiPassword.esm.js",
+  "types": "./WifiPassword.d.ts"
+}

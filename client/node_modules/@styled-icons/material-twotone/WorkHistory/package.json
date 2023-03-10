@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WorkHistory.js",
+  "module": "./WorkHistory.esm.js",
+  "types": "./WorkHistory.d.ts"
+}

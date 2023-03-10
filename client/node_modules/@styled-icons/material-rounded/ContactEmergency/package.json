@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ContactEmergency.js",
+  "module": "./ContactEmergency.esm.js",
+  "types": "./ContactEmergency.d.ts"
+}

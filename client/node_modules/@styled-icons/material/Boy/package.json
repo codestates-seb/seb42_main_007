@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Boy.js",
+  "module": "./Boy.esm.js",
+  "types": "./Boy.d.ts"
+}

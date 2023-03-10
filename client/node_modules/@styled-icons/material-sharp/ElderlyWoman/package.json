@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ElderlyWoman.js",
+  "module": "./ElderlyWoman.esm.js",
+  "types": "./ElderlyWoman.d.ts"
+}

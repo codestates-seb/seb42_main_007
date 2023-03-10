@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SwipeLeftAlt.js",
+  "module": "./SwipeLeftAlt.esm.js",
+  "types": "./SwipeLeftAlt.d.ts"
+}

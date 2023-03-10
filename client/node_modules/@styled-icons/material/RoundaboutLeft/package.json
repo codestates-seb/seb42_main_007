@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RoundaboutLeft.js",
+  "module": "./RoundaboutLeft.esm.js",
+  "types": "./RoundaboutLeft.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Token.js",
+  "module": "./Token.esm.js",
+  "types": "./Token.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FireTruck.js",
+  "module": "./FireTruck.esm.js",
+  "types": "./FireTruck.d.ts"
+}

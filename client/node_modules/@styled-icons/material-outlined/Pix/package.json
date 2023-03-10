@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Pix.js",
+  "module": "./Pix.esm.js",
+  "types": "./Pix.d.ts"
+}

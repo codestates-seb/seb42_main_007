@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TableBar.js",
+  "module": "./TableBar.esm.js",
+  "types": "./TableBar.d.ts"
+}

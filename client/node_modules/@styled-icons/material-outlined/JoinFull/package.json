@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./JoinFull.js",
+  "module": "./JoinFull.esm.js",
+  "types": "./JoinFull.d.ts"
+}

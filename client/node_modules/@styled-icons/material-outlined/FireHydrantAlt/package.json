@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FireHydrantAlt.js",
+  "module": "./FireHydrantAlt.esm.js",
+  "types": "./FireHydrantAlt.d.ts"
+}

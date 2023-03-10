@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Output.js",
+  "module": "./Output.esm.js",
+  "types": "./Output.d.ts"
+}

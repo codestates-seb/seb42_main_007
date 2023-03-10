@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./BookmarkRemove.js",
+  "module": "./BookmarkRemove.esm.js",
+  "types": "./BookmarkRemove.d.ts"
+}

@@ -1,0 +1,35 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _typeof = require("@babel/runtime/helpers/typeof");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ForkRightDimensions = exports.ForkRight = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var React = _interopRequireWildcard(require("react"));
+var _styledIcon = require("@styled-icons/styled-icon");
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var ForkRight = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(_styledIcon.StyledIconBase, (0, _extends2.default)({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9 20c0 .55.45 1 1 1s1-.45 1-1v-3c.73-2.58 3.07-3.47 5.17-3l-.88.88a.996.996 0 1 0 1.41 1.41l2.59-2.59a.996.996 0 0 0 0-1.41L16.7 9.7a.996.996 0 1 0-1.41 1.41l.88.89c-1.51-.33-3.73.08-5.17 1.36V6.83l.88.88a.996.996 0 1 0 1.41-1.41L10.7 3.71a.996.996 0 0 0-1.41 0L6.71 6.29A.996.996 0 1 0 8.12 7.7L9 6.83V20z"
+  }));
+});
+exports.ForkRight = ForkRight;
+ForkRight.displayName = 'ForkRight';
+var ForkRightDimensions = {
+  height: 24,
+  width: 24
+};
+exports.ForkRightDimensions = ForkRightDimensions;

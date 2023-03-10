@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TypeSpecimen.js",
+  "module": "./TypeSpecimen.esm.js",
+  "types": "./TypeSpecimen.d.ts"
+}

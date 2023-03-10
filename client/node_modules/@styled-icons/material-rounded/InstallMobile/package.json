@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./InstallMobile.js",
+  "module": "./InstallMobile.esm.js",
+  "types": "./InstallMobile.d.ts"
+}

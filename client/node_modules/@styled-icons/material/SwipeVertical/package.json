@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SwipeVertical.js",
+  "module": "./SwipeVertical.esm.js",
+  "types": "./SwipeVertical.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Groups2.js",
+  "module": "./Groups2.esm.js",
+  "types": "./Groups2.d.ts"
+}

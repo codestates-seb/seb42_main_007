@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DensityMedium.js",
+  "module": "./DensityMedium.esm.js",
+  "types": "./DensityMedium.d.ts"
+}

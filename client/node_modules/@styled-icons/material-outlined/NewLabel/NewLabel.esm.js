@@ -1,0 +1,23 @@
+import _extends from "@babel/runtime/helpers/extends";
+import * as React from 'react';
+import { StyledIconBase } from '@styled-icons/styled-icon';
+export var NewLabel = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(StyledIconBase, _extends({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "m21 12-4.37 6.16c-.37.52-.98.84-1.63.84h-3v-2h3l3.55-5L15 7H5v3H3V7c0-1.1.9-2 2-2h10c.65 0 1.26.31 1.63.84L21 12zm-11 3H7v-3H5v3H2v2h3v3h2v-3h3v-2z"
+  }));
+});
+NewLabel.displayName = 'NewLabel';
+export var NewLabelDimensions = {
+  height: 24,
+  width: 24
+};

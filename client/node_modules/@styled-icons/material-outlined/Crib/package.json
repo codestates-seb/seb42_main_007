@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Crib.js",
+  "module": "./Crib.esm.js",
+  "types": "./Crib.d.ts"
+}

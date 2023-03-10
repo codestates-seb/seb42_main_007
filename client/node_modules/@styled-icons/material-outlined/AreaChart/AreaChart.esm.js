@@ -1,0 +1,23 @@
+import _extends from "@babel/runtime/helpers/extends";
+import * as React from 'react';
+import { StyledIconBase } from '@styled-icons/styled-icon';
+export var AreaChart = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(StyledIconBase, _extends({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "m17 7-5-4-5 7-4-3v13h18V7h-4zm2 9.95-7-5.45L8 17l-3-2.4V11l2.44 1.83 4.96-6.95L16.3 9H19v7.95z"
+  }));
+});
+AreaChart.displayName = 'AreaChart';
+export var AreaChartDimensions = {
+  height: 24,
+  width: 24
+};

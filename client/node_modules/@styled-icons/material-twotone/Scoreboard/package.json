@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Scoreboard.js",
+  "module": "./Scoreboard.esm.js",
+  "types": "./Scoreboard.d.ts"
+}

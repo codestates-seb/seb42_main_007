@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Transcribe.js",
+  "module": "./Transcribe.esm.js",
+  "types": "./Transcribe.d.ts"
+}

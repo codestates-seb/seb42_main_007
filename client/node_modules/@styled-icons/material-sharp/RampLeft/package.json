@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RampLeft.js",
+  "module": "./RampLeft.esm.js",
+  "types": "./RampLeft.d.ts"
+}

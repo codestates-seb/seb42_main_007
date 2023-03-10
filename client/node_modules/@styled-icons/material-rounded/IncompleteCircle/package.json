@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./IncompleteCircle.js",
+  "module": "./IncompleteCircle.esm.js",
+  "types": "./IncompleteCircle.d.ts"
+}

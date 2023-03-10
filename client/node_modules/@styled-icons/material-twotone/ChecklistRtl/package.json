@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ChecklistRtl.js",
+  "module": "./ChecklistRtl.esm.js",
+  "types": "./ChecklistRtl.d.ts"
+}

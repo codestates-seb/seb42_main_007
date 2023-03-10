@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DataExploration.js",
+  "module": "./DataExploration.esm.js",
+  "types": "./DataExploration.d.ts"
+}

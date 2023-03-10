@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AssistWalker.js",
+  "module": "./AssistWalker.esm.js",
+  "types": "./AssistWalker.d.ts"
+}

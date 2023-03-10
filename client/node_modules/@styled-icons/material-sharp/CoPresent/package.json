@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CoPresent.js",
+  "module": "./CoPresent.esm.js",
+  "types": "./CoPresent.d.ts"
+}

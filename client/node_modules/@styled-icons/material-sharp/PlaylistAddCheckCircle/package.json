@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PlaylistAddCheckCircle.js",
+  "module": "./PlaylistAddCheckCircle.esm.js",
+  "types": "./PlaylistAddCheckCircle.d.ts"
+}

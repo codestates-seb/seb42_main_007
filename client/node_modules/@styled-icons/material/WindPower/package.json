@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WindPower.js",
+  "module": "./WindPower.esm.js",
+  "types": "./WindPower.d.ts"
+}

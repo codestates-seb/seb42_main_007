@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./JoinInner.js",
+  "module": "./JoinInner.esm.js",
+  "types": "./JoinInner.d.ts"
+}

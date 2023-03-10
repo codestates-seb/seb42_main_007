@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EditCalendar.js",
+  "module": "./EditCalendar.esm.js",
+  "types": "./EditCalendar.d.ts"
+}

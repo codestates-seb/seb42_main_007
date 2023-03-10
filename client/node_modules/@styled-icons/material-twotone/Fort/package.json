@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Fort.js",
+  "module": "./Fort.esm.js",
+  "types": "./Fort.d.ts"
+}

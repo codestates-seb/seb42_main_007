@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Troubleshoot.js",
+  "module": "./Troubleshoot.esm.js",
+  "types": "./Troubleshoot.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CurrencyYuan.js",
+  "module": "./CurrencyYuan.esm.js",
+  "types": "./CurrencyYuan.d.ts"
+}

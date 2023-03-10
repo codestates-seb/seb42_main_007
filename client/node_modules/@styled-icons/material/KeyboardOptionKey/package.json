@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./KeyboardOptionKey.js",
+  "module": "./KeyboardOptionKey.esm.js",
+  "types": "./KeyboardOptionKey.d.ts"
+}

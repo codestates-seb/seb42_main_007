@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SignalCellularAlt2Bar.js",
+  "module": "./SignalCellularAlt2Bar.esm.js",
+  "types": "./SignalCellularAlt2Bar.d.ts"
+}

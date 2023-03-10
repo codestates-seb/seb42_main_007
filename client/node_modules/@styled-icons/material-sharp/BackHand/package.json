@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./BackHand.js",
+  "module": "./BackHand.esm.js",
+  "types": "./BackHand.d.ts"
+}

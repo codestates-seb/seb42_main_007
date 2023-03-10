@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ModeOfTravel.js",
+  "module": "./ModeOfTravel.esm.js",
+  "types": "./ModeOfTravel.d.ts"
+}

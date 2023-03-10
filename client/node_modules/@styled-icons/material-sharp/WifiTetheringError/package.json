@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WifiTetheringError.js",
+  "module": "./WifiTetheringError.esm.js",
+  "types": "./WifiTetheringError.d.ts"
+}

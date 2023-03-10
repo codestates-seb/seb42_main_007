@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NewLabel.js",
+  "module": "./NewLabel.esm.js",
+  "types": "./NewLabel.d.ts"
+}

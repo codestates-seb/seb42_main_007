@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WebStories.js",
+  "module": "./WebStories.esm.js",
+  "types": "./WebStories.d.ts"
+}

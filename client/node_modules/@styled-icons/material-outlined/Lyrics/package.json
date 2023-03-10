@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Lyrics.js",
+  "module": "./Lyrics.esm.js",
+  "types": "./Lyrics.d.ts"
+}

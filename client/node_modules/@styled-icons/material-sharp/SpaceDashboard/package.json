@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SpaceDashboard.js",
+  "module": "./SpaceDashboard.esm.js",
+  "types": "./SpaceDashboard.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WidthNormal.js",
+  "module": "./WidthNormal.esm.js",
+  "types": "./WidthNormal.d.ts"
+}

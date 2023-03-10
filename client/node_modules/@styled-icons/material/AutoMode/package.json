@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AutoMode.js",
+  "module": "./AutoMode.esm.js",
+  "types": "./AutoMode.d.ts"
+}

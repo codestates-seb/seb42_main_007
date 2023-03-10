@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Hls.js",
+  "module": "./Hls.esm.js",
+  "types": "./Hls.d.ts"
+}

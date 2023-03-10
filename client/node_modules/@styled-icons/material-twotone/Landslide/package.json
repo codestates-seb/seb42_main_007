@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Landslide.js",
+  "module": "./Landslide.esm.js",
+  "types": "./Landslide.d.ts"
+}

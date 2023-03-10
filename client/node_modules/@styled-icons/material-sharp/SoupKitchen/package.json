@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SoupKitchen.js",
+  "module": "./SoupKitchen.esm.js",
+  "types": "./SoupKitchen.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NestCamWiredStand.js",
+  "module": "./NestCamWiredStand.esm.js",
+  "types": "./NestCamWiredStand.d.ts"
+}

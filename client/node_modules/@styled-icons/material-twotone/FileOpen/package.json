@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FileOpen.js",
+  "module": "./FileOpen.esm.js",
+  "types": "./FileOpen.d.ts"
+}

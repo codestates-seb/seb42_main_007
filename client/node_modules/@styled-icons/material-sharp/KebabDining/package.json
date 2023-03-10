@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./KebabDining.js",
+  "module": "./KebabDining.esm.js",
+  "types": "./KebabDining.d.ts"
+}

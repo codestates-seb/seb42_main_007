@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./HotelClass.js",
+  "module": "./HotelClass.esm.js",
+  "types": "./HotelClass.d.ts"
+}

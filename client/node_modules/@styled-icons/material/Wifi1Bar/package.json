@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Wifi1Bar.js",
+  "module": "./Wifi1Bar.esm.js",
+  "types": "./Wifi1Bar.d.ts"
+}

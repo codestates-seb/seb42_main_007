@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TurnLeft.js",
+  "module": "./TurnLeft.esm.js",
+  "types": "./TurnLeft.d.ts"
+}

@@ -1,0 +1,23 @@
+import _extends from "@babel/runtime/helpers/extends";
+import * as React from 'react';
+import { StyledIconBase } from '@styled-icons/styled-icon';
+export var Desk = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(StyledIconBase, _extends({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M2 6v12h2V8h10v10h2v-2h4v2h2V6H2zm18 2v2h-4V8h4zm-4 6v-2h4v2h-4z"
+  }));
+});
+Desk.displayName = 'Desk';
+export var DeskDimensions = {
+  height: 24,
+  width: 24
+};

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RampRight.js",
+  "module": "./RampRight.esm.js",
+  "types": "./RampRight.d.ts"
+}

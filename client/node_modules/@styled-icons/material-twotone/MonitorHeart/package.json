@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./MonitorHeart.js",
+  "module": "./MonitorHeart.esm.js",
+  "types": "./MonitorHeart.d.ts"
+}

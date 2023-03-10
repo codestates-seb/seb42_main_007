@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SwitchAccessShortcutAdd.js",
+  "module": "./SwitchAccessShortcutAdd.esm.js",
+  "types": "./SwitchAccessShortcutAdd.d.ts"
+}

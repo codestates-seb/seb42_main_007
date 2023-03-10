@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./KeyboardCommandKey.js",
+  "module": "./KeyboardCommandKey.esm.js",
+  "types": "./KeyboardCommandKey.d.ts"
+}

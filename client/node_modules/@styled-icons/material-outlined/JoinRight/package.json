@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./JoinRight.js",
+  "module": "./JoinRight.esm.js",
+  "types": "./JoinRight.d.ts"
+}

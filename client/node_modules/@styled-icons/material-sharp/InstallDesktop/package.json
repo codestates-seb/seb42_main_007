@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./InstallDesktop.js",
+  "module": "./InstallDesktop.esm.js",
+  "types": "./InstallDesktop.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Girl.js",
+  "module": "./Girl.esm.js",
+  "types": "./Girl.d.ts"
+}

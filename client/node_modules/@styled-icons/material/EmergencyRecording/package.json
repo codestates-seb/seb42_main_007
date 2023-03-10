@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EmergencyRecording.js",
+  "module": "./EmergencyRecording.esm.js",
+  "types": "./EmergencyRecording.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PersonalInjury.js",
+  "module": "./PersonalInjury.esm.js",
+  "types": "./PersonalInjury.d.ts"
+}

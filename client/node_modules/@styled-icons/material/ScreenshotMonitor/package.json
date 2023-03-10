@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ScreenshotMonitor.js",
+  "module": "./ScreenshotMonitor.esm.js",
+  "types": "./ScreenshotMonitor.d.ts"
+}

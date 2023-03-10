@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Difference.js",
+  "module": "./Difference.esm.js",
+  "types": "./Difference.d.ts"
+}

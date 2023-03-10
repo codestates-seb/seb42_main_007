@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DataObject.js",
+  "module": "./DataObject.esm.js",
+  "types": "./DataObject.d.ts"
+}

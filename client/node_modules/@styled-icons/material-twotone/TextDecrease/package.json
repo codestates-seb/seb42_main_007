@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TextDecrease.js",
+  "module": "./TextDecrease.esm.js",
+  "types": "./TextDecrease.d.ts"
+}

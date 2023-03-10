@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AppsOutage.js",
+  "module": "./AppsOutage.esm.js",
+  "types": "./AppsOutage.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Deselect.js",
+  "module": "./Deselect.esm.js",
+  "types": "./Deselect.d.ts"
+}

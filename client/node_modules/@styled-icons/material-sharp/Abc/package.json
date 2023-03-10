@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Abc.js",
+  "module": "./Abc.esm.js",
+  "types": "./Abc.d.ts"
+}

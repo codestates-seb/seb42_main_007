@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./BrowseGallery.js",
+  "module": "./BrowseGallery.esm.js",
+  "types": "./BrowseGallery.d.ts"
+}

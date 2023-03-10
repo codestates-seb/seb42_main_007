@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./GifBox.js",
+  "module": "./GifBox.esm.js",
+  "types": "./GifBox.d.ts"
+}

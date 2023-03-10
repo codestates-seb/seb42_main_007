@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SwipeUpAlt.js",
+  "module": "./SwipeUpAlt.esm.js",
+  "types": "./SwipeUpAlt.d.ts"
+}

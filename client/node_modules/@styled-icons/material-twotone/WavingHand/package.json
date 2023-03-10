@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WavingHand.js",
+  "module": "./WavingHand.esm.js",
+  "types": "./WavingHand.d.ts"
+}

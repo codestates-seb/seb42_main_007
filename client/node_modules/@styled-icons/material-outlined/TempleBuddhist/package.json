@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TempleBuddhist.js",
+  "module": "./TempleBuddhist.esm.js",
+  "types": "./TempleBuddhist.d.ts"
+}

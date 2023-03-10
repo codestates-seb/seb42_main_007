@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Battery5Bar.js",
+  "module": "./Battery5Bar.esm.js",
+  "types": "./Battery5Bar.d.ts"
+}

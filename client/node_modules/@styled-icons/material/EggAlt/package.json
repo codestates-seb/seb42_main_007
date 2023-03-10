@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EggAlt.js",
+  "module": "./EggAlt.esm.js",
+  "types": "./EggAlt.d.ts"
+}

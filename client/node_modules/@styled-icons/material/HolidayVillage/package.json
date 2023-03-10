@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./HolidayVillage.js",
+  "module": "./HolidayVillage.esm.js",
+  "types": "./HolidayVillage.d.ts"
+}

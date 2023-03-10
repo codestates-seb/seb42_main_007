@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./UTurnLeft.js",
+  "module": "./UTurnLeft.esm.js",
+  "types": "./UTurnLeft.d.ts"
+}

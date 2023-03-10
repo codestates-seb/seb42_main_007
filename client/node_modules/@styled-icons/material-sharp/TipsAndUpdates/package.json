@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TipsAndUpdates.js",
+  "module": "./TipsAndUpdates.esm.js",
+  "types": "./TipsAndUpdates.d.ts"
+}

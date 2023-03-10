@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SportsMartialArts.js",
+  "module": "./SportsMartialArts.esm.js",
+  "types": "./SportsMartialArts.d.ts"
+}

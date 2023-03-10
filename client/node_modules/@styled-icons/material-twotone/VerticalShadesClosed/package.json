@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./VerticalShadesClosed.js",
+  "module": "./VerticalShadesClosed.esm.js",
+  "types": "./VerticalShadesClosed.d.ts"
+}

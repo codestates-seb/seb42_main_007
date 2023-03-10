@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./InsertPageBreak.js",
+  "module": "./InsertPageBreak.esm.js",
+  "types": "./InsertPageBreak.d.ts"
+}

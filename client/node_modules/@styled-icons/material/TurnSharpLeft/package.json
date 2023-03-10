@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TurnSharpLeft.js",
+  "module": "./TurnSharpLeft.esm.js",
+  "types": "./TurnSharpLeft.d.ts"
+}

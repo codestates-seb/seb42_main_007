@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Chalet.js",
+  "module": "./Chalet.esm.js",
+  "types": "./Chalet.d.ts"
+}

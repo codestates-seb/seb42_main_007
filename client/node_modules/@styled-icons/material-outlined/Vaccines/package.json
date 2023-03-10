@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Vaccines.js",
+  "module": "./Vaccines.esm.js",
+  "types": "./Vaccines.d.ts"
+}

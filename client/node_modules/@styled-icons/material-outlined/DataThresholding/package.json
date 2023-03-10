@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DataThresholding.js",
+  "module": "./DataThresholding.esm.js",
+  "types": "./DataThresholding.d.ts"
+}

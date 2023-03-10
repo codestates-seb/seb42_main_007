@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PrivateConnectivity.js",
+  "module": "./PrivateConnectivity.esm.js",
+  "types": "./PrivateConnectivity.d.ts"
+}

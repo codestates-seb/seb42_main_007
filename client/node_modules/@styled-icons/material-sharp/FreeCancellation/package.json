@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FreeCancellation.js",
+  "module": "./FreeCancellation.esm.js",
+  "types": "./FreeCancellation.d.ts"
+}

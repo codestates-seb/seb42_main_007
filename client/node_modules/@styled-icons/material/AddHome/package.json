@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AddHome.js",
+  "module": "./AddHome.esm.js",
+  "types": "./AddHome.d.ts"
+}

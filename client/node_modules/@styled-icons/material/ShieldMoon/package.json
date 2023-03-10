@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ShieldMoon.js",
+  "module": "./ShieldMoon.esm.js",
+  "types": "./ShieldMoon.d.ts"
+}

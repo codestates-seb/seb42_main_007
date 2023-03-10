@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Bungalow.js",
+  "module": "./Bungalow.esm.js",
+  "types": "./Bungalow.d.ts"
+}

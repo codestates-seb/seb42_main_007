@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Deblur.js",
+  "module": "./Deblur.esm.js",
+  "types": "./Deblur.d.ts"
+}

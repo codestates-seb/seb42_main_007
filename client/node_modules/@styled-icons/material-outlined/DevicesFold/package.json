@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DevicesFold.js",
+  "module": "./DevicesFold.esm.js",
+  "types": "./DevicesFold.d.ts"
+}

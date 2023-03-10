@@ -1,0 +1,1 @@
+//class를 모아서 carousel 형식으로 배열한다.

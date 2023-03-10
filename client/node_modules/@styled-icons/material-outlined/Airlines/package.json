@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Airlines.js",
+  "module": "./Airlines.esm.js",
+  "types": "./Airlines.d.ts"
+}

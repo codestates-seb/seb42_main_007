@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DatasetLinked.js",
+  "module": "./DatasetLinked.esm.js",
+  "types": "./DatasetLinked.d.ts"
+}

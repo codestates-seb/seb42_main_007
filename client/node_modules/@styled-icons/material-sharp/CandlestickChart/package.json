@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CandlestickChart.js",
+  "module": "./CandlestickChart.esm.js",
+  "types": "./CandlestickChart.d.ts"
+}

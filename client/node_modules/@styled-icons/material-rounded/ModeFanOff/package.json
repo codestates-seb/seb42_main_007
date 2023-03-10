@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ModeFanOff.js",
+  "module": "./ModeFanOff.esm.js",
+  "types": "./ModeFanOff.d.ts"
+}

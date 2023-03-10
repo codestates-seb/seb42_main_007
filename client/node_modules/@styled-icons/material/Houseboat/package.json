@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Houseboat.js",
+  "module": "./Houseboat.esm.js",
+  "types": "./Houseboat.d.ts"
+}

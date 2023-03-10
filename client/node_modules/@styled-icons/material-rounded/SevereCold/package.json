@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SevereCold.js",
+  "module": "./SevereCold.esm.js",
+  "types": "./SevereCold.d.ts"
+}

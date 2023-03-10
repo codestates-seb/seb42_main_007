@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AppShortcut.js",
+  "module": "./AppShortcut.esm.js",
+  "types": "./AppShortcut.d.ts"
+}

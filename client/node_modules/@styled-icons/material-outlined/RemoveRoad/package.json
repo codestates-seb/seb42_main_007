@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RemoveRoad.js",
+  "module": "./RemoveRoad.esm.js",
+  "types": "./RemoveRoad.d.ts"
+}

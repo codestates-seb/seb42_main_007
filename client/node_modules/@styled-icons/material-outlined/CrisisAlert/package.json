@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CrisisAlert.js",
+  "module": "./CrisisAlert.esm.js",
+  "types": "./CrisisAlert.d.ts"
+}

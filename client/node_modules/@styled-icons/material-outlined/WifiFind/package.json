@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WifiFind.js",
+  "module": "./WifiFind.esm.js",
+  "types": "./WifiFind.d.ts"
+}

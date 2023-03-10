@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./BrowserUpdated.js",
+  "module": "./BrowserUpdated.esm.js",
+  "types": "./BrowserUpdated.d.ts"
+}

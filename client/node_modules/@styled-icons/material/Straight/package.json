@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Straight.js",
+  "module": "./Straight.esm.js",
+  "types": "./Straight.d.ts"
+}

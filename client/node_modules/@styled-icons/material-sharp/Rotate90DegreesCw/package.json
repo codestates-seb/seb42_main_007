@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Rotate90DegreesCw.js",
+  "module": "./Rotate90DegreesCw.esm.js",
+  "types": "./Rotate90DegreesCw.d.ts"
+}

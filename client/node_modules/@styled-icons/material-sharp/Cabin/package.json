@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Cabin.js",
+  "module": "./Cabin.esm.js",
+  "types": "./Cabin.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./OnDeviceTraining.js",
+  "module": "./OnDeviceTraining.esm.js",
+  "types": "./OnDeviceTraining.d.ts"
+}

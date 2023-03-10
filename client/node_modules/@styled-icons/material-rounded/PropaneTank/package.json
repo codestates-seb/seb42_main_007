@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PropaneTank.js",
+  "module": "./PropaneTank.esm.js",
+  "types": "./PropaneTank.d.ts"
+}

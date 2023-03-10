@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TempleHindu.js",
+  "module": "./TempleHindu.esm.js",
+  "types": "./TempleHindu.d.ts"
+}

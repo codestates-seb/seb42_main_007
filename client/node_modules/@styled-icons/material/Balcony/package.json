@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Balcony.js",
+  "module": "./Balcony.esm.js",
+  "types": "./Balcony.d.ts"
+}

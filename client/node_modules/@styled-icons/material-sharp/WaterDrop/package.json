@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WaterDrop.js",
+  "module": "./WaterDrop.esm.js",
+  "types": "./WaterDrop.d.ts"
+}

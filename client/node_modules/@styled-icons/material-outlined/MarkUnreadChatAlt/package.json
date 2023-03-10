@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./MarkUnreadChatAlt.js",
+  "module": "./MarkUnreadChatAlt.esm.js",
+  "types": "./MarkUnreadChatAlt.d.ts"
+}

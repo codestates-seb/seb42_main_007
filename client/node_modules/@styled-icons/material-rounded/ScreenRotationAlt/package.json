@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ScreenRotationAlt.js",
+  "module": "./ScreenRotationAlt.esm.js",
+  "types": "./ScreenRotationAlt.d.ts"
+}

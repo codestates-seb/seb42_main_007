@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SafetyCheck.js",
+  "module": "./SafetyCheck.esm.js",
+  "types": "./SafetyCheck.d.ts"
+}

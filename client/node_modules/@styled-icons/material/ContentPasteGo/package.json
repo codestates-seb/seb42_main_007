@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ContentPasteGo.js",
+  "module": "./ContentPasteGo.esm.js",
+  "types": "./ContentPasteGo.d.ts"
+}

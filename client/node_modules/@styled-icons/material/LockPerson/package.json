@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./LockPerson.js",
+  "module": "./LockPerson.esm.js",
+  "types": "./LockPerson.d.ts"
+}

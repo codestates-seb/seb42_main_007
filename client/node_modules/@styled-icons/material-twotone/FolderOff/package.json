@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FolderOff.js",
+  "module": "./FolderOff.esm.js",
+  "types": "./FolderOff.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./OilBarrel.js",
+  "module": "./OilBarrel.esm.js",
+  "types": "./OilBarrel.d.ts"
+}

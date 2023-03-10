@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SensorOccupied.js",
+  "module": "./SensorOccupied.esm.js",
+  "types": "./SensorOccupied.d.ts"
+}

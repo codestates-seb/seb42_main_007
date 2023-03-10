@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DisplaySettings.js",
+  "module": "./DisplaySettings.esm.js",
+  "types": "./DisplaySettings.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ForkLeft.js",
+  "module": "./ForkLeft.esm.js",
+  "types": "./ForkLeft.d.ts"
+}

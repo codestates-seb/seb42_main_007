@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AddCard.js",
+  "module": "./AddCard.esm.js",
+  "types": "./AddCard.d.ts"
+}

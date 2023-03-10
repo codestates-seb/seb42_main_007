@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Face2.js",
+  "module": "./Face2.esm.js",
+  "types": "./Face2.d.ts"
+}

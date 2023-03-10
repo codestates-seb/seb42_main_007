@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Blinds.js",
+  "module": "./Blinds.esm.js",
+  "types": "./Blinds.d.ts"
+}

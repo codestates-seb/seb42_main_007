@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ViewKanban.js",
+  "module": "./ViewKanban.esm.js",
+  "types": "./ViewKanban.d.ts"
+}

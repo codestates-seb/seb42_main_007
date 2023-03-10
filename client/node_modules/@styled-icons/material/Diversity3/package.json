@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Diversity3.js",
+  "module": "./Diversity3.esm.js",
+  "types": "./Diversity3.d.ts"
+}

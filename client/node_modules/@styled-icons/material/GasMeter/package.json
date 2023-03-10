@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./GasMeter.js",
+  "module": "./GasMeter.esm.js",
+  "types": "./GasMeter.d.ts"
+}

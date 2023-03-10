@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NetworkWifi3Bar.js",
+  "module": "./NetworkWifi3Bar.esm.js",
+  "types": "./NetworkWifi3Bar.d.ts"
+}

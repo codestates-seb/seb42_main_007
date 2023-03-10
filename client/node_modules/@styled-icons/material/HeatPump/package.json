@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./HeatPump.js",
+  "module": "./HeatPump.esm.js",
+  "types": "./HeatPump.d.ts"
+}

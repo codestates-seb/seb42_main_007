@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SpatialAudioOff.js",
+  "module": "./SpatialAudioOff.esm.js",
+  "types": "./SpatialAudioOff.d.ts"
+}

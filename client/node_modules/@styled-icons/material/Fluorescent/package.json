@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Fluorescent.js",
+  "module": "./Fluorescent.esm.js",
+  "types": "./Fluorescent.d.ts"
+}

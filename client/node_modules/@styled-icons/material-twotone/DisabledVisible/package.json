@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DisabledVisible.js",
+  "module": "./DisabledVisible.esm.js",
+  "types": "./DisabledVisible.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SwipeLeft.js",
+  "module": "./SwipeLeft.esm.js",
+  "types": "./SwipeLeft.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PunchClock.js",
+  "module": "./PunchClock.esm.js",
+  "types": "./PunchClock.d.ts"
+}

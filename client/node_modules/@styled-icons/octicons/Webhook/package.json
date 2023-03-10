@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Webhook.js",
+  "module": "./Webhook.esm.js",
+  "types": "./Webhook.d.ts"
+}

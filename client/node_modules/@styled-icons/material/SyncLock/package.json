@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SyncLock.js",
+  "module": "./SyncLock.esm.js",
+  "types": "./SyncLock.d.ts"
+}

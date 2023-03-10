@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./VpnKeyOff.js",
+  "module": "./VpnKeyOff.esm.js",
+  "types": "./VpnKeyOff.d.ts"
+}

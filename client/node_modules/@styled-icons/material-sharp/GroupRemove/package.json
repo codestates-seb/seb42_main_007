@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./GroupRemove.js",
+  "module": "./GroupRemove.esm.js",
+  "types": "./GroupRemove.d.ts"
+}

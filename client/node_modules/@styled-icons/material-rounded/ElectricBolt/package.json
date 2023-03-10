@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ElectricBolt.js",
+  "module": "./ElectricBolt.esm.js",
+  "types": "./ElectricBolt.d.ts"
+}

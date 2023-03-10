@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TireRepair.js",
+  "module": "./TireRepair.esm.js",
+  "types": "./TireRepair.d.ts"
+}

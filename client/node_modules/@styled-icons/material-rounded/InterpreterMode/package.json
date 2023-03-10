@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./InterpreterMode.js",
+  "module": "./InterpreterMode.esm.js",
+  "types": "./InterpreterMode.d.ts"
+}

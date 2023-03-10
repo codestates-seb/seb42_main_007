@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Cyclone.js",
+  "module": "./Cyclone.esm.js",
+  "types": "./Cyclone.d.ts"
+}

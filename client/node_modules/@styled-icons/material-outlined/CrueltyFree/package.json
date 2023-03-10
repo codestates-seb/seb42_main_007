@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CrueltyFree.js",
+  "module": "./CrueltyFree.esm.js",
+  "types": "./CrueltyFree.d.ts"
+}

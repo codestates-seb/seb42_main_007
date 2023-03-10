@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./MinorCrash.js",
+  "module": "./MinorCrash.esm.js",
+  "types": "./MinorCrash.d.ts"
+}

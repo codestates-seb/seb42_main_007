@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ViewCozy.js",
+  "module": "./ViewCozy.esm.js",
+  "types": "./ViewCozy.d.ts"
+}

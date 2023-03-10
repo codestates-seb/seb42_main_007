@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DriveFileMoveRtl.js",
+  "module": "./DriveFileMoveRtl.esm.js",
+  "types": "./DriveFileMoveRtl.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WidthWide.js",
+  "module": "./WidthWide.esm.js",
+  "types": "./WidthWide.d.ts"
+}

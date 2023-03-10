@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AudioFile.js",
+  "module": "./AudioFile.esm.js",
+  "types": "./AudioFile.d.ts"
+}

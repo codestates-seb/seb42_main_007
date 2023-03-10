@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CurrencyFranc.js",
+  "module": "./CurrencyFranc.esm.js",
+  "types": "./CurrencyFranc.d.ts"
+}

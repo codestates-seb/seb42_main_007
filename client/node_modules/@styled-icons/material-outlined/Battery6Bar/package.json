@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Battery6Bar.js",
+  "module": "./Battery6Bar.esm.js",
+  "types": "./Battery6Bar.d.ts"
+}

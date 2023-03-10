@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Phishing.js",
+  "module": "./Phishing.esm.js",
+  "types": "./Phishing.d.ts"
+}

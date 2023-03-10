@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Draw.js",
+  "module": "./Draw.esm.js",
+  "types": "./Draw.d.ts"
+}

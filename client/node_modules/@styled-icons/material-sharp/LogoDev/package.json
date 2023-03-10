@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./LogoDev.js",
+  "module": "./LogoDev.esm.js",
+  "types": "./LogoDev.d.ts"
+}

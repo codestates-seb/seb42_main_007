@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Villa.js",
+  "module": "./Villa.esm.js",
+  "types": "./Villa.d.ts"
+}

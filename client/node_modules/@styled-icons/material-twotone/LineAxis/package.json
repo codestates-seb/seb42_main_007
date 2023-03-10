@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./LineAxis.js",
+  "module": "./LineAxis.esm.js",
+  "types": "./LineAxis.d.ts"
+}

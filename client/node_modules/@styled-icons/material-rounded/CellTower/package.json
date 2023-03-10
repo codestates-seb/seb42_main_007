@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CellTower.js",
+  "module": "./CellTower.esm.js",
+  "types": "./CellTower.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SatelliteAlt.js",
+  "module": "./SatelliteAlt.esm.js",
+  "types": "./SatelliteAlt.d.ts"
+}

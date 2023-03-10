@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ViewCompactAlt.js",
+  "module": "./ViewCompactAlt.esm.js",
+  "types": "./ViewCompactAlt.d.ts"
+}

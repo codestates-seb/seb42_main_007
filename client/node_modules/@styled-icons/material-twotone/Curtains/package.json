@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Curtains.js",
+  "module": "./Curtains.esm.js",
+  "types": "./Curtains.d.ts"
+}

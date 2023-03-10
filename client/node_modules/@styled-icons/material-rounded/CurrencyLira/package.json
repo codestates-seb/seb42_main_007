@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CurrencyLira.js",
+  "module": "./CurrencyLira.esm.js",
+  "types": "./CurrencyLira.d.ts"
+}

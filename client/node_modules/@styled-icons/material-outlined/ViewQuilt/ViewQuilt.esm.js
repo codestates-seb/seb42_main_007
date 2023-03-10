@@ -1,0 +1,23 @@
+import _extends from "@babel/runtime/helpers/extends";
+import * as React from 'react';
+import { StyledIconBase } from '@styled-icons/styled-icon';
+export var ViewQuilt = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(StyledIconBase, _extends({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M3 5v14h18V5H3zm5.33 12H5V7h3.33v10zm5.34 0h-3.33v-4h3.33v4zM19 17h-3.33v-4H19v4zm0-6h-8.67V7H19v4z"
+  }));
+});
+ViewQuilt.displayName = 'ViewQuilt';
+export var ViewQuiltDimensions = {
+  height: 24,
+  width: 24
+};

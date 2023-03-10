@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./KeyboardDoubleArrowLeft.js",
+  "module": "./KeyboardDoubleArrowLeft.esm.js",
+  "types": "./KeyboardDoubleArrowLeft.d.ts"
+}

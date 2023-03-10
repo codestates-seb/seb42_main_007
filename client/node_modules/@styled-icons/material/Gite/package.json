@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Gite.js",
+  "module": "./Gite.esm.js",
+  "types": "./Gite.d.ts"
+}

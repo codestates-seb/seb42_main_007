@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PinInvoke.js",
+  "module": "./PinInvoke.esm.js",
+  "types": "./PinInvoke.d.ts"
+}

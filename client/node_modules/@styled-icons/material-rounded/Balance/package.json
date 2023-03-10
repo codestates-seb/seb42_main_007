@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Balance.js",
+  "module": "./Balance.esm.js",
+  "types": "./Balance.d.ts"
+}

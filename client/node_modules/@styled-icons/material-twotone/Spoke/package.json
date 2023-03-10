@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Spoke.js",
+  "module": "./Spoke.esm.js",
+  "types": "./Spoke.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EventRepeat.js",
+  "module": "./EventRepeat.esm.js",
+  "types": "./EventRepeat.d.ts"
+}

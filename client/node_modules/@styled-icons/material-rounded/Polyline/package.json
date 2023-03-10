@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Polyline.js",
+  "module": "./Polyline.esm.js",
+  "types": "./Polyline.d.ts"
+}

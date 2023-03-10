@@ -1,0 +1,25 @@
+import _extends from "@babel/runtime/helpers/extends";
+import * as React from 'react';
+import { StyledIconBase } from '@styled-icons/styled-icon';
+export var KeyboardDoubleArrowDown = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(StyledIconBase, _extends({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M17.29 5.71a.996.996 0 0 0-1.41 0L12 9.58 8.11 5.7A.996.996 0 1 0 6.7 7.11l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.984.984 0 0 0 0-1.4z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M17.29 12.3a.996.996 0 0 0-1.41 0L12 16.17l-3.88-3.88a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.993.993 0 0 0-.01-1.4z"
+  }));
+});
+KeyboardDoubleArrowDown.displayName = 'KeyboardDoubleArrowDown';
+export var KeyboardDoubleArrowDownDimensions = {
+  height: 24,
+  width: 24
+};

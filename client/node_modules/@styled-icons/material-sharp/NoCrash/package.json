@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NoCrash.js",
+  "module": "./NoCrash.esm.js",
+  "types": "./NoCrash.d.ts"
+}

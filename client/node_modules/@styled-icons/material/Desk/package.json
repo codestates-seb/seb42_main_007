@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Desk.js",
+  "module": "./Desk.esm.js",
+  "types": "./Desk.d.ts"
+}

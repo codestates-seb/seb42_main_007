@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./MacroOff.js",
+  "module": "./MacroOff.esm.js",
+  "types": "./MacroOff.d.ts"
+}

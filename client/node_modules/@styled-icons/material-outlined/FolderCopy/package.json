@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FolderCopy.js",
+  "module": "./FolderCopy.esm.js",
+  "types": "./FolderCopy.d.ts"
+}

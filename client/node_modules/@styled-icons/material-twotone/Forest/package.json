@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Forest.js",
+  "module": "./Forest.esm.js",
+  "types": "./Forest.d.ts"
+}

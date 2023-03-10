@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ShapeLine.js",
+  "module": "./ShapeLine.esm.js",
+  "types": "./ShapeLine.d.ts"
+}

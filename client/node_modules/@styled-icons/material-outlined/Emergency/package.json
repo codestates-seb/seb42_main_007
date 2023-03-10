@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Emergency.js",
+  "module": "./Emergency.esm.js",
+  "types": "./Emergency.d.ts"
+}

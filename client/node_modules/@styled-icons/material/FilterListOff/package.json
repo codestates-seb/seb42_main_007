@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FilterListOff.js",
+  "module": "./FilterListOff.esm.js",
+  "types": "./FilterListOff.d.ts"
+}

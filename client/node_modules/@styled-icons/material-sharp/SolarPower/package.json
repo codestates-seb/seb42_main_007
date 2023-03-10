@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SolarPower.js",
+  "module": "./SolarPower.esm.js",
+  "types": "./SolarPower.d.ts"
+}

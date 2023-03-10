@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CurrencyRuble.js",
+  "module": "./CurrencyRuble.esm.js",
+  "types": "./CurrencyRuble.d.ts"
+}

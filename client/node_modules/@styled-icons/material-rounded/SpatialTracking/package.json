@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SpatialTracking.js",
+  "module": "./SpatialTracking.esm.js",
+  "types": "./SpatialTracking.d.ts"
+}

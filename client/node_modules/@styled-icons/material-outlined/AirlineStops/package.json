@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./AirlineStops.js",
+  "module": "./AirlineStops.esm.js",
+  "types": "./AirlineStops.d.ts"
+}

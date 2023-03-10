@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EighteenUpRating.js",
+  "module": "./EighteenUpRating.esm.js",
+  "types": "./EighteenUpRating.d.ts"
+}

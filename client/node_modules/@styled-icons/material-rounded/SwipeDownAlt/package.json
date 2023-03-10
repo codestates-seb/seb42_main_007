@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./SwipeDownAlt.js",
+  "module": "./SwipeDownAlt.esm.js",
+  "types": "./SwipeDownAlt.d.ts"
+}

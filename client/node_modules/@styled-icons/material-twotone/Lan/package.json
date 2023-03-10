@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Lan.js",
+  "module": "./Lan.esm.js",
+  "types": "./Lan.d.ts"
+}

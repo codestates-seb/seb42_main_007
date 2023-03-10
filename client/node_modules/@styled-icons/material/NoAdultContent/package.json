@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./NoAdultContent.js",
+  "module": "./NoAdultContent.esm.js",
+  "types": "./NoAdultContent.d.ts"
+}

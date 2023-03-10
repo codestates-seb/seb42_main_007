@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EnergySavingsLeaf.js",
+  "module": "./EnergySavingsLeaf.esm.js",
+  "types": "./EnergySavingsLeaf.d.ts"
+}

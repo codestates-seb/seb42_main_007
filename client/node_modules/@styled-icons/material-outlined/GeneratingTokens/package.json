@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./GeneratingTokens.js",
+  "module": "./GeneratingTokens.esm.js",
+  "types": "./GeneratingTokens.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Hub.js",
+  "module": "./Hub.esm.js",
+  "types": "./Hub.d.ts"
+}

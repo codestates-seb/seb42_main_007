@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./GroupOff.js",
+  "module": "./GroupOff.esm.js",
+  "types": "./GroupOff.d.ts"
+}

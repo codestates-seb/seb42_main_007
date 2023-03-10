@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WatchOff.js",
+  "module": "./WatchOff.esm.js",
+  "types": "./WatchOff.d.ts"
+}

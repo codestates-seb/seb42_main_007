@@ -1,0 +1,35 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _typeof = require("@babel/runtime/helpers/typeof");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FitbitDimensions = exports.Fitbit = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var React = _interopRequireWildcard(require("react"));
+var _styledIcon = require("@styled-icons/styled-icon");
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var Fitbit = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var attrs = {
+    "fill": "currentColor",
+    "xmlns": "http://www.w3.org/2000/svg"
+  };
+  return /*#__PURE__*/React.createElement(_styledIcon.StyledIconBase, (0, _extends2.default)({
+    iconAttrs: attrs,
+    iconVerticalAlign: "middle",
+    iconViewBox: "0 0 24 24"
+  }, props, {
+    ref: ref
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M19.89 13.89c1.04 0 1.89-.85 1.89-1.89s-.85-1.89-1.89-1.89S18 10.96 18 12s.85 1.89 1.89 1.89zm-4.24-.21c.93 0 1.68-.75 1.68-1.68s-.75-1.68-1.68-1.68c-.93 0-1.68.75-1.68 1.68s.75 1.68 1.68 1.68zm0-4.26c.93 0 1.68-.75 1.68-1.68 0-.93-.75-1.68-1.68-1.68-.93 0-1.68.75-1.68 1.68 0 .93.75 1.68 1.68 1.68zm0 8.51c.93 0 1.68-.75 1.68-1.68 0-.93-.75-1.68-1.68-1.68-.93 0-1.68.75-1.68 1.68 0 .92.75 1.68 1.68 1.68zm-4.24-4.46c.81 0 1.47-.66 1.47-1.47s-.66-1.47-1.47-1.47c-.81 0-1.47.66-1.47 1.47s.65 1.47 1.47 1.47zm0-4.26c.81 0 1.47-.66 1.47-1.47s-.66-1.47-1.47-1.47c-.81 0-1.47.66-1.47 1.47s.65 1.47 1.47 1.47zm0 8.52c.81 0 1.47-.66 1.47-1.47 0-.81-.66-1.47-1.47-1.47-.81 0-1.47.66-1.47 1.47-.01.81.65 1.47 1.47 1.47zm0 4.27c.81 0 1.47-.66 1.47-1.47 0-.81-.66-1.47-1.47-1.47-.81 0-1.47.66-1.47 1.47-.01.81.65 1.47 1.47 1.47zm0-17.06c.81 0 1.47-.66 1.47-1.47S12.22 2 11.41 2c-.81 0-1.47.66-1.47 1.47s.65 1.47 1.47 1.47zm-4.25 8.32c.7 0 1.26-.57 1.26-1.26s-.57-1.26-1.26-1.26a1.261 1.261 0 0 0 0 2.52zm0 4.25a1.261 1.261 0 0 0 0-2.52 1.261 1.261 0 0 0 0 2.52zm0-8.49a1.261 1.261 0 0 0 0-2.52 1.261 1.261 0 0 0 0 2.52zm-3.87 4.03a1.05 1.05 0 1 0 0-2.1 1.05 1.05 0 0 0 0 2.1z"
+  }));
+});
+exports.Fitbit = Fitbit;
+Fitbit.displayName = 'Fitbit';
+var FitbitDimensions = {
+  height: 24,
+  width: 24
+};
+exports.FitbitDimensions = FitbitDimensions;

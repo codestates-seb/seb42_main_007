@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DensitySmall.js",
+  "module": "./DensitySmall.esm.js",
+  "types": "./DensitySmall.d.ts"
+}

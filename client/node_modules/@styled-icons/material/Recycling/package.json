@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Recycling.js",
+  "module": "./Recycling.esm.js",
+  "types": "./Recycling.d.ts"
+}

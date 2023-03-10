@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Face4.js",
+  "module": "./Face4.esm.js",
+  "types": "./Face4.d.ts"
+}

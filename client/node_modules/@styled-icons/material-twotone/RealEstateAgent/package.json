@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RealEstateAgent.js",
+  "module": "./RealEstateAgent.esm.js",
+  "types": "./RealEstateAgent.d.ts"
+}

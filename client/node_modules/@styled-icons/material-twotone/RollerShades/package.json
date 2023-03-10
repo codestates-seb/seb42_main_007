@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RollerShades.js",
+  "module": "./RollerShades.esm.js",
+  "types": "./RollerShades.d.ts"
+}

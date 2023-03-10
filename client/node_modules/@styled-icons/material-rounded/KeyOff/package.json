@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./KeyOff.js",
+  "module": "./KeyOff.esm.js",
+  "types": "./KeyOff.d.ts"
+}

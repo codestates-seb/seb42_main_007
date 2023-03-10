@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./EditNote.js",
+  "module": "./EditNote.esm.js",
+  "types": "./EditNote.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FrontHand.js",
+  "module": "./FrontHand.esm.js",
+  "types": "./FrontHand.d.ts"
+}

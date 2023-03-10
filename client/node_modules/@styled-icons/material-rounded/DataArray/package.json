@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DataArray.js",
+  "module": "./DataArray.esm.js",
+  "types": "./DataArray.d.ts"
+}

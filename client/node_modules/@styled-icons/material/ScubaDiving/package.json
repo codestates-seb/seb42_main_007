@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ScubaDiving.js",
+  "module": "./ScubaDiving.esm.js",
+  "types": "./ScubaDiving.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ArrowOutward.js",
+  "module": "./ArrowOutward.esm.js",
+  "types": "./ArrowOutward.d.ts"
+}

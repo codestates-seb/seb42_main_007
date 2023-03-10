@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./RollerSkating.js",
+  "module": "./RollerSkating.esm.js",
+  "types": "./RollerSkating.d.ts"
+}

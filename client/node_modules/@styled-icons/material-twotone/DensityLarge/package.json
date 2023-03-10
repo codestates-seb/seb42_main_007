@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./DensityLarge.js",
+  "module": "./DensityLarge.esm.js",
+  "types": "./DensityLarge.d.ts"
+}

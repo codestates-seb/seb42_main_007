@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PsychologyAlt.js",
+  "module": "./PsychologyAlt.esm.js",
+  "types": "./PsychologyAlt.d.ts"
+}

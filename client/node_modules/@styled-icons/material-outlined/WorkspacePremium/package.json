@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./WorkspacePremium.js",
+  "module": "./WorkspacePremium.esm.js",
+  "types": "./WorkspacePremium.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ContentPasteSearch.js",
+  "module": "./ContentPasteSearch.esm.js",
+  "types": "./ContentPasteSearch.d.ts"
+}

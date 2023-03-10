@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./PanToolAlt.js",
+  "module": "./PanToolAlt.esm.js",
+  "types": "./PanToolAlt.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Cottage.js",
+  "module": "./Cottage.esm.js",
+  "types": "./Cottage.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Pinch.js",
+  "module": "./Pinch.esm.js",
+  "types": "./Pinch.d.ts"
+}

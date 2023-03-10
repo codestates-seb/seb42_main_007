@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CommentsDisabled.js",
+  "module": "./CommentsDisabled.esm.js",
+  "types": "./CommentsDisabled.d.ts"
+}

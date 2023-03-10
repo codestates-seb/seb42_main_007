@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TableRestaurant.js",
+  "module": "./TableRestaurant.esm.js",
+  "types": "./TableRestaurant.d.ts"
+}

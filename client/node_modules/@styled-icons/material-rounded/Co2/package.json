@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Co2.js",
+  "module": "./Co2.esm.js",
+  "types": "./Co2.d.ts"
+}

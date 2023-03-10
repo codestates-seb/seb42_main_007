@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./BlindsClosed.js",
+  "module": "./BlindsClosed.esm.js",
+  "types": "./BlindsClosed.d.ts"
+}

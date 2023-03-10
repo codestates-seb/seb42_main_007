@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./VapingRooms.js",
+  "module": "./VapingRooms.esm.js",
+  "types": "./VapingRooms.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ManageHistory.js",
+  "module": "./ManageHistory.esm.js",
+  "types": "./ManageHistory.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./TurnSlightRight.js",
+  "module": "./TurnSlightRight.esm.js",
+  "types": "./TurnSlightRight.d.ts"
+}

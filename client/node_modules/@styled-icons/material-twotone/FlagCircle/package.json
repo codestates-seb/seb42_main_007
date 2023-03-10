@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FlagCircle.js",
+  "module": "./FlagCircle.esm.js",
+  "types": "./FlagCircle.d.ts"
+}

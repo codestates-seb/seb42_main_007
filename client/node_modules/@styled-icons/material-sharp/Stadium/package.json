@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./Stadium.js",
+  "module": "./Stadium.esm.js",
+  "types": "./Stadium.d.ts"
+}

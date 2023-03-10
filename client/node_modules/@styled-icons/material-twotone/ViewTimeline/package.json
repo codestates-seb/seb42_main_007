@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./ViewTimeline.js",
+  "module": "./ViewTimeline.esm.js",
+  "types": "./ViewTimeline.d.ts"
+}

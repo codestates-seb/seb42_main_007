@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./FormatOverline.js",
+  "module": "./FormatOverline.esm.js",
+  "types": "./FormatOverline.d.ts"
+}

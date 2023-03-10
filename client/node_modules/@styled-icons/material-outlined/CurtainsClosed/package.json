@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./CurtainsClosed.js",
+  "module": "./CurtainsClosed.esm.js",
+  "types": "./CurtainsClosed.d.ts"
+}

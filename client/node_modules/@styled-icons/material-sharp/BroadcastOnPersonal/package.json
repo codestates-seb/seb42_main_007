@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "./BroadcastOnPersonal.js",
+  "module": "./BroadcastOnPersonal.esm.js",
+  "types": "./BroadcastOnPersonal.d.ts"
+}

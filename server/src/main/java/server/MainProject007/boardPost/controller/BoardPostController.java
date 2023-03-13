@@ -1,4 +1,4 @@
-package server.MainProject007.boardPost;
+package server.MainProject007.boardPost.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -6,6 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import server.MainProject007.boardPost.entity.BoardPost;
+import server.MainProject007.boardPost.dto.BoardPostDto;
+import server.MainProject007.boardPost.mapper.BoardPostMapper;
+import server.MainProject007.boardPost.service.BoardPostService;
 import server.MainProject007.responseDto.MultiResponseEntity;
 import server.MainProject007.responseDto.PageInfo;
 import server.MainProject007.responseDto.SingleResponseEntity;

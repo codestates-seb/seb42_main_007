@@ -1,4 +1,4 @@
-package server.MainProject007.boardPost;
+package server.MainProject007.boardPost.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +18,16 @@ public class BoardPost extends Auditable {
     private long boardPostId;
 
     @Column(nullable = false)
-    private String title;
+    private String boardTitle;
 
     @Column(nullable = false)
-    private String content;
+    private String boardContent;
+
+    @Column(nullable = false)
+    private String boardImgPath;
+
+    @Column(nullable = false)
+    private long boardViewCount;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")

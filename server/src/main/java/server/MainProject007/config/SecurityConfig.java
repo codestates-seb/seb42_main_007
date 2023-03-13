@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/member/**").hasAnyRole("ADMIN", "MEMBER")
                 .antMatchers("/guest/**").hasAnyRole("ADMIN", "GUEST")
                 .antMatchers("/teacher/**").hasAnyRole("ADMIN", "TEACHER")
-                .antMatchers("/members/login").permitAll()
+                .antMatchers("/members/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -71,7 +71,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+                .permitAll()
+                .and()
+                .oauth2Login()
+                .loginPage("/members/oauth2/google")
+                .defaultSuccessUrl("/")
                 .permitAll();
+
     }
 
     private static class TokenAuthenticationFilter extends OncePerRequestFilter {

@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name = "members")
-public class Member extends Auditable {
+public class Member  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;

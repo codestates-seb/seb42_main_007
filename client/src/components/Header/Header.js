@@ -104,7 +104,7 @@ const Header = () => {
             <MenuItem>🌊 서핑스팟 찾기</MenuItem>
             {/* <MenuItem>😎 커뮤니티</MenuItem> */}
             <MenuItem>
-            <Link to="../../pages/Edit">😎 커뮤니티</Link></MenuItem>
+            <Link to="/Edit">😎 커뮤니티</Link></MenuItem>
             <MenuItem>🏄‍♀️ 강습예약</MenuItem>
             </MenuItems>
             <ButtonContainer>

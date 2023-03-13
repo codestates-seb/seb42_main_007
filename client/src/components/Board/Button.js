@@ -22,14 +22,14 @@ const StyledButton = styled.button`
   };
 
   &.type2 {
-    background-color: #0A95FF;
+    background-color: #7CCCDC;
     color: #FFF;
-    border: 0.1rem solid #0A95FF;
+    border: 0.1rem solid #4CA1B5;
     box-shadow: ${props => props.boxShadow ||
       'inset 0 0.1rem 0 0 hsla(0,0%,100%,0.4)'};
 
     &:hover {
-      background-color: #0074CC;
+      background-color: #36778B;
     }
   };
 
@@ -46,12 +46,12 @@ const StyledButton = styled.button`
 
   &.type4 {
     background-color: #FFF;
-    color: #0074CC;
+    color: #7CCCDC;
     border: 0.1rem solid #FFF;
 
     &:hover {
-      background-color: #F0F8FF;
-      color: #0063BF;
+      background-color: #4CA1B5;
+      color: #FFF;
     }
   };
 `;

@@ -9,7 +9,7 @@ const FooterContainer = styled.div`
     padding-right: 30px;
     display: flex;
     align-items: stretch;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
 `

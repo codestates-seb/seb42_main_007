@@ -1,29 +1,29 @@
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import Header from "./components/Header/Header";
 import GlobalStyle from "./styles/GlobalStyle";
-import Footer from "./components/Footer/Footer";
-import { Link } from "react-router-dom";
-import AskButton from "./components/Board/AskButton";
 import Edit from "./pages/Edit";
+import Home from "./pages/Home";
+import { List } from "./pages/List";
+import Ask from "./pages/Ask";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <div className="App">
-        <Header />
-        <header className="App-header">
-          <p> 개발 준비 완료! </p>
-        </header>
         <Routes>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/ask" element={<Ask></Ask>}></Route>
           <Route path="/Edit" element={<Edit></Edit>}></Route>
+          <Route path="/List" element={<List></List>}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
-        <Footer />
       </div>
     </>
   );
 }
 
 export default App;
+

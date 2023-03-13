@@ -1,9 +1,11 @@
-package server.MainProject007.boardPost;
+package server.MainProject007.boardPost.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import server.MainProject007.boardPost.entity.BoardPost;
+import server.MainProject007.boardPost.repository.BoardPostRepository;
 import server.MainProject007.exception.BusinessLogicException;
 import server.MainProject007.exception.ExceptionCode;
 
@@ -29,14 +31,17 @@ public class BoardPostService {
     public BoardPost updateBoardPost(BoardPost boardPost) {
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPost.getBoardPostId());
 
-        Optional.ofNullable(boardPost.getTitle())
-                .ifPresent(title -> existBoardPost.setTitle(title));
+        Optional.ofNullable(boardPost.getBoardTitle())
+                .ifPresent(boardTitle -> existBoardPost.setBoardTitle(boardTitle));
 
-        Optional.ofNullable(boardPost.getContent())
-                .ifPresent(content -> existBoardPost.setContent(content));
+        Optional.ofNullable(boardPost.getBoardContent())
+                .ifPresent(boardContent -> existBoardPost.setBoardContent(boardContent));
 
         Optional.ofNullable(boardPost.getUpdatedAt())
                 .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
+
+        Optional.ofNullable(boardPost.getBoardImgPath())
+                .ifPresent(boardImgPath -> existBoardPost.setBoardImgPath(boardImgPath));
 
         BoardPost response = boardPostRepository.save(existBoardPost);
 

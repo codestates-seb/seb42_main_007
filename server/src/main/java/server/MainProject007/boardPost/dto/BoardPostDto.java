@@ -1,4 +1,4 @@
-package server.MainProject007.boardPost;
+package server.MainProject007.boardPost.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +13,11 @@ public class BoardPostDto {
     @Getter
     public static class Post {
         @NotBlank
-        private String title;
-        private String content;
+        private String boardTitle;
+        private String boardContent;
         @NotBlank
         private String createdAt;
+        private String boardImgPath;
         @Min(1)
         private long memberId;
     }
@@ -25,10 +26,11 @@ public class BoardPostDto {
     @Setter
     public static class Patch {
         private long boardPostId;
-        private String title;
-        private String content;
+        private String boardTitle;
+        private String boardContent;
         @NotBlank
         private String updatedAt;
+        private String boardImgPath;
     }
 
     @Getter
@@ -36,11 +38,13 @@ public class BoardPostDto {
     @NoArgsConstructor
     public static class Response {
         private long boardPostId;
-        private String title;
-        private String content;
+        private String boardTitle;
+        private String boardContent;
         private String email;
         private String displayName;
         private String createdAt;
         private String updatedAt;
+        private String boardImgPath;
+        private long boardViewCount;
     }
 }

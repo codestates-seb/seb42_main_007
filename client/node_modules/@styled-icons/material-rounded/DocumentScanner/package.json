@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./DocumentScanner.js",
-  "module": "./DocumentScanner.esm.js",
-  "types": "./DocumentScanner.d.ts"
-}

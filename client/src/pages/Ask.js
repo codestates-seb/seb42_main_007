@@ -28,7 +28,7 @@ import {
           <Header></Header>
         </div>
         <MainLeft>
-          <h2>게시글 작성</h2>
+          <h2>글쓰기</h2>
           <div>
             <InputLabel title="제목" />
             <Input placeholder="" padding="0.78rem 0.91rem" width="100%" />

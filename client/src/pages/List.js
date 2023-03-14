@@ -9,15 +9,48 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import QuestionsList from '../components/Board/QuestionsList';
 
+
+
+export const List = () => {
+  // const [questions, setQuestions] = useState([]);
+
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: '',
+  //   }).then(res => setQuestions(res.data.data));
+  // }, []);
+
+  return (
+    <>
+    <Header></Header>
+      <MainContainer>
+        <MainContainer>
+          <HeadContainer>
+            <h1>커뮤니티 게시판</h1>
+            <AskButton>
+              <Link to="/ask">게시글 작성</Link>
+            </AskButton>
+          </HeadContainer>
+          <QuestionsController>
+            {/* <div className="total-questions">{questions.length} questions</div> */}
+            <FilterController>
+              <div className="newest-btn">최신글</div>
+              <div className="unanswered-btn">인기글</div>
+              <div className="view-btn">조회수</div>
+              <div className="vote-btn">평점</div>
+            </FilterController>
+          </QuestionsController>
+          {/* <QuestionsList questions={questions}></QuestionsList> */}
+        </MainContainer>
+        <Footer></Footer>
+      </MainContainer>
+    </>
+  );
+};
+
 export const MainContainer = styled.main`
-  max-width: 1100px;
-  width: calc(100% - 324px);
-  border: 1px solid hsl(210, 8%, 85%);
-  border-top-width: 0;
-  border-bottom-width: 0;
-  border-left-width: 1px;
-  border-right-width: 0;
-  padding: 24px;
+  padding: 5rem;
 `;
 
 export const HeadContainer = styled.div`
@@ -29,7 +62,6 @@ export const HeadContainer = styled.div`
   h1 {
     font-size: 2rem;
     margin-bottom: 12px;
-    margin-right: 12px;
     flex: 1 auto;
   }
 `;
@@ -98,44 +130,6 @@ const AskButton = styled.div`
   }
 
   a:hover {
-    background-color: hsl(206, 100%, 40%);
+    background-color: #36778B;
   }
 `;
-
-export const List = () => {
-  const [questions, setQuestions] = useState([]);
-
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: '',
-    }).then(res => setQuestions(res.data.data));
-  }, []);
-
-  return (
-    <>
-    <Header></Header>
-      <MainContainer>
-        <MainContainer>
-          <HeadContainer>
-            <h1>커뮤니티 게시판</h1>
-            <AskButton>
-              <Link to="/ask">게시글 작성</Link>
-            </AskButton>
-          </HeadContainer>
-          <QuestionsController>
-            <div className="total-questions">{questions.length} questions</div>
-            <FilterController>
-              <div className="newest-btn">Newest</div>
-              <div className="unanswered-btn">Unanswered</div>
-              <div className="view-btn">View</div>
-              <div className="vote-btn">Vote</div>
-            </FilterController>
-          </QuestionsController>
-          <QuestionsList questions={questions}></QuestionsList>
-        </MainContainer>
-        <Footer></Footer>
-      </MainContainer>
-    </>
-  );
-};

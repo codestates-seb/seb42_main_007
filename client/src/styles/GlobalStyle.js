@@ -18,6 +18,8 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         height: 100%;
+        display: flex;
+        flex-direction: column;
     }
     body {
         font-family: 'Noto Sans KR', sans-serif;

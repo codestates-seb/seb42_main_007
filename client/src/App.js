@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
 import Edit from "./pages/Edit";
@@ -17,6 +16,7 @@ import Mypage from "./components/Mypage/Mypage"
 
 
 import Detail from "./pages/Detail";
+
 
 function App() {
   // const dispatch = useDispatch();

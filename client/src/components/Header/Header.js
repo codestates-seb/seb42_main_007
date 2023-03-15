@@ -13,9 +13,12 @@ const HeaderContainer = styled.div`
     padding-left: 30px;
     display: flex;
     position: fixed;
+    top: 0;
+    left: 0;
     align-items: center;
     justify-content: space-between;
-    top: 0;
+    z-index: 1;
+
     .header-wrapper {
         display: flex;
         align-items: center;
@@ -97,6 +100,7 @@ const SignupButton = styled.button`
 `
 
 const Header = () => {
+
     return (
         <>
         <HeaderContainer>

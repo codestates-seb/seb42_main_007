@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png"
 import { Menu } from "@styled-icons/ionicons-solid/Menu"
+import { Link } from 'react-router-dom';
+
 
 const HeaderContainer = styled.div`
     width: 100%;
@@ -12,6 +14,7 @@ const HeaderContainer = styled.div`
     position: fixed;
     align-items: center;
     justify-content: space-between;
+    top: 0;
     .header-wrapper {
         display: flex;
         align-items: center;
@@ -96,15 +99,19 @@ const Header = () => {
     return (
         <>
         <HeaderContainer>
-            <LogoImage src={Wassurf_white} />
+            <Link to="/">
+            <LogoImage src={Wassurf_white} /></Link>
             <div className="header-wrapper">
             <MenuItems>
             <MenuItem>🌊 서핑스팟 찾기</MenuItem>
-            <MenuItem>😎 커뮤니티</MenuItem>
-            <MenuItem>🏄‍♀️ 강습예약</MenuItem>
-            </MenuItems>
+            {/* <MenuItem>😎 커뮤니티</MenuItem> */}
+            <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
+            <MenuItem><Link to="/Detail">😎 상세</Link></MenuItem>
+            <MenuItem><Link to="/Ask">😎 작성</Link></MenuItem>
+            <MenuItem><Link to="/Edit">😎 수정</Link></MenuItem>
+            <MenuItem>🏄‍♀️ 강습예약</MenuItem></MenuItems>
             <ButtonContainer>
-            <LoginButton>로그인</LoginButton>
+            <LoginButton><Link to="/Login">로그인</Link></LoginButton>
             <SignupButton>회원가입</SignupButton>
             </ButtonContainer>
             <MenuIcon />

@@ -16,6 +16,7 @@ import Mypage from "./components/Mypage/Mypage"
 
 
 
+import Detail from "./pages/Detail";
 
 function App() {
   // const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/ask" element={<Ask></Ask>}></Route>
           <Route path="/Edit" element={<Edit></Edit>}></Route>
           <Route path="/List" element={<List></List>}></Route>
+          <Route path="/Detail" element={<Detail></Detail>}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>

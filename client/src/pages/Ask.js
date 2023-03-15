@@ -14,12 +14,18 @@ import {
   import "../App.css";
   
   const Edit = (props) => {
+    const navigate = useNavigate();
     const [answer, setAnswer] = useState("");
     const editorRef = useRef();
   
     const handleEditorChange = () => {
       const data = editorRef.current.getInstance().getMarkdown();
       setAnswer(data);
+    };
+
+
+    const cancelButtonClick = () => {
+      navigate(`/List`);
     };
   
     return (
@@ -28,7 +34,7 @@ import {
           <Header></Header>
         </div>
         <MainLeft>
-          <h2>게시글 작성</h2>
+          <h2>글쓰기</h2>
           <div>
             <InputLabel title="제목" />
             <Input placeholder="" padding="0.78rem 0.91rem" width="100%" />
@@ -61,7 +67,7 @@ import {
               height="3.79rem"
             />
             <Button
-              //   onClick={cancelButtonClick}
+                onClick={cancelButtonClick}
               buttonType="type4"
               buttonName="취소"
               width="8.04rem"

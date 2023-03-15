@@ -4,9 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import server.MainProject007.lesson_class.entity.LessonClass;
 
-import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 public class LessonClassResponseDto {
     private long lessonClassId;

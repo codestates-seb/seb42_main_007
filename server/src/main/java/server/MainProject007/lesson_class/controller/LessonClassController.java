@@ -1,6 +1,7 @@
 package server.MainProject007.lesson_class.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,14 @@ import server.MainProject007.lesson_class.entity.LessonClass;
 import server.MainProject007.lesson_class.mapper.LessonClassMapper;
 import server.MainProject007.lesson_class.service.LessonClassService;
 import server.MainProject007.responseDto.MultiResponseEntity;
+import server.MainProject007.responseDto.SingleResponseEntity;
 import server.MainProject007.utils.UriCreator;
 
 import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/lesson-class")
 @RequiredArgsConstructor
@@ -50,7 +53,7 @@ public class LessonClassController {
     @GetMapping("/{lesson-class-id}")
     public ResponseEntity getLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId) {
         LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
-        return new ResponseEntity<>(mapper.lessonClassToLessonClassResponseDto(findLessonClass), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseEntity<>(mapper.lessonClassToLessonClassResponseDto(findLessonClass)), HttpStatus.OK);
     }
 
     @GetMapping

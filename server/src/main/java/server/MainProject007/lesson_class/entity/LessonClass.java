@@ -20,6 +20,15 @@ public class LessonClass {
     private LocalDateTime lessonStart;
     private LocalDateTime lessonEnd;
     private int headCount;
+
+    public LessonClass(String lessonClassTitle, String lessonClassContent, LocalDateTime lessonStart, LocalDateTime lessonEnd, int headCount) {
+        this.lessonClassTitle = lessonClassTitle;
+        this.lessonClassContent = lessonClassContent;
+        this.lessonStart = lessonStart;
+        this.lessonEnd = lessonEnd;
+        this.headCount = headCount;
+    }
+
     @Enumerated(value = EnumType.STRING)
     private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
 

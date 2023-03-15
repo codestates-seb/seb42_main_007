@@ -69,7 +69,7 @@ public class LessonClassService {
         log.info("# find LessonClasses");
 
         // 최신 강습클래스가 먼저 조회되도록 오름차순으로 정렬
-        return lessonClassRepository.findAll(PageRequest.of(page, size, Sort.by("lessonClassId").descending()));
+        return lessonClassRepository.findAll(PageRequest.of(page, size, Sort.by("lessonClassId").ascending()));
     }
 
     // 특정 강습클래스 삭제

@@ -12,7 +12,7 @@ import AnswersList from '../components/Board/AnswersList';
 import AnswerEditor from '../components/Board/AnswerEditor';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import Comments from '../components/Board/Comments';
+import Comments2 from '../components/Board/Comments2';
 
 const Detail = () => {
   const [question, setQuestion] = useState({});
@@ -36,6 +36,7 @@ const Detail = () => {
         
         <QuestionDetailMainContainer>
           <QuestionHeader>
+            <h1>죽도 해변 지금 서핑하기 어떤가요?</h1>
             <h1>{question.questionTitle}</h1>
             <AskButton>
               <Link to="/ask">글쓰기</Link>
@@ -43,33 +44,33 @@ const Detail = () => {
           </QuestionHeader>
           <QuestionStats>
             <div className="asked-at">
-              <span>Asked</span>
+              <span>작성일</span>
               <time>{question.createdAt}</time>
             </div>
             <div className="modified-at">
-              <span>Modified</span>
+              <span>수정됨</span>
               <time>{question.modifiedAt}</time>
             </div>
             <div className="view-stats">
-              <span>Viewed</span>
-              <span>{`${question.viewCount} times`}</span>
+              <span>조회수</span>
+              <span>{`${question.viewCount}`}</span>
             </div>
           </QuestionStats>
           <div className="detail-main">
             <QuestionBody>
-              <VoteBar
-                total={question.likeCount - question.hateCount}></VoteBar>
+              
               <QuestionContent>
                 <DetailContainer>
+                  <div>지금 죽도 해변 가고 있습니다! 날씨는 좋아보이는데 실제로도 서핑하기 좋은가요?</div>
                   {question.questionContent && (
                     <Viewer initialValue={question.questionContent}></Viewer>
                   )}
                 </DetailContainer>
                 <InfoContainer>
                   <EditContainer>
-                    <button>Share</button>
-                    <button><Link to="/Edit">Edit</Link></button>
-                    <button>Follow</button>
+                    {/* <button>Share</button> */}
+                    <button><Link to="/Edit">수정하기</Link></button>
+                    {/* <button>Follow</button> */}
                   </EditContainer>
                   <AuthorContainer>
                     <AuthorAskedTime>
@@ -85,10 +86,13 @@ const Detail = () => {
                 </InfoContainer>
               </QuestionContent>
             </QuestionBody>
-            <AnswersBody>
+            <VoteBar
+                total={question.likeCount - question.hateCount}></VoteBar>
+                <Comments2></Comments2>
+            {/* <AnswersBody>
               <AnswersList answers={answers}></AnswersList>
               <AnswerEditor id={id}></AnswerEditor>
-            </AnswersBody>
+            </AnswersBody> */}
           </div>
         </QuestionDetailMainContainer>
       </Container>
@@ -101,10 +105,11 @@ export default Detail;
 
 
 const QuestionDetailMainContainer = styled(MainContainer)`
-  width: calc(100% - 164px);
+  width: 100%;
+  padding: 8rem;
 
   > .detail-main {
-    width: calc(100% - 324px);
+    /* width: calc(100% - 324px); */
   }
 `;
 
@@ -113,11 +118,12 @@ const QuestionHeader = styled.div`
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 2rem;
 
   h1 {
     font-size: 2rem;
     margin-bottom: 8px;
-    flex: 1 auto;
+    /* flex: 1 auto; */
     overflow-wrap: break-word;
     font-weight: normal;
     color: hsl(210, 8%, 25%);
@@ -157,6 +163,8 @@ const QuestionContent = styled.div`
 
 const DetailContainer = styled.div`
   width: 100%;
+  display: flex;
+  padding: 2rem 0;
 `;
 
 const InfoContainer = styled.div`

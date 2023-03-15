@@ -57,7 +57,7 @@ const AnswerEditor = ({ id }) => {
 
   return (
     <EditorContainer>
-      <h2>답변</h2>
+      <h2>댓글</h2>
       <Editor
         height="400px"
         initialEditType="markdown"
@@ -67,7 +67,7 @@ const AnswerEditor = ({ id }) => {
         onChange={handleEditorChange}></Editor>
       <PostBtnWrapper>
         <PostBtn onClick={() => handlePostAnswer(answer)}>
-          답변 작성
+          댓글 작성
         </PostBtn>
       </PostBtnWrapper>
     </EditorContainer>

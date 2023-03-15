@@ -33,6 +33,7 @@
   
         .comment-content {
           // \n(엔터)를 태그 안의 텍스트에 적용
+          display: flex;
           white-space: pre-wrap;
           word-break: break-all;
           margin: 0.4rem auto;

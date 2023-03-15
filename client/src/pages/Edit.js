@@ -14,12 +14,18 @@ import Footer from "../components/Footer/Footer";
 import "../App.css";
 
 const Edit = (props) => {
+
+  const navigate = useNavigate();
   const [answer, setAnswer] = useState("");
   const editorRef = useRef();
 
   const handleEditorChange = () => {
     const data = editorRef.current.getInstance().getMarkdown();
     setAnswer(data);
+  };
+
+  const cancelButtonClick = () => {
+    navigate(`/Detail`);
   };
 
   return (
@@ -61,7 +67,7 @@ const Edit = (props) => {
             height="3.79rem"
           />
           <Button
-            //   onClick={cancelButtonClick}
+              onClick={cancelButtonClick}
             buttonType="type4"
             buttonName="취소"
             width="8.04rem"

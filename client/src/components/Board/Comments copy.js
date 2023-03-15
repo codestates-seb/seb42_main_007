@@ -12,8 +12,8 @@ import "./comments.scss";
 
 const Comments = ({board_id}) => {
   // 로그인 후 현재 경로로 돌아오기 위해 useLocation 사용
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [commentList, setCommentList] = useState([]);
   // 입력한 댓글 내용
   const [content, setContent] = useState("");
@@ -63,16 +63,16 @@ const Comments = ({board_id}) => {
   console.log(commentList)
   /*modal 관련 코드*/
   // 로그인 후 돌아올 수 있게 현재 경로 세팅
-  // const goLogin = () => {
-  //   setShow(false);
-  //   navigate(`/login?redirectUrl=${location.pathname}`);
-  // }
+  const goLogin = () => {
+    setShow(false);
+    navigate(`/login?redirectUrl=${location.pathname}`);
+  }
   // 로그인을 하지 않은 상태에서 댓글 입력 창을 클릭하면 Modal이 열림.
-  // const isLogin = () => {
+  const isLogin = () => {
     // if (!jwtUtils.isAuth(token)) {
-      // setShow(true);
+      setShow(true);
     // }
-  // }
+  }
 
   return (
     <div className="comments-wrapper">
@@ -80,7 +80,7 @@ const Comments = ({board_id}) => {
         <TextField
           className="comments-header-textarea"
           maxRows={3}
-          // onClick={isLogin}
+          onClick={isLogin}
           onChange={(e) => {
             setContent(e.target.value)
           }}
@@ -142,7 +142,7 @@ const Comments = ({board_id}) => {
             <div className="modal-button">
               <Button
                 variant="outlined" color="error"
-                // onClick={goLogin}
+                onClick={goLogin}
               >
                 예
               </Button>

@@ -4,14 +4,16 @@ import styled from "styled-components";
 const FooterContainer = styled.div`
     width: 100%;
     background-color: #3FBED3;
-    height: 150px;
+    height: 120px;
     padding-left: 30px;
     padding-right: 30px;
     display: flex;
     align-items: stretch;
-    position: absolute;
+    margin-top: 100px;
+    position: relative;
     bottom: 0;
     left: 0;
+    /* border: 2px red solid; */
 `
  const FooterItem = styled.div`
     margin-top: 20px;

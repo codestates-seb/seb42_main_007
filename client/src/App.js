@@ -8,15 +8,11 @@ import Ask from "./pages/Ask";
 import Login from "./components/Login/Login";
 import Signup from "./components/signUp/SignUp"
 import Mypage from "./components/Mypage/Mypage"
+import Detail from "./pages/Detail";
 // import { useEffect } from 'react';
 // import { authActions } from './Redux/auth';
 // import { Cookies } from 'react-cookie';
 // import { useDispatch } from 'react-redux';
-
-
-
-import Detail from "./pages/Detail";
-
 
 function App() {
   // const dispatch = useDispatch();
@@ -33,7 +29,6 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <div className="App">
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/ask" element={<Ask></Ask>}></Route>
@@ -44,7 +39,6 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
         </Routes>
-      </div>
     </>
   );
 }

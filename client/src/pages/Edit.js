@@ -30,7 +30,7 @@ const Edit = (props) => {
 
   return (
     <>
-      <div className="App">
+      <div>
         <Header></Header>
       </div>
       <MainLeft>

@@ -126,6 +126,6 @@ const Answer = ({ ele }) => {
       </AnswerContent>
     </AnswerContainer>
   );
-};
+}; 
 
 export default Answer;

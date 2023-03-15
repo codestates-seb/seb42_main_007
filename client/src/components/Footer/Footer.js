@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const FooterContainer = styled.div`
+
   width: 100%;
   background-color: #3fbed3;
   height: 150px;

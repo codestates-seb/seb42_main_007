@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class BoardPostDto {
 
@@ -16,7 +17,7 @@ public class BoardPostDto {
         private String boardTitle;
         private String boardContent;
         @NotBlank
-        private String createdAt;
+        private LocalDateTime createdAt;
         private String boardImgPath;
         @Min(1)
         private long memberId;
@@ -29,7 +30,7 @@ public class BoardPostDto {
         private String boardTitle;
         private String boardContent;
         @NotBlank
-        private String updatedAt;
+        private LocalDateTime updatedAt;
         private String boardImgPath;
     }
 
@@ -42,8 +43,8 @@ public class BoardPostDto {
         private String boardContent;
         private String email;
         private String displayName;
-        private String createdAt;
-        private String updatedAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
         private String boardImgPath;
         private long boardViewCount;
     }

@@ -28,7 +28,9 @@ public interface BoardPostMapper {
     }
 
     // patchDto -> entity
-    BoardPost boardPostPatchDtoToBoardPost(BoardPostDto.Patch boardPostPatch);
+    default BoardPost boardPostPatchDtoToBoardPost(BoardPostDto.Patch boardPostPatch) {
+        return null;
+    };
 
     // entity -> responseDto
     default BoardPostDto.Response boardPostToBoardPostResponseDto(BoardPost boardPost) {

@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./PinEnd.js",
-  "module": "./PinEnd.esm.js",
-  "types": "./PinEnd.d.ts"
-}

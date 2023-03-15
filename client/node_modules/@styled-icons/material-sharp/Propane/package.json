@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./Propane.js",
-  "module": "./Propane.esm.js",
-  "types": "./Propane.d.ts"
-}

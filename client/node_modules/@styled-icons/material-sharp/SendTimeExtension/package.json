@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./SendTimeExtension.js",
-  "module": "./SendTimeExtension.esm.js",
-  "types": "./SendTimeExtension.d.ts"
-}

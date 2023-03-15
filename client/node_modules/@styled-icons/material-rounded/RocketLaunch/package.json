@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./RocketLaunch.js",
-  "module": "./RocketLaunch.esm.js",
-  "types": "./RocketLaunch.d.ts"
-}

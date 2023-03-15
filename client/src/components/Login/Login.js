@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 // import { useDispatch } from 'react-redux';
 import './Login.css';
+import Logo_black from "../../images/Logo_black.png"
 
 // import { authActions } from '../../Redux/auth';
 // import { REDIRECT_URI } from '../Apiurl';
@@ -90,7 +91,7 @@ function Login() {
       <div className="login">
         <div className="content">
           <div className="loginbox">
-            <p>로그인</p>
+            <p className= "inbox"><img src={Logo_black} alt="logo" /></p>
             <div className="loginemail">
               <label className="flexItemLabel" htmlFor="display-name">
                 이메일

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png"
 import { Menu } from "@styled-icons/ionicons-solid/Menu"
 import { Link } from 'react-router-dom';
+import Logo_black from "../../images/Logo_black.png"
 
 
 const HeaderContainer = styled.div`
@@ -104,6 +105,7 @@ const Header = () => {
         <>
         <HeaderContainer>
             <Link to="/">
+            <LogoImage src={Logo_black} />
             <LogoImage src={Wassurf_white} /></Link>
             <div className="header-wrapper">
             <MenuItems>
@@ -116,7 +118,7 @@ const Header = () => {
             <MenuItem>🏄‍♀️ 강습예약</MenuItem></MenuItems>
             <ButtonContainer>
             <LoginButton><Link to="/Login">로그인</Link></LoginButton>
-            <SignupButton>회원가입</SignupButton>
+            <SignupButton><Link to="/signup">회원가입</Link></SignupButton>
             </ButtonContainer>
             <MenuIcon />
             </div>

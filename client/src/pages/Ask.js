@@ -30,7 +30,7 @@ import {
   
     return (
       <>
-        <div className="App">
+        <div>
           <Header></Header>
         </div>
         <MainLeft>

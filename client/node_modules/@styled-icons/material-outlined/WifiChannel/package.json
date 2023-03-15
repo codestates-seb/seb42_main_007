@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./WifiChannel.js",
-  "module": "./WifiChannel.esm.js",
-  "types": "./WifiChannel.d.ts"
-}

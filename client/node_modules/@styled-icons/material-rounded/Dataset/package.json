@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "sideEffects": false,
-  "main": "./Dataset.js",
-  "module": "./Dataset.esm.js",
-  "types": "./Dataset.d.ts"
-}

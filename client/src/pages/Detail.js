@@ -106,7 +106,7 @@ export default Detail;
 
 const QuestionDetailMainContainer = styled(MainContainer)`
   width: 100%;
-  padding: 8rem;
+  padding: 4rem 8rem 8rem 8rem;
 
   > .detail-main {
     /* width: calc(100% - 324px); */

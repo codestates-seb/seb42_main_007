@@ -1,13 +1,13 @@
 package server.MainProject007.member.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import server.MainProject007.member.entity.Member;
 
+@Builder
 @Getter
-@Setter
-@NoArgsConstructor
 public class MemberResponseDto {
     private long memberId;
     private String displayName;

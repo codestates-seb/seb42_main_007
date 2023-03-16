@@ -1,26 +1,42 @@
 package server.MainProject007.member.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import server.MainProject007.config.jwt.JwtToken;
+import server.MainProject007.config.jwt.JwtTokenProvider;
+import server.MainProject007.config.util.CustomAuthorityUtils;
 import server.MainProject007.member.repository.MemberRepository;
 import server.MainProject007.exception.BusinessLogicException;
 import server.MainProject007.exception.ExceptionCode;
 import server.MainProject007.member.entity.Member;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder PasswordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public MemberService(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.memberRepository = memberRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public JwtToken login(String email, String password){
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,password);
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        JwtToken token = jwtTokenProvider.generateToken(authentication);
+        return token;
     }
     public Member findMember(long memberId){
         return findVerifiedMember(memberId);
@@ -46,8 +62,11 @@ public class MemberService {
     public Member createMember(Member member){
         verifyExistEmail(member.getEmail());
 
-        member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
-        member.setRoles(member.getRoles());
+        String encryptedPassword = PasswordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
 
         return memberRepository.save(member);
     }
@@ -71,7 +90,4 @@ public class MemberService {
         if(member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXIST);
     }
-
-
-
 }

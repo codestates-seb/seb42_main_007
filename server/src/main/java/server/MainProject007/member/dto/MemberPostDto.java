@@ -9,9 +9,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class MemberPostDto {
 
     @NotBlank
@@ -26,4 +23,5 @@ public class MemberPostDto {
 
     @NotBlank
     private String aboutMe;
+
 }

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import server.MainProject007.config.jwt.JwtToken;
 import server.MainProject007.member.entity.Member;
 import server.MainProject007.member.service.MemberService;
 import server.MainProject007.member.dto.MemberPatchDto;
@@ -12,6 +13,7 @@ import server.MainProject007.member.mapper.MemberMapper;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/members")
@@ -25,7 +27,11 @@ public class MemberController {
         this.memberService = memberService;
         this.mapper = mapper;
     }
-
+    @PostMapping("/login")
+    public ResponseEntity<JwtToken> loginSuccess(@RequestBody Map<String,String> loginForm){
+        JwtToken token = memberService.login(loginForm.get("email"), loginForm.get("password"));
+        return ResponseEntity.ok(token);
+    }
     @PostMapping
     public ResponseEntity postMember(@Valid@RequestBody MemberPostDto memberPostDto){
         Member createMember = memberService.createMember(mapper.memberPostDtoToMember(memberPostDto));

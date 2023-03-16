@@ -7,7 +7,9 @@ import server.MainProject007.audit.Auditable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -36,18 +38,14 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String aboutMe;
 
-    public Member(long memberId, String email, String password) {
-        this.memberId = memberId;
+    public Member(String displayName, String email, String password) {
+        this.displayName = displayName;
         this.email = email;
         this.password = password;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "member_roles",
-            joinColumns = @JoinColumn(name = "member_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
 
     public enum MemberStatus{

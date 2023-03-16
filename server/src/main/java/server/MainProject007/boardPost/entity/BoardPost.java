@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import server.MainProject007.audit.Auditable;
 import server.MainProject007.boardComment.entity.BoardComment;
-import server.MainProject007.member.entity.Member;
+//import server.MainProject007.member.entity.Member;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ public class BoardPost extends Auditable {
     @Column(nullable = false)
     private long boardViewCount;
 
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
+//    @ManyToOne
+//    @JoinColumn(name = "MEMBER_ID")
+//    private Member member;
 /*
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
     private List<BoardComment> boardComments = new ArrayList<>();

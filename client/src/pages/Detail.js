@@ -1,39 +1,36 @@
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Viewer } from '@toast-ui/react-editor';
+import { Link, useParams } from "react-router-dom";
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Viewer } from "@toast-ui/react-editor";
 
-import { FaUser } from 'react-icons/fa';
-import Container from '../components/Board/Container';
-import { MainContainer } from './List';
-import VoteBar from '../components/Board/VoteBar';
-import AnswersList from '../components/Board/AnswersList';
-import AnswerEditor from '../components/Board/AnswerEditor';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import Comments2 from '../components/Board/Comments2';
+import { FaUser } from "react-icons/fa";
+import Container from "../components/Board/Container";
+import { MainContainer } from "./List";
+import VoteBar from "../components/Board/VoteBar";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Comments2 from "../components/Board/Comments2";
 
 const Detail = () => {
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
   const { id } = useParams();
 
-//   useEffect(() => {
-//     axios({
-//       method: 'get',
-//       url: `http://3.39.174.236:8080/questions/${id}/1`,
-//     }).then(res => {
-//       setQuestion(res.data.data.question);
-//       setAnswers(res.data.data.answers);
-//     });
-//   }, [id]);
+  //   useEffect(() => {
+  //     axios({
+  //       method: 'get',
+  //       url: `http://3.39.174.236:8080/questions/${id}/1`,
+  //     }).then(res => {
+  //       setQuestion(res.data.data.question);
+  //       setAnswers(res.data.data.answers);
+  //     });
+  //   }, [id]);
 
   return (
     <>
-    <Header></Header>
+      <Header></Header>
       <Container>
-        
         <QuestionDetailMainContainer>
           <QuestionHeader>
             <h1>죽도 해변 지금 서핑하기 어떤가요?</h1>
@@ -42,36 +39,44 @@ const Detail = () => {
               <Link to="/ask">글쓰기</Link>
             </AskButton>
           </QuestionHeader>
-          <QuestionStats>
-            <div className="asked-at">
-              <span>작성일</span>
+          <QuestionStat>
+          <div className="asked-at">
+              <span>작성일 </span>
               <time>{question.createdAt}</time>
+              <time>2023-03-14</time>
             </div>
-            <div className="modified-at">
+            {/* <div className="modified-at">
               <span>수정됨</span>
               <time>{question.modifiedAt}</time>
-            </div>
+            </div> */}
             <div className="view-stats">
-              <span>조회수</span>
-              <span>{`${question.viewCount}`}</span>
+              <span>조회수 </span>
+              {/* <span>{`${question.viewCount}`}</span> */}
+              <span>8</span>
             </div>
+          </QuestionStat>
+          <QuestionStats>
+            <EditContainer>
+              <button>
+                <Link to="/Edit">수정</Link>
+              </button>
+              <button>삭제</button>
+            </EditContainer>
           </QuestionStats>
+
           <div className="detail-main">
             <QuestionBody>
-              
               <QuestionContent>
                 <DetailContainer>
-                  <div>지금 죽도 해변 가고 있습니다! 날씨는 좋아보이는데 실제로도 서핑하기 좋은가요?</div>
+                  <div>
+                    지금 죽도 해변 가고 있습니다! 날씨는 좋아보이는데 실제로도
+                    서핑하기 좋은가요?
+                  </div>
                   {question.questionContent && (
                     <Viewer initialValue={question.questionContent}></Viewer>
                   )}
                 </DetailContainer>
                 <InfoContainer>
-                  <EditContainer>
-                    {/* <button>Share</button> */}
-                    <button><Link to="/Edit">수정하기</Link></button>
-                    {/* <button>Follow</button> */}
-                  </EditContainer>
                   <AuthorContainer>
                     <AuthorAskedTime>
                       작성자<span>{question.createdAt}</span>
@@ -86,9 +91,8 @@ const Detail = () => {
                 </InfoContainer>
               </QuestionContent>
             </QuestionBody>
-            <VoteBar
-                total={question.likeCount - question.hateCount}></VoteBar>
-                <Comments2></Comments2>
+            <VoteBar total={question.likeCount - question.hateCount}></VoteBar>
+            <Comments2></Comments2>
             {/* <AnswersBody>
               <AnswersList answers={answers}></AnswersList>
               <AnswerEditor id={id}></AnswerEditor>
@@ -102,7 +106,6 @@ const Detail = () => {
 };
 
 export default Detail;
-
 
 const QuestionDetailMainContainer = styled(MainContainer)`
   width: 100%;
@@ -118,7 +121,7 @@ const QuestionHeader = styled.div`
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
 
   h1 {
     font-size: 2rem;
@@ -130,11 +133,25 @@ const QuestionHeader = styled.div`
   }
 `;
 
+const QuestionStat = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  color: gray;
+  padding-right: 1rem;
+
+  .asked-at,
+  .modified-at {
+    margin-bottom: 0.2rem;
+    margin-right: 1rem;
+  }
+`;
+
 const QuestionStats = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 8px;
-  margin-bottom: 16px;
+  margin: 4px;
+  padding-bottom: 6px;
   border-bottom: 1px solid hsl(210, 8%, 90%);
 
   .asked-at,
@@ -179,7 +196,6 @@ const InfoContainer = styled.div`
 
 const EditContainer = styled.div`
   margin: 4px;
-  margin-right: 16px;
   margin-left: 0;
   padding-top: 2px;
   width: 96px;
@@ -187,6 +203,7 @@ const EditContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   color: hsl(210, 8%, 45%);
+  justify-content: flex-end;
 
   > button {
     margin: 4px;
@@ -241,16 +258,12 @@ const AuthorDetail = styled.div`
   }
 `;
 
-const AnswersBody = styled.div`
-  width: auto;
-  padding-top: 10px;
-`;
-
 const AskButton = styled.div`
   margin-bottom: 12px;
+  margin-right: 0.7rem;
 
   a {
-    background-color: #7CCCDC;
+    background-color: #7cccdc;
     color: hsl(0, 0%, 100%);
     border: 1px solid transparent;
     border-radius: 3px;
@@ -262,6 +275,6 @@ const AskButton = styled.div`
   }
 
   a:hover {
-    background-color: #36778B;
+    background-color: #36778b;
   }
 `;

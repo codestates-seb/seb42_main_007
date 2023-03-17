@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
 import Edit from "./pages/Edit";
@@ -13,6 +14,11 @@ import Detail from "./pages/Detail";
 // import { authActions } from './Redux/auth';
 // import { Cookies } from 'react-cookie';
 // import { useDispatch } from 'react-redux';
+
+
+
+
+
 
 function App() {
   // const dispatch = useDispatch();
@@ -38,6 +44,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
+          <Route path="/:id" element={<Detail></Detail>}></Route>
         </Routes>
     </>
   );

@@ -2,6 +2,28 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Author from './Author';
 
+const QuestionItem = ({ ele }) => {
+  return (
+    <ItemContainer>
+      <QuestionSummary>
+        <Link to={`/Detail`}>
+          <h3 className="question-title">죽도 해변 지금 서핑하기 어떤가요?</h3>
+        </Link>
+        <QuestionMeta>
+        <QuestionStats>
+        <span className="vote-stats">추천 1</span>
+        <span className="answers-stats">댓글 1</span>
+        <span className="view-stats">조회수 1</span>
+      </QuestionStats>
+          <Author name="조한준" createdAt="2023-03-16"></Author>
+        </QuestionMeta>
+      </QuestionSummary>
+    </ItemContainer>
+  );
+};
+
+export default QuestionItem;
+
 const ItemContainer = styled.li`
   display: flex;
   padding: 16px;
@@ -11,15 +33,14 @@ const ItemContainer = styled.li`
 
 const QuestionStats = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 108px;
+  flex-direction: row;
   flex-wrap: wrap;
   font-size: 13px;
   gap: 6px;
   margin-bottom: 4px;
   margin-right: 16px;
   font-weight: 500;
+  float: right;
 
   .answers-stats,
   .view-stats {
@@ -64,24 +85,4 @@ const QuestionMeta = styled.div`
   flex-wrap: wrap;
 `;
 
-const QuestionItem = ({ ele }) => {
-  return (
-    <ItemContainer>
-      <QuestionSummary>
-        <Link to={`/Detail`}>
-          <h3 className="question-title">죽도 해변 지금 서핑하기 어떤가요?</h3>
-        </Link>
-        <QuestionMeta>
-          <Author name="조한준" createdAt="2023-03-16"></Author>
-          <QuestionStats>
-        <span className="vote-stats">추천 1</span>
-        <span className="answers-stats">댓글 1</span>
-        <span className="view-stats">조회수 1</span>
-      </QuestionStats>
-        </QuestionMeta>
-      </QuestionSummary>
-    </ItemContainer>
-  );
-};
 
-export default QuestionItem;

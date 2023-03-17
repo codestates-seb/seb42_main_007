@@ -164,10 +164,11 @@ const CommentsWrapper = styled.div`
     align-items: baseline;
     font-weight: 600;
     float: right;
+    color: #595959;
   }
 
   hr {
-    background-color: lightgray;
+    background-color: #E0E0E0;
     height: 1px;
     border: 0px;
     clear: both;

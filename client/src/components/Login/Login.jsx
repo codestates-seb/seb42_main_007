@@ -113,7 +113,6 @@ function Login() {
               <label className="flexItemLabel" htmlFor="display-name">
                 비밀번호
               </label>
-            </div>
             <input
               placeholder="비밀번호를 입력해 주세요."
               className="s-input"
@@ -126,11 +125,8 @@ function Login() {
               id="password"
               // onChange={passwordhandler}
             ></input>
-            <div className="forgot">
-              <p className="forgot">아이디 찾기</p>
-              <p className="forgot">비밀번호 찾기</p>
             </div>
-            <div className="loginbtn">
+              <div className="loginbtn">
               <button
                 className="submit-button"
                 id="submit-button"
@@ -169,14 +165,18 @@ function Login() {
                 게스트 로그인
               </button>
             </div>
-          </div>
-        </div>
-        <div className="text">
-          <div className="signupsup">
+            <div className="forgot">
+              <p className="forgotid">아이디 찾기</p>
+              <p className="forgotpw">비밀번호 찾기</p>
+            </div>
+            <div className="signupsup">
             <p>회원이 아니신가요 ?</p>
             <Link to="/signup">
               <p className="sup">회원가입</p>
             </Link>
+          </div>
+        </div>
+        <div className="text">
           </div>
         </div>
       </div>

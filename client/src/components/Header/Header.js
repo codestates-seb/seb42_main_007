@@ -83,21 +83,6 @@ const LoginButton = styled.button`
     }
 `
 
-const SignupButton = styled.button`
-    height: 30px;
-    margin-right: 15px;
-    height: 30px;
-    width: 75px;
-    background-color: transparent;
-    border: white 2px solid;
-    color: white;
-    border-radius: 7px;
-    :hover {
-        border: black 2px solid;
-        color: black;
-        font-weight: bold;
-    }
-`
 
 const Header = () => {
 
@@ -118,7 +103,6 @@ const Header = () => {
             <MenuItem>🏄‍♀️ 강습예약</MenuItem></MenuItems>
             <ButtonContainer>
             <LoginButton><Link to="/Login">로그인</Link></LoginButton>
-            <SignupButton><Link to="/signup">회원가입</Link></SignupButton>
             </ButtonContainer>
             <MenuIcon />
             </div>

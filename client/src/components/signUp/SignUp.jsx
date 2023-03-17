@@ -18,7 +18,7 @@ function signUp() {
   // const [passwordMessage, setPasswordMessage] = useState('');
   // const [isPassword, setIsPassword] = useState(true);
 
-  const API_URL = `${REDIRECT_URI}users`;
+  // const API_URL = `${REDIRECT_URI}users`;
   // const navigate = useNavigate();
   // axios.defaults.withCredentials = true;
 
@@ -37,7 +37,7 @@ function signUp() {
   //       console.log(error);
   //     })
   //     .finally((res) => {
-  //       if (isemail && isPassword) {
+  //       if (email && Password) {
   //         alert('가입에 성공하셨습니다.');
   //         navigate('/login');
   //       }
@@ -159,6 +159,26 @@ function signUp() {
                 {/* <p className="fs-caption fc-light mt4 mb4">{passwordMessage}</p> */}
                 <div className="d-flex ai-center ps-relative jc-space-between"></div>
               </div>
+              <label className="flexItemLabel" htmlFor="password">
+                비밀번호 확인
+              </label>
+              <div className="authItem">
+                <p className="flex--item si-input-message js-error-message d-none"></p>
+
+                <div className="flexRelative">
+                  <input
+                    placeholder="비밀번호를 다시 입력해 주세요."
+                    className="flex--item si-input"
+                    type="password"
+                    autoComplete="off"
+                    // onChange={onChangePassword}
+                    name="password"
+                    id="password"
+                  />
+                </div>
+                {/* <p className="fs-caption fc-light mt4 mb4">{passwordMessage}</p> */}
+                <div className="d-flex ai-center ps-relative jc-space-between"></div>
+              </div>
               <div className="d-flex flex__center bg-black-050 ba bc-black-075 bar-sm pt8 pb2">
                 {/* <div id="no-captcha-here">
                   <div style={{ width: '164px', height: '144px' }}>
@@ -180,6 +200,7 @@ function signUp() {
                   </div>
                 </div>
                 <script></script> */}
+                
                 <div className="js-auth-item">
                   <div className="js-catpcha-error-container">
                     <p className="s-input-message m0 p0 js-error-message" />
@@ -197,7 +218,7 @@ function signUp() {
                   >
                     회원가입
                   </button>
-                  <button
+                  {/* <button
                     className="googlesignUpBtn"
                     // {isDisabled ? 'signUpbtnNone' : 'signUpBtn'}
                     id="submit-button"
@@ -205,7 +226,7 @@ function signUp() {
                     // onClick={submit}
                   >
                     구글 회원가입
-                  </button>
+                  </button> */}
                 </div>
                 <p className="flex--item s-input-message js-error-message d-none"></p>
               </div>

@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
+
 import "./App.css";
-import GlobalStyle from "./styles/GlobalStyle";
 import Edit from "./pages/Edit";
 import Home from "./pages/Home";
 import { List } from "./pages/List";
@@ -34,7 +35,6 @@ function App() {
   // }, []);
   return (
     <>
-      <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/ask" element={<Ask></Ask>}></Route>

@@ -18,8 +18,8 @@
 .content {
     display: flex;
     justify-content: center;
-    width: 60%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
     background-color: white;
     margin: 0 auto;
     border: 5px;
@@ -31,9 +31,8 @@
 
 .loginbox > .inbox {
     margin-bottom: 30%;
-    padding-left: 36%;
-    font: 30px "Noto Sans KR", sans-serif;
-    font-weight: 500;
+    /* padding-left: 10%; */
+    margin-top: 15%;
 }
 
   .loginbox {
@@ -51,13 +50,14 @@
   
   .s-input {
       display: flex;
-      width: 90%;
+      width: 100%;
+      height: 50px;
       margin: 0;
       padding: 0.6em 0.7em;
       border: 0.1px;
       border-style:solid; 
       border-color: hsl(175, 81%, 39%);
-      border-radius: 20px;
+      border-radius: 100px;
   }
   
   .password {
@@ -82,18 +82,33 @@
     padding:2px;
   }
   
+  .forgot {
+    margin-top: 10%;
+  }
   
-  .forgot > .forgot {
+  .forgotid:hover {
+      color: hsl(206,100%,52%);
+      cursor: pointer;
+  }
+  
+  .forgotpw:hover {
+    color: hsl(206,100%,52%);
+    cursor: pointer;
+}
+  
+  .forgot > .forgotid {
       /* margin-left:0px; */
       margin-top: 10%;
       font-size: 15px;
       color:hsl(175, 81%, 39%);
   }
-  
-  .forgot:hover {
-      color: hsl(206,100%,52%);
-      cursor: pointer;
-  }
+
+  .forgot > .forgotpw {
+    /* margin-left:0px; */
+    margin-top: 10%;
+    font-size: 15px;
+    color:hsl(175, 81%, 39%);
+}
 
  .sup {
     font-size: 16px;
@@ -198,16 +213,16 @@
   }
   
   .signupsup > p {
-      font: 12px "Noto Sans KR", sans-serif;
+      font: 16px "Noto Sans KR", sans-serif;
       margin: 0px 5px;
       margin-left: 7px;
   }
   
   
-  .text {
+  /* .text {
       margin: 0px 0px 24px;
       padding: 16px;
-  }
+  } */
  
   .emlerr {
       color: #d0393e;
@@ -226,6 +241,13 @@
   .s-input-icon {
       fill: #ff2727;
   }
+
+  /* .loginemail {
+    margin-left: 10%;
+  }
+  .loginpwd {
+    margin-left: 10%;
+  } */
   
   .loginemail > .s-input{
     display: flex;

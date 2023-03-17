@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
 import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
 import Edit from "./pages/Edit";
@@ -18,6 +19,7 @@ import Mypage from "./components/Mypage/Mypage"
 
 import Detail from "./pages/Detail";
 
+
 function App() {
   // const dispatch = useDispatch();
 
@@ -32,8 +34,6 @@ function App() {
   // }, []);
   return (
     <>
-      <GlobalStyle />
-      <div className="App">
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/ask" element={<Ask></Ask>}></Route>
@@ -44,7 +44,6 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
         </Routes>
-      </div>
     </>
   );
 }

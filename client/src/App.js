@@ -10,15 +10,11 @@ import Ask from "./pages/Ask";
 import Login from "./components/Login/Login";
 import Signup from "./components/signUp/SignUp"
 import Mypage from "./components/Mypage/Mypage"
+import Detail from "./pages/Detail";
 // import { useEffect } from 'react';
 // import { authActions } from './Redux/auth';
 // import { Cookies } from 'react-cookie';
 // import { useDispatch } from 'react-redux';
-
-
-
-import Detail from "./pages/Detail";
-
 
 function App() {
   // const dispatch = useDispatch();

@@ -13,7 +13,7 @@ import {
   import Footer from "../components/Footer/Footer";
   import "../App.css";
   
-  const Edit = (props) => {
+  const Ask = (props) => {
     const navigate = useNavigate();
     const [answer, setAnswer] = useState("");
     const editorRef = useRef();
@@ -30,7 +30,7 @@ import {
   
     return (
       <>
-        <div className="App">
+        <div>
           <Header></Header>
         </div>
         <MainLeft>
@@ -50,7 +50,7 @@ import {
             {/* <EditorInput ref={editorRef} /> */}
             <Editor
               height="30rem"
-              initialEditType="markdown"
+              initialEditType="wysiwyg"
               initialValue=" "
               useCommandShortcut={true}
               ref={editorRef}
@@ -80,7 +80,7 @@ import {
     );
   };
   
-  export default Edit;
+  export default Ask;
   
   const MainLeft = styled.div`
     display: flex;

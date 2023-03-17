@@ -30,7 +30,7 @@ const Edit = (props) => {
 
   return (
     <>
-      <div className="App">
+      <div>
         <Header></Header>
       </div>
       <MainLeft>
@@ -50,7 +50,7 @@ const Edit = (props) => {
           {/* <EditorInput ref={editorRef} /> */}
           <Editor
             height="30rem"
-            initialEditType="markdown"
+            initialEditType="wysiwyg"
             initialValue=" "
             useCommandShortcut={true}
             ref={editorRef}

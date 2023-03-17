@@ -14,7 +14,7 @@ const AuthorInfo = styled.div`
   min-width: 0;
   overflow-wrap: break-word;
   margin: 2px;
-  color: hsl(206, 100%, 40%);
+  color: #000000;
   text-decoration: none;
   cursor: pointer;
 `;

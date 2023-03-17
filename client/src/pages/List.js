@@ -8,7 +8,7 @@ import axios from 'axios';
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import QuestionsList from '../components/Board/QuestionsList';
-
+import QuestionsListDummy from '../components/Board/QuestionsListDummy'
 
 
 export const List = () => {
@@ -42,6 +42,7 @@ export const List = () => {
             </FilterController>
           </QuestionsController>
           {/* <QuestionsList questions={questions}></QuestionsList> */}
+          <QuestionsListDummy></QuestionsListDummy>
         </MainContainer>
         <Footer></Footer>
       </MainContainer>

@@ -36,11 +36,11 @@ const Detail = () => {
             <h1>죽도 해변 지금 서핑하기 어떤가요?</h1>
             <h1>{question.questionTitle}</h1>
             <AskButton>
-              <Link to="/ask">글쓰기</Link>
+              <Link to="/Write">글쓰기</Link>
             </AskButton>
           </QuestionHeader>
           <QuestionStat>
-          <div className="asked-at">
+            <div className="asked-at">
               <span>작성일 </span>
               <time>{question.createdAt}</time>
               <time>2023-03-14</time>
@@ -99,7 +99,7 @@ const Detail = () => {
             </AnswersBody> */}
           </div>
         </QuestionDetailMainContainer>
-      </Container>
+        </Container>
       <Footer></Footer>
     </>
   );
@@ -110,10 +110,7 @@ export default Detail;
 const QuestionDetailMainContainer = styled(MainContainer)`
   width: 100%;
   padding: 4rem 8rem 8rem 8rem;
-
-  > .detail-main {
-    /* width: calc(100% - 324px); */
-  }
+  margin: 8rem 8rem 12rem 8rem;
 `;
 
 const QuestionHeader = styled.div`

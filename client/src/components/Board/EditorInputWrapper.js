@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
 const InputLabelWrapper = styled.div`
   display: flex;
@@ -16,18 +16,12 @@ const InputLabelWrapper = styled.div`
     font-weight: 600;
     padding: 0.2rem;
   }
-
-  & .label {
-    color: #3b4045;
-    font-size: 1.2rem;
-  }
 `;
 
 export const InputLabel = (props) => {
   return (
     <InputLabelWrapper>
       <div className='title'>{props.title}</div>
-      <div className='label'>{props.label}</div>
     </InputLabelWrapper>
   )
 };
@@ -42,12 +36,13 @@ const StyledEditorInput = styled.div`
 `;
 
 export const EditorInput = forwardRef((props, ref) => {
-  const [ inputActive, setInputActive ] = useState(false);
 
   return (
-    <StyledEditorInput className={inputActive ? 'active' : null}>
+    <StyledEditorInput>
+      <InputLabel title={props.title} />
       <Editor 
-        previewStyle='vertical'
+      initialEditType="wysiwyg"
+      initialValue=" "
         height='30rem'
         toolbarItems={props.toolbarItems || [
           ['heading', 'bold', 'italic', 'strike'],
@@ -57,8 +52,6 @@ export const EditorInput = forwardRef((props, ref) => {
           ['code', 'codeblock']
         ]}
         ref={ref}
-        onFocus={() => setInputActive(true)}
-        onBlur={() => setInputActive(false)}
       />
     </StyledEditorInput>
   )
@@ -67,7 +60,7 @@ export const EditorInput = forwardRef((props, ref) => {
 export const EditorInputWrapper = forwardRef((props, ref) => {
   return (
     <>
-      <InputLabel title={props.title} label={props.label} />
+      <InputLabel title={props.title} />
       <EditorInput ref={ref} />
     </>
   )

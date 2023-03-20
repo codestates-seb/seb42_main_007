@@ -37,7 +37,7 @@ const Edit = (props) => {
         <h2>게시글 수정</h2>
         <div>
           <InputLabel title="제목" />
-          <Input placeholder="" padding="0.78rem 0.91rem" width="100%" />
+          <Input placeholder="" padding="0.78rem 0.91rem" />
           {/* <Input
             value={title.questionTitle}
             onChange={e => setquestionTitle(e.target.value)}
@@ -87,6 +87,7 @@ const MainLeft = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   margin: 10rem 20rem 20rem;
+  padding-top: 2rem;
 
   .buttonWrapper {
     display: flex;

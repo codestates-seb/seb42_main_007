@@ -29,7 +29,7 @@ export const List = () => {
           <HeadContainer>
             <h1>커뮤니티 게시판</h1>
             <AskButton>
-              <Link to="/ask">게시글 작성</Link>
+              <Link to="/Write">게시글 작성</Link>
             </AskButton>
           </HeadContainer>
           <QuestionsController>

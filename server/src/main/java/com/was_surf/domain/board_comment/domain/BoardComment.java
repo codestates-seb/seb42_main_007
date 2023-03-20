@@ -1,5 +1,6 @@
 package com.was_surf.domain.board_comment.domain;
 
+import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,8 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @Entity(name = "BOARD_COMMENT")
-//public class BoardComment extends Auditable {
-public class BoardComment {
+public class BoardComment extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long boardCommentId;

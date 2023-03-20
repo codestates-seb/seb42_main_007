@@ -1,5 +1,6 @@
 package com.was_surf.domain.lesson_class.domain;
 
+import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity
-public class LessonClass {
+public class LessonClass extends Auditable {
+//public class LessonClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long lessonClassId;

@@ -1,5 +1,6 @@
 package com.was_surf.domain.lesson_class.domain;
 
+import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,27 +8,51 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
 public class LessonClass extends Auditable {
-//public class LessonClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long lessonClassId;
-    private String lessonClassTitle;
-    private String lessonClassContent;
-    private LocalDateTime lessonStart;
-    private LocalDateTime lessonEnd;
+    @Column(nullable = false)
+    private String title;
+    @Column(nullable = false)
+    private String content;
+    @Column(nullable = false)
+    private LocalDateTime registerStart;
+    @Column(nullable = false)
+    private LocalDateTime registerEnd;
+    @Column(nullable = false)
     private int headCount;
 
-    public LessonClass(String lessonClassTitle, String lessonClassContent, LocalDateTime lessonStart, LocalDateTime lessonEnd, int headCount) {
-        this.lessonClassTitle = lessonClassTitle;
-        this.lessonClassContent = lessonClassContent;
-        this.lessonStart = lessonStart;
-        this.lessonEnd = lessonEnd;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @OneToMany(mappedBy = "lessonClass", cascade = CascadeType.PERSIST)
+    private List<MemberLessonClass> memberLessonClasses = new ArrayList<>();
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void addMemberLessonClass(MemberLessonClass memberLessonClass) {
+        memberLessonClasses.add(memberLessonClass);
+        if(memberLessonClass.getLessonClass() != this) {
+            memberLessonClass.setLessonClass(this);
+        }
+    }
+
+    public LessonClass(String title, String content, LocalDateTime registerStart, LocalDateTime registerEnd, int headCount) {
+        this.title = title;
+        this.content = content;
+        this.registerStart = registerStart;
+        this.registerEnd = registerEnd;
         this.headCount = headCount;
     }
 

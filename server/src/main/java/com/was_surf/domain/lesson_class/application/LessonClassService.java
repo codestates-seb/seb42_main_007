@@ -35,17 +35,17 @@ public class LessonClassService {
         LessonClass findLessonClass = findVerifiedLessonClass(lessonClass.getLessonClassId());
 
         // 강습클래스 제목
-        Optional.ofNullable(lessonClass.getLessonClassTitle())
-                .ifPresent(findLessonClass::setLessonClassTitle);
+        Optional.ofNullable(lessonClass.getTitle())
+                .ifPresent(findLessonClass::setTitle);
         // 강습클래스 내용
-        Optional.ofNullable(lessonClass.getLessonClassContent())
-                .ifPresent(findLessonClass::setLessonClassContent);
+        Optional.ofNullable(lessonClass.getContent())
+                .ifPresent(findLessonClass::setContent);
         // 강습클래스 신청 시작 기간
-        Optional.ofNullable(lessonClass.getLessonStart())
-                .ifPresent(findLessonClass::setLessonStart);
+        Optional.ofNullable(lessonClass.getRegisterStart())
+                .ifPresent(findLessonClass::setRegisterStart);
         // 강습클래스 신청 마감 기간
-        Optional.ofNullable(lessonClass.getLessonEnd())
-                .ifPresent(findLessonClass::setLessonEnd);
+        Optional.ofNullable(lessonClass.getRegisterEnd())
+                .ifPresent(findLessonClass::setRegisterEnd);
         // 강습클래스 모집 최대 인원
         Optional.ofNullable(lessonClass.getHeadCount())
                 .ifPresent(findLessonClass::setHeadCount);

@@ -1,5 +1,6 @@
 package com.was_surf.domain.board_comment.mapper;
 
+import com.was_surf.domain.board_comment.dto.BoardCommentDto;
 import com.was_surf.domain.board_comment.dto.BoardCommentPatchDto;
 import com.was_surf.domain.board_comment.dto.BoardCommentPostDto;
 import com.was_surf.domain.board_comment.dto.BoardCommentResponseDto;
@@ -10,11 +11,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BoardCommentMapper {
-    BoardComment commentPostDtoToComment(BoardCommentPostDto commentPostDto);
+    BoardComment commentPostDtoToComment(BoardCommentDto.Post commentPostDto);
 
-    BoardComment commentPatchDtoToComment(BoardCommentPatchDto commentPatchDto);
+    BoardComment commentPatchDtoToComment(BoardCommentDto.Patch commentPatchDto);
 
-    BoardCommentResponseDto commentToCommentResponseDto(BoardComment comment);
+    BoardCommentDto.Response commentToCommentResponseDto(BoardComment comment);
 
-    List<BoardCommentResponseDto> commentToCommentResponseDtos(List<BoardComment> boardComments);
+    List<BoardCommentDto.Response> commentToCommentResponseDtos(List<BoardComment> boardComments);
 }

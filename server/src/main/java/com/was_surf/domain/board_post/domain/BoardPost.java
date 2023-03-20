@@ -1,5 +1,6 @@
 package com.was_surf.domain.board_post.domain;
 
+import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,8 +11,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-//public class BoardPost extends Auditable {
-public class BoardPost {
+public class BoardPost extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long boardPostId;

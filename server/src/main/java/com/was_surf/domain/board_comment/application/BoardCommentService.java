@@ -2,11 +2,11 @@ package com.was_surf.domain.board_comment.application;
 
 import com.was_surf.domain.board_comment.domain.BoardComment;
 import com.was_surf.domain.board_comment.repository.BoardCommentRepository;
+import com.was_surf.global.error.exception.BusinessLogicException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.was_surf.global.error.exception.BusinessLogicException;
 import com.was_surf.global.error.exception.ExceptionCode;
 
 import java.util.Optional;

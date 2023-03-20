@@ -43,6 +43,9 @@ public class BoardPostService {
         Optional.ofNullable(boardPost.getBoardImgPath())
                 .ifPresent(boardImgPath -> existBoardPost.setBoardImgPath(boardImgPath));
 
+        Optional.ofNullable(boardPost.getBoardImgPath())
+                .ifPresent(boardImgPath -> existBoardPost.setBoardImgPath(boardImgPath));
+
         BoardPost response = boardPostRepository.save(existBoardPost);
 
         return response;

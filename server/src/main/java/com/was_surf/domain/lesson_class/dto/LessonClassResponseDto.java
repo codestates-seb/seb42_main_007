@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @Getter
 public class LessonClassResponseDto {
     private long lessonClassId;
-    private String lessonClassTitle;
-    private String lessonClassContent;
-    private LocalDateTime lessonStart;
-    private LocalDateTime lessonEnd;
+    private String title;
+    private String content;
+    private LocalDateTime registerStart;
+    private LocalDateTime registerEnd;
     private int headCount;
     private LessonClass.LessonStatus lessonStatus;
     public String getLessonStatus() {

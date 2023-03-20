@@ -1,7 +1,22 @@
-//class를 모아서 carousel 형식으로 배열한다.
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
+
+const ClassList = () => {
+    return (
+        <>
+        <ClassContainer>
+            <SingleClass>
+                <ClassThumbnail />
+                <ClassTitle>[와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회</ClassTitle>
+                <ClassPrice>￦75,000 / 1인</ClassPrice>
+                <ClassReservationButton><Link to="/classdetail">바로예약 👉</Link></ClassReservationButton>
+            </SingleClass>
+        </ClassContainer>
+        </>
+    )
+}
 const ClassContainer = styled.div`
     /* border: solid red 1px; */
     width: fit-content;
@@ -59,20 +74,5 @@ const ClassReservationButton = styled.button`
     margin-bottom: 20px;
 `
 
-
-const ClassList = () => {
-    return (
-        <>
-        <ClassContainer>
-            <SingleClass>
-                <ClassThumbnail />
-                <ClassTitle>[와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회</ClassTitle>
-                <ClassPrice>￦75,000 / 1인</ClassPrice>
-                <ClassReservationButton>바로예약 👉</ClassReservationButton>
-            </SingleClass>
-        </ClassContainer>
-        </>
-    )
-}
 
 export default ClassList;

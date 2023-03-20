@@ -5,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import Counter from "./Counter";
-
+import { Link } from "react-router-dom";
 
 const ClassDetailContainer = styled.div`
     min-height: fit-content;
@@ -15,9 +15,8 @@ const ClassDetailContainer = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 100px;
+    top: 80px;
     /* border: 1px red solid; */
-    padding-top: 50px;
     padding-bottom: 50px;
 `
 
@@ -58,48 +57,32 @@ const RegistrationDetail = styled.div`
     padding: 20px;
     border: 3px #3FBED3 solid;
     border-radius: 20px;
-`
-
-const RegistrationDate = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: 50px;
-    /* border: 1px red solid; */
+    justify-content: center;
+    .column-left {
+        /* border: 1px red solid; */
+        text-align: center;
+        width: 180px;
+    }
+    .column-right {
+        /* border: 1px red solid; */
+        width: 180px;
+    }
+    .column-left > div {
+        margin: 10px;
+        /* border: 1px red solid; */
+        height: 30px;
+    }
+    .column-right > div {
+        margin: 10px;
+        /* border: 1px red solid; */
+        height: 30px;
 
-    .date-text {
-        min-width: fit-content;
-        /* border: red 1px solid; */
     }
 
 `
 
-const RegistrationPersonsCounted = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: 50px;
-    /* border: 1px red solid; */
-    .count-text {
-        /* width: 100px; */
-        /* border: red 1px solid; */
-    }
-
-`
-
-const RegistrationSum = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: 50px;
-    .sum-total {
-        margin-left: 220px;
-    }
-
-`
 
 const RegistrationButton = styled.button`
     width: 80%;
@@ -159,6 +142,11 @@ const ClassDetailDeleteButton = styled.button`
 const ButtonsContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
+`
+
+const Space = styled.div`
+    height: 140px;
 `
 const ClassDetailPage = () => {
     const [date, setDate] = useState(new Date())
@@ -170,29 +158,30 @@ const ClassDetailPage = () => {
         <ClassDetailContainer>
             <ClassDetailTitle>
                 <div className="text">
-                    [와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회
+                [와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회
                 </div>
             </ClassDetailTitle>
             <ClassDetailBody>홍보내용</ClassDetailBody>
             <RegistrationDetail>
-                <RegistrationDate>
+                <div className="column-left">
                     <div className="date-text">선택 날짜</div>
-                    <DatePicker selected={date} onChange={date => setDate(date)} />
-                </RegistrationDate>
-                <RegistrationPersonsCounted>
                     <div className="count-text">인원 수</div>
-                    <Counter />
-                </RegistrationPersonsCounted>
-                <RegistrationSum>
                     <div className="sum-text">총 금액</div>
+                </div>
+                <div className="column-right">
+                    <div className="datepicker">
+                        <DatePicker selected={date} onChange={date => setDate(date)} />
+                    </div>
+                    <Counter />
                     <div className="sum-total">77,000원</div>
-                </RegistrationSum>
+                </div>
             </RegistrationDetail>
-            <RegistrationButton>강좌신청 👉</RegistrationButton>
+            <RegistrationButton><Link to="/pay">강좌신청 👉</Link></RegistrationButton>
             <ButtonsContainer>
                 <ClassDetailEditButton>수정</ClassDetailEditButton>
                 <ClassDetailDeleteButton>삭제</ClassDetailDeleteButton>
             </ButtonsContainer>
+            <Space />
         </ClassDetailContainer>
         <Footer />
         </>

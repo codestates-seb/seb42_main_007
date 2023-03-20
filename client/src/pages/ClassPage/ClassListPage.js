@@ -6,7 +6,7 @@ import ClassList from "./ClassList";
 import styled from "styled-components";
 import {ArrowIosForwardOutline} from "@styled-icons/evaicons-outline"
 import {ArrowIosBackOutline} from "@styled-icons/evaicons-outline/"
-import {PlusCircleFill} from "@styled-icons/bootstrap/PlusCircleFill"
+import { Link } from "react-router-dom";
 
 const ClassListWrapper = styled.div`
     min-height: fit-content;
@@ -52,18 +52,6 @@ const LeftArrowIcon = styled(ArrowIosBackOutline)`
     /* border: 2px white solid; */
 `
 
-// const CreateNewClassButton = styled(PlusCircleFill)`
-//     width: 50px;
-//     height: 50px;
-//     color: #3FBED3;
-//     position: sticky;
-//     top: 200px;
-//     left: 1300px;
-//     background-color: transparent;
-//     :hover{
-//         color: #319fb1;
-//     }
-// `
 
 const CreateNewClassButton = styled.button`
     width: 120px;
@@ -98,7 +86,7 @@ const ClassListPage = () => {
                 <RightArrowIcon />
             </ClassListContainer>
             <CreateNewClassButton>
-                <div className="show">새 강좌 작성하기</div>
+                <div className="show"><Link to="/newclass">새 강좌 작성하기</Link></div>
             </CreateNewClassButton>
         </ClassListWrapper>
         <Footer />

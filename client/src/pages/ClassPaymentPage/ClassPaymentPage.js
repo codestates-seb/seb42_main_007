@@ -21,6 +21,7 @@ const ClassPaymentContainer = styled.div`
     margin-top: 50px;
     margin-bottom: 20px;
     justify-content: center;
+
     h1 {
         margin-bottom: 30px;
         font-size: 25px;

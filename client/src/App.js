@@ -9,6 +9,12 @@ import Login from "./components/Login/Login";
 import Signup from "./components/signUp/SignUp"
 import Mypage from "./components/Mypage/Mypage"
 import Detail from "./pages/Detail";
+import ClassListPage from "./pages/ClassPage/ClassListPage";
+import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
+import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
+import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
+
+
 // import { useEffect } from 'react';
 // import { authActions } from './Redux/auth';
 // import { Cookies } from 'react-cookie';
@@ -38,6 +44,10 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
+          <Route path="/classlist" element={<ClassListPage />}></Route>
+          <Route path="/classdetail" element={<ClassDetailPage />}></Route>
+          <Route path="/pay" element={<ClassPaymentPage />}></Route>
+          <Route path="/newclass" element={<CreateClassPage />}></Route>
         </Routes>
     </>
   );

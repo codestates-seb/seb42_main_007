@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import "./comments.scss";
+// import "./comments.scss";
 
 const Comments = ({board_id}) => {
   // 로그인 후 현재 경로로 돌아오기 위해 useLocation 사용

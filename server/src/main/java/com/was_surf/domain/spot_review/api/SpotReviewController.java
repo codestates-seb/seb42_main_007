@@ -53,10 +53,10 @@ public class SpotReviewController {
     }
 
     // 후기 전체 조회: 페이지네이션
-    @GetMapping
-    public ResponseEntity getSpotReviews (@RequestParam int page,
+    @GetMapping("/{sort-status}")
+    public ResponseEntity getSpotReviews (@PathVariable("sort-status") String sortStatus, @RequestParam int page,
                                           @RequestParam @Positive int size) {
-        Page<SpotReview> pageSpotReviews = spotReviewService.findSpotReviews(page - 1,size);
+        Page<SpotReview> pageSpotReviews = spotReviewService.findSpotReviews(sortStatus, page - 1,size);
         List<SpotReview> spotReviewList = pageSpotReviews.getContent();
 
         return new ResponseEntity<>(new MultiResponseEntity<>(mapper.spotReviewsToSpotReviewResponseDtos(spotReviewList), pageSpotReviews), HttpStatus.OK);

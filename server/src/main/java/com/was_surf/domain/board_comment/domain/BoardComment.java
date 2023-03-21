@@ -3,6 +3,7 @@ package com.was_surf.domain.board_comment.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.was_surf.global.common.audit.Auditable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

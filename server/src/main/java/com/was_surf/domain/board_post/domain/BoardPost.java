@@ -1,12 +1,12 @@
 package com.was_surf.domain.board_post.domain;
 
+import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -30,12 +30,9 @@ public class BoardPost extends Auditable {
     @Column(nullable = false)
     private long boardViewCount;
 
-    // 최초 생성일
-    // 최종 수정일 => extends 필요
-
-//    @ManyToOne
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 /*
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
     private List<BoardComment> boardComments = new ArrayList<>();

@@ -7,6 +7,9 @@ import com.was_surf.domain.board_post.application.BoardPostService;
 import com.was_surf.global.common.response.MultiResponseEntity;
 import com.was_surf.global.common.response.SingleResponseEntity;
 
+import com.was_surf.global.common.response.MultiResponseEntity;
+import com.was_surf.global.common.response.PageInfo;
+import com.was_surf.global.common.response.SingleResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

@@ -1,5 +1,6 @@
 package com.was_surf.domain.spot_review.domain;
 
+import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class SpotReview {
+//public class SpotReview extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long spotReviewId;
@@ -30,7 +32,7 @@ public class SpotReview {
 //    @ManyToOne
 //    @JoinColumn(name = "MEMBER_ID")
 //    private Member member;
-
+//
 //    @ManyToOne
 //    @JoinColumn(name = "SURF_SPOT_ID")
 //    private SurfSpotId surfSpotId;

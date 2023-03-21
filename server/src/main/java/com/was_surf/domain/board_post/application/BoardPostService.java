@@ -37,8 +37,8 @@ public class BoardPostService {
         Optional.ofNullable(boardPost.getBoardContent())
                 .ifPresent(boardContent -> existBoardPost.setBoardContent(boardContent));
 
-//        Optional.ofNullable(boardPost.getUpdatedAt())
-//                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
+        Optional.ofNullable(boardPost.getUpdatedAt())
+                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
 
         Optional.ofNullable(boardPost.getBoardImgPath())
                 .ifPresent(boardImgPath -> existBoardPost.setBoardImgPath(boardImgPath));

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
@@ -14,11 +15,10 @@ public class BoardPostDto {
         @NotBlank
         private String boardTitle;
         private String boardContent;
-//        @NotNull
         private LocalDateTime createdAt;
         private String boardImgPath;
-//        @Min(1)
-//        private long memberId;
+        @Min(1)
+        private long memberId;
     }
 
     @Getter
@@ -27,7 +27,6 @@ public class BoardPostDto {
         private long boardPostId;
         private String boardTitle;
         private String boardContent;
-        @NotBlank
         private LocalDateTime updatedAt;
         private String boardImgPath;
     }

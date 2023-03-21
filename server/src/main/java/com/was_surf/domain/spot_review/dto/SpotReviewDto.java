@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class SpotReviewDto {
 
     @Getter
     public static class Post {
-        @NotBlank
+//        @NotNull
         private int spotGrade;
         private String review;
         private LocalDateTime createdAt;

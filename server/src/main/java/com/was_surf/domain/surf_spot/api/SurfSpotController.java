@@ -45,6 +45,6 @@ public class SurfSpotController {
         Page<SurfSpot> pageSurfSpots = surfSpotService.findSurfSpots(page - 1, size);
         List<SurfSpot> listSurfSpots = pageSurfSpots.getContent();
 
-        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.surfSpotToSurfSpotResponseDtos(listSurfSpots), pageSurfSpots), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.surfSpotsToSurfSpotResponseDtos(listSurfSpots), pageSurfSpots), HttpStatus.OK);
     }
 }

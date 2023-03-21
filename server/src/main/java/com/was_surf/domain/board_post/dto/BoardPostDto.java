@@ -12,12 +12,10 @@ public class BoardPostDto {
 
     @Getter
     public static class Post {
-        @NotBlank
-        private String boardTitle;
-        private String boardContent;
+        private String title;
+        private String content;
         private LocalDateTime createdAt;
-        private String boardImgPath;
-        @Min(1)
+        private String imgPath;
         private long memberId;
     }
 
@@ -25,10 +23,10 @@ public class BoardPostDto {
     public static class Patch {
         @Setter
         private long boardPostId;
-        private String boardTitle;
-        private String boardContent;
+        private String title;
+        private String content;
         private LocalDateTime updatedAt;
-        private String boardImgPath;
+        private String imgPath;
     }
 
     @Getter
@@ -36,13 +34,14 @@ public class BoardPostDto {
     @NoArgsConstructor
     public static class Response {
         private long boardPostId;
-        private String boardTitle;
-        private String boardContent;
+        private String title;
+        private String content;
+        private long memberId;
         private String email;
         private String displayName;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-        private String boardImgPath;
-        private long boardViewCount;
+        private String imgPath;
+        private long viewCount;
     }
 }

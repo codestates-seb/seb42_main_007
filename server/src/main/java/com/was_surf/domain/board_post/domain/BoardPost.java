@@ -1,44 +1,44 @@
 package com.was_surf.domain.board_post.domain;
 
+import com.was_surf.domain.board_comment.domain.BoardComment;
 import com.was_surf.domain.member.domain.Member;
-import com.was_surf.global.common.audit.Auditable;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 public class BoardPost extends Auditable {
-//public class BoardPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long boardPostId;
 
     @Column(nullable = false)
-    private String boardTitle;
+    private String title;
 
     @Column(nullable = false)
-    private String boardContent;
+    private String content;
 
     @Column(nullable = false)
-    private String boardImgPath;
+    private String imgPath;
 
     @Column(nullable = false)
-    private long boardViewCount;
+    private long viewCount;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-/*
+
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
     private List<BoardComment> boardComments = new ArrayList<>();
-*/
-    /*
+
     public void setMember(Member member){
         this.member = member;
 
@@ -47,7 +47,14 @@ public class BoardPost extends Auditable {
         if(!member.getBoardPosts().contains(this)){
             member.getBoardPosts().add(this);
         }
+
     }
 
-     */
+//    public BoardPost(String title, String content, String imgPath, long viewCount) {
+//
+//        this.title = title;
+//        this.content = content;
+//        this.imgPath = imgPath;
+//        this.viewCount = viewCount;
+//    }
 }

@@ -3,8 +3,8 @@ package com.was_surf.domain.surf_spot.api;
 import com.was_surf.domain.surf_spot.application.SurfSpotService;
 import com.was_surf.domain.surf_spot.domain.SurfSpot;
 import com.was_surf.domain.surf_spot.mapper.SurfSpotMapper;
-import com.was_surf.global.common.response.MultiResponseEntity;
-import com.was_surf.global.common.response.SingleResponseEntity;
+import com.was_surf.global.common.response.MultiResponseDto;
+import com.was_surf.global.common.response.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class SurfSpotController {
     public ResponseEntity getSurfSpot(@PathVariable("surf-spot-id") @Positive long surfSpotId) {
         SurfSpot findSurfSpot = surfSpotService.findSurfSpot(surfSpotId);
 
-        return new ResponseEntity<>(new SingleResponseEntity<>(mapper.surfSpotToSurfSpotResponseDto(findSurfSpot)), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.surfSpotToSurfSpotResponseDto(findSurfSpot)), HttpStatus.OK);
     }
 
     // 스팟 전체 조회
@@ -45,6 +45,6 @@ public class SurfSpotController {
         Page<SurfSpot> pageSurfSpots = surfSpotService.findSurfSpots(page - 1, size);
         List<SurfSpot> listSurfSpots = pageSurfSpots.getContent();
 
-        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.surfSpotsToSurfSpotResponseDtos(listSurfSpots), pageSurfSpots), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.surfSpotsToSurfSpotResponseDtos(listSurfSpots), pageSurfSpots), HttpStatus.OK);
     }
 }

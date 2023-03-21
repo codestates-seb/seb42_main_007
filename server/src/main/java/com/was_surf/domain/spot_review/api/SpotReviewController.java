@@ -4,7 +4,7 @@ import com.was_surf.domain.spot_review.application.SpotReviewService;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.spot_review.dto.SpotReviewDto;
 import com.was_surf.domain.spot_review.mapper.SpotReviewMapper;
-import com.was_surf.global.common.response.MultiResponseEntity;
+import com.was_surf.global.common.response.MultiResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -59,7 +59,7 @@ public class SpotReviewController {
         Page<SpotReview> pageSpotReviews = spotReviewService.findSpotReviews(sortStatus, page - 1,size);
         List<SpotReview> spotReviewList = pageSpotReviews.getContent();
 
-        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.spotReviewsToSpotReviewResponseDtos(spotReviewList), pageSpotReviews), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.spotReviewsToSpotReviewResponseDtos(spotReviewList), pageSpotReviews), HttpStatus.OK);
 
     }
 

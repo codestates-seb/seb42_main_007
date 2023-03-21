@@ -1,10 +1,11 @@
 package com.was_surf.domain.member.domain;
 
+import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import server.MainProject007.audit.Auditable;
+import com.was_surf.global.common.audit.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class Member  {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<BoardPost> boardPosts = new ArrayList<>();
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),

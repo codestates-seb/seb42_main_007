@@ -30,8 +30,11 @@ public class LessonClass extends Auditable {
     @Column(nullable = false)
     private int headCount;
 
+    @Enumerated(value = EnumType.STRING)
+    private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
+
     @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
+    @JoinColumn(name = "EMAIL")
     private Member member;
 
     @OneToMany(mappedBy = "lessonClass", cascade = CascadeType.PERSIST)
@@ -55,9 +58,6 @@ public class LessonClass extends Auditable {
         this.registerEnd = registerEnd;
         this.headCount = headCount;
     }
-
-    @Enumerated(value = EnumType.STRING)
-    private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
 
     public enum LessonStatus {
         POSSIBILITY("현재 강습을 신청할 수 있습니다."),

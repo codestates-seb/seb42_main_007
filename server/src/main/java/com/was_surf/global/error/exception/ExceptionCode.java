@@ -14,7 +14,8 @@ public enum ExceptionCode {
     COMMENT_NOT_CHANGE(404, "수정할 내용이 없습니다."),
     WRONG_TOKEN_INPUT(403, "잘못된 토큰입니다."),
     WRONG_FORMAT_OF_DATE(400, "날짜 형식이 올바르지 않습니다. (ex. 예시 적기)"),
-    LESSON_CLASS_NOT_FOUND(404, "강습 클래스를 찾을 수 없습니다.");
+    LESSON_CLASS_NOT_FOUND(404, "강습 클래스를 찾을 수 없습니다."),
+    MEMBER_NOT_MATCH(404, "작성자가 아닌 다른 회원은 삭제할 수 없습니다.");
 
     private int httpStatus;
     private String message;

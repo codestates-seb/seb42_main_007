@@ -8,13 +8,13 @@ import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
+import com.was_surf.global.error.exception.BusinessLogicException;
+import com.was_surf.global.error.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.was_surf.global.utils.UriCreator;
@@ -42,6 +42,7 @@ public class LessonClassController {
 
         // 현재 로그인된 회원 정보 검색
         Member member = memberService.findMemberToEmail(principal.getName());
+        log.info("# principal(getName) : " + principal.getName());
 
         // 회원 정보 주입
         lessonClass.setMember(member);
@@ -50,7 +51,8 @@ public class LessonClassController {
 
         URI location = UriCreator.createUri(LESSON_CLASS_DEFAULT_URL, createdLessonClass.getLessonClassId());
 
-        return ResponseEntity.created(location).build();
+//        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(mapper.lessonClassToLessonClassResponseDto(createdLessonClass), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{lesson-class-id}")
@@ -79,7 +81,16 @@ public class LessonClassController {
     }
 
     @DeleteMapping("/{lesson-class-id}")
-    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId) {
-        lessonClassService.deleteLessonClass(lessonClassId);
+    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId,
+                                  Principal principal) {
+        Member findMember = memberService.findMemberToEmail(principal.getName());
+        LessonClass lessonClass = lessonClassService.findLessonClass(lessonClassId);
+
+        // 작성한 회원만 삭제 가능
+        if(lessonClass.getMember().getMemberId() == findMember.getMemberId()) {
+            lessonClassService.deleteLessonClass(lessonClassId);
+        } else {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
     }
 }

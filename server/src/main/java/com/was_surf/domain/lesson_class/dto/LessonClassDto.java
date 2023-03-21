@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class LessonClassDto {
     @Getter
     public static class Post {
-        private long memberId;
         private long lessonClassId;
         private String title;
         private String content;
@@ -36,7 +35,7 @@ public class LessonClassDto {
     @Getter
     @Builder
     public static class Response {
-        private long memberId;
+        private String email;
         private long lessonClassId;
         @NotBlank
         private String title;

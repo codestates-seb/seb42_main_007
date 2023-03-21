@@ -14,7 +14,7 @@ public interface LessonClassMapper {
 
     LessonClass lessonClassPatchDtoToLessonClass(LessonClassDto.Patch lessonClassPatchDto);
 
-    @Mapping(source = "member.memberId", target = "memberId")
+    @Mapping(source = "member.email", target = "email")
     LessonClassDto.Response lessonClassToLessonClassResponseDto(LessonClass lessonClass);
 
     List<LessonClassDto.Response> lessonClassToLessonClassResponseDtos(List<LessonClass> lessonClasses);

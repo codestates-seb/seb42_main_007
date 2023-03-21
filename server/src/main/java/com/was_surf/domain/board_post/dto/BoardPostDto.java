@@ -22,8 +22,8 @@ public class BoardPostDto {
     }
 
     @Getter
-    @Setter
     public static class Patch {
+        @Setter
         private long boardPostId;
         private String boardTitle;
         private String boardContent;

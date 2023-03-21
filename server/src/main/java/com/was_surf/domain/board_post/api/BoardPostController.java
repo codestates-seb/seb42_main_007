@@ -1,15 +1,14 @@
 package com.was_surf.domain.board_post.api;
 
+import com.was_surf.domain.board_post.application.BoardPostService;
 import com.was_surf.domain.board_post.dto.BoardPostDto;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.board_post.mapper.BoardPostMapper;
-import com.was_surf.domain.board_post.application.BoardPostService;
 import com.was_surf.global.common.response.MultiResponseEntity;
 import com.was_surf.global.common.response.SingleResponseEntity;
 
-import com.was_surf.global.common.response.MultiResponseEntity;
-import com.was_surf.global.common.response.PageInfo;
-import com.was_surf.global.common.response.SingleResponseEntity;
+import com.was_surf.global.common.response.MultiResponseDto;
+import com.was_surf.global.common.response.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -65,17 +64,17 @@ public class BoardPostController {
         BoardPost foundBoardPost = boardPostService.findBoardPost(boardPostId);
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(foundBoardPost);
 
-        return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     // 게시글 전체 조회: 페이지네이션
     @GetMapping
-    public ResponseEntity getBoardPosts (@RequestParam int page,
-                                         @RequestParam @Positive int size) {
+    public ResponseEntity getBoardPosts(@RequestParam int page,
+                                        @RequestParam @Positive int size) {
         Page<BoardPost> pageBoardPosts = boardPostService.findBoardPosts(page - 1, size);
         List<BoardPost> boardPostList = pageBoardPosts.getContent();
 
-        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.boardPostsToBoardPostResponseDtos(boardPostList), pageBoardPosts), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.boardPostsToBoardPostResponseDtos(boardPostList), pageBoardPosts), HttpStatus.OK);
     }
 
     // 게시글 삭제

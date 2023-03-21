@@ -1,8 +1,10 @@
 package com.was_surf.domain.member.domain;
 
+import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import server.MainProject007.audit.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +36,16 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String aboutMe;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
+    private List<MemberLessonClass> memberLessonClasses = new ArrayList<>();
+
+    public void addMemberLessonClass(MemberLessonClass memberLessonClass) {
+        memberLessonClasses.add(memberLessonClass);
+        if(memberLessonClass.getMember() != this) {
+            memberLessonClass.setMember(this);
+        }
+    }
+
     public Member(String displayName, String email, String password) {
         this.displayName = displayName;
         this.email = email;
@@ -55,6 +67,4 @@ public class Member  {
             this.status = status;
         }
     }
-
-
 }

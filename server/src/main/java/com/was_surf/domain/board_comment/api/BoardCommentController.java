@@ -1,15 +1,14 @@
 package com.was_surf.domain.board_comment.api;
 
+import com.was_surf.domain.board_comment.application.BoardCommentService;
+import com.was_surf.domain.board_comment.dto.BoardCommentDto;
+import com.was_surf.global.common.response.MultiResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.was_surf.domain.board_comment.dto.BoardCommentPatchDto;
-import com.was_surf.domain.board_comment.dto.BoardCommentPostDto;
 import com.was_surf.domain.board_comment.domain.BoardComment;
 import com.was_surf.domain.board_comment.mapper.BoardCommentMapper;
-import com.was_surf.domain.board_comment.application.BoardCommentService;
-import com.was_surf.global.common.response.MultiResponseEntity;
 import com.was_surf.global.utils.UriCreator;
 
 import javax.validation.Valid;
@@ -30,7 +29,7 @@ public class BoardCommentController {
     }
 
     @PostMapping
-    public ResponseEntity postBoardComment(@Valid @RequestBody BoardCommentPostDto boardCommentPostDto) {
+    public ResponseEntity postBoardComment(@Valid @RequestBody BoardCommentDto.Post boardCommentPostDto) {
         BoardComment boardComment = mapper.commentPostDtoToComment(boardCommentPostDto);
 
         BoardComment createdBoardComment = boardCommentService.createBoardComment(boardComment);
@@ -41,7 +40,7 @@ public class BoardCommentController {
 
     @PatchMapping("/{comment-id}")
     public ResponseEntity patchBoardComment(@PathVariable("comment-id") @Positive long boardCommentId,
-                                            @Valid @RequestBody BoardCommentPatchDto boardCommentPatchDto) {
+                                            @Valid @RequestBody BoardCommentDto.Patch boardCommentPatchDto) {
         boardCommentPatchDto.setBoardCommentId(boardCommentId);
 
         BoardComment boardComment = mapper.commentPatchDtoToComment(boardCommentPatchDto);
@@ -63,7 +62,7 @@ public class BoardCommentController {
         Page<BoardComment> pageBoardComments = boardCommentService.findBoardComments(page - 1, size);
         List<BoardComment> boardcomments = pageBoardComments.getContent();
 
-        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.commentToCommentResponseDtos(boardcomments), pageBoardComments), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.commentToCommentResponseDtos(boardcomments), pageBoardComments), HttpStatus.OK);
     }
 
     @DeleteMapping("/{comment-id}")

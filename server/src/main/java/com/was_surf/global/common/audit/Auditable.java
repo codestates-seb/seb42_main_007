@@ -19,10 +19,8 @@ public class Auditable {
     @CreatedDate
     @Column(name = "CREATED_AT", updatable = false, nullable = false)
     private LocalDateTime createdAt;
-//    private String createdAt;
 
     @LastModifiedDate
     @Column(name = "LAST_MODIFIED_AT", nullable = false)
     private LocalDateTime updatedAt;
-//    private String updatedAt;
 }

@@ -2,6 +2,7 @@ package com.was_surf.domain.board_post.domain;
 
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
+import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

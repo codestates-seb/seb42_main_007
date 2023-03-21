@@ -36,17 +36,13 @@ public class LessonClassController {
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity postLessonClass(@RequestBody LessonClassDto.Post lessonClassPostDto) {
+    public ResponseEntity postLessonClass(@RequestBody LessonClassDto.Post lessonClassPostDto,
+                                          Principal principal) {
         LessonClass lessonClass = mapper.lessonClassPostDtoToLessonClass(lessonClassPostDto);
 
         // 현재 로그인된 회원 정보 검색
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserDetails userDetails = (UserDetails) principal;
-//
-//        log.info("# username: " + userDetails.getUsername());
-//        log.info("# password: " + userDetails.getPassword());
-//        Member member = memberService.findMemberToEmail(principal.getName());
-        Member member = memberService.findMember(lessonClassPostDto.getMemberId());
+        Member member = memberService.findMemberToEmail(principal.getName());
+
         // 회원 정보 주입
         lessonClass.setMember(member);
 

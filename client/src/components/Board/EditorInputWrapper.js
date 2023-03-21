@@ -29,10 +29,6 @@ export const InputLabel = (props) => {
 
 const StyledEditorInput = styled.div`
   border-radius:0.4rem;
-  &.active {
-    outline: 0.1rem solid #379fef;
-    box-shadow: 0 0 0.5rem #b3d3ea;
-  }
 `;
 
 export const EditorInput = forwardRef((props, ref) => {

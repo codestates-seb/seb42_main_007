@@ -96,7 +96,7 @@ const Header = () => {
             <MenuItems>
             <MenuItem><Link to="/Find">🌊 서핑스팟 찾기</Link></MenuItem>
             {/* <MenuItem>😎 커뮤니티</MenuItem> */}
-            <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
+            <MenuItem><Link to="/Board">😎 커뮤니티</Link></MenuItem>
             <MenuItem><Link to="/Detail">😎 상세</Link></MenuItem>
             <MenuItem><Link to="/Write">😎 작성</Link></MenuItem>
             <MenuItem><Link to="/Edit">😎 수정</Link></MenuItem>

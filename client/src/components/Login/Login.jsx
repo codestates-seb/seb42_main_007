@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 import './Login.css';
 import Logo_black from "../../images/Logo_black.png"
 
-// import { authActions } from '../../Redux/auth';
+import { authActions } from '../../Redux/auth';
 // import { REDIRECT_URI } from '../Apiurl';
 
 function Login() {
@@ -21,7 +21,7 @@ function Login() {
   const [isPassword, setIsPassword] = useState(false);
 
   const navigate = useNavigate();
-//   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // // 이메일
   const onChangeEmail = useCallback((e) => {
@@ -39,7 +39,7 @@ function Login() {
     }
   }, []);
 
-//   const API_URL = `${REDIRECT_URI}users/login`;
+  // const API_URL = `${REDIRECT_URI}users/login`;
 
   const passwordhandler = (e) => {
     const passwordCurrent = e.target.value;
@@ -75,7 +75,7 @@ function Login() {
           maxAge: 60 * 30000,
         });
         if (tokenCookie && refreshCookie) {
-        //   dispatch(authActions.login());
+          dispatch(authActions.login());
         }
         navigate(-1);
       })
@@ -104,7 +104,7 @@ function Login() {
                 size="30"
                 maxLength="100"
                 name="email"
-                // onChange={onChangeEmail}
+                onChange={onChangeEmail}
               ></input>
               {/* <div className="emlerr">{emailMessage}</div> */}
             </div>
@@ -123,7 +123,7 @@ function Login() {
               autoComplete="off"
               name="password"
               id="password"
-              // onChange={passwordhandler}
+              onChange={passwordhandler}
             ></input>
             </div>
               <div className="loginbtn">
@@ -133,7 +133,7 @@ function Login() {
                 name="submit-button"
                 type="button"
                 value="Log in"
-                // onClick={loginHandler}
+                onClick={loginHandler}
               >
                 로그인
               </button>

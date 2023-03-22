@@ -3,10 +3,16 @@ package com.was_surf.domain.member.dto;
 import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import java.util.List;
+
 
 public class MemberDto {
 
@@ -47,5 +53,14 @@ public class MemberDto {
         public void setMemberId(long memberId){
             this.memberId = memberId;
         }
+    }
+    @Getter
+    @Setter
+    public static class Logout {
+        @NotEmpty(message = "잘못된 요청입니다.")
+        private String accessToken;
+
+        @NotEmpty(message = "잘못된 요청입니다.")
+        private String refreshToken;
     }
 }

@@ -1,9 +1,11 @@
 package com.was_surf.domain.member.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.spot_review.domain.SpotReview;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,6 +41,10 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String aboutMe;
 
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
     private List<LessonRegister> lessonRegisters = new ArrayList<>();
@@ -50,20 +56,20 @@ public class Member  {
         }
     }
 
+
     public Member(String displayName, String email, String password) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
     }
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<BoardPost> boardPosts = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
+
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),

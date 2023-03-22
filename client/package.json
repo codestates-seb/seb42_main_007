@@ -19,10 +19,6 @@
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
-<<<<<<< HEAD
-    "react-bootstrap": "^2.7.2",
-=======
->>>>>>> 1c2655e6f41ef071e2084099b23b8ede241e78c4
     "react-calendar": "^4.0.0",
     "react-cookie": "^4.1.1",
     "react-datepicker": "^4.10.0",
@@ -33,12 +29,9 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
-    "react-switch": "^7.0.0",
-=======
     "react-slick": "^0.29.0",
+    "react-switch": "^7.0.0",
     "react-toastify": "^9.1.1",
->>>>>>> 1c2655e6f41ef071e2084099b23b8ede241e78c4
     "redux": "^4.2.1",
     "styled-components": "^5.3.9",
     "styled-icons": "^10.47.0",

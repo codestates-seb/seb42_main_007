@@ -32,26 +32,7 @@ function App() {
   // }, []);
   return (
     <>
-<<<<<<< HEAD
-        <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/ask" element={<Ask></Ask>}></Route>
-          <Route path="/Edit" element={<Edit></Edit>}></Route>
-          <Route path="/List" element={<List></List>}></Route>
-          <Route path="/Detail" element={<Detail></Detail>}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/Mypage" element={<Mypage />}></Route>
-          <Route path="/:id" element={<Detail></Detail>}></Route>
-          {/* <SurfingNavbar />
-        <Switch>
-          <Route exact path="/" component={MYpageRevise} />
-          <Route exact path="/profile" component={SurfingProfile} />
-        </Switch> */}
-
-        </Routes>
-=======
-      <GlobalStyle />
+    <GlobalStyle />
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/Find" element={<Find></Find>}></Route>
@@ -65,8 +46,12 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/:id" element={<Detail></Detail>}></Route>
+                {/* <SurfingNavbar />
+        <Switch>
+          <Route exact path="/" component={MYpageRevise} />
+          <Route exact path="/profile" component={SurfingProfile} />
+        </Switch> */}
       </Routes>
->>>>>>> 1c2655e6f41ef071e2084099b23b8ede241e78c4
     </>
   );
 }

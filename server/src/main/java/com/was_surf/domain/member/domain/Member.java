@@ -1,14 +1,12 @@
 package com.was_surf.domain.member.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.board_post.domain.BoardPost;
-import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.was_surf.global.common.audit.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "members")
-public class Member  {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;

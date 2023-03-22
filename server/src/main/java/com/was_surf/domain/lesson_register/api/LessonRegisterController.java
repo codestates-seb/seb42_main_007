@@ -50,10 +50,6 @@ public class LessonRegisterController {
 
         LessonRegister createdLessonRegister = lessonRegisterService.createRegister(lessonRegister);
 
-        LessonRegisterDto.Response response = mapper.lessonRegisterToLessonRegisterResponseDto(createdLessonRegister);
-        // 신청된 강습클래스 정보 전달
-        lessonClass.addLessonRegister(response);
-
         return new ResponseEntity<>(mapper.lessonRegisterToLessonRegisterResponseDto(createdLessonRegister), HttpStatus.CREATED);
     }
 

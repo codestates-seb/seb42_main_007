@@ -45,6 +45,12 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/Mypage" element={<Mypage />}></Route>
           <Route path="/:id" element={<Detail></Detail>}></Route>
+          {/* <SurfingNavbar />
+        <Switch>
+          <Route exact path="/" component={MYpageRevise} />
+          <Route exact path="/profile" component={SurfingProfile} />
+        </Switch> */}
+
         </Routes>
     </>
   );

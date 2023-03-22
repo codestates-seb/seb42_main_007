@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 import { useState, useCallback } from 'react';
 import './SignUp.css';
@@ -8,80 +9,103 @@ import Logo_black from "../../images/Logo_black.png"
 import React from "react";
 
 
-function signUp() {
+function SignUp() {
   // eslint-disable-next-line no-unused-vars
-  // const [Name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [emailMessage, setEmailMessage] = useState('');
-  // const [isemail, setIsemail] = useState(false);
-  // const [password, setPassword] = useState('');
-  // const [passwordMessage, setPasswordMessage] = useState('');
-  // const [isPassword, setIsPassword] = useState(true);
+  const [Name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailMessage, setEmailMessage] = useState('');
+  const [isemail, setIsemail] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+  const [isPassword, setIsPassword] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
-  // const API_URL = `${REDIRECT_URI}users`;
-  // const navigate = useNavigate();
+  const API_URL = `${REDIRECT_URI}users`;
+  const navigate = useNavigate();
   // axios.defaults.withCredentials = true;
 
-  // const submit = async () => {
-  //   event.preventDefault();
-  //   await axios
-  //     .post(API_URL, {
-  //       name: Name,
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  //     .finally((res) => {
-  //       if (email && Password) {
-  //         alert('가입에 성공하셨습니다.');
-  //         navigate('/login');
-  //       }
-  //     });
-  // };
-  // const userCreate = () => {
-  //   if (isemail && isPassword) alert('성공');
-  //   navigate('/login');
-  // };
-  // console.log('이메일' + isemail);
-  // console.log('패스워드' + isPassword);
+  const submit = async () => {
+    event.preventDefault();
+    await axios
+      .post(API_URL, {
+        name: Name,
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally((res) => {
+        if (isemail && isPassword) {
+          alert('가입에 성공하셨습니다.');
+          navigate('/login');
+        }
+      });
+  };
+  const userCreate = () => {
+    if (isemail && isPassword) alert('성공');
+    navigate('/login');
+  };
+  console.log('이메일' + isemail);
+  console.log('패스워드' + isPassword);
 
-  // const onNameHandler = (event) => {
-  //   setName(event.currentTarget.value);
-  // };
+  const onNameHandler = (event) => {
+    setName(event.currentTarget.value);
+  };
 
-  // const onChangeEmail = useCallback((e) => {
-  //   const emailRegex =
-  //     /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-  //   const emailCurrent = e.target.value;
-  //   setEmail(emailCurrent);
+  const onChangeEmail = useCallback((e) => {
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailCurrent = e.target.value;
+    setEmail(emailCurrent);
 
-  //   if (!emailRegex.test(emailCurrent) && emailCurrent.length > 1) {
-  //     setEmailMessage(`${e.target.value} 는 유효한 이메일 주소가 아닙니다.`);
-  //     setIsemail(false);
-  //   } else {
-  //     setEmailMessage('');
-  //     setIsemail(true);
-  //   }
-  // }, []);
+    if (!emailRegex.test(emailCurrent) && emailCurrent.length > 1) {
+      setEmailMessage(`${e.target.value} 는 유효한 이메일 주소가 아닙니다.`);
+      setIsemail(false);
+    } else {
+      setEmailMessage('');
+      setIsemail(true);
+    }
+  }, []);
 
-  // const onChangePassword = useCallback((e) => {
-  //   const passwordRegex = /^(?=.*[0-9]).{8,25}$/;
-  //   const passwordCurrent = e.target.value;
-  //   setPassword(passwordCurrent);
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex = /^(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(passwordCurrent);
 
-  //   if (!passwordRegex.test(passwordCurrent) && passwordCurrent.length > 1) {
-  //     setPasswordMessage('특수문자와 숫자를 조합해주세요.');
-  //     setIsPassword(false);
-  //   } else if (passwordCurrent.length > 8) {
-  //     setPasswordMessage('this password is available.');
-  //     setIsPassword(true);
-  //   }
-  // }, []);
+    if (!passwordRegex.test(passwordCurrent) && passwordCurrent.length > 1) {
+      setPasswordMessage('특수문자와 숫자를 조합해주세요.');
+      setIsPassword(false);
+    } else if (passwordCurrent.length > 8) {
+      setPasswordMessage('this password is available.');
+      setIsPassword(true);
+    }
+  }, []);
+
+  
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordMatch(e.target.value === confirmPassword);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setPasswordMatch(e.target.value === password);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 비밀번호 재확인이 일치하면 폼을 제출하는 로직
+    if (password === confirmPassword) {
+      console.log('비밀번호 재확인 성공!');
+    } else {
+      console.log('비밀번호 재확인 실패!');
+    }
+  };
 
   return (
 
@@ -113,7 +137,7 @@ function signUp() {
                     placeholder="닉네임을 입력해 주세요."
                     className="flex--item si-input"
                     type="text"
-                    // onChange={onNameHandler}
+                    onChange={onNameHandler}
                     name="display-name"
                     id="display-name"
                     data-is-teams="false"
@@ -131,7 +155,7 @@ function signUp() {
                     className="si-input"
                     id="email"
                     type="email"
-                    // onChange={onChangeEmail}
+                    onChange={onChangeEmail}
                     size={30}
                     maxLength={100}
                     name="email"
@@ -154,28 +178,29 @@ function signUp() {
                     // onChange={onChangePassword}
                     name="password"
                     id="password"
+                    value={password}
+                    onChange={handlePasswordChange}
                   />
                 </div>
                 {/* <p className="fs-caption fc-light mt4 mb4">{passwordMessage}</p> */}
                 <div className="d-flex ai-center ps-relative jc-space-between"></div>
               </div>
-              <label className="flexItemLabel" htmlFor="password">
+              <label className="flexItemLabel" htmlFor="confirm-password">
                 비밀번호 확인
               </label>
               <div className="authItem">
                 <p className="flex--item si-input-message js-error-message d-none"></p>
 
-                <div className="flexRelative">
-                  <input
-                    placeholder="비밀번호를 다시 입력해 주세요."
-                    className="flex--item si-input"
-                    type="password"
-                    autoComplete="off"
-                    // onChange={onChangePassword}
-                    name="password"
-                    id="password"
-                  />
+                <div className="flexRelative" htmlFor="password">
+                <input
+                placeholder="비밀번호를 확인해 주세요."
+                className="flex--item si-input"
+                type="password"
+                id="confirm-password" 
+                value={confirmPassword} 
+                onChange={handleConfirmPasswordChange} />
                 </div>
+                {!passwordMatch && <p style={{ color: 'red' } }>비밀번호가 일치하지 않습니다.</p>}
                 {/* <p className="fs-caption fc-light mt4 mb4">{passwordMessage}</p> */}
                 <div className="d-flex ai-center ps-relative jc-space-between"></div>
               </div>
@@ -214,7 +239,7 @@ function signUp() {
                     // {isDisabled ? 'signUpbtnNone' : 'signUpBtn'}
                     id="submit-button"
                     name="submit-button"
-                    // onClick={submit}
+                    onClick={submit}
                   >
                     회원가입
                   </button>
@@ -239,4 +264,4 @@ function signUp() {
     </div>
   );
 }
-export default signUp;
+export default SignUp;

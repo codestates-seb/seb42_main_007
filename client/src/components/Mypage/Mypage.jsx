@@ -1,10 +1,11 @@
 import './Mypage.css'
 import unnamed from "../../images/unnamed.jpg"
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import GlobalStyle from '../../styles/GlobalStyle';
+import { MyLessons, MyPosts } from './MyComponents';
 
 
-function signUp() {
+function Mypage() {
 
 return (
     <>
@@ -41,15 +42,25 @@ return (
     <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
      나의 프로필</h3>
     <p class="edit1">※ 프로필 수정하기</p>
-     <p>※ 나의 강습 정보 보기</p>
-     <p>※ 나의 게시글 보기</p>
+     <p>
+        <Link to="/mypage/lessons">※ 나의 강습 정보 보기</Link>
+     </p>
+     <p>
+        <Link to="/mypage/posts">※ 나의 게시글 보기</Link>
+     </p>
      <p>※ 1:1 문의 하기</p>
      <p>※ 회원탈퇴</p>
     </div>
 </nav>
+<div className="commonmypagerightcontent">
+          <Routes>
+            <Route path="/mypage/lessons" component={MyLessons} />
+            <Route path="/mypage/posts" component={MyPosts} />
+          </Routes>
+    </div>
     </div>
     </div>
     </>
 );
 }
-export default signUp;
+export default Mypage;

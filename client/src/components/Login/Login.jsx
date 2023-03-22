@@ -171,8 +171,10 @@ function Login() {
             </div>
             <div className="signupsup">
             <p>회원이 아니신가요 ?</p>
-            <Link to="/signup">
-              <p className="sup">회원가입</p>
+            <Link to="/signup" >
+              <p className="sup">
+                회원가입
+              </p>
             </Link>
           </div>
         </div>

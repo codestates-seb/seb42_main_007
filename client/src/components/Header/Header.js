@@ -163,20 +163,6 @@ const Header = () => {
             </Link>
             </div>
             <div className="header-wrapper">
-<<<<<<< HEAD
-            <MenuItems>
-            <MenuItem><Link to="/Find">🌊 서핑스팟 찾기</Link></MenuItem>
-            {/* <MenuItem>😎 커뮤니티</MenuItem> */}
-            <MenuItem><Link to="/Board">😎 커뮤니티</Link></MenuItem>
-            <MenuItem><Link to="/Detail">😎 상세</Link></MenuItem>
-            <MenuItem><Link to="/Write">😎 작성</Link></MenuItem>
-            <MenuItem><Link to="/Edit">😎 수정</Link></MenuItem>
-            <MenuItem>🏄‍♀️ 강습예약</MenuItem></MenuItems>
-            <ButtonContainer>
-            <LoginButton><Link to="/Login">로그인</Link></LoginButton>
-            </ButtonContainer>
-            <MenuIcon />
-=======
                 <MenuItems menu={menu}>
                     <MenuItem>🌊 서핑스팟 찾기</MenuItem>
                     <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
@@ -190,7 +176,6 @@ const Header = () => {
                 </div>
                 </ButtonContainer>
 
->>>>>>> e9f6401876ead1cde18f251e3b371299149ff4ce
             </div>
         </HeaderContainer>
         </>

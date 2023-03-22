@@ -9,7 +9,7 @@ import './Login.css';
 import Logo_black from "../../images/Logo_black.png"
 
 import { authActions } from '../../Redux/auth';
-// import { REDIRECT_URI } from '../Apiurl';
+import { REDIRECT_URI } from '../Apiurl';
 
 function Login() {
   const [tokenCookie, setTokenCookie] = useCookies(['id']);
@@ -39,7 +39,7 @@ function Login() {
     }
   }, []);
 
-  // const API_URL = `${REDIRECT_URI}users/login`;
+  const API_URL = `${REDIRECT_URI}/members/login`;
 
   const passwordhandler = (e) => {
     const passwordCurrent = e.target.value;

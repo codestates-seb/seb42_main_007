@@ -21,7 +21,7 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
 
-  const API_URL = `${REDIRECT_URI}users`;
+  const API_URL = `${REDIRECT_URI}/members`;
   const navigate = useNavigate();
   // axios.defaults.withCredentials = true;
 

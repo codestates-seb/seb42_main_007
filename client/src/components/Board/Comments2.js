@@ -13,11 +13,8 @@ import { useSelector } from "react-redux";
 // import api from "../utils/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
-<<<<<<< HEAD
 import styled from "styled-components";
-=======
 // import "./comments.scss";
->>>>>>> e9f6401876ead1cde18f251e3b371299149ff4ce
 
 const Comments = ({ board_id }) => {
   return (

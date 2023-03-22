@@ -5,10 +5,11 @@ import {CaretDown} from "@styled-icons/fluentui-system-filled/CaretDown"
 
 const CounterWrapper = styled.div`
     display: flex;
+    height: 100px;
     .number {
         font-size: 20px;
+        margin-top: -3px;
         /* border: red 1px solid; */
-        margin-left: 220px;
     }
 `
 
@@ -41,7 +42,7 @@ const Counter = () => {
 
     return (
         <CounterWrapper>
-        <div className="number">
+        <div className="number" number={number}>
             {number}
         <UpButton onClick={increaseNumber}/>
         <DownButton onClick={decreaseNumber}/>

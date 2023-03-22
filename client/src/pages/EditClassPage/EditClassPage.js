@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components";
 import Header from "../../components/Header/Header";
@@ -10,21 +10,21 @@ import { Editor } from "@toast-ui/react-editor";
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 
-const CreateClassPage = () => {
+const EditClassPage = () => {
 // 새로운 강습 모집글을 작성한다.
 // 제목, 내용, 신청기간, 신청인원, 최초생성일
-const createLesson = async () => {
+const EditLesson = async () => {
     // axios.defaults.withCredentials = true;
     await axios
-    .post(
-        `/api/board-lessons`,
+    .patch(
+        `/api/board-lessons/1`,
         {
             lessonTitle : `${title}`,
             lessonContent : `${content}`,
             deadLine : `${endDate}`,
             headCount : `${number}`,
-            createdAt : new Date(),
-            memberId : 1
+            field : true,
+            updatedAt : new Date(),
         }
     )
     .then(() => {
@@ -37,10 +37,11 @@ const createLesson = async () => {
 }
 
 
-const [title, setTitle] = useState('')
+const [title, setTitle] = useState('기존강좌명')
 const [endDate, setEndDate] = useState(new Date())
 const [number, setNumber] = useState('0')
 const [content, setContent] = useState('');
+const [initialValue, setInitialValue] = useState('기존홍보내용');
 const editorRef = useRef();
 
 const handleChange = () => {
@@ -66,20 +67,32 @@ const cancelClick = () => {
     navigate('/classlist')
 }
 
+// useEffect로 컴포넌트 렌더링 시에 
+// const handleInitialValue = () => {
+//     setInitialValue('기존 홍보내용 불러오기')
+//   // boardlesson GET하여 res.data를 통해 
+//   // 기존 작성 내용을 initialvalue로 지정
+// }
+
+
+
     return (
         <>
         <Header/>
-        <CreateClassPageWrapper>
-        <CreateClassPageContainer>
-            <h1>매력적인 강습 모집글을 작성해보세요.</h1>
+        <EditClassPageWrapper>
+        <EditClassPageContainer>
+            <h1>강습 모집글 수정</h1>
         <div className="element-container">
             <h2>제목</h2>
-            <input className="title-input" placeholder="강좌명을 입력하세요." onChange={handleTitleChange}/>
+            <input 
+            className="title-input" 
+            value={title}
+            onChange={handleTitleChange}/>
         </div>
         <div className="element-container">
         <h2>내용</h2>
             <Editor
-            initialValue=" "
+            initialValue={initialValue}  
             previewStyle="tab"
             height="400px"
             initialEditType="markdown"
@@ -91,7 +104,7 @@ const cancelClick = () => {
         <div className="element-container">
         <h2>모집기한</h2> 
         <DatePicker 
-        selected={endDate} 
+        selected={endDate} // 기존에 설정된 데드라인
         onChange={(date) => setEndDate(date)} 
         locale={ko}
         dateFormat="yyyy년 MM월 dd일"
@@ -100,31 +113,36 @@ const cancelClick = () => {
         </div>
         <div className="element-container">
             <h2>신청인원</h2>
-        <input className="input-number" type='number' placeholder="숫자만 입력하세요." onChange={handleNumberChange}></input>
+        <input 
+        className="input-number" 
+        type='number' 
+        value={number} // 기존 설정된 인원 수
+        onChange={handleNumberChange}>
+        </input>
         </div>
         <div className="button-container">
-        <SubmitButton type="submit" onClick={createLesson}>등록</SubmitButton>
+        <SubmitButton type="submit" onClick={EditLesson}>등록</SubmitButton>
         <CancelButton onClick={cancelClick}>취소</CancelButton>
         </div>
-        </CreateClassPageContainer>
-        </CreateClassPageWrapper>
+        </EditClassPageContainer>
+        </EditClassPageWrapper>
         <Footer/>
         </>
     )
 }
 
-const CreateClassPageWrapper = styled.div`
+const EditClassPageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
 
 `
 
-const CreateClassPageContainer = styled.div`
+const EditClassPageContainer = styled.div`
     width: 80%;
     min-height: 1000px;
-    /* border: 1px red solid; */
     margin-top: 50px;
+    /* border: 1px red solid; */
     .button-container{
         margin-top: 30px;
     }
@@ -175,4 +193,4 @@ const CancelButton = styled.button`
 `
 
 
-export default CreateClassPage;
+export default EditClassPage;

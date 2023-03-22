@@ -18,6 +18,7 @@
     "create-react-class": "^15.7.0",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
+    "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-calendar": "^4.0.0",
     "react-cookie": "^4.1.1",
@@ -30,9 +31,13 @@
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+<<<<<<< HEAD
     "react-switch": "^7.0.0",
     "react-toastify": "^9.1.1",
+=======
+>>>>>>> e9f6401876ead1cde18f251e3b371299149ff4ce
     "redux": "^4.2.1",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.9",
     "styled-icons": "^10.47.0",
     "styled-reset": "^4.4.5",

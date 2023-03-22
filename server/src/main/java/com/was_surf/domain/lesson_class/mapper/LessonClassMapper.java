@@ -1,8 +1,9 @@
 package com.was_surf.domain.lesson_class.mapper;
 
 import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.lesson_class.dto.*;
+import com.was_surf.domain.lesson_register.dto.LessonRegisterDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -14,12 +15,12 @@ public interface LessonClassMapper {
 
     LessonClass lessonClassPatchDtoToLessonClass(LessonClassDto.Patch lessonClassPatchDto);
 
-    @Mapping(source = "member.email", target = "email")
+    @Mapping(source = "member.memberId", target = "memberId")
     LessonClassDto.Response lessonClassToLessonClassResponseDto(LessonClass lessonClass);
 
     List<LessonClassDto.Response> lessonClassToLessonClassResponseDtos(List<LessonClass> lessonClasses);
 
     @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "lessonClass.lessonClassId", target = "lessonClassId")
-    List<MemberLessonClassDto.Response> memberLessonClassToMemberLessonClassResponseDtos(List<MemberLessonClass> memberLessonClasses);
+    List<LessonRegisterDto.Response> memberLessonClassToMemberLessonClassResponseDtos(List<LessonRegister> lessonRegisters);
 }

@@ -1,5 +1,7 @@
 package com.was_surf.domain.lesson_class.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
@@ -34,20 +36,21 @@ public class LessonClass extends Auditable {
     private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
 
     @ManyToOne
-    @JoinColumn(name = "EMAIL")
+    @JoinColumn(name = "MEMBER_ID", referencedColumnName = "memberId", nullable = false)
     private Member member;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "lessonClass", cascade = CascadeType.PERSIST)
-    private List<MemberLessonClass> memberLessonClasses = new ArrayList<>();
+    private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
     public void setMember(Member member) {
         this.member = member;
     }
 
-    public void addMemberLessonClass(MemberLessonClass memberLessonClass) {
-        memberLessonClasses.add(memberLessonClass);
-        if(memberLessonClass.getLessonClass() != this) {
-            memberLessonClass.setLessonClass(this);
+    public void addLessonRegister(LessonRegister lessonRegister) {
+        lessonRegisters.add(lessonRegister);
+        if(lessonRegister.getLessonClass() != this) {
+            lessonRegister.setLessonClass(this);
         }
     }
 

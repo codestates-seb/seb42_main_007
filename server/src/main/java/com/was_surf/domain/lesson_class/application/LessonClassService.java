@@ -2,6 +2,7 @@ package com.was_surf.domain.lesson_class.application;
 
 import com.was_surf.domain.lesson_class.domain.LessonClass;
 import com.was_surf.domain.lesson_class.repository.LessonClassRepository;
+import com.was_surf.domain.member.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,10 +30,13 @@ public class LessonClassService {
     }
 
     // 강습클래스 수정 및 Repository 저장
-    public LessonClass updateLessonClass(LessonClass lessonClass) {
+    public LessonClass updateLessonClass(LessonClass lessonClass, Member member) {
         log.info("# update LessonClass");
 
         LessonClass findLessonClass = findVerifiedLessonClass(lessonClass.getLessonClassId());
+
+        // 작성자와 관리자 계정일 경우에만 수정
+        verifyMatchMember(findLessonClass, member);
 
         // 강습클래스 제목
         Optional.ofNullable(lessonClass.getTitle())
@@ -73,11 +77,15 @@ public class LessonClassService {
     }
 
     // 특정 강습클래스 삭제
-    public void deleteLessonClass(long lessonClassId) {
+    public void deleteLessonClass(long lessonClassId, Member member) {
         log.info("# delete LessonClass");
 
         // 해당 아이디의 강습클래스가 유효한지 확인
         LessonClass findLessonClass = findVerifiedLessonClass(lessonClassId);
+
+        // 작성자와 관리자 계정일 경우에만 삭제
+        verifyMatchMember(findLessonClass, member);
+
         lessonClassRepository.delete(findLessonClass);
     }
 
@@ -88,5 +96,15 @@ public class LessonClassService {
         LessonClass findLessonClass = optionalLessonClass.orElseThrow(() -> new BusinessLogicException(ExceptionCode.LESSON_CLASS_NOT_FOUND));
 
         return findLessonClass;
+    }
+
+    // 로그인된 정보가 접근 권한을 가지는지 확인
+    public void verifyMatchMember(LessonClass lessonClass, Member member) {
+        long lessonClassHasMemberId = lessonClass.getMember().getMemberId();
+        long currentMemberId = member.getMemberId();
+
+        if(!(lessonClassHasMemberId == currentMemberId) || member.getRoles().toString().equals("ADMIN")) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
     }
 }

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState }from "react";
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png"
 import { Menu } from "@styled-icons/ionicons-solid/Menu"
+import { Times } from "@styled-icons/typicons/Times"
 import { Link } from 'react-router-dom';
 import Logo_black from "../../images/Logo_black.png"
 
@@ -10,33 +11,48 @@ const HeaderContainer = styled.div`
     width: 100%;
     background-color: #3FBED3;
     height: 100px;
-    padding-left: 30px;
+    padding-left: 10px;
     display: flex;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     align-items: center;
     justify-content: space-between;
     z-index: 1;
-
     .header-wrapper {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         /* border: solid red 1px; */
-        height: 100%;
+        height: 100px;
         min-width: 550px;
         max-width: 800px;
         margin: 0;
         padding: 0;
         padding-right: 30px;
     }
+    .header-wrapper > .toggle {
+        position: absolute;
+    }
+    .logo-container {
+        /* border: 1px red solid; */
+        display: flex;
+        justify-content: center;
+        margin-left: 10px;
+        min-width: 210px;
+        width: fit-content;
+        top: 3px;
+        position: relative;
+    }
 `
 const LogoImage = styled.img`
-    height: 50px;
-    /* cursor: pointer; */
+    height: 40px;
+    width: fit-content;
+    cursor: pointer;
+    /* border: 1px red solid; */
+    margin: 5px;
 `
-
+ 
 const MenuIcon = styled(Menu)`
     height: 30px;
     width: 30px;
@@ -44,32 +60,79 @@ const MenuIcon = styled(Menu)`
     margin-left: 20px;
     /* border: solid red 1px; */
     display: none;
+    position: relative;
+    transition: 0.5s;
+    @media screen and (max-width:768px) {
+        display: flex;
+        margin-right: 30px;
+    }
 `
+const TimesIcon = styled(Times)`
+    height: 30px;
+    width: 30px;
+    color: white;
+    margin-left: 20px;
+    /* border: solid red 1px; */
+    display: none;
+    @media screen and (max-width:768px) {
+        display: flex;
+        margin-right: 30px;        
+    }
+`
+
+
 const MenuItems = styled.div`
     display: flex;
-    position: sticky;
     /* border: solid red 1px; */
-    flex-wrap: nowrap;
     min-width: fit-content;
+    margin-right: -20px;
+    margin-left: -20px;
+    transition: 0.5s;
+    .hidden {
+        display: none;
+    }
+    @media screen and (max-width:768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 100px;
+        right: ${(props)=> (props.menu === true ? '20px' : '-180px')};
+        .hidden {
+            display: block;
+        }
+    }
+
 `
 
 const MenuItem = styled.div`
-    width: fit-content;
-    margin-left: 40px;
+    min-width: fit-content;
+    margin-left: 20px;
     color: white;
+    @media screen and (max-width:768px) {
+        background-color: #80DEE8;
+        border: 1px #3FBED3 solid;
+        width: 170px;
+        text-align: left;
+        padding: 12px 17px;
+        color: black;
+        /* border-radius: 20px 0 0 20px; */
+        /* text-align: center; */
+    }
+
 `
 
 const ButtonContainer = styled.div`
     width: fit-content;
     margin-left: 40px;
     position: sticky;
+    right: 0px;
     /* border: solid red 1px; */
     display: flex;
     flex-wrap: nowrap;
 `
 
 const LoginButton = styled.button`
-    margin-right: 10px;
+    margin-right: -10px;
     height: 30px;
     width: 60px;
     background-color: transparent;
@@ -81,6 +144,10 @@ const LoginButton = styled.button`
         color: black;
         font-weight: bold;
     }
+    @media screen and (max-width:768px) {
+        display: none;
+    }
+
 `
 
 const SignupButton = styled.button`
@@ -100,27 +167,30 @@ const SignupButton = styled.button`
 `
 
 const Header = () => {
-
+    const [menu, setMenu] = useState(false);
     return (
         <>
         <HeaderContainer>
+            <div className="logo-container">
             <Link to="/">
-            <LogoImage src={Logo_black} />
-            <LogoImage src={Wassurf_white} /></Link>
+                <LogoImage src={Logo_black} />
+                <LogoImage src={Wassurf_white} />
+            </Link>
+            </div>
             <div className="header-wrapper">
-            <MenuItems>
-            <MenuItem>🌊 서핑스팟 찾기</MenuItem>
-            {/* <MenuItem>😎 커뮤니티</MenuItem> */}
-            <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
-            <MenuItem><Link to="/Detail">😎 상세</Link></MenuItem>
-            <MenuItem><Link to="/Ask">😎 작성</Link></MenuItem>
-            <MenuItem><Link to="/Edit">😎 수정</Link></MenuItem>
-            <MenuItem>🏄‍♀️ 강습예약</MenuItem></MenuItems>
-            <ButtonContainer>
-            <LoginButton><Link to="/Login">로그인</Link></LoginButton>
-            <SignupButton><Link to="/signup">회원가입</Link></SignupButton>
-            </ButtonContainer>
-            <MenuIcon />
+                <MenuItems menu={menu}>
+                    <MenuItem>🌊 서핑스팟 찾기</MenuItem>
+                    <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
+                    <MenuItem><Link to="/classlist">🏄‍♀️ 강습예약</Link></MenuItem>
+                    <MenuItem className="hidden"><Link to="/Login">💬 로그인</Link></MenuItem>
+                </MenuItems>
+                <ButtonContainer>
+                    <LoginButton><Link to="/Login">로그인</Link></LoginButton>
+                <div className="toggle" onClick={() => setMenu(!menu)}>
+                    {!menu ? <MenuIcon /> : <TimesIcon />}
+                </div>
+                </ButtonContainer>
+
             </div>
         </HeaderContainer>
         </>

@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 // import api from "../utils/api";
 import {useLocation, useNavigate} from "react-router-dom";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
-import "./comments.scss";
+// import "./comments.scss";
 
 const Comments = ({board_id}) => {
 

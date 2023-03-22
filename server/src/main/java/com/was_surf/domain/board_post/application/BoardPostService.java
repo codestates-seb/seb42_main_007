@@ -31,20 +31,17 @@ public class BoardPostService {
     public BoardPost updateBoardPost(BoardPost boardPost) {
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPost.getBoardPostId());
 
-        Optional.ofNullable(boardPost.getBoardTitle())
-                .ifPresent(boardTitle -> existBoardPost.setBoardTitle(boardTitle));
+        Optional.ofNullable(boardPost.getTitle())
+                .ifPresent(title -> existBoardPost.setTitle(title));
 
-        Optional.ofNullable(boardPost.getBoardContent())
-                .ifPresent(boardContent -> existBoardPost.setBoardContent(boardContent));
+        Optional.ofNullable(boardPost.getContent())
+                .ifPresent(content -> existBoardPost.setContent(content));
 
-//        Optional.ofNullable(boardPost.getUpdatedAt())
-//                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
+        Optional.ofNullable(boardPost.getUpdatedAt())
+                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
 
-        Optional.ofNullable(boardPost.getBoardImgPath())
-                .ifPresent(boardImgPath -> existBoardPost.setBoardImgPath(boardImgPath));
-
-        Optional.ofNullable(boardPost.getBoardImgPath())
-                .ifPresent(boardImgPath -> existBoardPost.setBoardImgPath(boardImgPath));
+        Optional.ofNullable(boardPost.getImgPath())
+                .ifPresent(imgPath -> existBoardPost.setImgPath(imgPath));
 
         BoardPost response = boardPostRepository.save(existBoardPost);
 

@@ -1,5 +1,6 @@
 package com.was_surf.domain.board_comment.domain;
 
+import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,9 @@ public class BoardComment extends Auditable {
     @NotBlank
     private String comment;
 
-//    @ManyToOne
-//    @Column(name = "BOARD_POST_ID", nullable = false)
-//    private BoardPost boardPost;
+    @ManyToOne
+    @JoinColumn(name = "BOARD_POST_ID", nullable = false)
+    private BoardPost boardPost;
 
 //    public setBoardPost(BoardPost boardPost) {
 //        this.boardPost = boardPost;

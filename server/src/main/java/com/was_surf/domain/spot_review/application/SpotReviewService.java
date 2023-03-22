@@ -49,24 +49,10 @@ public class SpotReviewService {
     }
 
     // 후기 전체 조회
-    public Page<SpotReview> findSpotReviews(String sortStatus, int page, int size) {
-
-        // sortStatus 최신순일 때
-
-        switch (sortStatus) {
-
-            case "new":
-                return spotReviewRepository.findAll(PageRequest.of(
-                        page, size, Sort.by("spotReviewId").descending()
-                ));
-
-            case "old":
-                return spotReviewRepository.findAll(PageRequest.of(
-                        page, size, Sort.by("spotReviewId").ascending()
-                ));
-        }
-
-        return null;
+    public Page<SpotReview> findSpotReviews(int page, int size) {
+        return spotReviewRepository.findAll(PageRequest.of(
+                page, size, Sort.by("spotReviewId").descending()
+        ));
     }
 
     // 후기 삭제

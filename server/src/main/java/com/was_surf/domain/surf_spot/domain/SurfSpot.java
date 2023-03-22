@@ -20,13 +20,13 @@ public class SurfSpot {
     private long surfSpotId;
 
     @Column(nullable = false)
-    private String spotImgPath;
+    private String imgPath;
 
     @Column(nullable = false)
-    private String spotName;
+    private String name;
 
     @Column(nullable = false)
-    private String spotAddress;
+    private String address;
 
     // 조회수
     @Column(nullable = false)

@@ -1,5 +1,6 @@
 package com.was_surf.domain.surf_spot.application;
 
+import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.surf_spot.repository.SurfSpotRepository;
 import com.was_surf.domain.surf_spot.domain.SurfSpot;
 import com.was_surf.global.error.exception.BusinessLogicException;
@@ -16,21 +17,48 @@ import java.util.Optional;
 @Transactional
 public class SurfSpotService {
 
-    private SurfSpotRepository surfSpotRepository;
+    private final SurfSpotRepository surfSpotRepository;
 
     public SurfSpotService(SurfSpotRepository surfSpotRepository) {
+
         this.surfSpotRepository = surfSpotRepository;
     }
 
     // 개별 조회
     public SurfSpot findSurfSpot(long surfSpotId) {
+
         return findVerifiedSurfSpot(surfSpotId);
     }
 
-    // 전체 조회
+    // 전체 조회2
     public Page<SurfSpot> findSurfSpots(int page, int size) {
-        return surfSpotRepository.findAll(PageRequest.of(page, size));
+        return surfSpotRepository.findAll(PageRequest.of(
+                page, size, Sort.by("surfSpotId").descending()
+        ));
     }
+
+    /* => 💎개별 조회 {}랑 겹쳐서 에러남💎
+    // 전체 조회1
+    public Page<SurfSpot> findSurfSpots(String sortStatus, int page, int size) {
+
+        switch (sortStatus) {
+            // 최신순
+            case "new":
+                return surfSpotRepository.findAll(PageRequest.of(
+                        page, size, Sort.by("surfSpotId").descending()
+                ));
+
+            // 오래된순
+            case "old":
+                return surfSpotRepository.findAll(PageRequest.of(
+                        page, size, Sort.by("surfSpotId").ascending()
+                ));
+        }
+
+        return null;
+    }
+    */
+
 
     // findVerifiedSurfSpot
     public SurfSpot findVerifiedSurfSpot(long surfSpotId) {

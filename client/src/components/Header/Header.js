@@ -61,6 +61,7 @@ const MenuIcon = styled(Menu)`
     /* border: solid red 1px; */
     display: none;
     position: relative;
+    transition: 0.5s;
     @media screen and (max-width:768px) {
         display: flex;
         margin-right: 30px;

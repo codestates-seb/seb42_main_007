@@ -13,6 +13,7 @@ import ClassListPage from "./pages/ClassPage/ClassListPage";
 import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
 import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
 import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
+import EditClassPage from './pages/EditClassPage/EditClassPage';
 
 
 // import { useEffect } from 'react';
@@ -48,6 +49,7 @@ function App() {
           <Route path="/classdetail" element={<ClassDetailPage />}></Route>
           <Route path="/pay" element={<ClassPaymentPage />}></Route>
           <Route path="/newclass" element={<CreateClassPage />}></Route>
+          <Route path="/editclass" element={<EditClassPage />}></Route>
         </Routes>
     </>
   );

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import {ArrowIosForwardOutline} from "@styled-icons/evaicons-outline"
 import {ArrowIosBackOutline} from "@styled-icons/evaicons-outline/"
 import { Link } from "react-router-dom";
+import Slider from 'react-slick';
 
 const ClassListWrapper = styled.div`
     min-height: fit-content;
@@ -18,7 +19,7 @@ const ClassListWrapper = styled.div`
     position: relative;
     top: 100px;
     /* border: 1px red solid; */
-    padding-top: 50px;
+    padding-top: 0px;
     padding-bottom: 50px;
 `
 
@@ -71,23 +72,44 @@ const CreateNewClassButton = styled.button`
     }
 `
 
+const Space = styled.div`
+    width: auto;
+    height: 120px;
+`
+
+
+
 
 const ClassListPage = () => {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3, // 한번에 보이는 슬라이드 개수
+        slidesToScroll: 1 // 넘길 때 넘어가는 슬라이드 개수
+        };
+
     return (
         <>
         <Header />
         <ClassListWrapper>
             <Title>오늘 이런 수업 어때요? 🌴</Title>
             <ClassListContainer>
-                <LeftArrowIcon />
-                <ClassList />
-                <ClassList />
-                <ClassList />
-                <RightArrowIcon />
+                {/* <LeftArrowIcon /> */}
+                <Slider {...settings}>
+                    <div>
+                    <ClassList />
+                </div>
+                <button type="button" class="slick-prev">Previous</button>
+                <button type="button" class="slick-next">Next</button>
+                </Slider>
+                {/* <RightArrowIcon /> */}
             </ClassListContainer>
             <CreateNewClassButton>
                 <div className="show"><Link to="/newclass">새 강좌 작성하기</Link></div>
             </CreateNewClassButton>
+            <Space />
+
         </ClassListWrapper>
         <Footer />
         </>

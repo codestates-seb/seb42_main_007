@@ -18,8 +18,7 @@ const ClassPaymentContainer = styled.div`
     width: 70%;
     height: fit-content;
     /* border: 1px red solid; */
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 120px;
     justify-content: center;
 
     h1 {

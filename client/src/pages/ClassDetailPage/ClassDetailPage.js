@@ -5,7 +5,8 @@ import Footer from "../../components/Footer/Footer";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import Counter from "./Counter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ClassDetailContainer = styled.div`
     min-height: fit-content;
@@ -152,6 +153,19 @@ const ClassDetailPage = () => {
     const [date, setDate] = useState(new Date())
     const [number, setNumber] = useState('0')
     
+    const navigate = useNavigate()
+
+    const deleteClass = async () => {
+        await axios
+        .delete(`/api/board-lessons/1`)
+        .then(()=>{
+            navigate('/classlist')
+        })
+        .catch((err) => {
+            console.log(err);
+          });
+    }
+
     return (
         <>
         <Header />
@@ -178,8 +192,8 @@ const ClassDetailPage = () => {
             </RegistrationDetail>
             <RegistrationButton><Link to="/pay">강좌신청 👉</Link></RegistrationButton>
             <ButtonsContainer>
-                <ClassDetailEditButton>수정</ClassDetailEditButton>
-                <ClassDetailDeleteButton>삭제</ClassDetailDeleteButton>
+                <ClassDetailEditButton><Link to="/editclass">수정</Link></ClassDetailEditButton>
+                <ClassDetailDeleteButton onClick={deleteClass}>삭제</ClassDetailDeleteButton>
             </ButtonsContainer>
             <Space />
         </ClassDetailContainer>

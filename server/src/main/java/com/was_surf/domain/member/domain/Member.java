@@ -43,21 +43,6 @@ public class Member  {
         this.email = email;
         this.password = password;
     }
-
-    @Builder
-    public Member(long memberId, String displayName, String email, String password, List<String> roles, String aboutMe ) {
-        this.memberId = memberId;
-        this.displayName = displayName;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.aboutMe = aboutMe;
-    }
-
-    public Member update(String displayName){
-        this.displayName = displayName;
-        return this;
-    }
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),
         MEMBER_EXIST("활동중인 회원");

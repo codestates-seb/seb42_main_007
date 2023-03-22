@@ -112,4 +112,12 @@ public class MemberService {
         if(member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXIST);
     }
+
+    // 이메일로 회원 찾기
+    public Member findMemberToEmail(String email) {
+        Optional<Member> optionalMember =  memberRepository.findByEmail(email);
+        Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return findMember;
+    }
 }

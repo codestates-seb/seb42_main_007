@@ -33,6 +33,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
+                // x-frame-options 기능 끄기
+                .headers().frameOptions().disable()
+                .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -44,6 +47,7 @@ public class SecurityConfig {
                 .antMatchers("/members").permitAll()
                 .antMatchers("/board-posts").hasAnyRole("USER","ADMIN","TEACHER")
                 .antMatchers("/board-comments").hasAnyRole("USER","ADMIN","TEACHER")
+                .antMatchers("/h2-console/**)").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider,redisTemplate), UsernamePasswordAuthenticationFilter.class);
         return http.build();

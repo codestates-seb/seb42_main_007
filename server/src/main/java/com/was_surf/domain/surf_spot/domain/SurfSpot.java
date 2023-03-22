@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name = "SURF_SPOT")
 @Getter
 @Setter
 @NoArgsConstructor

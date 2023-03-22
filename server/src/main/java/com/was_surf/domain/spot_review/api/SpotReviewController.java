@@ -1,5 +1,7 @@
 package com.was_surf.domain.spot_review.api;
 
+import com.was_surf.domain.member.application.MemberService;
+import com.was_surf.domain.member.domain.Member;
 import com.was_surf.domain.spot_review.application.SpotReviewService;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.spot_review.dto.SpotReviewDto;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -24,18 +27,28 @@ public class SpotReviewController {
 
     private final SpotReviewService spotReviewService;
     private final SpotReviewMapper mapper;
+    private final MemberService memberService;
 
     public SpotReviewController(SpotReviewService spotReviewService,
-                                SpotReviewMapper mapper) {
+                                SpotReviewMapper mapper,
+                                MemberService memberService) {
         this.spotReviewService = spotReviewService;
         this.mapper = mapper;
+        this.memberService = memberService;
     }
     
     // 후기 등록
     @PostMapping
-    public ResponseEntity postSpotReview(@RequestBody @Valid SpotReviewDto.Post postDto) {
+    public ResponseEntity postSpotReview(@RequestBody @Valid SpotReviewDto.Post postDto, Principal principal) {
 
-        SpotReview createdSpotReview = spotReviewService.createSpotReview(mapper.spotReviewPostDtoToSpotReview(postDto));
+        SpotReview spotReview = mapper.spotReviewPostDtoToSpotReview(postDto);
+
+        // 회원 정보 검색
+        Member member = memberService.findMemberToEmail(principal.getName());
+
+        // 회원 정보 주입
+        spotReview.setMember(member);
+        SpotReview createdSpotReview = spotReviewService.createSpotReview(spotReview);
         SpotReviewDto.Response response = mapper.spotReviewToSpotReviewResponseDto(createdSpotReview);
 
         return ResponseEntity.ok().build();

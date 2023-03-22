@@ -39,22 +39,14 @@ public class BoardPost extends Auditable {
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
     private List<BoardComment> boardComments = new ArrayList<>();
 
-    public void setMember(Member member){
+    public void setMember(Member member) {
         this.member = member;
 
         //등록된 member의 boardPostList가 해당 boardPost을 담고 있지 않다면
         //해당 boardPost 객체를 boardPostList에 추가한다
-        if(!member.getBoardPosts().contains(this)){
+        if (!member.getBoardPosts().contains(this)) {
             member.getBoardPosts().add(this);
         }
 
     }
-
-//    public BoardPost(String title, String content, String imgPath, long viewCount) {
-//
-//        this.title = title;
-//        this.content = content;
-//        this.imgPath = imgPath;
-//        this.viewCount = viewCount;
-//    }
 }

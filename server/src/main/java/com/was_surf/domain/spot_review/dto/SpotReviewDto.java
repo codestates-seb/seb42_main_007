@@ -12,17 +12,16 @@ public class SpotReviewDto {
 
     @Getter
     public static class Post {
-//        @NotNull
         private int spotGrade;
         private String review;
         private LocalDateTime createdAt;
-//        private long memberId;
-//        private long surfSpotId;
+        private long memberId;
+        private long surfSpotId;
     }
 
     @Getter
-    @Setter
     public static class Patch {
+        @Setter
         private long spotReviewId;
         private int spotGrade;
         private String review;
@@ -36,7 +35,9 @@ public class SpotReviewDto {
         private long spotReviewId;
         private int spotGrade;
         private String review;
+        private long memberId;
         private String email;
+        private long surfSpotId;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
     }

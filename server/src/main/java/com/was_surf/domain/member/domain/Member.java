@@ -2,6 +2,7 @@ package com.was_surf.domain.member.domain;
 
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
+import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -58,6 +59,9 @@ public class Member  {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<BoardPost> boardPosts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<SpotReview> spotReviews = new ArrayList<>();
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),

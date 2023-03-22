@@ -40,8 +40,8 @@ public class SpotReviewService {
         Optional.ofNullable(spotReview.getReview())
                 .ifPresent(review -> existSpotReview.setReview(review));
 
-//        Optional.ofNullable(boardPost.getUpdatedAt())
-//                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
+        Optional.ofNullable(spotReview.getUpdatedAt())
+                .ifPresent(updatedAt -> existSpotReview.setUpdatedAt(updatedAt));
 
         SpotReview response = spotReviewRepository.save(existSpotReview);
 

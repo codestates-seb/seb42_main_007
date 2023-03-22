@@ -1,10 +1,13 @@
 package com.was_surf.domain.surf_spot.domain;
 
+import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,5 +29,8 @@ public class SurfSpot {
 
     // 조회수
     @Column(nullable = false)
-    private String spotViewCount;
+    private String viewCount;
+
+    @OneToMany(mappedBy = "surfSpot", cascade = CascadeType.ALL)
+    private List<SpotReview> spotReviews = new ArrayList<>();
 }

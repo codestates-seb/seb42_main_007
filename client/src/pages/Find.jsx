@@ -14,26 +14,7 @@ const Find = () => {
   return (
     <>
       <Header />
-      <TopBar>
-        <section>
-          <div>
-            <nav>
-              <Link to="/List">양양</Link>
-            </nav>
-            <nav>
-              <Link to="/List">제주</Link>
-            </nav>
-            <nav>
-              <Link to="/List">부산</Link>
-            </nav>
-            <nav>
-              <Link to="/List">고성</Link>
-            </nav>
-          </div>
-        </section>
-      </TopBar>
-      {/* <JukDo></JukDo> */}
-      <div className="App">
+      <Main>
         <Swiper
           style={{
             width: "90%",
@@ -60,22 +41,53 @@ const Find = () => {
             },
           }}
         >
-          <SwiperSlide>양양</SwiperSlide>
+          <TopBar>
+        <section>
+          <div>
+            <nav>
+              <Link to="/List"><h2>양양</h2>
+              <JukDo /></Link>
+            </nav>
+            <nav>
+              <Link to="/List">제주</Link>
+            </nav>
+            <nav>
+              <Link to="/List">부산</Link>
+            </nav>
+            <nav>
+              <Link to="/List">고성</Link>
+            </nav>
+          </div>
+        </section>
+      </TopBar>
+          <SwiperSlide><div className="box"><h2>양양</h2><JukDo /></div></SwiperSlide>
           <SwiperSlide>제주</SwiperSlide>
           <SwiperSlide>부산</SwiperSlide>
           <SwiperSlide>고성</SwiperSlide>
           <SwiperSlide>강릉</SwiperSlide>
           <SwiperSlide>포항</SwiperSlide>
           <SwiperSlide>서해</SwiperSlide>
-          <SwiperSlide>react slick</SwiperSlide>
         </Swiper>
-      </div>
+        </Main>
       <Footer />
     </>
   );
 };
 
 export default Find;
+
+const Main = styled.div`
+  display: flex;
+  margin-top: 10.5rem;
+
+  .box {
+    object-fit: cover;
+  }
+
+  .h2 {
+    font-size: 30px;
+  }
+`
 
 const TopBar = styled.div`
   a {

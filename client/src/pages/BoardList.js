@@ -1,5 +1,5 @@
 import {Pagination} from "@mui/material";
-import Card from "../components/Board/Card";
+import { Card } from "../components/Board/Card";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useSearchParams} from "react-router-dom";
@@ -17,14 +17,14 @@ const BoardList = () => {
     // 페이지에 해당하는 게시물 가져오기
     const getBoardList = async () => {
       const page_number = searchParams.get("page");
-      const {data} = await axios.get(`/localhost:4000/board-posts?page_number=${page_number}&page_size=4`);
+      const {data} = await axios.get(`http://localhost:4000/board-posts?page_number=${page_number}&page_size=4`);
       return data;
     }
     // 현재 페이지에 해당하는 게시물로 상태 변경하기
     getBoardList().then(result => setBoardList(result));
     // 게시물 전체 갯수 구하기
     const getTotalBoard = async () => {
-      const {data} = await axios.get("/api/board/count");
+      const {data} = await axios.get("http://localhost:4000/board-posts");
       return data.total;
     }
     // 페이지 카운트 구하기: (전체 board 갯수) / (한 페이지 갯수) 결과 올림

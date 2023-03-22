@@ -37,7 +37,7 @@ const Edit = (props) => {
         <h2>게시글 수정</h2>
         <div>
           <InputLabel title="제목" />
-          <Input placeholder="" padding="0.78rem 0.91rem" />
+          <Input placeholder="" padding="0.78rem 0.91rem" width="100%" />
           {/* <Input
             value={title.questionTitle}
             onChange={e => setquestionTitle(e.target.value)}

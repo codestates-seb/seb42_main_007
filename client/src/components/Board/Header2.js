@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Board from "../../pages/Board"
 import Write from "../../pages/Write"
+import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.div`
   padding: 1.2rem 4rem;
@@ -63,6 +64,9 @@ const Header = () => {
         <div className="header-menu">
           <Btn onClick={() => onToggle()}>
             <p>게시판</p>
+          </Btn>
+          <Btn onClick={() => onToggle()}>
+          <Link to="/boardList?page=1">게시판</Link>
           </Btn>
         </div>
       </HeaderWrapper>

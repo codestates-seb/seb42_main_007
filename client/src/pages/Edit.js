@@ -87,6 +87,7 @@ const MainLeft = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   margin: 10rem 20rem 20rem;
+  padding-top: 2rem;
 
   .buttonWrapper {
     display: flex;

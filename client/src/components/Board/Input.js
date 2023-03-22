@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledInput = styled.input`
   border: 0.1rem solid #BABFC4;
   padding: ${props => props.padding || '0'};
-  width: ${props => props.width || '15rem'};
+  width: ${props => props.width || '15rem' };
   border-radius: ${props => props.borderRadius || '0.3rem'};
   font-size: ${props => props.fontSize || '1.3rem'};
   &:focus {

@@ -19,24 +19,24 @@ import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
 import EditClassPage from './pages/EditClassPage/EditClassPage';
 
 
-import { useEffect } from 'react';
-import { authActions } from './Redux/auth';
-import { Cookies } from 'react-cookie';
-import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { authActions } from './Redux/auth';
+// import { Cookies } from 'react-cookie';
+// import { useDispatch } from 'react-redux';
 import GlobalStyle from "./styles/GlobalStyle";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const cookies = new Cookies();
-  useEffect(() => {
-    const Refresh = cookies.get('Refresh');
-    if (Refresh) {
-      dispatch(authActions.login());
-    } else {
-      dispatch(authActions.logout());
-    }
-  }, []);
+  // const cookies = new Cookies();
+  // useEffect(() => {
+  //   const Refresh = cookies.get('Refresh');
+  //   if (Refresh) {
+  //     dispatch(authActions.login());
+  //   } else {
+  //     dispatch(authActions.logout());
+  //   }
+  // }, []);
   return (
     <>
     <GlobalStyle />

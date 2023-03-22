@@ -35,6 +35,9 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/members").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/board-posts").hasAnyRole("USER","ADMIN")
+                .antMatchers("/board-comments").hasAnyRole("USER","ADMIN")
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();

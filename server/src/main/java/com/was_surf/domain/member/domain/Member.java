@@ -1,8 +1,12 @@
 package com.was_surf.domain.member.domain;
 
+import com.was_surf.domain.board_post.domain.BoardPost;
+import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
+import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.was_surf.global.common.audit.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +38,16 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String aboutMe;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
+    private List<MemberLessonClass> memberLessonClasses = new ArrayList<>();
+
+    public void addMemberLessonClass(MemberLessonClass memberLessonClass) {
+        memberLessonClasses.add(memberLessonClass);
+        if(memberLessonClass.getMember() != this) {
+            memberLessonClass.setMember(this);
+        }
+    }
+
     public Member(String displayName, String email, String password) {
         this.displayName = displayName;
         this.email = email;
@@ -43,6 +57,11 @@ public class Member  {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<BoardPost> boardPosts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<SpotReview> spotReviews = new ArrayList<>();
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),
@@ -55,6 +74,4 @@ public class Member  {
             this.status = status;
         }
     }
-
-
 }

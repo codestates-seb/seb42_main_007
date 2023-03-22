@@ -46,7 +46,6 @@ public class BoardPostController {
     // 게시글 등록
     @PostMapping
     public ResponseEntity postBoardPost(@RequestBody @Valid BoardPostDto.Post postDto, Principal principal) {
-//    public ResponseEntity postBoardPost(@RequestBody @Valid BoardPostDto.Post postDto) {
 
         BoardPost boardPost = mapper.boardPostPostDtoToBoardPost(postDto);
 

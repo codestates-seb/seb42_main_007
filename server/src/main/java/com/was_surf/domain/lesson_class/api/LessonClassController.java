@@ -1,23 +1,21 @@
 package com.was_surf.domain.lesson_class.api;
 
+import com.was_surf.domain.lesson_class.application.LessonClassService;
 import com.was_surf.domain.lesson_class.domain.LessonClass;
 import com.was_surf.domain.lesson_class.dto.LessonClassDto;
 import com.was_surf.domain.lesson_class.mapper.LessonClassMapper;
-import com.was_surf.domain.lesson_class.application.LessonClassService;
 import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
+import com.was_surf.global.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.was_surf.global.utils.UriCreator;
 
 import javax.validation.constraints.Positive;
 import java.net.URI;
@@ -35,13 +33,15 @@ public class LessonClassController {
     private final LessonClassService lessonClassService;
     private final MemberService memberService;
 
+    // 강습 클래스 모집 글 생성
     @PostMapping
     public ResponseEntity postLessonClass(@RequestBody LessonClassDto.Post lessonClassPostDto,
                                           Principal principal) {
         LessonClass lessonClass = mapper.lessonClassPostDtoToLessonClass(lessonClassPostDto);
 
-        // 현재 로그인된 회원 정보 검색
+        // 현재 로그인된 회원 정보 조회
         Member member = memberService.findMemberToEmail(principal.getName());
+        log.info("# principal(getName) : " + principal.getName());
 
         // 회원 정보 주입
         lessonClass.setMember(member);
@@ -50,15 +50,21 @@ public class LessonClassController {
 
         URI location = UriCreator.createUri(LESSON_CLASS_DEFAULT_URL, createdLessonClass.getLessonClassId());
 
-        return ResponseEntity.created(location).build();
+//        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(mapper.lessonClassToLessonClassResponseDto(createdLessonClass), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{lesson-class-id}")
     public ResponseEntity patchLessonClass(@PathVariable("lesson-class-id") long lessonClassId,
-                                           @RequestBody LessonClassDto.Patch lessonClassPatchDto) {
+                                           @RequestBody LessonClassDto.Patch lessonClassPatchDto,
+                                           Principal principal) {
+        // 현재 로그인한 회원 정보 조회
+        Member findMember = memberService.findMemberToEmail(principal.getName());
+
+        // 작성한 회원 및 관리자 계정만 수정 가능
         lessonClassPatchDto.setLessonClassId(lessonClassId);
 
-        LessonClass lessonClass = lessonClassService.updateLessonClass(mapper.lessonClassPatchDtoToLessonClass(lessonClassPatchDto));
+        LessonClass lessonClass = lessonClassService.updateLessonClass(mapper.lessonClassPatchDtoToLessonClass(lessonClassPatchDto), findMember);
 
         return new ResponseEntity<>(mapper.lessonClassToLessonClassResponseDto(lessonClass), HttpStatus.OK);
     }
@@ -79,7 +85,12 @@ public class LessonClassController {
     }
 
     @DeleteMapping("/{lesson-class-id}")
-    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId) {
-        lessonClassService.deleteLessonClass(lessonClassId);
+    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId,
+                                  Principal principal) {
+        // 현재 로그인한 회원 정보 조회
+        Member findMember = memberService.findMemberToEmail(principal.getName());
+
+        // 작성한 회원 및 관리자 계정만 삭제 가능
+        lessonClassService.deleteLessonClass(lessonClassId, findMember);
     }
 }

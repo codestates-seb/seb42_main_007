@@ -1,5 +1,7 @@
 package com.was_surf.domain.member.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson_class.domain.MemberLessonClass;
 import com.was_surf.domain.spot_review.domain.SpotReview;
@@ -38,13 +40,14 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String aboutMe;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
-    private List<MemberLessonClass> memberLessonClasses = new ArrayList<>();
+    private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
-    public void addMemberLessonClass(MemberLessonClass memberLessonClass) {
-        memberLessonClasses.add(memberLessonClass);
-        if(memberLessonClass.getMember() != this) {
-            memberLessonClass.setMember(this);
+    public void addMemberLessonClass(LessonRegister lessonRegister) {
+        lessonRegisters.add(lessonRegister);
+        if(lessonRegister.getMember() != this) {
+            lessonRegister.setMember(this);
         }
     }
 

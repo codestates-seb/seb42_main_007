@@ -1,10 +1,12 @@
 package com.was_surf.domain.member.dto;
 
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 public class MemberDto {
 
@@ -32,6 +34,7 @@ public class MemberDto {
         private String email;
         private String password;
         private String aboutMe;
+        private List<LessonRegister> lessonRegisters;
     }
     @Getter
     @AllArgsConstructor

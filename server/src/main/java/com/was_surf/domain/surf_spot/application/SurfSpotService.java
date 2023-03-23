@@ -31,17 +31,16 @@ public class SurfSpotService {
     }
 
     // 전체 조회2
-    public Page<SurfSpot> findSurfSpots(int page, int size) {
-        return surfSpotRepository.findAll(PageRequest.of(
-                page, size, Sort.by("surfSpotId").descending()
-        ));
-    }
+//    public Page<SurfSpot> findSurfSpots(int page, int size) {
+//        return surfSpotRepository.findAll(PageRequest.of(
+//                page, size, Sort.by("surfSpotId").descending()
+//        ));
+//    }
 
-    /* => 💎개별 조회 {}랑 겹쳐서 에러남💎
     // 전체 조회1
-    public Page<SurfSpot> findSurfSpots(String sortStatus, int page, int size) {
+    public Page<SurfSpot> findSurfSpots(String status, int page, int size) {
 
-        switch (sortStatus) {
+        switch (status) {
             // 최신순
             case "new":
                 return surfSpotRepository.findAll(PageRequest.of(
@@ -57,14 +56,14 @@ public class SurfSpotService {
 
         return null;
     }
-    */
+
 
 
     // findVerifiedSurfSpot
     public SurfSpot findVerifiedSurfSpot(long surfSpotId) {
         Optional<SurfSpot> optionalSurfSpot = surfSpotRepository.findById(surfSpotId);
         SurfSpot findSurfSpot = optionalSurfSpot.orElseThrow(
-                () -> new BusinessLogicException(ExceptionCode.REVIEW_NOT_FOUND)
+                () -> new BusinessLogicException(ExceptionCode.SPOT_NOT_FOUND)
         );
 
         return findSurfSpot;

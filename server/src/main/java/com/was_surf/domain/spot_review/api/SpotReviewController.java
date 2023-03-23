@@ -6,7 +6,10 @@ import com.was_surf.domain.spot_review.application.SpotReviewService;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.spot_review.dto.SpotReviewDto;
 import com.was_surf.domain.spot_review.mapper.SpotReviewMapper;
+import com.was_surf.domain.surf_spot.application.SurfSpotService;
+import com.was_surf.domain.surf_spot.domain.SurfSpot;
 import com.was_surf.global.common.response.MultiResponseDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -23,20 +26,15 @@ import java.util.List;
 @RequestMapping("/spot-reviews")
 @Slf4j
 @Validated
+@RequiredArgsConstructor
 public class SpotReviewController {
 
     private final SpotReviewService spotReviewService;
     private final SpotReviewMapper mapper;
     private final MemberService memberService;
+    private final SurfSpotService surfSpotService;
 
-    public SpotReviewController(SpotReviewService spotReviewService,
-                                SpotReviewMapper mapper,
-                                MemberService memberService) {
-        this.spotReviewService = spotReviewService;
-        this.mapper = mapper;
-        this.memberService = memberService;
-    }
-    
+
     // 후기 등록
     @PostMapping
     public ResponseEntity postSpotReview(@RequestBody @Valid SpotReviewDto.Post postDto, Principal principal) {
@@ -45,9 +43,11 @@ public class SpotReviewController {
 
         // 회원 정보 검색
         Member member = memberService.findMemberToEmail(principal.getName());
+        SurfSpot surfSpot = surfSpotService.findSurfSpot(postDto.getSurfSpotId());
 
         // 회원 정보 주입
         spotReview.setMember(member);
+        spotReview.setSurfSpot(surfSpot);
         SpotReview createdSpotReview = spotReviewService.createSpotReview(spotReview);
         SpotReviewDto.Response response = mapper.spotReviewToSpotReviewResponseDto(createdSpotReview);
 
@@ -68,8 +68,12 @@ public class SpotReviewController {
     // 후기 전체 조회: 페이지네이션
     @GetMapping
     public ResponseEntity getSpotReviews (@RequestParam @Positive int page,
-                                          @RequestParam @Positive int size) {
-        Page<SpotReview> pageSpotReviews = spotReviewService.findSpotReviews(page - 1,size);
+                                          @RequestParam @Positive int size,
+                                          @RequestParam long surfSpotId) {
+
+        SurfSpot surfSpot = surfSpotService.findSurfSpot(surfSpotId);
+
+        Page<SpotReview> pageSpotReviews = spotReviewService.findSpotReviews(page - 1,size, surfSpot);
         List<SpotReview> spotReviewList = pageSpotReviews.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.spotReviewsToSpotReviewResponseDtos(spotReviewList), pageSpotReviews), HttpStatus.OK);

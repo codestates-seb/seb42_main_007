@@ -2,6 +2,7 @@ package com.was_surf.domain.spot_review.application;
 
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.spot_review.repository.SpotReviewRepository;
+import com.was_surf.domain.surf_spot.domain.SurfSpot;
 import com.was_surf.global.error.exception.BusinessLogicException;
 import com.was_surf.global.error.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
@@ -49,8 +50,8 @@ public class SpotReviewService {
     }
 
     // 후기 전체 조회
-    public Page<SpotReview> findSpotReviews(int page, int size) {
-        return spotReviewRepository.findAll(PageRequest.of(
+    public Page<SpotReview> findSpotReviews(int page, int size, SurfSpot surfSpot) {
+        return spotReviewRepository.findAllBySurfSpot(surfSpot, PageRequest.of(
                 page, size, Sort.by("spotReviewId").descending()
         ));
     }

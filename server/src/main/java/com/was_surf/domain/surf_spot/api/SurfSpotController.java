@@ -46,8 +46,9 @@ public class SurfSpotController {
     // 스팟 전체 조회2
     @GetMapping
     public ResponseEntity getSurfSpots (@RequestParam @Positive int page,
-                                          @RequestParam @Positive int size) {
-        Page<SurfSpot> pageSurfSpots = surfSpotService.findSurfSpots(page - 1,size);
+                                          @RequestParam @Positive int size,
+                                        @RequestParam String status) {
+        Page<SurfSpot> pageSurfSpots = surfSpotService.findSurfSpots(status,page - 1,size);
         List<SurfSpot> surfSpotList = pageSurfSpots.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.surfSpotsToSurfSpotResponseDtos(surfSpotList), pageSurfSpots), HttpStatus.OK);

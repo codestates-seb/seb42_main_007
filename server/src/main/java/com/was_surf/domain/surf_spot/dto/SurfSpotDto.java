@@ -11,9 +11,9 @@ public class SurfSpotDto {
     @NoArgsConstructor
     public static class Response {
         private long surfSpotId;
-        private String spotImgPath;
-        private String spotName;
-        private String spotAddress;
-        private String spotViewCount;
+        private String imgPath;
+        private String name;
+        private String address;
+        private String viewCount;
     }
 }

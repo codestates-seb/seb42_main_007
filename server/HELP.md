@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.Main-Project-007' is invalid and this project uses 'com.was_surf' instead.
+* The original package name 'server.Main-Project-007' is invalid and this project uses 'server.MainProject007' instead.
 
 # Getting Started
 

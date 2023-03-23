@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import CloseIcon from "@mui/icons-material/Close";
-import Header2 from "../components/Board/Header2"
 import Home from "./Home.js"
 import BoardModal from "react-modal"
+import Header from "../components/Header/Header.js";
 
 const ModalContainer = styled.div`
   position: absolute;
@@ -66,7 +66,7 @@ const Container = styled.div`
 
 const Board = ({ isModal, setModal }) => {
   return (
-    <><Header2 />
+    <><Header />
     <BoardModal
       isOpen={isModal}
       onRequestClose={() => setModal(false)}

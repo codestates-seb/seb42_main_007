@@ -1,57 +1,111 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-// import Container from '../components/Container';
-// import Sidebar from '../components/Sidebar';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import QuestionsList from '../components/Board/QuestionsList';
-import QuestionsListDummy from '../components/Board/QuestionsListDummy'
+import styled from "styled-components";
 
+const List = ({ location }) => {
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-export const List = () => {
-  // const [questions, setQuestions] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const page = new URLSearchParams(location?.search).get("page") || 1;
+      const response = await axios.get(
+        `http://localhost:4000/board-posts?page=${page}`
+      );
+      setPosts(response.data.posts);
+      setTotalPages(response.data.totalPages);
+      setCurrentPage(Number(page));
+    }
+    fetchData();
+  }, [location?.search]);
 
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get',
-  //     url: '',
-  //   }).then(res => setQuestions(res.data.data));
-  // }, []);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1;
+      setCurrentPage(prevPage);
+      const queryParams = new URLSearchParams({ page: prevPage }).toString();
+      window.history.pushState(null, "", `?${queryParams}`);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      const nextPage = currentPage + 1;
+      setCurrentPage(nextPage);
+      const queryParams = new URLSearchParams({ page: nextPage }).toString();
+      window.history.pushState(null, "", `?${queryParams}`);
+    }
+  };
 
   return (
     <>
-    <Header></Header>
-      <MainContainer>
-        <MainContainer>
-          <HeadContainer>
-            <h1>커뮤니티 게시판</h1>
-            <AskButton>
-              <Link to="/Write">게시글 작성</Link>
-            </AskButton>
-          </HeadContainer>
-          <QuestionsController>
-            {/* <div className="total-questions">{questions.length} questions</div> */}
-            <FilterController>
-              <div className="newest-btn">최신글</div>
-              <div className="unanswered-btn">인기글</div>
-              <div className="view-btn">조회수</div>
-              <div className="vote-btn">평점</div>
-            </FilterController>
-          </QuestionsController>
-          {/* <QuestionsList questions={questions}></QuestionsList> */}
-          <QuestionsListDummy></QuestionsListDummy>
-        </MainContainer>
-        <Footer></Footer>
-      </MainContainer>
+      <Header></Header>
+      <MainLeft>
+        <h1>커뮤니티 게시판</h1>
+        <AskButton>
+          <Link to="/Write">게시글 작성</Link>
+        </AskButton>
+        {posts?.map((post) => (
+          <PostItem key={post.id}>
+            <Link to={`/Detail/${post.id}`}>
+              <PostTitle>{post.title}</PostTitle>
+            </Link>
+            <PostDate>{post.createAt}</PostDate>
+          </PostItem>
+        ))}
+        <Pagination>
+          <Button onClick={handlePrevPage} disabled={currentPage <= 1}>
+            이전
+          </Button>
+          <PageNumber>{currentPage}</PageNumber>
+          <Button onClick={handleNextPage} disabled={currentPage >= totalPages}>
+            다음
+          </Button>
+        </Pagination>
+      </MainLeft>
+      <Footer></Footer>
     </>
   );
 };
 
+export default List;
+
+const MainLeft = styled.div`
+  padding: 4rem 5rem 8rem 5rem;
+`;
+
+const PostItem = styled.div`
+  /* your styles here */
+`;
+
+const PostTitle = styled.h2`
+  /* your styles here */
+`;
+
+const PostDate = styled.p`
+  /* your styles here */
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+`;
+
+const Button = styled.button`
+  /* your styles here */
+`;
+
+const PageNumber = styled.span`
+  /* your styles here */
+`;
+
 export const MainContainer = styled.main`
-  padding: 5rem;
+  padding: 4rem 5rem 8rem 5rem;
 `;
 
 export const HeadContainer = styled.div`
@@ -117,9 +171,10 @@ const FilterController = styled.div`
 
 const AskButton = styled.div`
   margin-bottom: 12px;
+  float: right;
 
   a {
-    background-color: #7CCCDC;
+    background-color: #7cccdc;
     color: hsl(0, 0%, 100%);
     border: 1px solid transparent;
     border-radius: 3px;
@@ -131,6 +186,6 @@ const AskButton = styled.div`
   }
 
   a:hover {
-    background-color: #36778B;
+    background-color: #36778b;
   }
 `;

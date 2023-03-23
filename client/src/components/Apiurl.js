@@ -1,1 +1,1 @@
-export const REDIRECT_URI = 'https://589b-125-247-122-218.jp.ngrok.io/';
+export const REDIRECT_URI = 'http://43.201.167.13:8080/';

@@ -59,14 +59,8 @@ function App() {
         <Route path="/pay" element={<ClassPaymentPage />}></Route>
         <Route path="/newclass" element={<CreateClassPage />}></Route>
         <Route path="/editclass" element={<EditClassPage />}></Route>
-                {/* <SurfingNavbar />
-        <Switch>
-          <Route exact path="/" component={MYpageRevise} />
-          <Route exact path="/profile" component={SurfingProfile} />
-        </Switch> */}
         </Routes>
     </>
   );
 }
-
 export default App;

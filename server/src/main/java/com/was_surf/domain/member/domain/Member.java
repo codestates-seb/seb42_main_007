@@ -2,14 +2,12 @@ package com.was_surf.domain.member.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.board_post.domain.BoardPost;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.was_surf.global.common.audit.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String displayName;
 
-    @Column(nullable = false, updatable = false, unique = true, columnDefinition = "TEXT")
+    @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -66,6 +64,9 @@ public class Member  {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<BoardPost> boardPosts = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
+//    private List<BoardComment> boardComments = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();

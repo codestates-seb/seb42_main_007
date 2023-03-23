@@ -46,7 +46,12 @@
     font-weight: bold;
     line-height: 22px;
     text-decoration-line: none;
+    background-color: white;
+    border: none;
+}
 
+.Linkout:hover {
+    cursor: pointer;
 }
 
 .commonmypagelink > p {

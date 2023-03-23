@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
@@ -8,14 +7,14 @@ import { useCookies } from 'react-cookie';
 import './Login.css';
 import Logo_black from "../../images/Logo_black.png"
 
-import { authActions } from '../../Redux/auth';
-// import { REDIRECT_URI } from '../Apiurl';
+// import { authActions } from '../../Redux/auth';
+import { REDIRECT_URI } from '../Apiurl';
 
 function Login() {
   const [tokenCookie, setTokenCookie] = useCookies(['id']);
   const [refreshCookie, setRefreshCookie] = useCookies(['Refresh']);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
   const [isEmail, setIsEmail] = useState(true);
   const [isPassword, setIsPassword] = useState(false);
@@ -39,7 +38,7 @@ function Login() {
     }
   }, []);
 
-  // const API_URL = `${REDIRECT_URI}/members/login`;
+  const API_URL = `${REDIRECT_URI}members/login`;
 
   const passwordhandler = (e) => {
     const passwordCurrent = e.target.value;
@@ -48,14 +47,14 @@ function Login() {
 
   const loginHandler = () => {
     axios.defaults.withCredentials = true;
-    // const token = tokenCookie.id;
+    const token = tokenCookie.id;
 
     return axios
       .post(
-        // API_URL,
+        API_URL,
         {
-          email: email,
-          password: password,
+          email: Email,
+          password: Password,
         },
         {
           headers: {
@@ -75,7 +74,7 @@ function Login() {
           maxAge: 60 * 30000,
         });
         if (tokenCookie && refreshCookie) {
-          dispatch(authActions.login());
+          // dispatch(authActions.login());
         }
         navigate(-1);
       })
@@ -106,7 +105,7 @@ function Login() {
                 name="email"
                 onChange={onChangeEmail}
               ></input>
-              {/* <div className="emlerr">{emailMessage}</div> */}
+              <div className="emlerr">{emailMessage}</div>
             </div>
             <div className="emailerr"></div>
             <div className="loginpwd">

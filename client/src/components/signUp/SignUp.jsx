@@ -11,17 +11,17 @@ import React from "react";
 
 function SignUp() {
   // eslint-disable-next-line no-unused-vars
-  const [Name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [Displayname, setName] = useState('');
+  const [Email, setEmail] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
   const [isemail, setIsemail] = useState(false);
-  const [password, setPassword] = useState('');
+  const [Password, setPassword] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [isPassword, setIsPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
 
-  const API_URL = `${REDIRECT_URI}/members`;
+  const API_URL = `${REDIRECT_URI}members`;
   const navigate = useNavigate();
   // axios.defaults.withCredentials = true;
 
@@ -29,9 +29,9 @@ function SignUp() {
     event.preventDefault();
     await axios
       .post(API_URL, {
-        name: Name,
-        email: email,
-        password: password,
+        name: Displayname,
+        email: Email,
+        password: Password,
       })
       .then((res) => {
         console.log(res);
@@ -94,13 +94,13 @@ function SignUp() {
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
-    setPasswordMatch(e.target.value === password);
+    setPasswordMatch(e.target.value === Password);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // 비밀번호 재확인이 일치하면 폼을 제출하는 로직
-    if (password === confirmPassword) {
+    if (Password === confirmPassword) {
       console.log('비밀번호 재확인 성공!');
     } else {
       console.log('비밀번호 재확인 실패!');
@@ -178,7 +178,7 @@ function SignUp() {
                     // onChange={onChangePassword}
                     name="password"
                     id="password"
-                    value={password}
+                    value={Password}
                     onChange={handlePasswordChange}
                   />
                 </div>

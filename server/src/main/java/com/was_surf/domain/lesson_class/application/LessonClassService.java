@@ -50,6 +50,12 @@ public class LessonClassService {
         // 강습클래스 신청 마감 기간
         Optional.ofNullable(lessonClass.getRegisterEnd())
                 .ifPresent(findLessonClass::setRegisterEnd);
+        // 강습클래스 실제 강습 날짜
+        Optional.ofNullable(lessonClass.getLessonDate())
+                .ifPresent(findLessonClass::setLessonDate);
+        // 강습클래스 가격
+        Optional.ofNullable(lessonClass.getPrice())
+                .ifPresent(findLessonClass::setPrice);
         // 강습클래스 모집 최대 인원
         Optional.ofNullable(lessonClass.getHeadCount())
                 .ifPresent(findLessonClass::setHeadCount);

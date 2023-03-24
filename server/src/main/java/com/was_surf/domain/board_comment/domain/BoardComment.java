@@ -25,18 +25,18 @@ public class BoardComment extends Auditable {
     @JoinColumn(name = "BOARD_POST_ID", nullable = false)
     private BoardPost boardPost;
 
-//    public setBoardPost(BoardPost boardPost) {
-//        this.boardPost = boardPost;
-//        if(boardPost.getBoardComment().contains(this)) {
-//            boardPost.getBoardComment().add(this);
-//        }
-//    }
-
+    public void setBoardPost(BoardPost boardPost) {
+        this.boardPost = boardPost;
+        if(boardPost.getBoardComments().contains(this)) {
+            boardPost.getBoardComments().add(this);
+        }
+    }
+//
 //    @ManyToOne
 //    @Column(name = "MEMBER_ID", nullable = false)
 //    private Member member;
-
-//    public setBoardPost(Member member) {
+//
+//    public void setMember(Member member) {
 //        this.member = member;
 //        if(member.getBoardComment().contains(this)) {
 //            member.getBoardComment().add(this);

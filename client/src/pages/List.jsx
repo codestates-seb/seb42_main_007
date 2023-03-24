@@ -14,7 +14,7 @@ const List = ({ location }) => {
     async function fetchData() {
       const page = new URLSearchParams(location?.search).get("page") || 1;
       const response = await axios.get(
-        `http://localhost:4000/board-posts?page=${page}`
+        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${page}`
       );
       setPosts(response.data.posts);
       setTotalPages(response.data.totalPages);

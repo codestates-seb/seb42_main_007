@@ -22,8 +22,10 @@ public class Region {
     @Column(name = "region_child")
     private String childRegion; // 시, 군, 구
 
+    @Column(name = "nx")
     private int nx; // x좌표
 
+    @Column(name = "ny")
     private int ny; // y좌표
 
     @Embedded

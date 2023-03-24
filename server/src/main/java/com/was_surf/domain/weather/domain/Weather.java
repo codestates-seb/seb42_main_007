@@ -15,13 +15,22 @@ import javax.persistence.Embeddable;
 public class Weather {
 
     @Column(nullable = true)
-    private double temp; //온도
+    private String temp; //온도
 
     @Column(nullable = true)
-    private double wave; //파고
+    private String wave; //파고
 
     @Column(nullable = true)
-    private double windSpeed; //풍속
+    private String windSpeed; //풍속
+
+    @Column(nullable = true)
+    private String highestTemperature; // 일 최고기온
+
+    @Column(nullable = true)
+    private String minimumTemperature; // 일 최저기온
+
+    @Column(nullable = true)
+    private String precipitation; // 강수확률
 
     @Column(nullable = true)
     private String lastUpdateTime; // 마지막 갱신시각

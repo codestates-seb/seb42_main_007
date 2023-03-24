@@ -41,7 +41,6 @@ public class LessonClassController {
 
         // 현재 로그인된 회원 정보 조회
         Member member = memberService.findMemberToEmail(principal.getName());
-        log.info("# principal(getName) : " + principal.getName());
 
         // 회원 정보 주입
         lessonClass.setMember(member);

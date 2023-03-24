@@ -1,6 +1,7 @@
 package com.was_surf.global.config.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +26,10 @@ public class JwtTokenProvider {
     private static final String AUTHORITIES_KEY = "auth";
     private final Key key;
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000L;
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 30 * 60 * 1000L;
 
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
-        byte[] secretByteKey = DatatypeConverter.parseBase64Binary(secretKey);
+        byte[] secretByteKey = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(secretByteKey);
     }
     long now = (new Date().getTime());
@@ -37,10 +39,11 @@ public class JwtTokenProvider {
                 .collect(Collectors.joining(","));
 
         //Access Token 생성
+        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
@@ -60,6 +63,7 @@ public class JwtTokenProvider {
 
     //토큰 복호화
     public Authentication getAuthentication(String accessToken) {
+
         Claims claims = parseClaims(accessToken);
 
         if (claims.get(AUTHORITIES_KEY) == null) {

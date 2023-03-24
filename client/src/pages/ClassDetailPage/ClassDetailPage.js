@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -7,6 +7,80 @@ import "react-datepicker/dist/react-datepicker.css";
 import Counter from "./Counter";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+
+const ClassDetailPage = () => {
+    const [date, setDate] = useState(new Date())
+    const [number, setNumber] = useState('0')
+    const [classData, setClassData] = useState({})
+
+    const navigate = useNavigate()
+
+  
+    useEffect(()=>{
+        axios
+        .get(`http://43.201.167.13:8080/board-lessons/1`)
+        //1 -> lessonId
+        .then((res)=>{
+            setClassData(res.data)
+        })
+        .catch((err) => {
+            console.log(err);
+          });
+    })
+
+    const deleteClass = async () => {
+        await axios
+        .delete(`http://43.201.167.13:8080/board-lessons/1`)
+        //1 -> LessonId
+        .then(()=>{
+            navigate('/classlist')
+        })
+        .catch((err) => {
+            console.log(err);
+          });
+    }
+
+
+    return (
+        <>
+        <Header />
+        <ClassDetailContainer>
+            <ClassDetailTitle>
+                <div className="text">
+                {/* [와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회 */}
+                {classData.lessonTitle}
+                </div>
+            </ClassDetailTitle>
+            <div className="deadline">{classData.deadLine}</div>
+            <div className="headcount">{classData.headCount}</div>
+            <div className="created-at">{classData.createdAt}</div>
+            <ClassDetailBody>{classData.lessonContent}</ClassDetailBody>
+            <RegistrationDetail>
+                <div className="column-left">
+                    <div className="date-text">선택 날짜</div>
+                    <div className="count-text">인원 수</div>
+                    <div className="sum-text">총 금액</div>
+                </div>
+                <div className="column-right">
+                    <div className="datepicker">
+                        <DatePicker selected={date} onChange={date => setDate(date)} />
+                    </div>
+                    <Counter />
+                    <div className="sum-total">77,000원</div>
+                </div>
+            </RegistrationDetail>
+            <RegistrationButton><Link to="/pay">강좌신청 👉</Link></RegistrationButton>
+            <ButtonsContainer>
+                <ClassDetailEditButton><Link to="/editclass">수정</Link></ClassDetailEditButton>
+                <ClassDetailDeleteButton onClick={deleteClass}>삭제</ClassDetailDeleteButton>
+            </ButtonsContainer>
+            <Space />
+        </ClassDetailContainer>
+        <Footer />
+        </>
+    )
+}
 
 const ClassDetailContainer = styled.div`
     min-height: fit-content;
@@ -149,57 +223,5 @@ const ButtonsContainer = styled.div`
 const Space = styled.div`
     height: 140px;
 `
-const ClassDetailPage = () => {
-    const [date, setDate] = useState(new Date())
-    const [number, setNumber] = useState('0')
-    
-    const navigate = useNavigate()
-
-    const deleteClass = async () => {
-        await axios
-        .delete(`/api/board-lessons/1`)
-        .then(()=>{
-            navigate('/classlist')
-        })
-        .catch((err) => {
-            console.log(err);
-          });
-    }
-
-    return (
-        <>
-        <Header />
-        <ClassDetailContainer>
-            <ClassDetailTitle>
-                <div className="text">
-                [와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회
-                </div>
-            </ClassDetailTitle>
-            <ClassDetailBody>홍보내용</ClassDetailBody>
-            <RegistrationDetail>
-                <div className="column-left">
-                    <div className="date-text">선택 날짜</div>
-                    <div className="count-text">인원 수</div>
-                    <div className="sum-text">총 금액</div>
-                </div>
-                <div className="column-right">
-                    <div className="datepicker">
-                        <DatePicker selected={date} onChange={date => setDate(date)} />
-                    </div>
-                    <Counter />
-                    <div className="sum-total">77,000원</div>
-                </div>
-            </RegistrationDetail>
-            <RegistrationButton><Link to="/pay">강좌신청 👉</Link></RegistrationButton>
-            <ButtonsContainer>
-                <ClassDetailEditButton><Link to="/editclass">수정</Link></ClassDetailEditButton>
-                <ClassDetailDeleteButton onClick={deleteClass}>삭제</ClassDetailDeleteButton>
-            </ButtonsContainer>
-            <Space />
-        </ClassDetailContainer>
-        <Footer />
-        </>
-    )
-}
 
 export default ClassDetailPage;

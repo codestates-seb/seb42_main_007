@@ -1,8 +1,121 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 const SingleClass = () => {
-    // get으로 클래스를 불러온다.. get api/board-lessons/1,2,3,4,5...
-    // 불러온 클래스의 제목, 내용, 가격을 컴포넌트에 띄운다
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+          .get(`http://43.201.167.13:8080/board-lessons/?page=1&size=10`)
+          .then((res) => {
+            setData(res.data);
+          });
+      }, []);
+    //   {
+    //     "memberId": "1",
+    //     "lessonClassId": 1,
+    //     "title": "강습 클래스 제목",
+    //     "content": "강습 클래스 내용",
+    //     "registerStart": "2023-03-18T12:20:00",
+    //     "registerEnd": "2023-03-20T23:30:00",
+    //     "lessonDate": "2023-03-31",
+    //     "headCount": 40,
+    //     "price": 75000,
+    //     "lessonStatus": "현재 강습을 신청할 수 있습니다.",
+    //     "lessonRegisters": []
+    //   }, ...
+
+    return (
+        <>
+        {data && data.map((lessondata) => {
+            return (
+                <div className="lesson-data" key={lessondata.lessonClassId} > 
+                <SingleClassContainer>
+                <ClassThumbnail />
+                <ClassTitle>{lessondata.title}</ClassTitle>
+                <ClassPrice>{`${lessondata.price}원`}</ClassPrice>
+                <ClassReservationButton><Link to={`/lesson-class/${lessondata.lessonClassId}`}>바로예약 👉</Link></ClassReservationButton>
+                </SingleClassContainer>
+                </div>
+                )
+        })} 
+                <SingleClassContainer>
+                <ClassThumbnail />
+                <ClassTitle>와썹in양양 [타이틀]</ClassTitle>
+                <ClassPrice>77,000원</ClassPrice>
+                <ClassReservationButton><Link to="/lesson-class/1">바로예약 👉</Link></ClassReservationButton>
+                </SingleClassContainer>
+                <SingleClassContainer>
+                <ClassThumbnail />
+                <ClassTitle>와썹in부산 [타이틀]</ClassTitle>
+                <ClassPrice>99,000원</ClassPrice>
+                <ClassReservationButton><Link to="/classdetail">바로예약 👉</Link></ClassReservationButton>
+                </SingleClassContainer>
+                <SingleClassContainer>
+                <ClassThumbnail />
+                <ClassTitle>와썹in제주 [타이틀]</ClassTitle>
+                <ClassPrice>109,000원</ClassPrice>
+                <ClassReservationButton><Link to="/classdetail">바로예약 👉</Link></ClassReservationButton>
+                </SingleClassContainer>
+        </>
+    )
 }
+
+const SingleClassContainer = styled.div`
+    /* border: solid red 1px; */
+    min-height: 100%;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 0px 0px 7px 0px #CBCBCB;
+    margin: 0px 5px;
+
+`
+
+
+const ClassThumbnail = styled.div`
+    background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+    background-size: cover;
+    background-position: center;
+    width: 250px;
+    min-height: 250px;
+`
+
+const ClassTitle = styled.div`
+    font-size: 17px;
+    padding: 10px;
+    width: 100%;
+    text-align: right;
+    /* border: 1px red solid; */
+`
+
+const ClassPrice = styled.div`
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    /* margin-top: 5px; */
+    text-align: right;
+    /* border: 1px red solid; */
+`
+
+//왼쪽 오른쪽 이동하는 아이콘 2개
+const ClassReservationButton = styled.button`
+    width: 90px;
+    height: 35px;
+    color: white;
+    background-color: #3FBED3;
+    text-align: center;
+    border: transparent;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+`
+
+
 
 export default SingleClass;

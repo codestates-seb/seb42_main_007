@@ -5,7 +5,7 @@ import {
 import { Input } from "../components/Board/Input";
 import { Button } from "../components/Board/Button";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header/Header";
@@ -44,16 +44,21 @@ const Write = () => {
 
   const onSubmit = (data) => {
     setTitle(data?.title);
-    setContent(body1.current.getInstance().getHtml());
+    if (body1.current) {
+      setContent(body1.current.getInstance().getHtml());
+    }
   };
 
   const postButtonClick = useCallback(async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/board-posts`, {
-        title: title,
-        content: content,
-        createAt: TodayTime(),
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/board-posts`,
+        {
+          title: title,
+          content: content,
+          createAt: TodayTime(),
+        }
+      );
       console.log("서버에서 내려온값:", response);
       window.alert("등록 완료");
       navigate("/List");
@@ -71,6 +76,12 @@ const Write = () => {
 
   const { register, handleSubmit } = useForm();
   const body1 = useRef();
+
+  useEffect(() => {
+    if (body1.current) {
+      setContent(body1.current.getInstance().getHtml());
+    }
+  }, []);
 
   return (
     <>
@@ -116,7 +127,10 @@ const Write = () => {
         </div>
         <div className="buttonWrapper">
           <Button
-            onClick={postButtonClick}
+            onClick={() => {
+              onSubmit();
+              postButtonClick();
+            }}
             type="submit"
             buttonType="type2"
             buttonName="작성"

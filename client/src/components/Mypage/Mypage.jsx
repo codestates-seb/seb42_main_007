@@ -4,7 +4,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import GlobalStyle from '../../styles/GlobalStyle';
 import { MyLessons, MyPosts } from './MyComponents';
 import Cookies from 'js-cookie';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 function Mypage() {
@@ -36,6 +36,39 @@ function Mypage() {
       console.error(error);
     }
   };
+
+  async function getDisplayName() {
+    try {
+      const response = await fetch('members/display-name', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get display name');
+      }
+
+      const data = await response.json();
+      return data.displayName;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const [displayName, setDisplayName] = useState('');
+
+  async function fetchDisplayName() {
+    const displayName = await getDisplayName();
+    setDisplayName(displayName);
+  }
+
+  useEffect(() => {
+    fetchDisplayName();
+  }, []);
+
 
   const handleDeleteAccount = async () => {
     try {
@@ -77,73 +110,70 @@ function Mypage() {
     );
   }
 
-    
-    
-return (
+
+
+  return (
     <>
-    <GlobalStyle /> 
-<div class="Mypagecontainer">
-    <div class="commonMypage">
-    <section class="commonmypagese">
-    <h1 class="commonmypagelink">
-    <Link to="/Mypage" class="link" ><p>My Page</p></Link>
-    </h1>
-    <div class="commonmypagelogout">
-        <button 
-        className="Linkout"
-        onClick={handleLogout}>
-            로그아웃
-        </button>
-    </div>
-    <div class="commonmypageprofil">
-    <img src={unnamed} class="profileimage" alt="프로필 이미지가 없습니다"></img>
-    <div className ="imgside">
-       <strong>
-        환영합니다 ooo님 !
-       </strong>
-       </div>
-       <div class="commonmypagesupday">
-        <span>
-            "가입일 : "
-            "2016.02.09"
-        </span>
+      <GlobalStyle />
+      <div class="Mypagecontainer">
+        <div class="commonMypage">
+          <section class="commonmypagese">
+            <h1 class="commonmypagelink">
+              <Link to="/Mypage" class="link" ><p>My Page</p></Link>
+            </h1>
+            <div class="commonmypagelogout">
+              <button
+                className="Linkout"
+                onClick={handleLogout}>
+                로그아웃
+              </button>
+            </div>
+            <div class="commonmypageprofil">
+              <img src={unnamed} class="profileimage" alt="프로필 이미지가 없습니다" />
+              <div className="imgside">
+                <strong>
+                  환영합니다 {displayName}님!
+                </strong>
+              </div>
+              <div class="commonmypagesupday">
+                <span>"가입일 : " "2016.02.09"</span>
+              </div>
+            </div>
+          </section>
+          <nav class="commonmypageleftnav">
+            <h2 class="commonmypagembm">
+              Mypage Navigation Menus
+            </h2>
+            <div className="Mylist">
+              <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                나의 프로필</h3>
+              <p class="edit1">※ 프로필 수정하기</p>
+              <p>
+                <Link to="/mypage/lessons">※ 나의 강습 정보 보기</Link>
+              </p>
+              <p>
+                <Link to="/mypage/posts">※ 나의 게시글 보기</Link>
+              </p>
+              <p>※ 1:1 문의 하기</p>
+              <button
+                className="xmembers"
+                onClick={handleDeleteAccount}
+              >
+                <p>
+                  ※ 회원탈퇴
+                </p>
+              </button>
+            </div>
+          </nav>
+          <div className="commonmypagerightcontent">
+            <Routes>
+              <Route path="/mypage/lessons" component={MyLessons} />
+              <Route path="/mypage/posts" component={MyPosts} />
+            </Routes>
+          </div>
         </div>
-    </div>
-    </section>
-<nav class="commonmypageleftnav">
-    <h2 class="commonmypagembm">
-        Mypage Navigation Menus
-    </h2>
-    <div className="Mylist">
-    <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-     나의 프로필</h3>
-    <p class="edit1">※ 프로필 수정하기</p>
-     <p>
-        <Link to="/mypage/lessons">※ 나의 강습 정보 보기</Link>
-     </p>
-     <p>
-        <Link to="/mypage/posts">※ 나의 게시글 보기</Link>
-     </p>
-     <p>※ 1:1 문의 하기</p>
-     <button 
-     className="xmembers"
-     onClick={handleDeleteAccount}
-     >
-     <p>
-      ※ 회원탈퇴
-      </p>
-      </button>
-    </div>
-</nav>
-<div className="commonmypagerightcontent">
-          <Routes>
-            <Route path="/mypage/lessons" component={MyLessons} />
-            <Route path="/mypage/posts" component={MyPosts} />
-          </Routes>
-    </div>
-    </div>
-    </div>
+      </div>
     </>
-);
+  );
 }
 export default Mypage;

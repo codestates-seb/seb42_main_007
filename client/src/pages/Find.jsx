@@ -1,7 +1,6 @@
 import {Pagination} from "@mui/material";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import JukDoBeach from "../images/Board/JukDoBeach.jpg";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Card } from "../components/Board/Card";
@@ -53,7 +52,3 @@ const Main = styled.div`
     font-size: 30px;
   }
 `
-
-const JukDo = styled.img.attrs({
-  src: `${JukDoBeach}`,
-})``;

@@ -19,6 +19,9 @@ function Home() {
         <Section>
 
         </Section>
+        <Section>
+
+        </Section>
       </SectionsContainer>
       <Footer />
     </>

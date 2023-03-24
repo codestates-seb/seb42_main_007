@@ -11,6 +11,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.was_surf.domain.board_post.domain.BoardPost;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
+import com.was_surf.domain.spot_review.domain.SpotReview;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 @Setter
 @Entity
@@ -29,7 +47,7 @@ public class Member implements UserDetails {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String displayName;
 
-    @Column(nullable = false, updatable = false, unique = true, columnDefinition = "TEXT")
+    @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -75,6 +93,30 @@ public class Member implements UserDetails {
         this.email = email;
         this.password = password;
     }
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<BoardPost> boardPosts = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
+//    private List<BoardComment> boardComments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<SpotReview> spotReviews = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private List<LessonRegister> lessonRegisters = new ArrayList<>();
+
+    public void addLessonRegister(LessonRegister lessonRegister) {
+        lessonRegisters.add(lessonRegister);
+
+        if(lessonRegister.getMember() != this) {
+            lessonRegister.setMember(this);
+        }
+    }
+
+
+
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),
         MEMBER_EXIST("활동중인 회원");

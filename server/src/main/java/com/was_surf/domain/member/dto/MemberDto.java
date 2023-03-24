@@ -47,10 +47,10 @@ public class MemberDto {
     @Getter
     @Setter
     public static class Logout {
-        @NotEmpty(message = "토큰이 비어있습니다")
+        @NotEmpty(message = "토큰이 비어있습니다!")
         private String accessToken;
 
-        @NotEmpty(message = "토큰이 비어있습니다")
+        @NotEmpty(message = "토큰이 비어있습니다!")
         private String refreshToken;
     }
     @Getter

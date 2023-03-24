@@ -45,4 +45,8 @@ public class SpotReview extends Auditable {
             member.getSpotReviews().add(this);
         }
     }
+
+    public void setSurfSpot(SurfSpot surfSpot) {
+        this.surfSpot = surfSpot;
+    }
 }

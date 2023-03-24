@@ -32,6 +32,9 @@ public class LessonClass extends Auditable {
     @Column(nullable = false)
     private int headCount;
 
+    @Column(nullable = false)
+    private int price;
+
     @Enumerated(value = EnumType.STRING)
     private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
 

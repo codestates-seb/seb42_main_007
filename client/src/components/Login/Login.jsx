@@ -47,42 +47,45 @@ function Login() {
 
   const loginHandler = () => {
     axios.defaults.withCredentials = true;
-    const token = tokenCookie.id;
-
+    // const token = tokenCookie.id;
+  
     return axios
       .post(
         API_URL,
         {
-          email: Email,
-          password: Password,
+          Email: Email,
+          Password: Password,
         },
-        {
-          headers: {
-            'ngrok-skip-browser-warning': '69420',
-            'Content-Type': 'application/json',
-          },
-        }
+        // {
+        //   headers: {
+        //     'ngrok-skip-browser-warning': '69420',
+        //     'Content-Type': 'application/json',
+        //   },
+        // }
       )
       .then((response) => {
-        const accessToken = response.headers.get('Authorization').split(' ')[1];
-        const refreshToken = response.headers.get('Refresh');
-
-        setTokenCookie('id', accessToken, {
-          maxAge: 60 * 30000,
-        });
-        setRefreshCookie('Refresh', refreshToken, {
-          maxAge: 60 * 30000,
-        });
-        if (tokenCookie && refreshCookie) {
+        // const accessToken = response.headers ? response.headers.get('Authorization')?.split(' ')[1] : null;
+        // const refreshToken = response.headers ? response.headers.get('Refresh') : null;
+        console.log('Response Data:', response.data);
+        const accessToken = response.headers?.get('Authorization')?.split(' ')[1];
+        const refreshToken = response.headers?.get('Refresh');
+  
+        if (accessToken && refreshToken) {
+          setTokenCookie('id', accessToken, {
+            maxAge: 60 * 30000,
+          });
+          setRefreshCookie('Refresh', refreshToken, {
+            maxAge: 60 * 30000,
+          });
+          console.log('Access Token:', accessToken);
+          console.log('Refresh Token:', refreshToken);
+          alert('로그인이 성공했습니다!');
           // dispatch(authActions.login());
+        } else {
+          console.error('로그인 오류:', response);
+          alert('로그인에 실패했습니다. 잠시 후 다시 시도해주세요.');
         }
-        navigate(-1);
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          alert('이메일또는 비밀번호를 확인해주세요!');
-        }
-      });
   };
 
   return (

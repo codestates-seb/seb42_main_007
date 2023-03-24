@@ -24,7 +24,7 @@
     margin: 0px auto;
     color: rgb(0, 0, 0);
 }
-.commonmypagelink {
+.commonmypagelink { 
     padding: 20px 0px 24px;
     font-size: 30px;
 }
@@ -34,6 +34,21 @@
     right: 0px;
     top: 20px;
 
+}
+
+.Mylist > .xmembers {
+    background-color: white;
+    border: none;
+    display: flex;
+    font-size: 16px;
+    line-height: 40px;
+    font-family: Musinsa, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    color: rgb(110, 110, 110) !important;
+    border-bottom: 1px solid hsl(0, 0%, 100%);
+}
+
+.xmembers:hover{
+    cursor: pointer;
 }
 
 .commonmypagelogout > .Linkout {

@@ -9,37 +9,75 @@ import React, { useState } from 'react';
 
 function Mypage() {
 
-    const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-    const handleLogout = async () => {
-      try {
-        // 1. 백엔드 API를 호출하여 토큰 무효화하기
-        const response = await fetch('/api/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
-          },
-        });
-  
-        if (!response.ok) {
-          throw new Error('Failed to log out');
-        }
-  
-        // 2. 쿠키 삭제하기
-        Cookies.remove('token');
-  
-        // 3. 상태 업데이트하기
-        setIsLoggedOut(true);
-      } catch (error) {
-        console.error(error);
+  const handleLogout = async () => {
+    try {
+      // 1. 백엔드 API를 호출하여 토큰 무효화하기
+      const response = await fetch('members/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to log out');
       }
-    };
-  
-    if (isLoggedOut) {
-      return <div>Logged out successfully!</div>;
+
+      // 2. 쿠키 삭제하기
+      Cookies.remove('token');
+
+      // 3. 상태 업데이트하기
+      setIsLoggedOut(true);
+    } catch (error) {
+      console.error(error);
     }
-  
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      // 1. 백엔드 API를 호출하여 회원정보 삭제하기
+      const response = await fetch('members/{member-id}', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete account');
+      }
+
+      // 2. 쿠키 삭제하기
+      Cookies.remove('token');
+
+      // 3. 상태 업데이트하기
+      setIsDeleting(false);
+      setIsLoggedOut(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (isLoggedOut) {
+    return <div>Logged out successfully!</div>;
+  }
+
+  if (isDeleting) {
+    return (
+      <div>
+        <p>정말 삭제하시겠습니까?</p>
+        <button onClick={handleDeleteAccount}>예</button>
+        <button onClick={() => setIsDeleting(false)}>아니요</button>
+      </div>
+    );
+  }
+
+    
     
 return (
     <>
@@ -87,7 +125,14 @@ return (
         <Link to="/mypage/posts">※ 나의 게시글 보기</Link>
      </p>
      <p>※ 1:1 문의 하기</p>
-     <p>※ 회원탈퇴</p>
+     <button 
+     className="xmembers"
+     onClick={handleDeleteAccount}
+     >
+     <p>
+      ※ 회원탈퇴
+      </p>
+      </button>
     </div>
 </nav>
 <div className="commonmypagerightcontent">

@@ -1,9 +1,12 @@
 package com.was_surf.domain.member.application;
 
 import com.was_surf.domain.member.domain.Member;
+import com.was_surf.domain.member.dto.MemberDto;
+import com.was_surf.global.lib.Response;
 import com.was_surf.global.config.util.CustomAuthorityUtils;
 import com.was_surf.global.error.exception.BusinessLogicException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +22,7 @@ import com.was_surf.global.error.exception.ExceptionCode;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -29,26 +33,52 @@ public class MemberService {
     private final CustomAuthorityUtils authorityUtils;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final RedisTemplate redisTemplate;
+    private final Response response;
 
-    public JwtToken login(String email, String password){
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,password);
+    public ResponseEntity<?> login(MemberDto.Login login) {
+        if(memberRepository.findByEmail(login.getEmail()).orElse(null)==null) {
+            return response.fail("해당하는 유저가 없습니다.", HttpStatus.BAD_REQUEST);
+        }
+        UsernamePasswordAuthenticationToken authenticationToken = login.toAuthentication();
+
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
-        JwtToken token = jwtTokenProvider.generateToken(authentication);
-        return token;
+        JwtToken jwtToken = jwtTokenProvider.generateToken(authentication);
+
+        redisTemplate.opsForValue().set("RT:"+authentication.getName(),jwtToken.getRefreshToken(),jwtToken.getRefreshTokenExpirationTime(),TimeUnit.MILLISECONDS);
+
+        return response.success(jwtToken,"로그인에 성공했습니다.", HttpStatus.OK);
     }
+
+    public ResponseEntity<?> logout(MemberDto.Logout logout) {
+        if(!jwtTokenProvider.validateToken(logout.getAccessToken())){
+            return response.fail("잘못된 요청입니다.",HttpStatus.BAD_REQUEST);
+        }
+        Authentication authentication = jwtTokenProvider.getAuthentication(logout.getAccessToken());
+
+        if (redisTemplate.opsForValue().get("RT:" + authentication.getName()) != null){
+            redisTemplate.delete("RT:" + authentication.getName());
+        }
+
+        Long expiration = jwtTokenProvider.getExpiration(logout.getAccessToken());
+
+        redisTemplate.opsForValue().set(logout.getAccessToken(),"logout",expiration,TimeUnit.MILLISECONDS);
+
+        return response.success("로그아웃 되었습니다.");
+    }
+
     public Member findMember(long memberId){
         return findVerifiedMember(memberId);
     }
     public Member updateMember(Member member){
+
         Member findMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getDisplayName())
                 .ifPresent(memberDisplayName->findMember.setDisplayName(memberDisplayName));
         Optional.ofNullable(member.getPassword())
                 .ifPresent(memberPassword->findMember.setPassword(memberPassword));
-        Optional.ofNullable(member.getAboutMe())
-                .ifPresent(memberAboutMe->findMember.setAboutMe(memberAboutMe));
 
         return memberRepository.save(findMember);
     }

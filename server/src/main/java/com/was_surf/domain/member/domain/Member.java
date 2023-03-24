@@ -1,24 +1,34 @@
 package com.was_surf.domain.member.domain;
 
+
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.board_post.domain.BoardPost;
+import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.was_surf.global.common.audit.Auditable;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "members")
-public class Member  {
+public class Member implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
@@ -36,18 +46,39 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String password;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String aboutMe;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
-    private List<LessonRegister> lessonRegisters = new ArrayList<>();
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
 
-    public void addMemberLessonClass(LessonRegister lessonRegister) {
-        lessonRegisters.add(lessonRegister);
-        if(lessonRegister.getMember() != this) {
-            lessonRegister.setMember(this);
-        }
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public Member(String displayName, String email, String password) {
@@ -56,14 +87,19 @@ public class Member  {
         this.password = password;
     }
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles = new ArrayList<>();
+
+
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<BoardPost> boardPosts = new ArrayList<>();
 
+//    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
+//    private List<BoardComment> boardComments = new ArrayList<>();
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
+
+
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),
@@ -76,4 +112,6 @@ public class Member  {
             this.status = status;
         }
     }
+
+
 }

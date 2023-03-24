@@ -49,6 +49,8 @@ public class LessonClassDto {
         private LocalDateTime registerEnd;
         @NotNull
         private int headCount;
+        @NotNull
+        private int price;
         private LessonClass.LessonStatus lessonStatus;
         private List<LessonRegister> lessonRegisters;
         public String getLessonStatus() {

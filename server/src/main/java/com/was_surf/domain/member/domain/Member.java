@@ -1,6 +1,12 @@
 package com.was_surf.domain.member.domain;
 
 
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson_register.domain.LessonRegister;
@@ -9,16 +15,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "members")
-public class Member  {
+public class Member implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
@@ -36,30 +46,48 @@ public class Member  {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String password;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String aboutMe;
-
-
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
-    private List<LessonRegister> lessonRegisters = new ArrayList<>();
-
-    public void addMemberLessonClass(LessonRegister lessonRegister) {
-        lessonRegisters.add(lessonRegister);
-        if(lessonRegister.getMember() != this) {
-            lessonRegister.setMember(this);
-        }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 
     public Member(String displayName, String email, String password) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
     }
+
+
 
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -70,6 +98,7 @@ public class Member  {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
+
 
 
     public enum MemberStatus{
@@ -83,4 +112,6 @@ public class Member  {
             this.status = status;
         }
     }
+
+
 }

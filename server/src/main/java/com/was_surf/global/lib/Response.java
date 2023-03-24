@@ -1,4 +1,4 @@
-package com.was_surf.domain.member.lib;
+package com.was_surf.global.lib;
 
 import lombok.Builder;
 import lombok.Getter;

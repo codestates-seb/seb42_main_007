@@ -10,6 +10,6 @@ import lombok.Setter;
 public class PageInfo {
     private int page;
     private int size;
-    private int totalPages;
     private long totalElements;
+    private int totalPages;
 }

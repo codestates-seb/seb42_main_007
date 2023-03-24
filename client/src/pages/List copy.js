@@ -34,24 +34,24 @@ export const List = () => {
           </HeadContainer>
           <QuestionsController>
             {/* <div className="total-questions">{questions.length} questions</div> */}
-            <FilterController>
+            {/* <FilterController>
               <div className="newest-btn">최신글</div>
               <div className="unanswered-btn">인기글</div>
               <div className="view-btn">조회수</div>
               <div className="vote-btn">평점</div>
-            </FilterController>
+            </FilterController> */}
           </QuestionsController>
           {/* <QuestionsList questions={questions}></QuestionsList> */}
           <QuestionsListDummy></QuestionsListDummy>
         </MainContainer>
-        <Footer></Footer>
       </MainContainer>
+      <Footer></Footer>
     </>
   );
 };
 
 export const MainContainer = styled.main`
-  padding: 5rem;
+  padding: 4rem 5rem 8rem 5rem;
 `;
 
 export const HeadContainer = styled.div`

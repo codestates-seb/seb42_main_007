@@ -8,25 +8,34 @@
       transform: translateZ(0);
     }
   }
-  .boardList-wrapper{
+  .FindList-wrapper{
     opacity: 0;
-    animation: smoothAppear 1.5s forwards;
-    animation-delay: 0.5s;
+    animation: myAnim 1s ease 0s 1 normal forwards;
+    // animation-delay: 0.1s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .boardList-header{
+    @keyframes myAnim {
+      0% {
+        opacity: 0;
+      }
+    
+      100% {
+        opacity: 1;
+      }
+    }
+    .FindList-header{
       color: midnightblue;
       font-weight: bold;
       font-size: 2rem;
     }
-    .boardList-body{
+    .FindList-body{
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
     }
-    .boardList-footer{
+    .FindList-footer{
       margin: 1.5rem;
     }
   }

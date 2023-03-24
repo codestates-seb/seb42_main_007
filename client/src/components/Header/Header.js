@@ -185,7 +185,7 @@ const Header = () => {
           </div>
           <div className="header-wrapper">
             <MenuItems menu={menu}>
-              <MenuItem>🌊 서핑스팟 찾기</MenuItem>
+            <MenuItem><Link to="/Find">🌊 서핑스팟 찾기</Link></MenuItem>
               <MenuItem>
                 <Link to="/List">😎 커뮤니티</Link>
               </MenuItem>

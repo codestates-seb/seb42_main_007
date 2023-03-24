@@ -20,6 +20,7 @@ public class LessonClassDto {
         private LocalDateTime registerStart;
         private LocalDateTime registerEnd;
         private int headCount;
+        private int price;
     }
 
     @Getter
@@ -31,6 +32,7 @@ public class LessonClassDto {
         private LocalDateTime registerStart;
         private LocalDateTime registerEnd;
         private int headCount;
+        private int price;
         private LessonClass.LessonStatus lessonStatus;
     }
 

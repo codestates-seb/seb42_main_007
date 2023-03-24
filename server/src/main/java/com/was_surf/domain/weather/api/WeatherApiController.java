@@ -72,7 +72,7 @@ public class WeatherApiController {
         log.info("API 요청 발송 >>> 지역: {}, 연월일: {}, 시각: {}", region, yyyyMMdd, hourStr);
 
         try {
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + serviceKey);
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "="+ serviceKey);
             urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
@@ -107,9 +107,12 @@ public class WeatherApiController {
             //// 응답 수신 완료 ////
             //// 응답 결과를 JSON 파싱 ////
 
-            Double temp = null;
-            Double wave = null;
-            Double windSpeed = null;
+            String temp = null;
+            String wave = null;
+            String windSpeed = null;
+            String highestTemperature = null;
+            String minimumTemperature = null;
+            String precipitation =null;
 
             JSONObject jObject = new JSONObject(data);
             JSONObject response = jObject.getJSONObject("response");
@@ -120,22 +123,31 @@ public class WeatherApiController {
             for(int i = 0; i < jArray.length(); i++) {
                 JSONObject obj = jArray.getJSONObject(i);
                 String category = obj.getString("category");
-                double obsrValue = obj.getDouble("obsrValue");
+                String fcstValue = obj.getString("fcstValue");
 
                 switch (category) {
-                    case "T1H":
-                        temp = obsrValue;
+                    case "TMP":
+                        temp = fcstValue;
                         break;
                     case "WAV":
-                        wave = obsrValue;
+                        wave = fcstValue;
                         break;
                     case "WSD":
-                        windSpeed = obsrValue;
+                        windSpeed = fcstValue;
+                        break;
+                    case "POP":
+                        precipitation = fcstValue;
+                        break;
+                    case "TMX":
+                        highestTemperature = fcstValue;
+                        break;
+                    case "TMN":
+                        minimumTemperature = fcstValue;
                         break;
                 }
             }
 
-            Weather weather = new Weather(temp,wave,windSpeed,currentChangeTime);
+            Weather weather = new Weather(temp,wave,windSpeed,precipitation,highestTemperature,minimumTemperature,currentChangeTime);
             region.updateRegionWeather(weather); // DB 업데이트
             WeatherResponseDto dto = WeatherResponseDto.builder()
                     .weather(weather)

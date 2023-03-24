@@ -13,36 +13,80 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 const EditClassPage = () => {
 // 새로운 강습 모집글을 작성한다.
 // 제목, 내용, 신청기간, 신청인원, 최초생성일
+const [title, setTitle] = useState('기존강좌명')
+const [startDate, setStartDate] = useState(new Date());
+const [endDate, setEndDate] = useState(new Date());
+const [lessonDate, setLessonDate] = useState(new Date());
+const [number, setNumber] = useState('0');
+const [content, setContent] = useState('');
+const [initialValue, setInitialValue] = useState("");
+const [originalData, setOriginalData] = useState({});
+const [price, setPrice] = useState('0');
+const editorRef = useRef();
+const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZ2RAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTQ5OTcwN30.Knm8U82RHwU4qv0kVvBYkfejb-QgizeI_-sOCLkSLQE';
+
+useEffect(() => {
+    axios
+      .get(`http://43.201.167.13:8080/lesson-class/1`,   // 수정할 클래스 아이디     
+      {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+        })
+      .then((res) => {
+        setOriginalData(res.data);
+        setInitialValue(originalData.content);
+        setTitle(originalData.title);
+        setStartDate(originalData.registerStart);
+        setEndDate(originalData.registerEnd);
+        setLessonDate(originalData.lessonDate);
+        setNumber(originalData.headCount);
+        setPrice(originalData.price);
+      });
+  }, []);
+
+
 const EditLesson = async () => {
-    // axios.defaults.withCredentials = true;
     await axios
     .patch(
-        `/api/board-lessons/1`,
+        `http://43.201.167.13:8080/board-lessons/${originalData.lessonClassId}`,
         {
-            lessonTitle : `${title}`,
-            lessonContent : `${content}`,
-            deadLine : `${endDate}`,
+            title : `${title}`,
+            content : `${content}`,
+            registerStart : new Date(),
+            registerEnd : `${endDate}`,
             headCount : `${number}`,
-            field : true,
-            updatedAt : new Date(),
+            price : `${price}`,
+        },
+    //   {
+    //     "memberId": "1",
+    //     "lessonClassId": 1,
+    //     "title": "강습 클래스 제목",
+    //     "content": "강습 클래스 내용",
+    //     "registerStart": "2023-03-18T12:20:00",
+    //     "registerEnd": "2023-03-20T23:30:00",
+    //     "lessonDate": "2023-03-31",
+    //     "headCount": 40,
+    //     "price": 75000,
+    //     "lessonStatus": "현재 강습을 신청할 수 있습니다.",
+    //     "lessonRegisters": []
+    //   },
+    {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
         }
     )
     .then(() => {
-        History.back();
+        // History.back();
+        window.location.replace(`/board-lessons/${originalData.lessonClassId}`);
+
     })
     .catch((error) => {
         console.log(error)
 
     });
 }
-
-
-const [title, setTitle] = useState('기존강좌명')
-const [endDate, setEndDate] = useState(new Date())
-const [number, setNumber] = useState('0')
-const [content, setContent] = useState('');
-const [initialValue, setInitialValue] = useState('기존홍보내용');
-const editorRef = useRef();
 
 const handleChange = () => {
   const instance = editorRef.current.getInstance();
@@ -63,13 +107,21 @@ const handleNumberChange = (event) => {
     setNumber(numberValue)
     console.log(number)
 }
-const cancelClick = () => {
-    navigate('/classlist')
+const handlePriceChange = (event) => {
+    const priceValue = event.target.value;
+    setPrice(priceValue)
+    console.log(priceValue)
 }
 
-// useEffect로 컴포넌트 렌더링 시에 
-// const handleInitialValue = () => {
-//     setInitialValue('기존 홍보내용 불러오기')
+const cancelClick = () => {
+    navigate('/classlist')
+    //해당 강습모집글 페이지로 다시 이동하도록 변경 
+    // or History.back(), navigate(-1) ?
+}
+
+// // useEffect로 컴포넌트 렌더링 시에 
+// const handleInitialValue = (originalData) => {
+//     setInitialValue(originalData.content)
 //   // boardlesson GET하여 res.data를 통해 
 //   // 기존 작성 내용을 initialvalue로 지정
 // }
@@ -82,49 +134,74 @@ const cancelClick = () => {
         <EditClassPageWrapper>
         <EditClassPageContainer>
             <h1>강습 모집글 수정</h1>
-        <div className="element-container">
-            <h2>제목</h2>
-            <input 
-            className="title-input" 
-            value={title}
-            onChange={handleTitleChange}/>
-        </div>
-        <div className="element-container">
-        <h2>내용</h2>
-            <Editor
-            initialValue={initialValue}  
-            previewStyle="tab"
-            height="400px"
-            initialEditType="markdown"
-            useCommandShortcut={true}
-            ref={editorRef}
-            onChange={handleChange}>
-            </Editor>
-        </div>
-        <div className="element-container">
-        <h2>모집기한</h2> 
-        <DatePicker 
-        selected={endDate} // 기존에 설정된 데드라인
-        onChange={(date) => setEndDate(date)} 
-        locale={ko}
-        dateFormat="yyyy년 MM월 dd일"
-        minDate={new Date()}
-        />
-        </div>
-        <div className="element-container">
-            <h2>신청인원</h2>
-        <input 
-        className="input-number" 
-        type='number' 
-        value={number} // 기존 설정된 인원 수
-        onChange={handleNumberChange}>
-        </input>
-        </div>
-        <div className="button-container">
-        <SubmitButton type="submit" onClick={EditLesson}>등록</SubmitButton>
-        <CancelButton onClick={cancelClick}>취소</CancelButton>
-        </div>
-        </EditClassPageContainer>
+            <div className="element-container">
+                <h2>제목</h2>
+                <input 
+                className="title-input" 
+                value={title}
+                onChange={handleTitleChange}/>
+            </div>
+            <div className="element-container">
+                <h2>내용</h2>
+                    <Editor
+                    initialValue={initialValue}  
+                    previewStyle="tab"
+                    height="400px"
+                    initialEditType="markdown"
+                    useCommandShortcut={true}
+                    ref={editorRef}
+                    onChange={handleChange}>
+                    </Editor>
+            </div>
+            <div className="element-container">
+                <h2>모집기한</h2> 
+                <h3>강습 모집 시작일</h3> 
+                <DatePicker 
+                selected={startDate} 
+                onChange={(date) => setStartDate(date)} 
+                locale={ko}
+                dateFormat="yyyy년 MM월 dd일"
+                />
+                <h3>강습 모집 종료일</h3> 
+                <DatePicker 
+                selected={endDate} 
+                onChange={(date) => setEndDate(date)} 
+                locale={ko}
+                dateFormat="yyyy년 MM월 dd일"
+                // minDate={new Date()}
+                />
+                <h3>강습 날짜</h3> 
+                <DatePicker 
+                selected={lessonDate} 
+                onChange={(date) => setLessonDate(date)} 
+                locale={ko}
+                dateFormat="yyyy년 MM월 dd일"
+                // minDate={new Date()}
+                />
+            </div>
+            <div className="element-container">
+                <h2>신청인원</h2>
+                <input 
+                className="input-number" 
+                type='number' 
+                value={number} // 기존 설정된 인원 수
+                onChange={handleNumberChange}>
+                </input>
+                <h2>강습 요금</h2>
+                <input 
+                className="input-price" 
+                type='number' 
+                min='0' 
+                value={price}
+                placeholder="숫자만 입력하세요." 
+                onChange={handlePriceChange}>
+                </input>
+            </div>
+            <div className="button-container">
+                <SubmitButton type="submit" onClick={EditLesson}>등록</SubmitButton>
+                <CancelButton onClick={cancelClick}>취소</CancelButton>
+            </div>
+            </EditClassPageContainer>
         </EditClassPageWrapper>
         <Footer/>
         </>
@@ -150,16 +227,25 @@ const EditClassPageContainer = styled.div`
         width: 100%;
         height: 30px;
     }
-    .input-number{
+    .input-number, .input-price{
         height: 30px;
+        margin-bottom: 25px;
     }
     .element-container{
         margin-top: 25px;
     }
     h2 {
         margin-bottom: 10px;
+        font-size: 18px;
+        background-color: #a7d7dc;
+        padding: 3px 6px;
+        display: flex;
+        width: fit-content;
     }
-    
+    h3 {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
 `
 const SubmitButton = styled.button`
     width: 90px;

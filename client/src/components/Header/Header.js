@@ -96,7 +96,7 @@ const MenuItems = styled.div`
         align-items: flex-start;
         position: fixed;
         top: 100px;
-        right: ${(props)=> (props.menu === true ? '20px' : '-180px')};
+        right: ${(props)=> (props.menu === true ? '20px' : '-250px')};
         .hidden {
             display: block;
         }

@@ -14,7 +14,7 @@ const List = ({ location }) => {
     async function fetchData() {
       const page = new URLSearchParams(location?.search).get("page") || 1;
       const response = await axios.get(
-        `http://localhost:4000/board-posts?page=${page}`
+        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${page}`
       );
       setPosts(response.data.posts);
       setTotalPages(response.data.totalPages);
@@ -80,28 +80,33 @@ const MainLeft = styled.div`
 
 const PostItem = styled.div`
   /* your styles here */
+  display: flex;
 `;
 
 const PostTitle = styled.h2`
   /* your styles here */
+  font-size: 30px;
 `;
 
 const PostDate = styled.p`
   /* your styles here */
+  font-size: 10px;
 `;
 
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 10rem;
 `;
 
 const Button = styled.button`
   /* your styles here */
+  display: flex;
 `;
 
 const PageNumber = styled.span`
   /* your styles here */
+  font-size: 1rem;
 `;
 
 export const MainContainer = styled.main`

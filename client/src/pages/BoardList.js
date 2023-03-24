@@ -3,7 +3,7 @@ import { Card } from "../components/Board/Card";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useSearchParams} from "react-router-dom";
-import "../components/Board/boardList.scss";
+import "../components/Board/FindList.scss";
 import moment from "moment";
 
 const BoardList = () => {

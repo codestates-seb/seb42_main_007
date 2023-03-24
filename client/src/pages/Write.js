@@ -49,7 +49,7 @@ const Write = () => {
 
   const postButtonClick = useCallback(async () => {
     try {
-      const response = await axios.post("http://localhost:4000/board-posts", {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/board-posts`, {
         title: title,
         content: content,
         createAt: TodayTime(),
@@ -82,7 +82,7 @@ const Write = () => {
           <Input
             placeholder=""
             padding="0.78rem 0.91rem"
-            width="100%"
+            width="calc(100% - 30.12px);"
             register={register("title")}
           />
         </form>
@@ -101,7 +101,7 @@ const Write = () => {
                   formData.append("image", blob);
                   try {
                     const response = await axios.post(
-                      "http://localhost:4000/board-posts",
+                      `${process.env.REACT_APP_SERVER_URL}/board-posts`,
                       formData
                     );
                     const imageUrl = response.data.url;

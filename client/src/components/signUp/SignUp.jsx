@@ -11,7 +11,7 @@ import React from "react";
 
 function SignUp() {
   // eslint-disable-next-line no-unused-vars
-  const [Displayname, setName] = useState('');
+  const [displayName, setdisplayName] = useState('');
   const [Email, setEmail] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
   const [isemail, setIsemail] = useState(false);
@@ -29,7 +29,7 @@ function SignUp() {
     event.preventDefault();
     await axios
       .post(API_URL, {
-        name: Displayname,
+        displayName: displayName,
         email: Email,
         password: Password,
       })
@@ -54,7 +54,7 @@ function SignUp() {
   console.log('패스워드' + isPassword);
 
   const onNameHandler = (event) => {
-    setName(event.currentTarget.value);
+    setdisplayName(event.currentTarget.value);
   };
 
   const onChangeEmail = useCallback((e) => {
@@ -129,7 +129,7 @@ function SignUp() {
               <input type="hidden" name="ssrc" defaultValue="head" />
               <input type="hidden" name="legalLinksShown" defaultValue={1} />
               <div className="authItem">
-                <label className="flexItemLabel" htmlFor="display-name">
+                <label className="flexItemLabel" htmlFor="displayName">
                   닉네임
                 </label>
                 <div className="flexRelative">
@@ -138,8 +138,8 @@ function SignUp() {
                     className="flex--item si-input"
                     type="text"
                     onChange={onNameHandler}
-                    name="display-name"
-                    id="display-name"
+                    name="displayName"
+                    id="displayName"
                     data-is-teams="false"
                   />
                 </div>

@@ -1,10 +1,10 @@
-import React, { useState }from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Wassurf_white from "../../images/Wassurf_white.png"
-import { Menu } from "@styled-icons/ionicons-solid/Menu"
-import { Times } from "@styled-icons/typicons/Times"
-import { Link } from 'react-router-dom';
-import Logo_black from "../../images/Logo_black.png"
+import Wassurf_white from "../../images/Wassurf_white.png";
+import { Menu } from "@styled-icons/ionicons-solid/Menu";
+import { Times } from "@styled-icons/typicons/Times";
+import { Link } from "react-router-dom";
+import Logo_black from "../../images/Logo_black.png";
 
 
 const HeaderContainer = styled.div`
@@ -150,36 +150,74 @@ const LoginButton = styled.button`
 
 `
 
+const MypageButton = styled.button`
+    margin-right: -10px;
+    height: 30px;
+    width: 60px;
+    background-color: transparent;
+    border: white 2px solid;
+    color: white;
+    border-radius: 7px;
+    :hover {
+        border: black 2px solid;
+        color: black;
+        font-weight: bold;
+    }
+    @media screen and (max-width:768px) {
+        display: none;
+    }
+
+`
+
 
 const Header = () => {
     const [menu, setMenu] = useState(false);
+    const isLoggedIn = localStorage.getItem("token"); // 로그인 상태를 나타내는 변수
+  
     return (
-        <>
+      <>
         <HeaderContainer>
-            <div className="logo-container">
+          <div className="logo-container">
             <Link to="/">
-                <LogoImage src={Logo_black} />
-                <LogoImage src={Wassurf_white} />
+              <LogoImage src={Logo_black} />
+              <LogoImage src={Wassurf_white} />
             </Link>
-            </div>
-            <div className="header-wrapper">
-                <MenuItems menu={menu}>
-                    <MenuItem>🌊 서핑스팟 찾기</MenuItem>
-                    <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
-                    <MenuItem><Link to="/classlist">🏄‍♀️ 강습예약</Link></MenuItem>
-                    <MenuItem className="hidden"><Link to="/Login">💬 로그인</Link></MenuItem>
-                </MenuItems>
-                <ButtonContainer>
-                    <LoginButton><Link to="/Login">로그인</Link></LoginButton>
-                <div className="toggle" onClick={() => setMenu(!menu)}>
-                    {!menu ? <MenuIcon /> : <TimesIcon />}
-                </div>
-                </ButtonContainer>
-
-            </div>
+          </div>
+          <div className="header-wrapper">
+            <MenuItems menu={menu}>
+            <MenuItem><Link to="/Find">🌊 서핑스팟 찾기</Link></MenuItem>
+              <MenuItem>
+                <Link to="/List">😎 커뮤니티</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/classlist">🏄‍♀️ 강습예약</Link>
+              </MenuItem>
+              {isLoggedIn ? (
+                <MenuItem>
+                  <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
+                </MenuItem>
+              ) : (
+                <MenuItem className="hidden">
+                  <Link to="/Login">💬 로그인</Link>
+                </MenuItem>
+              )}
+            </MenuItems>
+            <ButtonContainer>
+              {isLoggedIn ? (
+                <></>
+              ) : (
+                <LoginButton>
+                  <Link to="/Login">로그인</Link>
+                </LoginButton>
+              )}
+              <div className="toggle" onClick={() => setMenu(!menu)}>
+                {!menu ? <MenuIcon /> : <TimesIcon />}
+              </div>
+            </ButtonContainer>
+          </div>
         </HeaderContainer>
-        </>
-    )
-}
-
-export default Header;
+      </>
+    );
+  };
+  
+  export default Header;

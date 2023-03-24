@@ -55,7 +55,7 @@ function App() {
         <Route path="/:id" element={<Detail></Detail>}></Route>
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/classlist" element={<ClassListPage />}></Route>
-        <Route path="/classdetail" element={<ClassDetailPage />}></Route>
+        <Route path="/lesson-class" element={<ClassDetailPage />}></Route>
         <Route path="/pay" element={<ClassPaymentPage />}></Route>
         <Route path="/newclass" element={<CreateClassPage />}></Route>
         <Route path="/editclass" element={<EditClassPage />}></Route>

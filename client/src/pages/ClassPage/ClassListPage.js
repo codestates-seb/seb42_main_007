@@ -8,6 +8,7 @@ import {ArrowIosForwardOutline} from "@styled-icons/evaicons-outline"
 import {ArrowIosBackOutline} from "@styled-icons/evaicons-outline/"
 import { Link } from "react-router-dom";
 import Slider from 'react-slick';
+import SingleClass from "./SingleClass";
 
 const ClassListWrapper = styled.div`
     min-height: fit-content;
@@ -17,16 +18,16 @@ const ClassListWrapper = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 100px;
+    top: 50px;
     /* border: 1px red solid; */
     padding-top: 0px;
     padding-bottom: 50px;
 `
 
 const ClassListContainer = styled.div`
-    width: 100%;
+    width: 750px;
     height: fit-content;
-    /* border: 1px red solid; */
+    border: 1px red solid;
     display: flex;
     justify-content: center;
     align-items: center;    
@@ -86,7 +87,7 @@ const ClassListPage = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 3, // 한번에 보이는 슬라이드 개수
-        slidesToScroll: 1 // 넘길 때 넘어가는 슬라이드 개수
+        slidesToScroll: 3 // 넘길 때 넘어가는 슬라이드 개수
         };
 
     return (
@@ -97,11 +98,7 @@ const ClassListPage = () => {
             <ClassListContainer>
                 {/* <LeftArrowIcon /> */}
                 <Slider {...settings}>
-                    <div>
-                    <ClassList />
-                </div>
-                <button type="button" class="slick-prev">Previous</button>
-                <button type="button" class="slick-next">Next</button>
+                    <SingleClass />
                 </Slider>
                 {/* <RightArrowIcon /> */}
             </ClassListContainer>

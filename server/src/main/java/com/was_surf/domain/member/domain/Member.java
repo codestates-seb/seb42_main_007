@@ -1,20 +1,17 @@
 package com.was_surf.domain.member.domain;
 
 
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -87,9 +84,6 @@ public class Member implements UserDetails {
         this.password = password;
     }
 
-
-
-
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<BoardPost> boardPosts = new ArrayList<>();
 
@@ -98,6 +92,18 @@ public class Member implements UserDetails {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private List<LessonRegister> lessonRegisters = new ArrayList<>();
+
+    public void addLessonRegister(LessonRegister lessonRegister) {
+        lessonRegisters.add(lessonRegister);
+
+        if(lessonRegister.getMember() != this) {
+            lessonRegister.setMember(this);
+        }
+    }
 
 
 

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class LessonClass extends Auditable {
     private LocalDateTime registerStart;
     @Column(nullable = false)
     private LocalDateTime registerEnd;
+    @Column(nullable = false)
+    private LocalDate lessonDate;
     @Column(nullable = false)
     private int headCount;
 

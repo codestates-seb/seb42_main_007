@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fullpage/react-fullpage": "^0.1.37",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.12",
     "@mui/styled-engine-sc": "^5.11.11",
@@ -23,6 +24,7 @@
     "react-cookie": "^4.1.1",
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
+    "react-fullpage": "^0.1.19",
     "react-hook-form": "^7.43.7",
     "react-icons": "^4.8.0",
     "react-modal": "^3.16.1",

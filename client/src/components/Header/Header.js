@@ -164,7 +164,7 @@ const Header = () => {
             </div>
             <div className="header-wrapper">
                 <MenuItems menu={menu}>
-                    <MenuItem>🌊 서핑스팟 찾기</MenuItem>
+                    <MenuItem><Link to="/Find">🌊 서핑스팟 찾기</Link></MenuItem>
                     <MenuItem><Link to="/List">😎 커뮤니티</Link></MenuItem>
                     <MenuItem><Link to="/classlist">🏄‍♀️ 강습예약</Link></MenuItem>
                     <MenuItem className="hidden"><Link to="/Login">💬 로그인</Link></MenuItem>

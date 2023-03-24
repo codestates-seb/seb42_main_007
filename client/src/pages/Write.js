@@ -82,7 +82,7 @@ const Write = () => {
           <Input
             placeholder=""
             padding="0.78rem 0.91rem"
-            width="100%"
+            width="calc(100% - 30.12px);"
             register={register("title")}
           />
         </form>

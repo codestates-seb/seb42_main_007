@@ -1,21 +1,28 @@
 import "../App.css";
 import Header from "../components/Header/Header";
-import GlobalStyle from "../styles/GlobalStyle";
 import Footer from "../components/Footer/Footer";
+import {SectionsContainer, Section} from 'react-fullpage';
+import HomeBack from "../components/Board/HomeBack";
 
-function App() {
+function Home() {
+  const options = {
+    anchors: ['sectionOne', 'sectionTwo', 'sectionThree'],
+    navigation: false,
+  }
   return (
     <>
-      <GlobalStyle />
-      <div className="App">
-        <Header />
-        <header className="App-header">
-          <p> 개발 준비 완료! </p>
-        </header>
-        <Footer />
-      </div>
+    <Header />
+    <SectionsContainer {...options}>
+        <Section>
+          <HomeBack />
+        </Section>
+        <Section>
+
+        </Section>
+      </SectionsContainer>
+      <Footer />
     </>
   );
 }
 
-export default App;
+export default Home;

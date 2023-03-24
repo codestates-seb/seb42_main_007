@@ -9,13 +9,10 @@ public class MemberPatchDto {
     private long memberId;
     private String displayName;
     private String password;
-    private String aboutMe;
-
     @Builder
-    public MemberPatchDto(long memberId, String displayName, String password, String aboutMe) {
+    public MemberPatchDto(long memberId, String displayName, String password) {
         this.memberId = memberId;
         this.displayName = displayName;
         this.password = password;
-        this.aboutMe = aboutMe;
-    }
+        }
 }

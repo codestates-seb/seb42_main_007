@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class WeatherResponseDto {
+
     private Weather weather;
     private String message;
 }

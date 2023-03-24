@@ -7,11 +7,11 @@ import lombok.Getter;
 @Builder
 @Getter
 public class MemberResponseDto {
+
     private long memberId;
     private String displayName;
     private String email;
     private String password;
-    private String aboutMe;
     private Member.MemberStatus memberStatus;
 
 }

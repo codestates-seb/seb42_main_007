@@ -9,5 +9,6 @@ import lombok.Getter;
 public class WeatherResponseDto {
 
     private Weather weather;
+
     private String message;
 }

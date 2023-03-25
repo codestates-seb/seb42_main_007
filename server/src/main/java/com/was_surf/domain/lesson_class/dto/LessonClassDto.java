@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +20,9 @@ public class LessonClassDto {
         private String content;
         private LocalDateTime registerStart;
         private LocalDateTime registerEnd;
+        private LocalDate lessonDate;
         private int headCount;
+        private int price;
     }
 
     @Getter
@@ -30,7 +33,9 @@ public class LessonClassDto {
         private String content;
         private LocalDateTime registerStart;
         private LocalDateTime registerEnd;
+        private LocalDate lessonDate;
         private int headCount;
+        private int price;
         private LessonClass.LessonStatus lessonStatus;
     }
 
@@ -48,7 +53,11 @@ public class LessonClassDto {
         @NotNull
         private LocalDateTime registerEnd;
         @NotNull
+        private LocalDate lessonDate;
+        @NotNull
         private int headCount;
+        @NotNull
+        private int price;
         private LessonClass.LessonStatus lessonStatus;
         private List<LessonRegister> lessonRegisters;
         public String getLessonStatus() {

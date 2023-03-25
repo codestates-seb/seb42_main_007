@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,12 @@ public class LessonClass extends Auditable {
     @Column(nullable = false)
     private LocalDateTime registerEnd;
     @Column(nullable = false)
+    private LocalDate lessonDate;
+    @Column(nullable = false)
     private int headCount;
+
+    @Column(nullable = false)
+    private int price;
 
     @Enumerated(value = EnumType.STRING)
     private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;

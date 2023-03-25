@@ -14,11 +14,12 @@ const List = ({ location }) => {
     async function fetchData() {
       const page = new URLSearchParams(location?.search).get("page") || 1;
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${page}`
+        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${page}&size=10`
       );
       setPosts(response.data.posts);
       setTotalPages(response.data.totalPages);
       setCurrentPage(Number(page));
+      console.log(response.data.posts);
     }
     fetchData();
   }, [location?.search]);
@@ -43,14 +44,16 @@ const List = ({ location }) => {
 
   return (
     <>
-      <Header></Header>
-      <MainLeft>
-        <h1>커뮤니티 게시판</h1>
-        <AskButton>
-          <Link to="/Write">게시글 작성</Link>
-        </AskButton>
+      <Header />
+      <MainContainer>
+        <HeadContainer>
+          <h1>커뮤니티 게시판</h1>
+          <AskButton>
+            <Link to="/Write">게시글 작성</Link>
+          </AskButton>
+        </HeadContainer>
         {posts?.map((post) => (
-          <PostItem key={post.id}>
+          <PostItem key={post.boardPostId}>
             <Link to={`/Detail/${post.id}`}>
               <PostTitle>{post.title}</PostTitle>
             </Link>
@@ -66,131 +69,130 @@ const List = ({ location }) => {
             다음
           </Button>
         </Pagination>
-      </MainLeft>
-      <Footer></Footer>
+      </MainContainer>
+      <Footer />
     </>
   );
 };
 
 export default List;
 
-const MainLeft = styled.div`
-  padding: 4rem 5rem 8rem 5rem;
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+`;
+
+const HeadContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    color: #2b2b2b;
+  }
 `;
 
 const PostItem = styled.div`
-  /* your styles here */
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 2rem;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 const PostTitle = styled.h2`
-  /* your styles here */
-  font-size: 30px;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2b2b2b;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  line-height: 1.4;
 `;
 
 const PostDate = styled.p`
-  /* your styles here */
-  font-size: 10px;
+  font-size: 1.2rem;
+  color: #6b6b6b;
+  margin: 0;
+  padding: 0;
 `;
 
 const Pagination = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 10rem;
+  width: 100%;
+  max-width: 1140px;
+  margin-top: 4rem;
 `;
 
 const Button = styled.button`
-  /* your styles here */
-  display: flex;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 1rem;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: #c1c1c1;
+  }
 `;
 
 const PageNumber = styled.span`
-  /* your styles here */
-  font-size: 1rem;
-`;
-
-export const MainContainer = styled.main`
-  padding: 4rem 5rem 8rem 5rem;
-`;
-
-export const HeadContainer = styled.div`
-  display: flex;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 12px;
-    flex: 1 auto;
-  }
-`;
-
-const QuestionsController = styled.div`
-  display: flex;
-  margin-bottom: 12px;
-  justify-content: space-between;
-  align-items: center;
-
-  .total-questions {
-    font-size: 1.3rem;
-    margin-right: 12px;
-    flex: 1 auto;
-  }
-`;
-
-const FilterController = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  margin-bottom: 1px;
-
-  div {
-    margin-right: -1px;
-    margin-bottom: 1px;
-    border: 1px solid hsl(210, 8%, 55%);
-    color: hsl(210, 8%, 25%);
-    font-size: 12px;
-    padding: 0.8em;
-    cursor: pointer;
-    font-weight: normal;
-  }
-
-  div:hover {
-    background-color: hsl(210, 8%, 97.5%);
-    color: hsl(210, 8%, 35%);
-  }
-
-  .newest-btn {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  .vote-btn {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    margin-right: 0;
-  }
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #2b2b2b;
+  margin-right: 1rem;
+  padding: 0;
 `;
 
 const AskButton = styled.div`
-  margin-bottom: 12px;
-  float: right;
-
   a {
     background-color: #7cccdc;
-    color: hsl(0, 0%, 100%);
-    border: 1px solid transparent;
-    border-radius: 3px;
-    box-shadow: inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
-    font-size: 13px;
-    padding: 0.8em;
-    cursor: pointer;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
     text-decoration: none;
-  }
+    font-weight: 500;
+    font-size: 1.2rem;
+    transition: background-color 0.2s ease;
 
-  a:hover {
-    background-color: #36778b;
+    &:hover {
+      background-color: #36778b;
+    }
   }
 `;
+
+
+
+
+

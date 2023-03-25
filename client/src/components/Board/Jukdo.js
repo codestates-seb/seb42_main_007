@@ -1,45 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const API_KEY = '<af9623f9d7e9c5712a1d1434431155aa>';
-const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=Yangyang&appid=${API_KEY}`;
-
-function JukDo() {
-  const [weather, setWeather] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const JukDo = () => {
+  const [temperature, setTemperature] = useState(0);
+  const [windSpeed, setWindSpeed] = useState(0);
+  const [windDirection, setWindDirection] = useState("");
+  const [waveHeight, setWaveHeight] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchWeatherData = async () => {
       try {
-        const response = await axios.get(API_URL);
-        setWeather(response.data);
+        const response = await axios.get("/api/weather");
+        const { data } = response;
+        setWaveHeight(data.waveHeight);
+        setTemperature(data.temperature);
+        setWindSpeed(data.windSpeed);
+        setWindDirection(data.windDirection);
+        setIsLoading(false);
       } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
+        console.log(error);
       }
     };
-    fetchData();
+    fetchWeatherData();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!weather) return null;
-
-  const { main, wind } = weather;
-  const { temp, humidity } = main;
-  const { speed, deg } = wind;
+  const isSafeToSurf = () => {
+    if (waveHeight >= 2) {
+      return "No, waves are too big.";
+    }
+    if (windSpeed >= 10) {
+      return "No, winds are too strong.";
+    }
+    if (temperature < 10 || temperature > 30) {
+      return "No, temperature is too extreme.";
+    }
+    return "Yes, it's safe to surf!";
+  };
 
   return (
     <div>
-      <h1>Weather in Yangyang</h1>
-      <p>Temperature: {temp} K</p>
-      <p>Humidity: {humidity}%</p>
-      <p>Wind speed: {speed} m/s</p>
-      <p>Wind direction: {deg} deg</p>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <p>Temperature: {temperature}°C</p>
+          <p>Wind Speed: {windSpeed} m/s</p>
+          <p>Wind Direction: {windDirection}</p>
+          <p>Wave Height: {waveHeight}m</p>
+          <p>{isSafeToSurf()}</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default JukDo;

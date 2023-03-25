@@ -11,7 +11,6 @@ const HeaderContainer = styled.div`
     width: 100%;
     background-color: #3FBED3;
     height: 100px;
-    padding-left: 10px;
     display: flex;
     position: sticky;
     top: 0;
@@ -25,11 +24,11 @@ const HeaderContainer = styled.div`
         justify-content: flex-end;
         /* border: solid red 1px; */
         height: 100px;
-        min-width: 550px;
+        /* min-width: 1rem; */
         max-width: 800px;
         margin: 0;
         padding: 0;
-        padding-right: 30px;
+        /* padding-right: 30px; */
     }
     .header-wrapper > .toggle {
         position: absolute;
@@ -124,6 +123,7 @@ const MenuItem = styled.div`
 const ButtonContainer = styled.div`
     width: fit-content;
     margin-left: 40px;
+    margin-right: 30px;
     position: sticky;
     right: 0px;
     /* border: solid red 1px; */

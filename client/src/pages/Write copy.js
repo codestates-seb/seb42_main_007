@@ -20,15 +20,6 @@ const Write = () => {
   const navigate = useNavigate();
   const body1 = useRef();
 
-
-  const handleChange = () => {
-    const instance = body1.current.getInstance();
-    const data = instance.getMarkdown();
-    setContent(data);
-    console.log(content)
-  };
-
-
   const TodayTime = () => {
     const now = new Date();
     const todayMonth = now.getMonth() + 1;
@@ -82,7 +73,6 @@ const Write = () => {
           title: data?.title,
           content: content,
           createAt: TodayTime(),
-          imgPath: "test"
         }
       );
       console.log("서버에서 내려온값:", response);
@@ -117,59 +107,41 @@ const Write = () => {
             register={register("title")}
           />
           <InputLabel title="내용" />
-          <Editor
-            initialValue=" "
-            previewStyle="tab"
-            height="600px"
-            initialEditType="markdown"
-            useCommandShortcut={true}
-            ref={body1}
-            onChange={handleChange}>
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  const formData = new FormData();
-                  formData.append("image", blob);
-                  try {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_URL}/board-posts`,
-                      formData
-                    );
-                    const imageUrl = response.data.url;
-                    callback(imageUrl, "alt text");
-                  } catch (error) {
-                    console.error(error);
-                  }
-                },
-              }}
-            </Editor>
-          {/* <EditorInputWrapper>
+          <EditorInputWrapper>
             <Editor
-              previewStyle="tab"
+              previewStyle="vertical"
               height="600px"
-              initialEditType="markdown"
+              initialEditType="wysiwyg"
+              initialValue={content}
               useCommandShortcut={false}
               ref={body1}
-              onChange={handleChange}
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  const formData = new FormData();
-                  formData.append("image", blob);
-                  try {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_URL}/board-posts`,
-                      formData
-                    );
-                    const imageUrl = response.data.url;
-                    callback(imageUrl, "alt text");
-                  } catch (error) {
-                    console.error(error);
-                  }
-                },
-              }}
+              // hooks={{
+              //   addImageBlobHook: async (blob, callback) => {
+              //     const formData = new FormData();
+              //     formData.append("image", blob);
+              //     try {
+              //       const response = await axios.post(
+              //         `${process.env.REACT_APP_SERVER_URL}/board-posts`,
+              //         formData
+              //       );
+              //       const imageUrl = response.data.url;
+              //       callback(imageUrl, "alt text");
+              //     } catch (error) {
+              //       console.error(error);
+              //     }
+              //   },
+              // }}
             />
-          </EditorInputWrapper> */}
+          </EditorInputWrapper>
           
           <div className="buttonWrapper">
+          <Button
+                onClick={body1SubmitButtonClick}
+                buttonType="type2"
+                buttonName="Next"
+                width="4.96rem"
+                height="3.79rem"
+              />
             <Button
               type="submit"
               buttonType="type2"

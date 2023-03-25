@@ -6,7 +6,7 @@ import { Viewer } from "@toast-ui/react-editor";
 
 import { FaUser } from "react-icons/fa";
 import Container from "../components/Board/Container";
-import { MainContainer } from "./List";
+import MainContainer from "./List";
 import VoteBar from "../components/Board/VoteBar";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";

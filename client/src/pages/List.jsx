@@ -82,6 +82,7 @@ const MainContainer = styled.main`
   flex-direction: column;
   align-items: center;
   padding: 4rem 0;
+  height: 100%;
 `;
 
 const HeadContainer = styled.div`
@@ -93,10 +94,10 @@ const HeadContainer = styled.div`
   margin-bottom: 2rem;
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     margin: 0;
     padding: 0;
-    font-weight: 500;
+    font-weight: 30px;
     color: #2b2b2b;
   }
 `;

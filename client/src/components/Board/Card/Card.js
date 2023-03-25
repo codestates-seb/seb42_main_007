@@ -35,3 +35,5 @@ export const Card = ({board_id, title, content, img_url, username, date}) => {
     </>
   );
 };
+
+export default Card;

@@ -22,3 +22,5 @@ export const Card4 = ({board_id, title, content, img_url, username, date}) => {
     </div>
   );
 };
+
+export default Card4;

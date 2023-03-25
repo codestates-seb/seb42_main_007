@@ -1,9 +1,9 @@
-package com.was_surf.domain.lesson_class.api;
+package com.was_surf.domain.lesson.api;
 
-import com.was_surf.domain.lesson_class.application.LessonClassService;
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_class.dto.LessonClassDto;
-import com.was_surf.domain.lesson_class.mapper.LessonClassMapper;
+import com.was_surf.domain.lesson.application.LessonClassService;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.dto.LessonClassDto;
+import com.was_surf.domain.lesson.mapper.LessonClassMapper;
 import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;

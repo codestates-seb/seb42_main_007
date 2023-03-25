@@ -1,7 +1,7 @@
-package com.was_surf.domain.lesson_register.mapper;
+package com.was_surf.domain.lesson.mapper;
 
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
-import com.was_surf.domain.lesson_register.dto.LessonRegisterDto;
+import com.was_surf.domain.lesson.domain.LessonRegister;
+import com.was_surf.domain.lesson.dto.LessonRegisterDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

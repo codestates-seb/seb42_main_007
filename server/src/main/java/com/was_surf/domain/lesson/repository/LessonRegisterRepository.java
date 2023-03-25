@@ -1,6 +1,6 @@
-package com.was_surf.domain.lesson_register.repository;
+package com.was_surf.domain.lesson.repository;
 
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import com.was_surf.domain.member.domain.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

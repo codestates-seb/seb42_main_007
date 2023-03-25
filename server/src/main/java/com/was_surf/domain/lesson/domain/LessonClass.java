@@ -1,7 +1,6 @@
-package com.was_surf.domain.lesson_class.domain;
+package com.was_surf.domain.lesson.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;

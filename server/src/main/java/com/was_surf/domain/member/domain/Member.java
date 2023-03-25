@@ -2,7 +2,7 @@ package com.was_surf.domain.member.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

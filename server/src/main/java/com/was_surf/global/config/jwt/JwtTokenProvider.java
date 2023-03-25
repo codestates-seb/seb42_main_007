@@ -60,7 +60,6 @@ public class JwtTokenProvider {
                 .refreshTokenExpirationTime(REFRESH_TOKEN_EXPIRE_TIME)
                 .build();
     }
-
     //토큰 복호화
     public Authentication getAuthentication(String accessToken) {
 

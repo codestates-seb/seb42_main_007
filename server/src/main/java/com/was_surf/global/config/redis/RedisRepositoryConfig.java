@@ -16,12 +16,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisRepositoryConfig {
 
     private final RedisProperties redisProperties;
-
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         return new LettuceConnectionFactory(redisProperties.getHost(),redisProperties.getPort());
     }
-
     @Bean
     public RedisTemplate<String,Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();

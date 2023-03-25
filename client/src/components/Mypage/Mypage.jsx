@@ -2,7 +2,7 @@ import './Mypage.css'
 import unnamed from "../../images/unnamed.jpg"
 import { Link, Route, Routes } from 'react-router-dom';
 import GlobalStyle from '../../styles/GlobalStyle';
-import { MyLessons, MyPosts } from './MyComponents';
+import { MyLessons, MyPosts, MyAppliedLessons } from './MyComponents';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
 
@@ -11,11 +11,12 @@ function Mypage() {
 
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState('');
 
   const handleLogout = async () => {
     try {
       // 1. 백엔드 API를 호출하여 토큰 무효화하기
-      const response = await fetch('members/logout', {
+      const response = await fetch('/members/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +40,7 @@ function Mypage() {
 
   async function getDisplayName() {
     try {
-      const response = await fetch('members/display-name', {
+      const response = await fetch('/members/{member-id}', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +119,7 @@ function Mypage() {
       <div class="Mypagecontainer">
         <div class="commonMypage">
           <section class="commonmypagese">
-            <h1 class="commonmypagelink">
+          <h1 class="commonmypagelink">
               <Link to="/Mypage" class="link" ><p>My Page</p></Link>
             </h1>
             <div class="commonmypagelogout">
@@ -149,15 +150,15 @@ function Mypage() {
                 나의 프로필</h3>
               <p class="edit1">※ 프로필 수정하기</p>
               <p>
-                <Link to="/mypage/lessons">※ 나의 강습 정보 보기</Link>
+                <button onClick={() => {setSelectedMenu('appliedLessons')}}>※ 나의 강습 정보 보기</button>
               </p>
               <p>
-                <Link to="/mypage/posts">※ 나의 게시글 보기</Link>
+                <button onClick={() => {setSelectedMenu('myPosts')}}>※ 나의 게시글 보기</button>
               </p>
               <p>※ 1:1 문의 하기</p>
               <button
                 className="xmembers"
-                onClick={handleDeleteAccount}
+                onClick={() => setIsDeleting(true)}
               >
                 <p>
                   ※ 회원탈퇴
@@ -166,10 +167,8 @@ function Mypage() {
             </div>
           </nav>
           <div className="commonmypagerightcontent">
-            <Routes>
-              <Route path="/mypage/lessons" component={MyLessons} />
-              <Route path="/mypage/posts" component={MyPosts} />
-            </Routes>
+            {selectedMenu === 'appliedLessons' && <MyAppliedLessons />}
+            {selectedMenu === 'myPosts' && <MyPosts />}
           </div>
         </div>
       </div>

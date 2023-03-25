@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { REDIRECT_URI } from '../Apiurl';
+import { useAuth } from '../../context/AuthContext'
+
+
 
 const LoginWrapper = styled.div`
   background-color: #f4f4f4;
@@ -20,6 +23,7 @@ const LoginWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 30rem;
+    margin: 2rem;
     padding: 3rem;
     background-color: #fff;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
@@ -43,13 +47,15 @@ const LoginWrapper = styled.div`
   }
   button {
     font-size: 1.6rem;
-    padding: 1rem;
+    padding: 0.8rem 1.2rem; /* 수정된 부분 */
+    margin-top: 1rem; /* 수정된 부분 */
     border-radius: 0.5rem;
     border: none;
     background-color: #0077c2;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    margin-right: 1rem;
   }
   button:hover {
     background-color: #0062a6;
@@ -61,27 +67,36 @@ const LoginWrapper = styled.div`
   }
 `;
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
+  const { setTokens } = useAuth();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.post(API_URL, { email, password });
       const { accessToken, refreshToken } = response.data;
-      setCookie('accessToken', accessToken, { maxAge: 60 * 60 }); // 1시간
-      setCookie('refreshToken', refreshToken, { maxAge: 60 * 60 }); // 1시간
-      console.log(accessToken);
-      console.log(refreshToken);
-      navigate('/');
+  
+      if (response.status === 200) {
+        setCookie('accessToken', accessToken, { maxAge: 60 * 60 });
+        setCookie('refreshToken', refreshToken, { maxAge: 60 * 60 });
+        setTokens(accessToken, refreshToken); // 전역 상태에 토큰 설정
+  
+        // 로그인이 성공적으로 완료된 후 페이지 이동
+        navigate('/');
+      } else {
+        setError('로그인 정보가 일치하지 않습니다.');
+      }
     } catch (error) {
-      setError(error.response.data.message === 401);
+      setError(error.response?.status === 401 ? '로그인 정보가 일치하지 않습니다.' : '알 수 없는 에러가 발생했습니다.');
     }
   };
-
+  
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     if (!e.target.value.includes('@')) {
@@ -91,11 +106,20 @@ const Login = () => {
     }
   };
 
+  const handleFindId = () => {
+    navigate('/findid'); // 아이디 찾기 페이지로 이동
+  };
+  
+  const handleFindPassword = () => {
+    navigate('/findpassword'); // 비밀번호 찾기 페이지로 이동
+  };
+  
+
   const API_URL = `${REDIRECT_URI}members/login`;
 
   return (
     <LoginWrapper>
-      <form>
+      <form onSubmit={handleLogin}>
         <h1>로그인</h1>
         {error && <div className="error">{error}</div>}
         <div>
@@ -116,10 +140,19 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button onClick={handleLogin} disabled={!email || !password}>
+        <div>
+          <button onClick={handleFindId} type="button">
+            아이디 찾기
+          </button>
+          <button onClick={handleFindPassword} type="button">
+            비밀번호 찾기
+          </button>
+        </div>
+        <button type="submit" disabled={!email || !password}>
           로그인
         </button>
       </form>
+      <div>{JSON.stringify(cookies)}</div>
     </LoginWrapper>
   );
 };

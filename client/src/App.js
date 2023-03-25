@@ -17,7 +17,7 @@ import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
 import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
 import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
 import EditClassPage from './pages/EditClassPage/EditClassPage';
-
+import WaveFind from "./pages/WaveFind";
 
 // import { useEffect } from 'react';
 // import { authActions } from './Redux/auth';
@@ -43,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/Find" element={<Find></Find>}></Route>
+        <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
         <Route path="/Write" element={<Write></Write>}></Route>
         <Route path="/Edit" element={<Edit></Edit>}></Route>
         <Route path="/List" element={<List></List>}></Route>

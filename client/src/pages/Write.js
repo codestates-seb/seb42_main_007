@@ -5,7 +5,7 @@ import {
 import { Input } from "../components/Board/Input";
 import { Button } from "../components/Board/Button";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header/Header";
@@ -18,6 +18,7 @@ const Write = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
+  const body1 = useRef();
 
   const TodayTime = () => {
     const now = new Date();
@@ -42,19 +43,34 @@ const Write = () => {
     );
   };
 
-  const onSubmit = (data) => {
-    setTitle(data?.title);
-    if (body1.current) {
-      setContent(body1.current.getInstance().getHtml());
-    }
+
+  const body1SubmitButtonClick = () => {
+    setContent({
+      ...content,
+      content: body1.current.getInstance().getHTML(),
+    });
   };
 
-  const postButtonClick = useCallback(async () => {
+
+
+  const onSubmit = async (data) => {
+    console.log("onSubmit called");
+
+    setTitle(data?.title);
+
+    let editorContent;
+    if (body1.current) {
+      editorContent = body1.current.getInstance().getHTML();
+    }
+    setContent(editorContent);
+
+
+    
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/board-posts`,
         {
-          title: title,
+          title: data?.title,
           content: content,
           createAt: TodayTime(),
         }
@@ -66,8 +82,9 @@ const Write = () => {
       console.error("오류!", error);
       window.alert("등록 실패");
     }
-  }, [title, content, navigate]);
+  };
 
+  
   const cancelButtonClick = () => {
     setTitle("");
     setContent("");
@@ -75,14 +92,7 @@ const Write = () => {
   };
 
   const { register, handleSubmit } = useForm();
-  const body1 = useRef();
-
-  useEffect(() => {
-    if (body1.current) {
-      setContent(body1.current.getInstance().getHtml());
-    }
-  }, []);
-
+  
   return (
     <>
       <Header />
@@ -96,8 +106,6 @@ const Write = () => {
             width="calc(100% - 30.12px);"
             register={register("title")}
           />
-        </form>
-        <div>
           <InputLabel title="내용" />
           <EditorInputWrapper>
             <Editor
@@ -105,46 +113,51 @@ const Write = () => {
               height="600px"
               initialEditType="wysiwyg"
               initialValue={content}
+              useCommandShortcut={false}
               ref={body1}
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  const formData = new FormData();
-                  formData.append("image", blob);
-                  try {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_URL}/board-posts`,
-                      formData
-                    );
-                    const imageUrl = response.data.url;
-                    callback(imageUrl, "alt text");
-                  } catch (error) {
-                    console.error(error);
-                  }
-                },
-              }}
+              // hooks={{
+              //   addImageBlobHook: async (blob, callback) => {
+              //     const formData = new FormData();
+              //     formData.append("image", blob);
+              //     try {
+              //       const response = await axios.post(
+              //         `${process.env.REACT_APP_SERVER_URL}/board-posts`,
+              //         formData
+              //       );
+              //       const imageUrl = response.data.url;
+              //       callback(imageUrl, "alt text");
+              //     } catch (error) {
+              //       console.error(error);
+              //     }
+              //   },
+              // }}
             />
           </EditorInputWrapper>
-        </div>
-        <div className="buttonWrapper">
+          
+          <div className="buttonWrapper">
           <Button
-            onClick={() => {
-              onSubmit();
-              postButtonClick();
-            }}
-            type="submit"
-            buttonType="type2"
-            buttonName="작성"
-            width="8.04rem"
-            height="3.79rem"
-          />
-          <Button
-            onClick={cancelButtonClick}
-            buttonType="type4"
-            buttonName="취소"
-            width="8.04rem"
-            height="3.79rem"
-          />
-        </div>
+                onClick={body1SubmitButtonClick}
+                buttonType="type2"
+                buttonName="Next"
+                width="4.96rem"
+                height="3.79rem"
+              />
+            <Button
+              type="submit"
+              buttonType="type2"
+              buttonName="작성"
+              width="8.04rem"
+              height="3.79rem"
+            />
+            <Button
+              onClick={cancelButtonClick}
+              buttonType="type4"
+              buttonName="취소"
+              width="8.04rem"
+              height="3.79rem"
+            />
+          </div>
+        </form>
       </MainLeft>
       <Footer />
     </>

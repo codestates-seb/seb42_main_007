@@ -1,6 +1,5 @@
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import JukDoBeach from "../images/Board/JukDoBeach.jpg";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -46,7 +45,7 @@ const Find = () => {
           <div>
             <nav>
               <Link to="/List"><h2>양양</h2>
-              <JukDo /></Link>
+              </Link>
             </nav>
             <nav>
               <Link to="/List">제주</Link>
@@ -60,7 +59,7 @@ const Find = () => {
           </div>
         </section>
       </TopBar>
-          <SwiperSlide><div className="box"><h2>양양</h2><JukDo /></div></SwiperSlide>
+          <SwiperSlide><div className="box"><h2>양양</h2></div></SwiperSlide>
           <SwiperSlide>제주</SwiperSlide>
           <SwiperSlide>부산</SwiperSlide>
           <SwiperSlide>고성</SwiperSlide>
@@ -123,7 +122,3 @@ const TopBar = styled.div`
     cursor: pointer;
   }
 `;
-
-const JukDo = styled.img.attrs({
-  src: `${JukDoBeach}`,
-})``;

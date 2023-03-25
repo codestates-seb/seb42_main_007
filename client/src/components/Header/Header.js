@@ -7,77 +7,140 @@ import { Link } from "react-router-dom";
 import Logo_black from "../../images/Logo_black.png";
 
 const HeaderContainer = styled.div`
-  width: 100%;
-  background-color: #3fbed3;
-  height: 100px;
-  padding-left: 10px;
-  display: flex;
-  position: sticky;
-  top: 0;
-  left: 0;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
-  .header-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    /* border: solid red 1px; */
+    width: 100%;
+    background-color: #3FBED3;
     height: 100px;
-    min-width: 550px;
-    max-width: 800px;
+    padding-left: 0px;
+    display: flex;
+    position: sticky;
     margin: 0;
-    padding: 0;
-    padding-right: 30px;
-  }
-  .header-wrapper > .toggle {
-    position: absolute;
-  }
-  .logo-container {
-    /* border: 1px red solid; */
-    display: flex;
-    justify-content: center;
-    margin-left: 10px;
-    min-width: 210px;
-    width: fit-content;
-    top: 3px;
-    position: relative;
-  }
-`;
-const LogoImage = styled.img`
-  height: 40px;
-  width: fit-content;
-  cursor: pointer;
-  /* border: 1px red solid; */
-  margin: 5px;
-`;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        /* border: solid red 1px; */
+        height: 100px;
+        min-width: 550px;
+        max-width: 800px;
+        margin: 0;
+        padding: 0;
+        padding-right: 30px;
+    }
+    .header-wrapper > .toggle {
+        position: absolute;
+    }
+    .logo-container {
+        /* border: 1px red solid; */
+        display: flex;
+        justify-content: center;
+        margin-left: 10px;
+        min-width: 210px;
+        width: fit-content;
+        top: 3px;
+        position: relative;
+    }
+    @media screen and (max-width:375px) {
+        /* max-height: 30px;
+        border: 1px red solid;
+        margin-left: 0px;
+        position: relative;
+        left: -15px; */
+        display: none;
+    }
 
+`
+const LogoImage = styled.img`
+    height: 40px;
+    width: fit-content;
+    cursor: pointer;
+    /* border: 1px red solid; */
+    margin: 5px;
+    @media screen and (max-width:375px) {
+        /* max-height: 30px;
+        border: 1px red solid;
+        margin-left: 0px;
+        position: relative;
+        left: -15px; */
+        display: none;
+    }
+
+`
+ 
 const MenuIcon = styled(Menu)`
-  height: 30px;
-  width: 30px;
-  color: white;
-  margin-left: 20px;
-  /* border: solid red 1px; */
-  display: none;
-  position: relative;
-  transition: 0.5s;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    margin-right: 30px;
-  }
-`;
+    height: 30px;
+    width: 30px;
+    color: white;
+    margin-left: 20px;
+    /* border: solid red 1px; */
+    display: none;
+    position: relative;
+    transition: 0.5s;
+    @media screen and (max-width:768px) {
+        display: flex;
+        margin-right: 50px;
+    }
+    @media screen and (max-width:375px) {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        background-color: red;
+        margin-right: 20px;
+    }
+
+
+`
 const TimesIcon = styled(Times)`
-  height: 30px;
-  width: 30px;
-  color: white;
-  margin-left: 20px;
-  /* border: solid red 1px; */
-  display: none;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    margin-right: 30px;
-  }
-`;
+    height: 30px;
+    width: 30px;
+    color: white;
+    margin-left: 20px;
+    /* border: solid red 1px; */
+    display: none;
+    @media screen and (max-width:768px) {
+        display: flex;
+        margin-right: 50px;        
+    }
+    @media screen and (max-width:375px) {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        color: red;
+        margin-right: 20px;
+    }
+
+`
+
+// const MenuIcon = styled(Menu)`
+//   height: 30px;
+//   width: 30px;
+//   color: white;
+//   margin-left: 20px;
+//   /* border: solid red 1px; */
+//   display: none;
+//   position: relative;
+//   transition: 0.5s;
+//   @media screen and (max-width: 768px) {
+//     display: flex;
+//     margin-right: 30px;
+//   }
+// `;
+// const TimesIcon = styled(Times)`
+//   height: 30px;
+//   width: 30px;
+//   color: white;
+//   margin-left: 20px;
+//   /* border: solid red 1px; */
+//   display: none;
+//   @media screen and (max-width: 768px) {
+//     display: flex;
+//     margin-right: 30px;
+//   }
+// `;
 
 const MenuItems = styled.div`
   display: flex;

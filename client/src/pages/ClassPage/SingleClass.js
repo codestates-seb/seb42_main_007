@@ -2,18 +2,74 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import RandomImage from 'react-random-image';
 
 const SingleClass = () => {
-    const [data, setData] = useState([]);
+    const defaultPhotoUrl = 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80';
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZ2RAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTQ5OTcwN30.Knm8U82RHwU4qv0kVvBYkfejb-QgizeI_-sOCLkSLQE';
 
-    useEffect(() => {
+    const [data, setData] = useState([]);
+    const [photoUrl, setPhotoUrl] = useState(defaultPhotoUrl)
+    const [name, setName] = useState('anonymous')
+
+        //시간당 50회 제한
+    // const getPhotoUrl = async () => {
+    //     axios
+    //     .get(`https://api.unsplash.com/photos/random?client_id=${process.env.REACT_APP_FETCHPICS_API_KEY}`,
+    //     {
+    //         headers: {
+    //             Authorization: process.env.REACT_APP_FETCHPICS_API_KEY
+    //         },
+    //         params: {
+    //             query: 'surf'
+    //         }
+    //     })
+    //     .then((res) => {
+    //         setPhotoUrl(res.data.urls.regular)
+    //         setName(res.data.user.name)
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //     })
+        
+    // }
+    //카테고리설정이..안됨...
+    // const getPhotoUrl = async () => {
+    //     axios
+    //     .get(`https://random.imagecdn.app/v1/image?width=250&height=250&category=landscape&format=text`)
+    //     .then((res) => {
+    //         setPhotoUrl(res.data)
+    //         console.log(res)
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //     })
+        
+    // }
+    const getLessons = async () => {
         axios
-          .get(`http://43.201.167.13:8080/board-lessons/?page=1&size=10`)
+          .get(
+            `http://43.201.167.13:8080/board-lessons/?page=1&size=10`,
+          {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+          }
+        }
+          )
           .then((res) => {
             setData(res.data);
-          });
-      }, []);
+          })
+          .catch((err) => {
+            console.log(err)
+        })
+
+      };
+
+      useEffect(() => {
+        getLessons();
+        // getPhotoUrl();
+      }, [])
+
     //   {
     //     "memberId": "1",
     //     "lessonClassId": 1,
@@ -30,59 +86,58 @@ const SingleClass = () => {
 
     return (
         <>
-        {data && data.map((lessondata) => {
+        {/* {data && data.map((lessondata) => {
             return (
                 <div className="lesson-data" key={lessondata.lessonClassId} > 
                 <SingleClassContainer>
                 <ClassThumbnail />
                 <ClassTitle>{lessondata.title}</ClassTitle>
                 <ClassPrice>{`${lessondata.price}원`}</ClassPrice>
-                <ClassReservationButton><Link to={`/lesson-class/${lessondata.lessonClassId}`}>바로예약 👉</Link></ClassReservationButton>
+                <ClassReservationButton><Link to={`/class/${lessondata.lessonClassId}`}>바로예약 👉</Link></ClassReservationButton>
                 </SingleClassContainer>
                 </div>
                 )
-        })} 
+        })}  */}
                 <SingleClassContainer>
-                <ClassThumbnail />
-                <ClassTitle>와썹in양양 [타이틀]</ClassTitle>
-                <ClassPrice>77,000원</ClassPrice>
-                <ClassReservationButton><Link to="/lesson-class/1">바로예약 👉</Link></ClassReservationButton>
-                </SingleClassContainer>
-                <SingleClassContainer>
-                <ClassThumbnail />
-                <ClassTitle>와썹in부산 [타이틀]</ClassTitle>
-                <ClassPrice>99,000원</ClassPrice>
-                <ClassReservationButton><Link to="/classdetail">바로예약 👉</Link></ClassReservationButton>
-                </SingleClassContainer>
-                <SingleClassContainer>
-                <ClassThumbnail />
-                <ClassTitle>와썹in제주 [타이틀]</ClassTitle>
-                <ClassPrice>109,000원</ClassPrice>
-                <ClassReservationButton><Link to="/classdetail">바로예약 👉</Link></ClassReservationButton>
+                <ClassThumbnail src={photoUrl}/>
+                    <div className="copyright">{`Photo by ${name} on `}<Link to="unsplash.com">Unsplash</Link></div>
+                    <ClassTitle>와썹in양양 [타이틀]</ClassTitle>
+                    <ClassPrice>77,000원</ClassPrice>
+                    <ClassReservationButton>
+                        <Link to="/class/1">상세보기 👉</Link>
+                    </ClassReservationButton>
                 </SingleClassContainer>
         </>
     )
 }
 
+
 const SingleClassContainer = styled.div`
     /* border: solid red 1px; */
-    min-height: 100%;
+    min-height: 400px;
     width: 250px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    box-shadow: 0px 0px 7px 0px #CBCBCB;
-    margin: 0px 5px;
-
+    box-shadow: 0px 0px 7px 1px #CBCBCB;
+    border-radius: 20px;
+    margin: 5px 0px 5px 5px;
+    .copyright{
+        font-size: 5px;
+        color: #D4D2D1;
+        margin-right: 3px;
+    }
 `
 
 
-const ClassThumbnail = styled.div`
-    background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+const ClassThumbnail = styled.img`
     background-size: cover;
     background-position: center;
     width: 250px;
-    min-height: 250px;
+    height: 250px;
+    z-index: -1;
+    border-radius: 20px 20px 0 0;
+
 `
 
 const ClassTitle = styled.div`
@@ -114,6 +169,11 @@ const ClassReservationButton = styled.button`
     margin-top: 10px;
     margin-right: 10px;
     margin-bottom: 20px;
+    :hover {
+        transition: 0.5s;
+        background-color: #319fb1;
+    }
+
 `
 
 

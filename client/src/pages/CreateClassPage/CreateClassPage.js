@@ -13,10 +13,9 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 const CreateClassPage = () => {
 // 새로운 강습 모집글을 작성한다.
 // 제목, 내용, 신청기간, 신청인원, 최초생성일
-const createLesson = async () => {
-
 const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZ2RAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTQ5OTcwN30.Knm8U82RHwU4qv0kVvBYkfejb-QgizeI_-sOCLkSLQE';
 
+const createLesson = async () => {
     await axios
     .post(
         `http://43.201.167.13:8080/lesson-class`,

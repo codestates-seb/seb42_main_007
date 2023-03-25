@@ -5,8 +5,9 @@ import Footer from "../../components/Footer/Footer";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import Counter from "./Counter";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 
 const ClassDetailPage = () => {
@@ -14,13 +15,13 @@ const ClassDetailPage = () => {
     const [number, setNumber] = useState('0')
     const [classData, setClassData] = useState({})
 
+    const { classId } = useParams(); // /class/{classId}
     const navigate = useNavigate()
 
   
     useEffect(()=>{
         axios
-        .get(`http://43.201.167.13:8080/board-lessons/1`)
-        //1 -> lessonId
+        .get(`http://43.201.167.13:8080/board-lessons/${classId}`)
         .then((res)=>{
             setClassData(res.data)
         })
@@ -31,16 +32,29 @@ const ClassDetailPage = () => {
 
     const deleteClass = async () => {
         await axios
-        .delete(`http://43.201.167.13:8080/board-lessons/1`)
+        .delete(`http://43.201.167.13:8080/board-lessons/${classId}`)
         //1 -> LessonId
         .then(()=>{
-            navigate('/classlist')
+            alert('강습 모집글이 삭제되었습니다.');
+            navigate('/classlist');
         })
         .catch((err) => {
             console.log(err);
           });
     }
-
+    // "data": {
+    //     "memberId": "1",
+    //     "lessonClassId": 1,
+    //     "title": "강습 클래스 제목",
+    //     "content": "강습 클래스 내용",
+    //     "registerStart": "2023-03-18T12:20:00",
+    //     "registerEnd": "2023-03-20T23:30:00",
+    //     "lessonDate": "2023-03-31",
+    //     "headCount": 40,
+    //     "price": 75000,
+    //     "lessonStatus": "현재 강습을 신청할 수 있습니다.",
+    //     "lessonRegisters": []
+    //   }
 
     return (
         <>
@@ -49,7 +63,7 @@ const ClassDetailPage = () => {
             <ClassDetailTitle>
                 <div className="text">
                 {/* [와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회 */}
-                {classData.lessonTitle}
+                {classData.title}
                 </div>
             </ClassDetailTitle>
             <div className="deadline">{classData.deadLine}</div>

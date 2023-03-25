@@ -13,6 +13,7 @@ const FooterContainer = styled.div`
   padding-right: 30px; */
   display: flex;
   align-items: stretch;
+
 `;
 
 const FooterItem = styled.div`
@@ -20,7 +21,9 @@ const FooterItem = styled.div`
   flex: 1 1 0;
   /* border: 1px solid red; */
   text-align: center;
-  
+  @media screen and (max-width:600px) {
+        font-size: 0.6rem;
+    }
 `;
 
 const WaveImg = styled.img`
@@ -71,6 +74,10 @@ const SurferImg = styled.img`
 const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   .footer-images{
     position: relative;
     top: 5px;

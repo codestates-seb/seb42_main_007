@@ -43,6 +43,7 @@ public class Member implements UserDetails {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
+//    @Column
     private List<String> roles = new ArrayList<>();
 
     @Override

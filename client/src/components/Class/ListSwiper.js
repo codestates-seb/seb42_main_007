@@ -18,9 +18,9 @@ const ListSwiper = () => {
             // onSwiper={(swiper) => console.log(swiper)}
         >
             <SwiperSlide><SingleClass/></SwiperSlide>
+            {/* <SwiperSlide><SingleClass/></SwiperSlide>
             <SwiperSlide><SingleClass/></SwiperSlide>
-            <SwiperSlide><SingleClass/></SwiperSlide>
-            <SwiperSlide><SingleClass/></SwiperSlide>
+            <SwiperSlide><SingleClass/></SwiperSlide> */}
         </Swiper>
     )
 };

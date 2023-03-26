@@ -23,7 +23,7 @@ const ClassDetailPage = () => {
         axios
         .get(`http://43.201.167.13:8080/lesson-class/${lessonId}`)
         .then((res)=>{
-            setClassData(res.data)
+            setClassData(res.data.data)
             setDate(res.data.lessonDate)
         })
         .catch((err) => {

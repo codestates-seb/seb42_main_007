@@ -18,14 +18,13 @@ const ClassPaymentPage = () => {
         axios
         .get(`http://43.201.167.13:8080/lesson-class/${lessonId}`)
         .then((res)=>{
-            setSelectedClassData(res.data)
+            setSelectedClassData(res.data.data)
         })
         .catch((err) => {
             console.log(err);
           });
     })
 
-    if (selectedClassData === {}) {
         return (
             <>
         <Header />
@@ -45,7 +44,7 @@ const ClassPaymentPage = () => {
                 <div className="detail-text">{selectedClassData.price}</div>
             </div>
             </RegistrationDetail>
-            <PaymentButton>
+            <PaymentButton onClick={requestPayment}>
                 카카오페이로 결제
             <KakaopayIcon src={Kakaopay} />
             </PaymentButton>
@@ -54,39 +53,8 @@ const ClassPaymentPage = () => {
         <Footer />
         </>
         )
-    } else {
-        return (
-            <>
-            <Header/>
-            <ClassPaymentWrapper>
-            <ClassPaymentContainer>
-                <h1>✅ 결제 전 신청하신 내용을 최종 확인하세요!</h1>
-            <ClassTitle>
-            [와쎂 in Yangyang] 양양 서핑 강습 (2시간) 1회권 + 죽도 해변 요트투어 탑승 1회
-            </ClassTitle>
-            <RegistrationDetail>
-                <div className="category">
-                    <div className="category-title">강습 날짜</div>
-                    <div className="category-title">총 인원</div>
-                    <div className="category-title">총 금액</div>
-                </div>
-            <div className="detail">
-                <div className="detail-text"> 2023년 7월 15일</div>
-                <div className="detail-text"> 2</div>
-                <div className="detail-text"> 154,000원</div>
-            </div>
-            </RegistrationDetail>
-            <PaymentButton onClick={requestPayment}>
-                카카오페이로 결제
-            <KakaopayIcon src={Kakaopay} />
-            </PaymentButton>
-            </ClassPaymentContainer>
-        </ClassPaymentWrapper> 
-        <Footer />
-        </>
-        )
     }
-}
+
 
 
 const ClassPaymentWrapper = styled.div`

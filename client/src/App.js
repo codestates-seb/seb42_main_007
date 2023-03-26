@@ -20,8 +20,10 @@ import EditClassPage from './pages/EditClassPage/EditClassPage';
 import { AuthProvider } from './context/AuthContext';
 import FindId from "./components/Login/FindID";
 import FindPassword from "./components/Login/FIndPassword";
-
+import WaveFind from "./pages/WaveFind";
+import CardModal from "./components/Board/Card/CardModal";
 import GlobalStyle from "./styles/GlobalStyle";
+import PaymentSuccess from "./components/Payment/PaymentSuccess";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/Find" element={<Find></Find>}></Route>
+        <Route path="/CardModal" element={<CardModal></CardModal>}></Route>
+        <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
         <Route path="/Write" element={<Write></Write>}></Route>
         <Route path="/Edit" element={<Edit></Edit>}></Route>
         <Route path="/List" element={<List></List>}></Route>
@@ -40,15 +44,16 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/Mypage" element={<Mypage />}></Route>
-        <Route path="/:id" element={<Detail></Detail>}></Route>
+        <Route path="/detail/:boardPostId" element={<Detail></Detail>}></Route>
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/classlist" element={<ClassListPage />}></Route>
-        <Route path="/lesson-class" element={<ClassDetailPage />}></Route>
-        <Route path="/pay" element={<ClassPaymentPage />}></Route>
+        <Route path="/class/:lessonId" element={<ClassDetailPage />}></Route>
+        <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
         <Route path="/newclass" element={<CreateClassPage />}></Route>
-        <Route path="/editclass" element={<EditClassPage />}></Route>
         <Route path="/findid" element={<FindId />}></Route>
         <Route path="/findpassword" element={<FindPassword />}></Route>
+        <Route path="/editclass/:lessonId" element={<EditClassPage />}></Route>
+        <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
         </Routes>
     </>
     </AuthProvider>

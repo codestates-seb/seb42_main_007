@@ -1,196 +1,168 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 
-const List = ({ location }) => {
+const List = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     async function fetchData() {
-      const page = new URLSearchParams(location?.search).get("page") || 1;
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${page}`
+        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${currentPage}&size=10`
       );
-      setPosts(response.data.posts);
-      setTotalPages(response.data.totalPages);
-      setCurrentPage(Number(page));
+      setPosts(response.data.data);
+      setTotalPages(response.data.pageInfo.totalPages);
     }
     fetchData();
-  }, [location?.search]);
+  }, [currentPage]);
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      const prevPage = currentPage - 1;
-      setCurrentPage(prevPage);
-      const queryParams = new URLSearchParams({ page: prevPage }).toString();
-      window.history.pushState(null, "", `?${queryParams}`);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      const nextPage = currentPage + 1;
-      setCurrentPage(nextPage);
-      const queryParams = new URLSearchParams({ page: nextPage }).toString();
-      window.history.pushState(null, "", `?${queryParams}`);
-    }
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
 
   return (
     <>
-      <Header></Header>
-      <MainLeft>
+    <Header />
+    <MainContainer>
+      <HeadContainer>
         <h1>커뮤니티 게시판</h1>
         <AskButton>
           <Link to="/Write">게시글 작성</Link>
         </AskButton>
-        {posts?.map((post) => (
-          <PostItem key={post.id}>
-            <Link to={`/Detail/${post.id}`}>
-              <PostTitle>{post.title}</PostTitle>
-            </Link>
-            <PostDate>{post.createAt}</PostDate>
-          </PostItem>
-        ))}
-        <Pagination>
-          <Button onClick={handlePrevPage} disabled={currentPage <= 1}>
-            이전
-          </Button>
-          <PageNumber>{currentPage}</PageNumber>
-          <Button onClick={handleNextPage} disabled={currentPage >= totalPages}>
-            다음
-          </Button>
-        </Pagination>
-      </MainLeft>
-      <Footer></Footer>
+      </HeadContainer>
+      {posts.length > 0 ? (
+        <>
+          {posts.map((post, index) => (
+            <PostItem key={post.boardPostId}>
+              <PostNumber>{post.boardPostId}</PostNumber>
+              <div>
+                <PostTitle>
+                  <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
+                </PostTitle>
+                <PostDate>{post.createdAt}</PostDate>
+                <p>{post.displayName}</p>
+                <p>{post.viewCount} views</p>
+              </div>
+            </PostItem>
+          ))}
+          <Stack spacing={2} direction="row">
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </Stack>
+        </>
+      ) : (
+        <NoPost>게시글이 없습니다. 글을 작성해 주세요!</NoPost>
+      )}
+    </MainContainer>
+    <Footer />
     </>
   );
 };
 
+
 export default List;
 
-const MainLeft = styled.div`
-  padding: 4rem 5rem 8rem 5rem;
+
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+  height: 100%;
+`;
+
+const HeadContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    padding: 0;
+    font-weight: 30px;
+    color: #2b2b2b;
+  }
 `;
 
 const PostItem = styled.div`
-  /* your styles here */
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 2rem;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      /* text-decoration: underline; */
+    }
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
+const PostNumber = styled.span`
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  margin-right: 1rem;
+`;
+
+
 const PostTitle = styled.h2`
-  /* your styles here */
-  font-size: 30px;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2b2b2b;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  line-height: 1.4;
 `;
 
 const PostDate = styled.p`
-  /* your styles here */
-  font-size: 10px;
+  font-size: 1.2rem;
+  color: #6b6b6b;
+  margin: 0;
+  padding: 0;
 `;
 
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10rem;
-`;
-
-const Button = styled.button`
-  /* your styles here */
-  display: flex;
-`;
-
-const PageNumber = styled.span`
-  /* your styles here */
-  font-size: 1rem;
-`;
-
-export const MainContainer = styled.main`
-  padding: 4rem 5rem 8rem 5rem;
-`;
-
-export const HeadContainer = styled.div`
-  display: flex;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 12px;
-    flex: 1 auto;
-  }
-`;
-
-const QuestionsController = styled.div`
-  display: flex;
-  margin-bottom: 12px;
-  justify-content: space-between;
-  align-items: center;
-
-  .total-questions {
-    font-size: 1.3rem;
-    margin-right: 12px;
-    flex: 1 auto;
-  }
-`;
-
-const FilterController = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  margin-bottom: 1px;
-
-  div {
-    margin-right: -1px;
-    margin-bottom: 1px;
-    border: 1px solid hsl(210, 8%, 55%);
-    color: hsl(210, 8%, 25%);
-    font-size: 12px;
-    padding: 0.8em;
-    cursor: pointer;
-    font-weight: normal;
-  }
-
-  div:hover {
-    background-color: hsl(210, 8%, 97.5%);
-    color: hsl(210, 8%, 35%);
-  }
-
-  .newest-btn {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  .vote-btn {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    margin-right: 0;
-  }
+const NoPost = styled.div`
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 3rem;
 `;
 
 const AskButton = styled.div`
-  margin-bottom: 12px;
-  float: right;
-
   a {
     background-color: #7cccdc;
-    color: hsl(0, 0%, 100%);
-    border: 1px solid transparent;
-    border-radius: 3px;
-    box-shadow: inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
-    font-size: 13px;
-    padding: 0.8em;
-    cursor: pointer;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
     text-decoration: none;
-  }
+    font-weight: 500;
+    font-size: 1.2rem;
+    transition: background-color 0.2s ease;
 
-  a:hover {
-    background-color: #36778b;
+    &:hover {
+      background-color: #36778b;
+    }
   }
 `;
+

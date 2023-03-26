@@ -1,17 +1,37 @@
-import React from "react";
-import GlobalStyle from "../../styles/GlobalStyle";
+import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import ClassList from "./ClassList";
 import styled from "styled-components";
 import {ArrowIosForwardOutline} from "@styled-icons/evaicons-outline"
 import {ArrowIosBackOutline} from "@styled-icons/evaicons-outline/"
 import { Link } from "react-router-dom";
-import Slider from 'react-slick';
+import ListSwiper from "../../components/Class/ListSwiper";
 import SingleClass from "./SingleClass";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
+const ClassListPage = () => {
+    const [isLoading, setIsLoading] = useState(true);
+
+    return (
+        <>
+        <Header />
+        <ClassListWrapper>
+            <Title>오늘 이런 수업 어때요? 🌴</Title>
+            <ClassListContainer>
+            {/* <ListSwiper /> */}
+            <SingleClass />
+            </ClassListContainer>
+            <CreateNewClassButton>
+                <div className="show"><Link to="/newclass">새 강좌 작성하기</Link></div>
+            </CreateNewClassButton>
+            <Space />
+
+        </ClassListWrapper>
+        <Footer />
+        </>
+    )
+}
 const ClassListWrapper = styled.div`
-    min-height: fit-content;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -21,16 +41,15 @@ const ClassListWrapper = styled.div`
     top: 50px;
     /* border: 1px red solid; */
     padding-top: 0px;
-    padding-bottom: 50px;
+    /* padding-bottom: 50px; */
 `
 
 const ClassListContainer = styled.div`
-    width: 750px;
-    height: fit-content;
-    border: 1px red solid;
+    width: 800px;
+    min-height: 450px;
+    /* border: 1px red solid; */
     display: flex;
-    justify-content: center;
-    align-items: center;    
+    align-items: center;  
     flex: 1;
 `
 
@@ -69,6 +88,7 @@ const CreateNewClassButton = styled.button`
     position: relative;
     left: 320px;
     :hover {
+        transition: 0.5s;
         background-color: #319fb1;
     }
 `
@@ -77,40 +97,5 @@ const Space = styled.div`
     width: auto;
     height: 120px;
 `
-
-
-
-
-const ClassListPage = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3, // 한번에 보이는 슬라이드 개수
-        slidesToScroll: 3 // 넘길 때 넘어가는 슬라이드 개수
-        };
-
-    return (
-        <>
-        <Header />
-        <ClassListWrapper>
-            <Title>오늘 이런 수업 어때요? 🌴</Title>
-            <ClassListContainer>
-                {/* <LeftArrowIcon /> */}
-                <Slider {...settings}>
-                    <SingleClass />
-                </Slider>
-                {/* <RightArrowIcon /> */}
-            </ClassListContainer>
-            <CreateNewClassButton>
-                <div className="show"><Link to="/newclass">새 강좌 작성하기</Link></div>
-            </CreateNewClassButton>
-            <Space />
-
-        </ClassListWrapper>
-        <Footer />
-        </>
-    )
-}
 
 export default ClassListPage;

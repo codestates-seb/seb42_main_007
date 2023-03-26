@@ -1,10 +1,11 @@
 import {
   InputLabel,
+  EditorInputWrapper,
 } from "../components/Board/EditorInputWrapper";
 import { Input } from "../components/Board/Input";
 import { Button } from "../components/Board/Button";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header/Header";
@@ -18,15 +19,6 @@ const Write = () => {
   const [content, setContent] = useState("");
   const navigate = useNavigate();
   const body1 = useRef();
-
-
-  const handleChange = () => {
-    const instance = body1.current.getInstance();
-    const data = instance.getMarkdown();
-    setContent(data);
-    console.log(content)
-  };
-
 
   const TodayTime = () => {
     const now = new Date();
@@ -51,6 +43,16 @@ const Write = () => {
     );
   };
 
+
+  const body1SubmitButtonClick = () => {
+    setContent({
+      ...content,
+      content: body1.current.getInstance().getHTML(),
+    });
+  };
+
+
+
   const onSubmit = async (data) => {
     console.log("onSubmit called");
 
@@ -71,7 +73,6 @@ const Write = () => {
           title: data?.title,
           content: content,
           createAt: TodayTime(),
-          imgPath: "",
         }
       );
       console.log("서버에서 내려온값:", response);
@@ -106,32 +107,41 @@ const Write = () => {
             register={register("title")}
           />
           <InputLabel title="내용" />
-          <Editor
-            initialValue=" "
-            previewStyle="tab"
-            height="600px"
-            initialEditType="markdown"
-            useCommandShortcut={true}
-            ref={body1}
-            onChange={handleChange}>
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  const formData = new FormData();
-                  formData.append("image", blob);
-                  try {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_URL}/board-posts`,
-                      formData
-                    );
-                    const imageUrl = response.data.imgPath;
-                    callback(imageUrl, "alt text");
-                  } catch (error) {
-                    console.error(error);
-                  }
-                },
-              }}
-            </Editor>
+          <EditorInputWrapper>
+            <Editor
+              previewStyle="vertical"
+              height="600px"
+              initialEditType="wysiwyg"
+              initialValue={content}
+              useCommandShortcut={false}
+              ref={body1}
+              // hooks={{
+              //   addImageBlobHook: async (blob, callback) => {
+              //     const formData = new FormData();
+              //     formData.append("image", blob);
+              //     try {
+              //       const response = await axios.post(
+              //         `${process.env.REACT_APP_SERVER_URL}/board-posts`,
+              //         formData
+              //       );
+              //       const imageUrl = response.data.url;
+              //       callback(imageUrl, "alt text");
+              //     } catch (error) {
+              //       console.error(error);
+              //     }
+              //   },
+              // }}
+            />
+          </EditorInputWrapper>
+          
           <div className="buttonWrapper">
+          <Button
+                onClick={body1SubmitButtonClick}
+                buttonType="type2"
+                buttonName="Next"
+                width="4.96rem"
+                height="3.79rem"
+              />
             <Button
               type="submit"
               buttonType="type2"
@@ -181,24 +191,5 @@ const MainLeft = styled.div`
     display: flex;
     flex-direction: row;
     font-size: 30px;
-  }
-
-  /* Media query for screens smaller than 1080px */
-  @media only screen and (max-width: 1080px) {
-    margin: 6rem 2rem 4rem;
-    padding-top: 1rem;
-
-    > div {
-      gap: 0.2rem;
-    }
-
-    > h2 {
-      font-size: 30px;
-    }
-
-    .buttonWrapper {
-      gap: 0.4rem;
-      margin-bottom: 2rem;
-    }
   }
 `;

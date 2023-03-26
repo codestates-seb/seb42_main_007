@@ -1,23 +1,28 @@
 import React from 'react';
 
-function MyLessons() {
-  // 강습 정보를 받아오는 로직 등을 작성합니다.
+export function MyLessons() {
   return (
     <div>
-      <h2>나의 강습 정보 보기</h2>
-      {/* 강습 정보를 보여주는 UI를 작성합니다. */}
+      <h1>나의 강습 정보</h1>
+      {/* 내가 신청한 강습 정보를 보여주는 컴포넌트 */}
     </div>
   );
 }
 
-function MyPosts() {
-  // 게시글 정보를 받아오는 로직 등을 작성합니다.
+export function MyPosts() {
   return (
     <div>
-      <h2>나의 게시글 보기</h2>
-      {/* 게시글 정보를 보여주는 UI를 작성합니다. */}
+      <h1>나의 게시글</h1>
+      {/* 내가 작성한 게시글을 보여주는 컴포넌트 */}
     </div>
   );
 }
 
-export { MyLessons, MyPosts };
+export function MyAppliedLessons() {
+  return (
+    <div>
+      <h1>나의 강습 정보</h1>
+      {/* 내가 신청한 강습 정보를 보여주는 컴포넌트 */}
+    </div>
+  );
+}

@@ -6,6 +6,8 @@ import {ArrowIosForwardOutline} from "@styled-icons/evaicons-outline"
 import {ArrowIosBackOutline} from "@styled-icons/evaicons-outline/"
 import { Link } from "react-router-dom";
 import ListSwiper from "../../components/Class/ListSwiper";
+import SingleClass from "./SingleClass";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ClassListPage = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +18,8 @@ const ClassListPage = () => {
         <ClassListWrapper>
             <Title>오늘 이런 수업 어때요? 🌴</Title>
             <ClassListContainer>
-            <ListSwiper />
+            {/* <ListSwiper /> */}
+            <SingleClass />
             </ClassListContainer>
             <CreateNewClassButton>
                 <div className="show"><Link to="/newclass">새 강좌 작성하기</Link></div>

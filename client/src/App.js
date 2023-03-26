@@ -17,29 +17,17 @@ import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
 import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
 import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
 import EditClassPage from './pages/EditClassPage/EditClassPage';
+import { AuthProvider } from './context/AuthContext';
+import FindId from "./components/Login/FindID";
+import FindPassword from "./components/Login/FIndPassword";
 import WaveFind from "./pages/WaveFind";
 import CardModal from "./components/Board/Card/CardModal";
-
-// import { useEffect } from 'react';
-// import { authActions } from './Redux/auth';
-// import { Cookies } from 'react-cookie';
-// import { useDispatch } from 'react-redux';
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 
 function App() {
-  // const dispatch = useDispatch();
-
-  // const cookies = new Cookies();
-  // useEffect(() => {
-  //   const Refresh = cookies.get('Refresh');
-  //   if (Refresh) {
-  //     dispatch(authActions.login());
-  //   } else {
-  //     dispatch(authActions.logout());
-  //   }
-  // }, []);
   return (
+    <AuthProvider>
     <>
     <GlobalStyle />
       <Routes>
@@ -62,10 +50,13 @@ function App() {
         <Route path="/class/:lessonId" element={<ClassDetailPage />}></Route>
         <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
         <Route path="/newclass" element={<CreateClassPage />}></Route>
+        <Route path="/findid" element={<FindId />}></Route>
+        <Route path="/findpassword" element={<FindPassword />}></Route>
         <Route path="/editclass/:lessonId" element={<EditClassPage />}></Route>
         <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
         </Routes>
     </>
+    </AuthProvider>
   );
 }
 export default App;

@@ -6,7 +6,8 @@ import axios from 'axios';
 export const requestPayment = async () => {
     try {
       const response = await axios.post(
-        'https://kapi.kakao.com/v1/payment/ready', {
+        'https://kapi.kakao.com/v1/payment/ready', null, {
+        params : {
             cid: "TC0ONETIME",
             partner_order_id: "partner_order_id",
             partner_user_id: "partner_user_id",
@@ -15,11 +16,11 @@ export const requestPayment = async () => {
             total_amount: 22000, // 총 가격
             vat_amount: 0,
             tax_free_amount: 0,
-            approval_url: "http://localhost:3000/paysuccess",
+            approval_url: `http://localhost:3000/paysuccess?item_name=${'서핑강좌'}&quantity=${'1'}&price=${'22000'}`,
             fail_url: "http://localhost:3000",
             cancel_url: "http://localhost:3000/class/1",
-          }, {
-            headers: {
+          },    
+        headers: {
                 'Authorization': `KakaoAK 96b2b8ecaf66cbe0b9ddaaa9fb1fda29`,
                 'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
             },

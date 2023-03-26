@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { useParams, useLocation } from "react-router-dom";
 
 const PaymentSuccessWrapper = styled.div`
     display: flex;
@@ -28,6 +29,12 @@ const Space = styled.div`
     height: 300px;
 `
 const PaymentSuccess = () => {
+    const { params } = useParams();
+    const location = useLocation();
+    
+    console.log(useLocation())
+    console.log({params})
+    console.log(useParams())
     return (
         <>
         <Header />

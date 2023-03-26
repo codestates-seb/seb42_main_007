@@ -1,5 +1,5 @@
 import {Pagination} from "@mui/material";
-import { Card } from "../components/Board/Card";
+import { Card } from "../components/Board/Card/Card";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useSearchParams} from "react-router-dom";

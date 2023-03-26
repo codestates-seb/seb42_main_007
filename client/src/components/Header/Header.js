@@ -25,7 +25,7 @@ const HeaderContainer = styled.div`
         justify-content: flex-end;
         /* border: solid red 1px; */
         height: 100px;
-        min-width: 550px;
+        /* min-width: 1rem; */
         max-width: 800px;
         margin: 0;
         padding: 0;
@@ -191,7 +191,6 @@ const ButtonContainer = styled.div`
 `;
 
 const LoginButton = styled.button`
-  margin-right: -10px;
   height: 30px;
   width: 60px;
   background-color: transparent;

@@ -25,38 +25,42 @@ const [price, setPrice] = useState('0');
 const editorRef = useRef();
 const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZ2RAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTQ5OTcwN30.Knm8U82RHwU4qv0kVvBYkfejb-QgizeI_-sOCLkSLQE';
 
-useEffect(() => {
-    axios
-      .get(`http://43.201.167.13:8080/lesson-class/1`,   // 수정할 클래스 아이디     
-      {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-        })
-      .then((res) => {
-        setOriginalData(res.data);
-        setInitialValue(originalData.content);
-        setTitle(originalData.title);
-        setStartDate(originalData.registerStart);
-        setEndDate(originalData.registerEnd);
-        setLessonDate(originalData.lessonDate);
-        setNumber(originalData.headCount);
-        setPrice(originalData.price);
-      });
-  }, []);
 
 
 const EditLesson = async () => {
+
+    useEffect(() => {
+        axios
+          .get(`http://43.201.167.13:8080/lesson-class/1`,   // 수정할 클래스 아이디     
+          {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            })
+          .then((res) => {
+            setOriginalData(res.data);
+            setInitialValue(originalData.content);
+            setTitle(originalData.title);
+            setStartDate(originalData.registerStart);
+            setEndDate(originalData.registerEnd);
+            setLessonDate(originalData.lessonDate);
+            setNumber(originalData.headCount);
+            setPrice(originalData.price);
+          });
+      }, []);
+    
+
     await axios
     .patch(
-        `http://43.201.167.13:8080/board-lessons/${originalData.lessonClassId}`,
+        `http://43.201.167.13:8080/lesson-class/${originalData.lessonClassId}`,
         {
-            title : `${title}`,
-            content : `${content}`,
-            registerStart : new Date(),
-            registerEnd : `${endDate}`,
-            headCount : `${number}`,
-            price : `${price}`,
+            title : title,
+            content : content,
+            registerStart : startDate, 
+            registerEnd : endDate,
+            lessonDate: lessonDate, 
+            headCount : number, 
+            price : price
         },
     //   {
     //     "memberId": "1",

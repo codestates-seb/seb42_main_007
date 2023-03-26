@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
-import Counter from "./Counter";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import GlobalStyle from "../../styles/GlobalStyle";
 
 
 const ClassDetailPage = () => {
@@ -15,15 +12,19 @@ const ClassDetailPage = () => {
     const [number, setNumber] = useState('0')
     const [classData, setClassData] = useState({})
 
-    const { classId } = useParams(); // /class/{classId}
+    const { lessonId } = useParams(); // /class/{lessonId}
     const navigate = useNavigate()
 
-  
+    const handleNumberChange = (event) => {
+        setNumber(event.target.value)
+        console.log(number)
+    }
     useEffect(()=>{
         axios
-        .get(`http://43.201.167.13:8080/board-lessons/${classId}`)
+        .get(`http://43.201.167.13:8080/lesson-class/${lessonId}`)
         .then((res)=>{
             setClassData(res.data)
+            setDate(res.data.lessonDate)
         })
         .catch((err) => {
             console.log(err);
@@ -32,7 +33,7 @@ const ClassDetailPage = () => {
 
     const deleteClass = async () => {
         await axios
-        .delete(`http://43.201.167.13:8080/board-lessons/${classId}`)
+        .delete(`http://43.201.167.13:8080/lesson-class/${lessonId}`)
         //1 -> LessonId
         .then(()=>{
             alert('강습 모집글이 삭제되었습니다.');
@@ -59,6 +60,7 @@ const ClassDetailPage = () => {
     return (
         <>
         <Header />
+        <ClassDetailWrapper>
         <ClassDetailContainer>
             <ClassDetailTitle>
                 <div className="text">
@@ -66,35 +68,52 @@ const ClassDetailPage = () => {
                 {classData.title}
                 </div>
             </ClassDetailTitle>
-            <div className="deadline">{classData.deadLine}</div>
-            <div className="headcount">{classData.headCount}</div>
-            <div className="created-at">{classData.createdAt}</div>
-            <ClassDetailBody>{classData.lessonContent}</ClassDetailBody>
+            <div className="registering-date">
+                <h2>강습 신청 가능 기간</h2>
+                <div className="register-period">{`${classData.registerStart ? classData.registerStart : '2023년 1월 25일'} ~ ${classData.registerEnd ? classData.registerEnd : '2023년 3월 24일'}`}</div>
+                <h2>강습 일자</h2>
+                <div className="lesson-date">{`${classData.lessonDate ? classData.lessonDate : '2023년 4월 7일'}`}</div>
+            </div>
+            <ClassDetailBody>{classData.content ? classData.content : '홍보내용'}</ClassDetailBody>
             <RegistrationDetail>
                 <div className="column-left">
-                    <div className="date-text">선택 날짜</div>
+                    <div className="date-text">강습 날짜</div>
                     <div className="count-text">인원 수</div>
                     <div className="sum-text">총 금액</div>
                 </div>
                 <div className="column-right">
-                    <div className="datepicker">
+                    {/* <div className="datepicker">
                         <DatePicker selected={date} onChange={date => setDate(date)} />
-                    </div>
-                    <Counter />
-                    <div className="sum-total">77,000원</div>
+                    </div> */}
+                    <div>{classData.lessonDate ? classData.lessonDate : '2023년 3월 25일' }</div>
+                    <input className="input-number" type='number' min='0' placeholder="숫자만 입력하세요." onChange={handleNumberChange}></input>
+                    <div className="sum-total">{classData.price ? `${classData.price}원` : '77,000원'}</div>
                 </div>
             </RegistrationDetail>
-            <RegistrationButton><Link to="/pay">강좌신청 👉</Link></RegistrationButton>
             <ButtonsContainer>
-                <ClassDetailEditButton><Link to="/editclass">수정</Link></ClassDetailEditButton>
-                <ClassDetailDeleteButton onClick={deleteClass}>삭제</ClassDetailDeleteButton>
+                <RegistrationButton><Link to={`/pay/${lessonId}`}>강좌신청 👉</Link></RegistrationButton>
+                <div>
+                    <ClassDetailEditButton><Link to={`/editclass/${lessonId}`}>수정</Link></ClassDetailEditButton>
+                    <ClassDetailDeleteButton onClick={deleteClass}>삭제</ClassDetailDeleteButton>
+                </div>
             </ButtonsContainer>
             <Space />
         </ClassDetailContainer>
+        </ClassDetailWrapper>
         <Footer />
         </>
     )
 }
+
+const ClassDetailWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        /* @media screen and (min-width: 768px) {
+        max-width: 80%;
+  } */
+
+`
 
 const ClassDetailContainer = styled.div`
     min-height: fit-content;
@@ -104,9 +123,31 @@ const ClassDetailContainer = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 80px;
+    top: 50px;
     /* border: 1px red solid; */
     padding-bottom: 50px;
+    .registering-date{
+        width: 80%;
+        text-align: left;
+        width: 80%;
+        height: fit-content;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 25px 20px;
+        border: 3px #3FBED3 solid;
+        border-radius: 20px;
+    }
+    .registering-date > h2 {
+        font-size: 18px;
+        background-color: #a7d7dc;
+        padding: 3px 6px;
+        display: flex;
+        width: fit-content;
+    }
+    .register-period {
+        margin-bottom: 20px;
+    }
+
 `
 
 const ClassDetailTitle = styled.div`
@@ -157,24 +198,27 @@ const RegistrationDetail = styled.div`
     .column-right {
         /* border: 1px red solid; */
         width: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .column-left > div {
-        margin: 10px;
+        margin: 10.5px;
         /* border: 1px red solid; */
         height: 30px;
     }
     .column-right > div {
-        margin: 10px;
+        margin-top: 13px;
+        margin-bottom: 13px;
         /* border: 1px red solid; */
         height: 30px;
-
     }
 
 `
 
 
 const RegistrationButton = styled.button`
-    width: 80%;
+    width: 100%;
     background-color: #3FBED3;
     color: white;
     font-weight: bold;
@@ -182,8 +226,8 @@ const RegistrationButton = styled.button`
     border-radius: 15px;
     height: 50px;
     font-size: 16px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    flex: 3 1 0;
+
     :hover {
         border: solid 3px #3FBED3;
         background-color: transparent;
@@ -193,14 +237,16 @@ const RegistrationButton = styled.button`
 `
 
 const ClassDetailEditButton = styled.button`
-    width: 100px;
-    background-color: #3FBED3;
+    width: 50px;
+    background-color: #9bd9e5;
     color: white;
     font-weight: bold;
     border: transparent;
     border-radius: 15px;
-    height: 40px;
+    height: 50px;
     font-size: 14px;
+    flex: 1 1 0;
+
     :hover {
         border: solid 3px #3FBED3;
         background-color: transparent;
@@ -211,15 +257,15 @@ const ClassDetailEditButton = styled.button`
 `
 
 const ClassDetailDeleteButton = styled.button`
-    width: 100px;
-    background-color: #3FBED3;
+    width: 50px;
+    background-color: #9bd9e5;
     color: white;
     font-weight: bold;
     border: transparent;
     border-radius: 15px;
-    height: 40px;
+    height: 50px;
     font-size: 14px;
-    margin-left: 10px;
+    flex: 1 1 0;
     :hover {
         border: solid 3px #3FBED3;
         background-color: transparent;
@@ -230,12 +276,20 @@ const ClassDetailDeleteButton = styled.button`
 `
 const ButtonsContainer = styled.div`
     display: flex;
+    min-width: 300px;
+    height: 50px;
     justify-content: space-between;
     margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    button {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
 `
 
 const Space = styled.div`
-    height: 140px;
+    height: 80px;
 `
 
 export default ClassDetailPage;

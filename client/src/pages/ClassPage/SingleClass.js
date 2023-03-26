@@ -6,7 +6,6 @@ import RandomImage from 'react-random-image';
 
 const SingleClass = () => {
     const defaultPhotoUrl = 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80';
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZ2RAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTQ5OTcwN30.Knm8U82RHwU4qv0kVvBYkfejb-QgizeI_-sOCLkSLQE';
 
     const [data, setData] = useState([]);
     const [photoUrl, setPhotoUrl] = useState(defaultPhotoUrl)
@@ -49,14 +48,10 @@ const SingleClass = () => {
     const getLessons = async () => {
         axios
           .get(
-            `http://43.201.167.13:8080/board-lessons/?page=1&size=10`,
-          {
-              headers: {
-                  Authorization: `Bearer ${token}`,
-          }
-        }
+            `http://43.201.167.13:8080/lesson-class/?page=1&size=10`
           )
           .then((res) => {
+            console.log(res.data)
             setData(res.data);
           })
           .catch((err) => {
@@ -90,17 +85,27 @@ const SingleClass = () => {
             return (
                 <div className="lesson-data" key={lessondata.lessonClassId} > 
                 <SingleClassContainer>
-                <ClassThumbnail />
+                <ClassThumbnail src={photoUrl}/>
                 <ClassTitle>{lessondata.title}</ClassTitle>
                 <ClassPrice>{`${lessondata.price}원`}</ClassPrice>
                 <ClassReservationButton><Link to={`/class/${lessondata.lessonClassId}`}>바로예약 👉</Link></ClassReservationButton>
                 </SingleClassContainer>
                 </div>
                 )
-        })}  */}
+        })}  */}        
+                {/* <div className="lesson-data" key='1' > 
                 <SingleClassContainer>
                 <ClassThumbnail src={photoUrl}/>
-                    <div className="copyright">{`Photo by ${name} on `}<Link to="unsplash.com">Unsplash</Link></div>
+                <ClassTitle>{data[0] ? data[0].title : '클래스제목'}</ClassTitle>
+                <ClassPrice>{data[0] ? `${data[0].price}원` : '77000원'}</ClassPrice>
+                <ClassReservationButton><Link to={'/class/1'}>바로예약 👉</Link></ClassReservationButton>
+                </SingleClassContainer>
+                </div> */}
+                
+  
+                <SingleClassContainer>
+                <ClassThumbnail src={photoUrl}/>
+                    {/* <div className="copyright">{`Photo by ${name} on `}<Link to="unsplash.com">Unsplash</Link></div> */}
                     <ClassTitle>와썹in양양 [타이틀]</ClassTitle>
                     <ClassPrice>77,000원</ClassPrice>
                     <ClassReservationButton>

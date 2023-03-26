@@ -1,5 +1,6 @@
 package com.was_surf.domain.member.dto;
 
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import com.was_surf.domain.member.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,5 @@ public class MemberResponseDto {
     private String email;
     private String password;
     private Member.MemberStatus memberStatus;
-    private List<String> roles;
-
+    private List<LessonRegister> lessonRegisters;
 }

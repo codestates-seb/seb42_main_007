@@ -1,7 +1,7 @@
-package com.was_surf.domain.lesson_class.dto;
+package com.was_surf.domain.lesson.dto;
 
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
-package com.was_surf.domain.lesson_class.application;
+package com.was_surf.domain.lesson.application;
 
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_class.repository.LessonClassRepository;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.repository.LessonClassRepository;
 import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
 import lombok.RequiredArgsConstructor;

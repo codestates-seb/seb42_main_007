@@ -1,9 +1,9 @@
 package com.was_surf.domain.member.mapper;
 
+import com.was_surf.domain.member.domain.Member;
 import com.was_surf.domain.member.dto.MemberPatchDto;
 import com.was_surf.domain.member.dto.MemberPostDto;
 import com.was_surf.domain.member.dto.MemberResponseDto;
-import com.was_surf.domain.member.domain.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

@@ -33,25 +33,25 @@ const SingleClass = () => {
         
     // }
     //카테고리설정이..안됨...
-    // const getPhotoUrl = async () => {
-    //     axios
-    //     .get(`https://random.imagecdn.app/v1/image?width=250&height=250&category=landscape&format=text`)
-    //     .then((res) => {
-    //         setPhotoUrl(res.data)
-    //         console.log(res)
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
+    const getPhotoUrl = async () => {
+        axios
+        .get(`https://random.imagecdn.app/v1/image?width=250&height=250&category=landscape&format=text`)
+        .then((res) => {
+            setPhotoUrl(res.data)
+            // console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
         
-    // }
+    }
     const getLessons = async () => {
         axios
           .get(
             `http://43.201.167.13:8080/lesson-class/?page=1&size=10`
           )
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             setData(res.data);
           })
           .catch((err) => {
@@ -62,56 +62,33 @@ const SingleClass = () => {
 
       useEffect(() => {
         getLessons();
-        // getPhotoUrl();
+        getPhotoUrl();
       }, [])
-
-    //   {
-    //     "memberId": "1",
-    //     "lessonClassId": 1,
-    //     "title": "강습 클래스 제목",
-    //     "content": "강습 클래스 내용",
-    //     "registerStart": "2023-03-18T12:20:00",
-    //     "registerEnd": "2023-03-20T23:30:00",
-    //     "lessonDate": "2023-03-31",
-    //     "headCount": 40,
-    //     "price": 75000,
-    //     "lessonStatus": "현재 강습을 신청할 수 있습니다.",
-    //     "lessonRegisters": []
-    //   }, ...
 
     return (
         <>
-        {/* {data && data.map((lessondata) => {
+       {/* {data && data.map((lessondata) => {
             return (
                 <div className="lesson-data" key={lessondata.lessonClassId} > 
                 <SingleClassContainer>
                 <ClassThumbnail src={photoUrl}/>
                 <ClassTitle>{lessondata.title}</ClassTitle>
                 <ClassPrice>{`${lessondata.price}원`}</ClassPrice>
-                <ClassReservationButton><Link to={`/class/${lessondata.lessonClassId}`}>바로예약 👉</Link></ClassReservationButton>
+                <ClassReservationButton><Link to={`/class/${lessondata.lessonClassId}`}>상세보기 👉</Link></ClassReservationButton>
                 </SingleClassContainer>
                 </div>
                 )
-        })}  */}        
-                {/* <div className="lesson-data" key='1' > 
+        })}         */}
+                <div className="lesson-data" key='1' > 
                 <SingleClassContainer>
                 <ClassThumbnail src={photoUrl}/>
                 <ClassTitle>{data[0] ? data[0].title : '클래스제목'}</ClassTitle>
                 <ClassPrice>{data[0] ? `${data[0].price}원` : '77000원'}</ClassPrice>
-                <ClassReservationButton><Link to={'/class/1'}>바로예약 👉</Link></ClassReservationButton>
+                <ClassReservationButton><Link to={'/class/1'}>상세보기 👉</Link></ClassReservationButton>
                 </SingleClassContainer>
-                </div> */}
+                </div>
                 
   
-                <SingleClassContainer>
-                <ClassThumbnail src={photoUrl}/>
-                    {/* <div className="copyright">{`Photo by ${name} on `}<Link to="unsplash.com">Unsplash</Link></div> */}
-                    <ClassTitle>와썹in양양 [타이틀]</ClassTitle>
-                    <ClassPrice>77,000원</ClassPrice>
-                    <ClassReservationButton>
-                        <Link to="/class/1">상세보기 👉</Link>
-                    </ClassReservationButton>
-                </SingleClassContainer>
         </>
     )
 }

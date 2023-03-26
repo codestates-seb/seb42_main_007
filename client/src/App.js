@@ -25,6 +25,7 @@ import CardModal from "./components/Board/Card/CardModal";
 // import { Cookies } from 'react-cookie';
 // import { useDispatch } from 'react-redux';
 import GlobalStyle from "./styles/GlobalStyle";
+import PaymentSuccess from "./components/Payment/PaymentSuccess";
 
 function App() {
   // const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
         <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
         <Route path="/newclass" element={<CreateClassPage />}></Route>
         <Route path="/editclass/:lessonId" element={<EditClassPage />}></Route>
+        <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
         </Routes>
     </>
   );

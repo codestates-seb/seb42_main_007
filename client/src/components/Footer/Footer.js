@@ -21,12 +21,9 @@ const FooterItem = styled.div`
   flex: 1 1 0;
   /* border: 1px solid red; */
   text-align: center;
-<<<<<<< HEAD
-=======
   @media screen and (max-width:600px) {
         font-size: 0.6rem;
     }
->>>>>>> 47d435a6ba1ebeb934d6f99ae7de9bf631b3ac93
 `;
 
 const WaveImg = styled.img`

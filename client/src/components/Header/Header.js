@@ -29,7 +29,7 @@ const HeaderContainer = styled.div`
         max-width: 800px;
         margin: 0;
         padding: 0;
-        /* padding-right: 30px; */
+        padding-right: 30px;
     }
     .header-wrapper > .toggle {
         position: absolute;
@@ -181,17 +181,6 @@ const MenuItem = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-<<<<<<< HEAD
-    width: fit-content;
-    margin-left: 40px;
-    margin-right: 30px;
-    position: sticky;
-    right: 0px;
-    /* border: solid red 1px; */
-    display: flex;
-    flex-wrap: nowrap;
-`
-=======
   width: fit-content;
   margin-left: 40px;
   position: sticky;
@@ -200,10 +189,8 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `;
->>>>>>> 47d435a6ba1ebeb934d6f99ae7de9bf631b3ac93
 
 const LoginButton = styled.button`
-  margin-right: -10px;
   height: 30px;
   width: 60px;
   background-color: transparent;

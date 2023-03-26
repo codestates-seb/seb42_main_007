@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {ArrowIosForwardOutline} from "@styled-icons/evaicons-outline"
 import {ArrowIosBackOutline} from "@styled-icons/evaicons-outline/"
 import { Link } from "react-router-dom";
-import ListSwiper from "../../components/Class/\bListSwiper";
+import ListSwiper from "../../components/Class/ListSwiper";
 
 const ClassListPage = () => {
     const [isLoading, setIsLoading] = useState(true);

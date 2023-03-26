@@ -1,5 +1,6 @@
 package com.was_surf.domain.surf_spot.domain;
 
+import com.was_surf.domain.spot_data.domain.SpotData;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,12 @@ public class SurfSpot {
     @Column(nullable = false)
     private String viewCount;
 
+//    @Column(nullable = false)
+//    private String score;
+
     @OneToMany(mappedBy = "surfSpot", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
+
+//    @OneToOne(mappedBy = "surfSpot")
+//    private SpotData spotData;
 }

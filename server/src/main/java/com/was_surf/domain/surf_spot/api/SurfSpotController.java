@@ -54,18 +54,4 @@ public class SurfSpotController {
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.surfSpotsToSurfSpotResponseDtos(surfSpotList), pageSurfSpots), HttpStatus.OK);
 
     }
-    
-    /* => 💎개별 조회 {}랑 겹쳐서 에러남💎
-    // 스팟 전체 조회1: 페이지네이션
-    @GetMapping("/{sort-status}")
-    public ResponseEntity getSurfSpots(@PathVariable("sort-status") String sortStatus,
-                                       @Positive @RequestParam int page,
-                                       @Positive @RequestParam int size) {
-        Page<SurfSpot> pageSurfSpots = surfSpotService.findSurfSpots(sortStatus, page - 1, size);
-        List<SurfSpot> listSurfSpots = pageSurfSpots.getContent();
-
-        return new ResponseEntity<>(new MultiResponseDto<>(mapper.surfSpotsToSurfSpotResponseDtos(listSurfSpots), pageSurfSpots), HttpStatus.OK);
-    }
-    
-    */
 }

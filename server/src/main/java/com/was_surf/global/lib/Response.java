@@ -3,6 +3,7 @@ package com.was_surf.global.lib;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 @Component
+@Slf4j
 public class Response {
 
     @Getter

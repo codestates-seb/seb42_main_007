@@ -52,6 +52,9 @@ public class SurfSpotService {
                 return surfSpotRepository.findAll(PageRequest.of(
                         page, size, Sort.by("surfSpotId").ascending()
                 ));
+
+            // recommend순
+//            case "recommend":
         }
 
         return null;

@@ -1,5 +1,6 @@
 package com.was_surf.domain.spot_data.application;
 
+import com.was_surf.domain.weather.domain.Weather;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class SpotDataService {
     @Scheduled(cron = "0 0 0/3 1/1 * *")
     public void runEveryTenSecondsOne() {
 
-
+//        Weather weather = new weather.getTemp();
         log.info("3시간에 한번 : " + LocalTime.now());
         log.info("thread: " + Thread.currentThread().getName());
         log.info("==============================================");

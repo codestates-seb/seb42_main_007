@@ -1,18 +1,21 @@
 package com.was_surf.domain.weather.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.was_surf.domain.member.domain.Member;
+import com.was_surf.domain.spot_data.domain.SpotData;
+import com.was_surf.domain.surf_spot.domain.SurfSpot;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Embeddable
 public class Weather {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long weatherId;
 
     @Column(nullable = true)
     private String temp; //온도
@@ -34,4 +37,23 @@ public class Weather {
 
     @Column(nullable = true)
     private String lastUpdateTime; // 마지막 갱신시각
+
+    @ManyToOne
+    @JoinColumn(name = "SPOT_DATA_ID")
+    private SpotData spotData;
+
+    public void setSpotData(SpotData spotData) {
+        this.spotData = spotData;
+    }
+
+
+    public Weather(String temp, String wave, String windSpeed, String highestTemperature, String minimumTemperature, String precipitation, String lastUpdateTime) {
+        this.temp = temp;
+        this.wave = wave;
+        this.windSpeed = windSpeed;
+        this.highestTemperature = highestTemperature;
+        this.minimumTemperature = minimumTemperature;
+        this.precipitation = precipitation;
+        this.lastUpdateTime = lastUpdateTime;
+    }
 }

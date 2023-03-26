@@ -45,17 +45,36 @@ public class WeatherApiController {
         StringBuilder urlBuilder =  new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
 
         // 2. 요청 시각 조회
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now().minusHours(3);
         String yyyyMMdd = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int hour = now.getHour();
         int min = now.getMinute();
-        if(min <= 30) { // 해당 시각 발표 전에는 자료가 없음 - 이전시각을 기준으로 해야함
-            hour -= 1;
+        if (hour == 23 && min >= 50) {
+            hour = 2;
+            now = now.plusDays(1);
+        } else if (min >= 50) {
+            hour += 3;
+        } else if (hour < 2 || hour == 23) {
+            hour = 2;
+        } else if (hour < 5) {
+            hour = 5;
+        } else if (hour < 8) {
+            hour = 8;
+        } else if (hour < 11) {
+            hour = 11;
+        } else if (hour < 14) {
+            hour = 14;
+        } else if (hour < 17) {
+            hour = 17;
+        } else if (hour < 20) {
+            hour = 20;
+        } else {
+            hour = 23;
         }
-        String hourStr = hour + "00"; // 정시 기준
+        String hourStr = String.format("%02d", hour) + "10";
         String nx = Integer.toString(region.getNx());
         String ny = Integer.toString(region.getNy());
-        String currentChangeTime = now.format(DateTimeFormatter.ofPattern("yy.MM.dd ")) + hour;
+        String currentChangeTime = now.format(DateTimeFormatter.ofPattern("yy.MM.dd ")) + hourStr;
 
         // 기준 시각 조회 자료가 이미 존재하고 있다면 API 요청 없이 기존 자료 그대로 넘김
         Weather prevWeather = region.getWeather();

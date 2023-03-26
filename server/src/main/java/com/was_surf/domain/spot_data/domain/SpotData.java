@@ -1,11 +1,15 @@
 package com.was_surf.domain.spot_data.domain;
 
+import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.surf_spot.domain.SurfSpot;
+import com.was_surf.domain.weather.domain.Weather;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,23 +20,26 @@ public class SpotData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long spotDataId;
 
-//    @Column
+    @Column
     private int temp; //온도
-//    @Column
+    @Column
     private int tempScore;
 
-//    @Column
+    @Column
     private int wave; //파고
-//    @Column
+    @Column
     private int waveSore;
 
-//    @Column
+    @Column
     private int windSpeed; //풍속
-//    @Column
+    @Column
     private int windSpeedSore;
 
-//    @OneToOne
-//    @JoinColumn(name = "SURF_SPOT_ID")
-//    private SurfSpot surfSpot;
+    @OneToMany(mappedBy = "spotData", cascade = CascadeType.ALL)
+    private List<Weather> Weathers = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "SURF_SPOT_ID")
+    private SurfSpot surfSpot;
 
 }

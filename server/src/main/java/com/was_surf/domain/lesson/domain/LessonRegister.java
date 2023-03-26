@@ -33,6 +33,7 @@ public class LessonRegister {
 
     public void setMember(Member member) {
         this.member = member;
+
         if(!this.member.getLessonRegisters().contains(this)) {
             this.member.getLessonRegisters().add(this);
         }
@@ -45,6 +46,7 @@ public class LessonRegister {
 
     public void setLessonClass(LessonClass lessonClass) {
         this.lessonClass = lessonClass;
+
         if(this.lessonClass.getLessonRegisters().contains(this)) {
             this.lessonClass.getLessonRegisters().add(this);
         }

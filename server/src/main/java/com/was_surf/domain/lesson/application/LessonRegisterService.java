@@ -8,6 +8,7 @@ import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.error.exception.BusinessLogicException;
 import com.was_surf.global.error.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class LessonRegisterService {
     private final LessonRegisterRepository lessonRegisterRepository;
     private final MemberService memberService;
@@ -44,6 +46,8 @@ public class LessonRegisterService {
     public LessonRegister updateRegister(LessonRegister lessonRegister, String email) {
         // 현재 로그인된 회원 정보 조회
         Member findMember = memberService.findMemberToEmail(email);
+
+        verifyMatchMember(lessonRegister, findMember);
 
         LessonRegister findLessonRegister = verifiedRegister(lessonRegister.getLessonRegisterId());
 
@@ -85,7 +89,11 @@ public class LessonRegisterService {
 
     public void verifyMatchMember(LessonRegister lessonRegister, Member member) {
         long lessonRegisterHasMemberId = lessonRegister.getMember().getMemberId();
+        log.info("# lessonRegisterMemberId: " + lessonRegisterHasMemberId);
         long currentMemberId = member.getMemberId();
+        log.info("# currentMemberId: " + currentMemberId);
+        log.info("# memberRole: " + member.getRoles());
+        log.info("# memberRole: " + member.getRoles().getClass().getSimpleName());
 
         if(!(lessonRegisterHasMemberId == currentMemberId) || member.getRoles().toString().equals("ADMIN")) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);

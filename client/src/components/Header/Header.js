@@ -199,7 +199,9 @@ const Header = () => {
           </MenuItems>
           <ButtonContainer>
             {isLoggedIn ? (
-              <></>
+              <MypageButton>
+                <Link to="/mypage">마이페이지</Link>
+              </MypageButton>
             ) : (
               <LoginButton>
                 <Link to="/Login">로그인</Link>

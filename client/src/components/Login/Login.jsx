@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { REDIRECT_URI } from '../Apiurl';
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../context/AuthContext';
 
 
 
@@ -75,19 +75,39 @@ const Login = () => {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
   const { setTokens } = useAuth();
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(API_URL, { email, password });
+      const payload = new URLSearchParams();
+      payload.append('email', email);
+      payload.append('password', password);
+      
+  
+      const response = await axios.post(
+        API_URL,
+        payload.toString(),
+        {
+          headers: {
+            'Authorization': `Bearer ${cookies.accessToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      );
       const { accessToken, refreshToken } = response.data;
   
-      if (response.status === 200) {
-        setCookie('accessToken', accessToken, { maxAge: 60 * 60 });
-        setCookie('refreshToken', refreshToken, { maxAge: 60 * 60 });
-        setTokens(accessToken, refreshToken); // 전역 상태에 토큰 설정
+      if (accessToken && refreshToken) {
+        setCookie('accessToken', accessToken, { path: '/', secure: true, sameSite:"none", maxAge: 60 * 30000 });
+        setCookie('refreshToken', refreshToken, { path: '/',secure: true, sameSite:"none", maxAge: 60 * 30000 });
+        setTokens(accessToken, refreshToken);
+        if (!accessToken || !refreshToken) {
+          console.error('No access or refresh tokens found in cookies.');
+          return;
+        }
+        console.log(accessToken);
+        console.log(refreshToken);
+        console.log(response.data);
   
-        // 로그인이 성공적으로 완료된 후 페이지 이동
         navigate('/');
       } else {
         setError('로그인 정보가 일치하지 않습니다.');
@@ -96,6 +116,7 @@ const Login = () => {
       setError(error.response?.status === 401 ? '로그인 정보가 일치하지 않습니다.' : '알 수 없는 에러가 발생했습니다.');
     }
   };
+  
   
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -152,7 +173,7 @@ const Login = () => {
           로그인
         </button>
       </form>
-      <div>{JSON.stringify(cookies)}</div>
+      {/* <div>{JSON.stringify(cookies)}</div> */}
     </LoginWrapper>
   );
 };

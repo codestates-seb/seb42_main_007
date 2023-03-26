@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Spinner from '../../images/LoadingIndicator.gif'
+import Spinner from '../images/LoadingIndicator.gif'
 
 export const Background = styled.div`
   position: absolute;

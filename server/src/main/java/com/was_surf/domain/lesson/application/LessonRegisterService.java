@@ -31,13 +31,17 @@ public class LessonRegisterService {
         Member findMember = memberService.findMemberToEmail(email);
 
         // 입력된 강습 클래스 조회
-        LessonClass lessonClass = lessonClassService.findLessonClass(lessonClassId);
+        LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
+
+        // 해당 강습 클래스를 이미 신청했는지 확인
+        existRegisterCheck(findLessonClass, findMember);
+
 
         lessonRegister.setMember(findMember);
-        lessonRegister.setLessonClass(lessonClass);
+        lessonRegister.setLessonClass(findLessonClass);
         lessonRegister.setRegisterDate(LocalDateTime.now());
         // 신청 마감일 3일전까지 취소가능
-        lessonRegister.setCancelDate(lessonClass.getRegisterEnd().minusDays(3).toLocalDate());
+        lessonRegister.setCancelDate(findLessonClass.getRegisterEnd().minusDays(3).toLocalDate());
 
         return lessonRegisterRepository.save(lessonRegister);
     }
@@ -97,6 +101,16 @@ public class LessonRegisterService {
 
         if(!(lessonRegisterHasMemberId == currentMemberId) || member.getRoles().toString().equals("ADMIN")) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
+    }
+
+    // 해당 강습 클래스를 이미 신청했는지 확인
+    public void existRegisterCheck(LessonClass lessonClass, Member member) {
+        Optional<LessonRegister> optionalLessonRegister = lessonRegisterRepository.findByLessonClassAndMember(lessonClass, member);
+
+        // 이미 신청한 강습 클래스라면 에러 발생
+        if(optionalLessonRegister.isPresent()) {
+            throw new BusinessLogicException(ExceptionCode.REGISTER_EXIST);
         }
     }
 }

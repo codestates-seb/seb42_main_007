@@ -161,13 +161,14 @@ const MenuItems = styled.div`
     .hidden {
       display: block;
     }
-  }
+  } 
 `;
 
 const MenuItem = styled.div`
   min-width: fit-content;
   margin-left: 20px;
   color: white;
+ 
   @media screen and (max-width: 768px) {
     background-color: #80dee8;
     border: 1px #3fbed3 solid;
@@ -179,6 +180,7 @@ const MenuItem = styled.div`
     /* text-align: center; */
   }
 `;
+
 
 const ButtonContainer = styled.div`
   width: fit-content;

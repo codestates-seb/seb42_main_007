@@ -1,11 +1,10 @@
 import {
   InputLabel,
-  EditorInputWrapper,
 } from "../components/Board/EditorInputWrapper";
 import { Input } from "../components/Board/Input";
 import { Button } from "../components/Board/Button";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header/Header";
@@ -51,16 +50,6 @@ const Write = () => {
       "분"
     );
   };
-
-
-  const body1SubmitButtonClick = () => {
-    setContent({
-      ...content,
-      content: body1.current.getInstance().getHTML(),
-    });
-  };
-
-
 
   const onSubmit = async (data) => {
     console.log("onSubmit called");
@@ -219,5 +208,24 @@ const MainLeft = styled.div`
     display: flex;
     flex-direction: row;
     font-size: 30px;
+  }
+
+  /* Media query for screens smaller than 1080px */
+  @media only screen and (max-width: 1080px) {
+    margin: 6rem 2rem 4rem;
+    padding-top: 1rem;
+
+    > div {
+      gap: 0.2rem;
+    }
+
+    > h2 {
+      font-size: 30px;
+    }
+
+    .buttonWrapper {
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
   }
 `;

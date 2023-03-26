@@ -1,18 +1,6 @@
 package com.was_surf.domain.member.domain;
 
 
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson_register.domain.LessonRegister;
@@ -56,6 +44,7 @@ public class Member implements UserDetails {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
+//    @Column
     private List<String> roles = new ArrayList<>();
 
     @Override

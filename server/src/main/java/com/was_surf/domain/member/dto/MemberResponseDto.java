@@ -4,6 +4,8 @@ import com.was_surf.domain.member.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Builder
 @Getter
 public class MemberResponseDto {
@@ -13,5 +15,6 @@ public class MemberResponseDto {
     private String email;
     private String password;
     private Member.MemberStatus memberStatus;
+    private List<String> roles;
 
 }

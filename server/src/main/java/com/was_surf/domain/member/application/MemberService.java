@@ -43,7 +43,7 @@ public class MemberService {
             return response.fail("해당하는 유저가 없습니다.", HttpStatus.BAD_REQUEST);
         }
         log.info("# email: " + login.getEmail());
-        log.info("# password0: " + login.getPassword());
+        log.info("# password: " + login.getPassword());
 
         UsernamePasswordAuthenticationToken authenticationToken = login.toAuthentication();
 

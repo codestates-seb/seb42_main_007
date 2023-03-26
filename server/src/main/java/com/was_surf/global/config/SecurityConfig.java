@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -51,8 +50,8 @@ public class SecurityConfig {
                 .antMatchers("/api/weather").permitAll()
                 .antMatchers("/api/region").permitAll()
                 .antMatchers("/members").permitAll()
-                .antMatchers("/board-posts").hasAnyRole("USER", "ADMIN", "TEACHER")
-                .antMatchers("/board-comments").hasAnyRole("USER", "ADMIN", "TEACHER")
+                .antMatchers("/board-posts").permitAll()
+                .antMatchers("/board-comments").permitAll()
                 .antMatchers("/h2-console/**)").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);

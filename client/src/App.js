@@ -58,10 +58,10 @@ function App() {
         <Route path="/:id" element={<Detail></Detail>}></Route>
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/classlist" element={<ClassListPage />}></Route>
-        <Route path="/lesson-class" element={<ClassDetailPage />}></Route>
-        <Route path="/pay" element={<ClassPaymentPage />}></Route>
+        <Route path="/class/:lessonId" element={<ClassDetailPage />}></Route>
+        <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
         <Route path="/newclass" element={<CreateClassPage />}></Route>
-        <Route path="/editclass" element={<EditClassPage />}></Route>
+        <Route path="/editclass/:lessonId" element={<EditClassPage />}></Route>
         </Routes>
     </>
   );

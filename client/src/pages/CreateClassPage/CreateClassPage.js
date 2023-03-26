@@ -9,32 +9,29 @@ import { ko } from 'date-fns/esm/locale';
 import { Editor } from "@toast-ui/react-editor";
 import '@toast-ui/editor/dist/toastui-editor.css';
 
+const navigate = useNavigate;
 
 const CreateClassPage = () => {
 // 새로운 강습 모집글을 작성한다.
 // 제목, 내용, 신청기간, 신청인원, 최초생성일
+
 const createLesson = async () => {
-
-const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZ2RAZ21haWwuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTQ5OTcwN30.Knm8U82RHwU4qv0kVvBYkfejb-QgizeI_-sOCLkSLQE';
-
     await axios
     .post(
         `http://43.201.167.13:8080/lesson-class`,
         {
-            title : `${title}`,
-            content : `${content}`,
-            registerStart : new Date(), //강습 모집시작
-            registerEnd : `${endDate}`, //강습 모집마감
-            headCount : `${number}`, //모집최대인원
-            price : `${price}`
-        }, //강습 날짜 추가예정
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-        }}
+            title : title,
+            content : content,
+            registerStart : new Date(), 
+            registerEnd : endDate,
+            lessonDate: lessonDate, 
+            headCount : number, 
+            price : price
+        }, 
     )
-    .then(() => {
-        History.back();
+    .then((res) => {
+        console.log(res);
+        navigate('/classlist');
     })
     .catch((error) => {
         console.log(error)

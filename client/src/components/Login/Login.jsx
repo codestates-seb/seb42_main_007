@@ -11,13 +11,11 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-
   h1 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: #102a43;
   }
-
   form {
     display: flex;
     flex-direction: column;
@@ -27,13 +25,11 @@ const LoginWrapper = styled.div`
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
   }
-
   label {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
     color: #102a43;
   }
-
   input[type='email'],
   input[type='password'] {
     font-size: 1.4rem;
@@ -45,7 +41,6 @@ const LoginWrapper = styled.div`
     background-color: #f2f2f2;
     color: #102a43;
   }
-
   button {
     font-size: 1.6rem;
     padding: 1rem;
@@ -56,11 +51,9 @@ const LoginWrapper = styled.div`
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
   }
-
   button:hover {
     background-color: #0062a6;
   }
-
   .error {
     font-size: 1.4rem;
     color: red;
@@ -75,17 +68,26 @@ const Login = () => {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
 
-  // 로그인 버튼 클릭 시 호출되는 함수
   const handleLogin = async () => {
     try {
       const response = await axios.post(API_URL, { email, password });
       const { accessToken, refreshToken } = response.data;
-      // 로그인이 성공하면 토큰을 쿠키에 저장하고 메인 페이지로 이동합니다.
       setCookie('accessToken', accessToken, { maxAge: 60 * 60 }); // 1시간
       setCookie('refreshToken', refreshToken, { maxAge: 60 * 60 }); // 1시간
+      console.log(accessToken);
+      console.log(refreshToken);
       navigate('/');
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error.response.data.message === 401);
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (!e.target.value.includes('@')) {
+      setError('올바른 이메일 형식이 아닙니다.');
+    } else {
+      setError(null);
     }
   };
 
@@ -102,7 +104,7 @@ const Login = () => {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           />
         </div>
         <div>
@@ -114,7 +116,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button onClick={handleLogin}>로그인</button>
+        <button onClick={handleLogin} disabled={!email || !password}>
+          로그인
+        </button>
       </form>
     </LoginWrapper>
   );

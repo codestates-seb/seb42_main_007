@@ -6,6 +6,7 @@ import com.was_surf.global.lib.Response;
 import com.was_surf.global.config.util.CustomAuthorityUtils;
 import com.was_surf.global.error.exception.BusinessLogicException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -40,6 +42,9 @@ public class MemberService {
         if(memberRepository.findByEmail(login.getEmail()).orElse(null)==null) {
             return response.fail("해당하는 유저가 없습니다.", HttpStatus.BAD_REQUEST);
         }
+        log.info("# email: " + login.getEmail());
+        log.info("# password0: " + login.getPassword());
+
         UsernamePasswordAuthenticationToken authenticationToken = login.toAuthentication();
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);

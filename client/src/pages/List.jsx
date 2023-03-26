@@ -1,81 +1,77 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 
-const List = ({ location }) => {
+const List = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     async function fetchData() {
-      const page = new URLSearchParams(location?.search).get("page") || 1;
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${page}&size=10`
+        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${currentPage}&size=10`
       );
-      setPosts(response.data.posts);
-      setTotalPages(response.data.totalPages);
-      setCurrentPage(Number(page));
-      console.log(response.data.posts);
+      setPosts(response.data.data);
+      setTotalPages(response.data.pageInfo.totalPages);
     }
     fetchData();
-  }, [location?.search]);
+  }, [currentPage]);
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      const prevPage = currentPage - 1;
-      setCurrentPage(prevPage);
-      const queryParams = new URLSearchParams({ page: prevPage }).toString();
-      window.history.pushState(null, "", `?${queryParams}`);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      const nextPage = currentPage + 1;
-      setCurrentPage(nextPage);
-      const queryParams = new URLSearchParams({ page: nextPage }).toString();
-      window.history.pushState(null, "", `?${queryParams}`);
-    }
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
 
   return (
     <>
-      <Header />
-      <MainContainer>
-        <HeadContainer>
-          <h1>커뮤니티 게시판</h1>
-          <AskButton>
-            <Link to="/Write">게시글 작성</Link>
-          </AskButton>
-        </HeadContainer>
-        {posts?.map((post) => (
-          <PostItem key={post.boardPostId}>
-            <Link to={`/Detail/${post.id}`}>
-              <PostTitle>{post.title}</PostTitle>
-            </Link>
-            <PostDate>{post.createAt}</PostDate>
-          </PostItem>
-        ))}
-        <Pagination>
-          <Button onClick={handlePrevPage} disabled={currentPage <= 1}>
-            이전
-          </Button>
-          <PageNumber>{currentPage}</PageNumber>
-          <Button onClick={handleNextPage} disabled={currentPage >= totalPages}>
-            다음
-          </Button>
-        </Pagination>
-      </MainContainer>
-      <Footer />
+    <Header />
+    <MainContainer>
+      <HeadContainer>
+        <h1>커뮤니티 게시판</h1>
+        <AskButton>
+          <Link to="/Write">게시글 작성</Link>
+        </AskButton>
+      </HeadContainer>
+      {posts.length > 0 ? (
+        <>
+          {posts.map((post, index) => (
+            <PostItem key={post.boardPostId}>
+              <PostNumber>{post.boardPostId}</PostNumber>
+              <div>
+                <PostTitle>
+                  <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
+                </PostTitle>
+                <PostDate>{post.createdAt}</PostDate>
+                <p>{post.displayName}</p>
+                <p>{post.viewCount} views</p>
+              </div>
+            </PostItem>
+          ))}
+          <Stack spacing={2} direction="row">
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </Stack>
+        </>
+      ) : (
+        <NoPost>게시글이 없습니다. 글을 작성해 주세요!</NoPost>
+      )}
+    </MainContainer>
+    <Footer />
     </>
   );
 };
 
+
 export default List;
+
 
 const MainContainer = styled.main`
   display: flex;
@@ -114,7 +110,7 @@ const PostItem = styled.div`
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      /* text-decoration: underline; */
     }
   }
 
@@ -122,6 +118,14 @@ const PostItem = styled.div`
     margin-bottom: 0;
   }
 `;
+
+const PostNumber = styled.span`
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  margin-right: 1rem;
+`;
+
 
 const PostTitle = styled.h2`
   font-size: 2rem;
@@ -139,41 +143,10 @@ const PostDate = styled.p`
   padding: 0;
 `;
 
-const Pagination = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1140px;
-  margin-top: 4rem;
-`;
-
-const Button = styled.button`
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #6b6b6b;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  margin-right: 1rem;
-  padding: 0;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    color: #c1c1c1;
-  }
-`;
-
-const PageNumber = styled.span`
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #2b2b2b;
-  margin-right: 1rem;
-  padding: 0;
+const NoPost = styled.div`
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 3rem;
 `;
 
 const AskButton = styled.div`
@@ -192,8 +165,4 @@ const AskButton = styled.div`
     }
   }
 `;
-
-
-
-
 

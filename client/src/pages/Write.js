@@ -71,7 +71,7 @@ const Write = () => {
           title: data?.title,
           content: content,
           createAt: TodayTime(),
-          imgPath: "test"
+          imgPath: "",
         }
       );
       console.log("서버에서 내려온값:", response);
@@ -123,7 +123,7 @@ const Write = () => {
                       `${process.env.REACT_APP_SERVER_URL}/board-posts`,
                       formData
                     );
-                    const imageUrl = response.data.url;
+                    const imageUrl = response.data.imgPath;
                     callback(imageUrl, "alt text");
                   } catch (error) {
                     console.error(error);
@@ -131,33 +131,6 @@ const Write = () => {
                 },
               }}
             </Editor>
-          {/* <EditorInputWrapper>
-            <Editor
-              previewStyle="tab"
-              height="600px"
-              initialEditType="markdown"
-              useCommandShortcut={false}
-              ref={body1}
-              onChange={handleChange}
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  const formData = new FormData();
-                  formData.append("image", blob);
-                  try {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_URL}/board-posts`,
-                      formData
-                    );
-                    const imageUrl = response.data.url;
-                    callback(imageUrl, "alt text");
-                  } catch (error) {
-                    console.error(error);
-                  }
-                },
-              }}
-            />
-          </EditorInputWrapper> */}
-          
           <div className="buttonWrapper">
             <Button
               type="submit"

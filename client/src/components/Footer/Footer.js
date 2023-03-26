@@ -74,11 +74,10 @@ const SurferImg = styled.img`
 const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
-  .footer-images{
+  .footer-images {
     position: relative;
     top: 5px;
   }

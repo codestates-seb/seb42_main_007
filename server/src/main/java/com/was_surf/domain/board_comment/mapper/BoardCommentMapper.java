@@ -1,9 +1,6 @@
 package com.was_surf.domain.board_comment.mapper;
 
 import com.was_surf.domain.board_comment.dto.BoardCommentDto;
-import com.was_surf.domain.board_comment.dto.BoardCommentPatchDto;
-import com.was_surf.domain.board_comment.dto.BoardCommentPostDto;
-import com.was_surf.domain.board_comment.dto.BoardCommentResponseDto;
 import com.was_surf.domain.board_comment.domain.BoardComment;
 import org.mapstruct.Mapper;
 

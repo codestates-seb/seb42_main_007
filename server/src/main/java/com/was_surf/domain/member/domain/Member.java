@@ -93,7 +93,7 @@ public class Member implements UserDetails {
     private List<SpotReview> spotReviews = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
     public void addLessonRegister(LessonRegister lessonRegister) {
@@ -104,7 +104,12 @@ public class Member implements UserDetails {
         }
     }
 
-
+    // 강습클래스 신청 시 개인정보를 제외한 객체 생성자
+    public Member(long memberId, String displayName, String email) {
+        this.memberId = memberId;
+        this.displayName = displayName;
+        this.email = email;
+    }
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),

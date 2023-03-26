@@ -30,6 +30,11 @@ public class LessonRegisterService {
         // 현재 로그인된 회원 정보 조회
         Member findMember = memberService.findMemberToEmail(email);
 
+        // 개인정보를 제외한 Member 객체 생성
+        Member newMember = new Member(findMember.getMemberId(),
+                findMember.getDisplayName(),
+                findMember.getEmail());
+
         // 입력된 강습 클래스 조회
         LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
 
@@ -37,7 +42,7 @@ public class LessonRegisterService {
         existRegisterCheck(findLessonClass, findMember);
 
 
-        lessonRegister.setMember(findMember);
+        lessonRegister.setMember(newMember);
         lessonRegister.setLessonClass(findLessonClass);
         lessonRegister.setRegisterDate(LocalDateTime.now());
         // 신청 마감일 3일전까지 취소가능

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const PaymentSuccessWrapper = styled.div`
     display: flex;
@@ -22,9 +24,14 @@ const PaymentSuccessContainer = styled.div`
     }
 `
 
+const Space = styled.div`
+    height: 300px;
+`
 const PaymentSuccess = () => {
     return (
         <>
+        <Header />
+        <Space />
         <PaymentSuccessWrapper>
         <PaymentSuccessContainer>
             <div className="message">
@@ -32,6 +39,8 @@ const PaymentSuccess = () => {
             </div>
         </PaymentSuccessContainer>
         </PaymentSuccessWrapper>
+        <Space />
+        <Footer />
         </>
     )
 }

@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Kakaopay from "../../images/ClassPaymentPage/Kakaopay.png"
-import PaymentSuccess from "./PaymentSuccess";
+import PaymentSuccess from "../../components/Payment/PaymentSuccess.js";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { requestPayment } from "../../components/Payment/Kakaopay";
 
 // 컨테이너 사이즈 반응형 웹으로 조정.
 
@@ -75,7 +76,7 @@ const ClassPaymentPage = () => {
                 <div className="detail-text"> 154,000원</div>
             </div>
             </RegistrationDetail>
-            <PaymentButton>
+            <PaymentButton onClick={requestPayment}>
                 카카오페이로 결제
             <KakaopayIcon src={Kakaopay} />
             </PaymentButton>

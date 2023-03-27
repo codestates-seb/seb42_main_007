@@ -4,7 +4,6 @@ import com.was_surf.domain.lesson.application.LessonClassService;
 import com.was_surf.domain.lesson.domain.LessonClass;
 import com.was_surf.domain.lesson.dto.LessonClassDto;
 import com.was_surf.domain.lesson.mapper.LessonClassMapper;
-import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
 import com.was_surf.global.utils.UriCreator;
@@ -30,7 +29,6 @@ public class LessonClassController {
     private final static String LESSON_CLASS_DEFAULT_URL = "/lesson-class";
     private final LessonClassMapper mapper;
     private final LessonClassService lessonClassService;
-    private final MemberService memberService;
 
     // 강습 클래스 모집 글 생성
     @PostMapping
@@ -47,7 +45,7 @@ public class LessonClassController {
     }
 
     @PatchMapping("/{lesson-class-id}")
-    public ResponseEntity patchLessonClass(@PathVariable("lesson-class-id") long lessonClassId,
+    public ResponseEntity patchLessonClass(@PathVariable("lesson-class-id") Long lessonClassId,
                                            @RequestBody LessonClassDto.Patch lessonClassPatchDto,
                                            Principal principal) {
         lessonClassPatchDto.setLessonClassId(lessonClassId);
@@ -58,7 +56,7 @@ public class LessonClassController {
     }
 
     @GetMapping("/{lesson-class-id}")
-    public ResponseEntity getLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId) {
+    public ResponseEntity getLessonClass(@PathVariable("lesson-class-id") @Positive Long lessonClassId) {
         LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.lessonClassToLessonClassResponseDto(findLessonClass)), HttpStatus.OK);
@@ -74,7 +72,7 @@ public class LessonClassController {
     }
 
     @DeleteMapping("/{lesson-class-id}")
-    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId,
+    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive Long lessonClassId,
                                   Principal principal) {
         // 작성한 회원 및 관리자 계정만 삭제 가능
         lessonClassService.deleteLessonClass(lessonClassId, principal.getName());

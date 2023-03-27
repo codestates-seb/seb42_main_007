@@ -4,7 +4,6 @@ import com.was_surf.domain.lesson.application.LessonRegisterService;
 import com.was_surf.domain.lesson.domain.LessonRegister;
 import com.was_surf.domain.lesson.dto.LessonRegisterDto;
 import com.was_surf.domain.lesson.mapper.LessonRegisterMapper;
-import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.global.common.response.MultiResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +50,7 @@ public class LessonRegisterController {
 
     // 신청한 강습 클래스 중 특정 강습 클래스 조회
     @GetMapping("/{lesson-register-id}")
-    public ResponseEntity getLessonRegister(@Positive @PathVariable("lesson-register-id") long lessonRegisterId) {
+    public ResponseEntity getLessonRegister(@Positive @PathVariable("lesson-register-id") Long lessonRegisterId) {
         LessonRegister findLessonRegister = lessonRegisterService.findRegister(lessonRegisterId);
 
         return new ResponseEntity<>(mapper.lessonRegisterToLessonRegisterResponseDto(findLessonRegister), HttpStatus.OK);
@@ -68,7 +67,7 @@ public class LessonRegisterController {
     }
 
     @DeleteMapping("/{lesson-register-id}")
-    public void cancelLessonRegister(@Positive @PathVariable("lesson-register-id") long lessonRegisterId,
+    public void cancelLessonRegister(@Positive @PathVariable("lesson-register-id") Long lessonRegisterId,
                                      Principal principal) {
         lessonRegisterService.cancelRegister(lessonRegisterId, principal.getName());
     }

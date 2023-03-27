@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class LessonRegisterService {
     private final LessonRegisterRepository lessonRegisterRepository;
     private final MemberService memberService;
@@ -27,23 +27,26 @@ public class LessonRegisterService {
 
     // 강습 클래스 신청 생성
     public LessonRegister createRegister(LessonRegister lessonRegister, String email, long lessonClassId) {
+        log.info("# createRegister");
+
         // 현재 로그인된 회원 정보 조회
         Member findMember = memberService.findMemberToEmail(email);
-
-        // 개인정보를 제외한 Member 객체 생성
-        Member newMember = new Member(findMember.getMemberId(),
-                findMember.getDisplayName(),
-                findMember.getEmail());
 
         // 입력된 강습 클래스 조회
         LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
 
+        // 감습클래스 주최자일 경우 신청 불가
+        hostMemberCheck(findLessonClass, findMember);
+
+        // 개인정보를 제외한 Member 객체 생성
+        Member newMember = new Member(findMember.getMemberId(), findMember.getDisplayName(), findMember.getEmail());
+
         // 해당 강습 클래스를 이미 신청했는지 확인
         existRegisterCheck(findLessonClass, findMember);
 
-
         lessonRegister.setMember(newMember);
         lessonRegister.setLessonClass(findLessonClass);
+        lessonRegister.getLessonClass().updateCurrentHeadCount(lessonRegister.getHeadCount());
         lessonRegister.setRegisterDate(LocalDateTime.now());
         // 신청 마감일 3일전까지 취소가능
         lessonRegister.setCancelDate(findLessonClass.getRegisterEnd().minusDays(3).toLocalDate());
@@ -53,6 +56,8 @@ public class LessonRegisterService {
 
     // 강습 클래스 신청 내역 수정
     public LessonRegister updateRegister(LessonRegister lessonRegister, String email) {
+        log.info("# updateRegister");
+
         // 현재 로그인된 회원 정보 조회
         Member findMember = memberService.findMemberToEmail(email);
 
@@ -68,11 +73,15 @@ public class LessonRegisterService {
 
     // 강습 클래스 신청 내역 조회
     public LessonRegister findRegister(long lessonRegisterId) {
+        log.info("# findRegister");
+
         return verifiedRegister(lessonRegisterId);
     }
 
     // 강습 클래스 신청 내역 전체 조회
     public Page<LessonRegister> findRegisters(int page, int size, String email) {
+        log.info("# findRegisters");
+
         Member findMember = memberService.findMemberToEmail(email);
 
         return lessonRegisterRepository.findAllByMember(findMember, PageRequest.of(page - 1, size, Sort.by("lessonClass").ascending()));
@@ -80,6 +89,8 @@ public class LessonRegisterService {
 
     // 강습 클래스 신청 취소
     public void cancelRegister(long lessonRegisterId, String email) {
+        log.info("# cancelRegister");
+
         // 현재 로그인된 계정 확인
         Member findMember = memberService.findMemberToEmail(email);
 
@@ -96,15 +107,20 @@ public class LessonRegisterService {
         return findLessonRegister;
     }
 
+    // 강습클래스 주최자일 경우 신청 불가
+    public void hostMemberCheck(LessonClass lessonClass, Member member) {
+        if(lessonClass.getMember() == member) {
+            throw new BusinessLogicException(ExceptionCode.IMPOSSIBLE_REGISTER);
+        }
+    }
+
     public void verifyMatchMember(LessonRegister lessonRegister, Member member) {
         long lessonRegisterHasMemberId = lessonRegister.getMember().getMemberId();
-        log.info("# lessonRegisterMemberId: " + lessonRegisterHasMemberId);
         long currentMemberId = member.getMemberId();
-        log.info("# currentMemberId: " + currentMemberId);
-        log.info("# memberRole: " + member.getRoles());
-        log.info("# memberRole: " + member.getRoles().getClass().getSimpleName());
 
-        if(!(lessonRegisterHasMemberId == currentMemberId) || member.getRoles().toString().equals("ADMIN")) {
+        // 작성자 계정 또는 관리자 계정인지 확인
+        if(!(lessonRegisterHasMemberId == currentMemberId) || member.getRoles().contains("ADMIN")) {
+            // 아닐 경우 에러 발생
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

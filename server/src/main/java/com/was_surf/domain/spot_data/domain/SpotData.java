@@ -2,6 +2,7 @@ package com.was_surf.domain.spot_data.domain;
 
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.surf_spot.domain.SurfSpot;
+import com.was_surf.domain.weather.domain.Region;
 import com.was_surf.domain.weather.domain.Weather;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,7 +40,8 @@ public class SpotData {
     @JoinColumn(name = "SURF_SPOT_ID")
     private SurfSpot surfSpot;
 
-    @OneToOne(mappedBy = "spotData")
-    private Weather weather;
-
+    // region의 지역 정보 일대일 참조
+    @OneToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
 }

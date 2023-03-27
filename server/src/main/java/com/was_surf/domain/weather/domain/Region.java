@@ -1,19 +1,19 @@
 package com.was_surf.domain.weather.domain;
 
+import com.was_surf.domain.spot_data.domain.SpotData;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
 @NoArgsConstructor
 public class Region {
     @Id
-    @Column(name = "region_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 지역 순번
 
     @Column(name = "region_parent")
@@ -30,6 +30,9 @@ public class Region {
 
     @Embedded
     private Weather weather; // 지역 날씨 정보
+
+//    @OneToOne(mappedBy = "region") // spotData에 지역-날씨 데이터 제공
+//    private SpotData spotData;
 
     // 날씨 정보 제외하고 지역 생성
     public Region(Long id, String parentRegion, String childRegion, int nx, int ny) {

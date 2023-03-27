@@ -51,13 +51,13 @@ public class SecurityConfig {
                 .antMatchers("/api/region").permitAll()
                 .antMatchers("/members").permitAll()
                 .antMatchers("/board-posts").permitAll()
+                .antMatchers("/lesson-class").permitAll()
                 .antMatchers("/board-comments").permitAll()
                 .antMatchers("/h2-console/**)").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 

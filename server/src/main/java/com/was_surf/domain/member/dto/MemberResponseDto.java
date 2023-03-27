@@ -12,9 +12,15 @@ import java.util.List;
 public class MemberResponseDto {
 
     private long memberId;
+
     private String displayName;
+
     private String email;
-    private String password;
+
     private Member.MemberStatus memberStatus;
+
+    private Member.MemberStatus memberStatus;
+    
     private List<LessonRegister> lessonRegisters;
+
 }

@@ -1,8 +1,10 @@
-package com.was_surf.domain.lesson_class.application;
+package com.was_surf.domain.lesson.application;
 
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_class.repository.LessonClassRepository;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.repository.LessonClassRepository;
+import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,47 +17,38 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class LessonClassService {
     private final LessonClassRepository lessonClassRepository;
-
-    public LessonClassService(LessonClassRepository lessonClassRepository) {
-        this.lessonClassRepository = lessonClassRepository;
-    }
+    private final MemberService memberService;
 
     // 강습클래스 생성 및 Repository 저장
-    public LessonClass createLessonClass(LessonClass lessonClass) {
+    public LessonClass createLessonClass(LessonClass lessonClass, String email) {
         log.info("# create LessonClass");
+
+        // 현재 로그인된 회원 정보 조회
+        Member member = memberService.findMemberToEmail(email);
+
+        // 회원 정보 주입
+        lessonClass.setMember(member);
 
         return lessonClassRepository.save(lessonClass);
     }
 
     // 강습클래스 수정 및 Repository 저장
-    public LessonClass updateLessonClass(LessonClass lessonClass, Member member) {
+    public LessonClass updateLessonClass(LessonClass lessonClass, String email) {
         log.info("# update LessonClass");
+
+        // 현재 로그인한 회원 정보 조회
+        Member findMember = memberService.findMemberToEmail(email);
 
         LessonClass findLessonClass = findVerifiedLessonClass(lessonClass.getLessonClassId());
 
         // 작성자와 관리자 계정일 경우에만 수정
-        verifyMatchMember(findLessonClass, member);
+        verifyMatchMember(findLessonClass, findMember);
 
-        // 강습클래스 제목
-        Optional.ofNullable(lessonClass.getTitle())
-                .ifPresent(findLessonClass::setTitle);
-        // 강습클래스 내용
-        Optional.ofNullable(lessonClass.getContent())
-                .ifPresent(findLessonClass::setContent);
-        // 강습클래스 신청 시작 기간
-        Optional.ofNullable(lessonClass.getRegisterStart())
-                .ifPresent(findLessonClass::setRegisterStart);
-        // 강습클래스 신청 마감 기간
-        Optional.ofNullable(lessonClass.getRegisterEnd())
-                .ifPresent(findLessonClass::setRegisterEnd);
-        // 강습클래스 모집 최대 인원
-        Optional.ofNullable(lessonClass.getHeadCount())
-                .ifPresent(findLessonClass::setHeadCount);
-        // 강습클래스 삭제 상태
-        Optional.ofNullable(lessonClass.getLessonStatus())
-                .ifPresent(findLessonClass::setLessonStatus);
+        // 강습 클래스 수정
+        findLessonClass.updateLessonClass(lessonClass);
 
         // 수정된 강습클래스 Repository에 저장
         return lessonClassRepository.save(findLessonClass);
@@ -77,14 +70,17 @@ public class LessonClassService {
     }
 
     // 특정 강습클래스 삭제
-    public void deleteLessonClass(long lessonClassId, Member member) {
+    public void deleteLessonClass(long lessonClassId, String email) {
         log.info("# delete LessonClass");
+
+        // 현재 로그인한 회원 정보 조회
+        Member findMember = memberService.findMemberToEmail(email);
 
         // 해당 아이디의 강습클래스가 유효한지 확인
         LessonClass findLessonClass = findVerifiedLessonClass(lessonClassId);
 
         // 작성자와 관리자 계정일 경우에만 삭제
-        verifyMatchMember(findLessonClass, member);
+        verifyMatchMember(findLessonClass, findMember);
 
         lessonClassRepository.delete(findLessonClass);
     }
@@ -103,7 +99,7 @@ public class LessonClassService {
         long lessonClassHasMemberId = lessonClass.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if(!(lessonClassHasMemberId == currentMemberId) || member.getRoles().toString().equals("ADMIN")) {
+        if(!(lessonClassHasMemberId == currentMemberId) || (member.getRoles().toString().equals("TEACHER") && member.getRoles().toString().equals("ADMIN"))) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

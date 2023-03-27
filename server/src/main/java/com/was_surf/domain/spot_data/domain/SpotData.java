@@ -21,27 +21,37 @@ public class SpotData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long spotDataId;
 
+//    @Column
+//    private int temp; //온도
     @Column
-    private int temp; //온도
+    private Integer tempScore;
+
+//    @Column
+//    private int wave; //파고
     @Column
-    private int tempScore;
+    private Integer waveScore;
+
+//    @Column
+//    private int windSpeed; //풍속
+    @Column
+    private Integer windSpeedScore;
 
     @Column
-    private int wave; //파고
-    @Column
-    private int waveSore;
+    private Integer totalScore;
 
-    @Column
-    private int windSpeed; //풍속
-    @Column
-    private int windSpeedSore;
-
-//    @OneToOne
-//    @JoinColumn(name = "SURF_SPOT_ID")
-//    private SurfSpot surfSpot;
+    @OneToOne(mappedBy = "spotData")
+    private SurfSpot surfSpot;
 
     // region의 지역 정보 일대일 참조
-//    @OneToOne
-//    @JoinColumn(name = "region_id")
-//    private Region region;
+    @OneToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public void sumScore() {
+        this.totalScore = this.tempScore + this.waveScore + this.windSpeedScore;
+    }
 }

@@ -12,6 +12,8 @@ public enum ExceptionCode {
     COMMENT_NOT_FOUND(404, "댓글을 찾을 수 없습니다."),
     REVIEW_NOT_FOUND(404, "리뷰를 찾을 수 없습니다."),
     SPOT_NOT_FOUND(404, "스팟을 찾을 수 없습니다."),
+    REGION_NOT_FOUND(404, "장소를 찾을 수 없습니다."),
+    SPOTDATA_NOT_FOUND(404, "날씨 정보를 찾을 수 없습니다."),
     POST_NOT_CHANGE(404, "수정할 내용이 없습니다."),
     COMMENT_NOT_CHANGE(404, "수정할 내용이 없습니다."),
     WRONG_TOKEN_INPUT(403, "잘못된 토큰입니다."),

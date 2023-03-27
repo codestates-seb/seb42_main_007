@@ -33,14 +33,4 @@ public class Weather {
 
     @Column(nullable = true)
     private String lastUpdateTime; // 마지막 갱신시각
-
-//    public Weather(String temp, String wave, String windSpeed, String highestTemperature, String minimumTemperature, String precipitation, String lastUpdateTime) {
-//        this.temp = temp;
-//        this.wave = wave;
-//        this.windSpeed = windSpeed;
-//        this.highestTemperature = highestTemperature;
-//        this.minimumTemperature = minimumTemperature;
-//        this.precipitation = precipitation;
-//        this.lastUpdateTime = lastUpdateTime;
-//    }
 }

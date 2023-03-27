@@ -33,6 +33,9 @@ public class Region {
     @Embedded
     private Weather weather; // 지역 날씨 정보
 
+    @OneToOne(mappedBy = "region")
+    private SpotData spotData;
+
     // 날씨 갱신
     public void updateRegionWeather(Weather weather) {
         this.weather = weather;

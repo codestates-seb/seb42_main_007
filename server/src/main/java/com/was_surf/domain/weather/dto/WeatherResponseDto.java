@@ -10,10 +10,6 @@ import javax.persistence.Column;
 @Builder
 public class WeatherResponseDto {
 
-    private Long weatherId;
-    private String temp; //온도
-    private String wave; //파고
-    private String windSpeed; //풍속
     private Weather weather;
     private String message;
 }

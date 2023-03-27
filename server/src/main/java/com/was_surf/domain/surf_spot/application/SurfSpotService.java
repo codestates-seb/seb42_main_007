@@ -30,14 +30,7 @@ public class SurfSpotService {
         return findVerifiedSurfSpot(surfSpotId);
     }
 
-    // 전체 조회2
-//    public Page<SurfSpot> findSurfSpots(int page, int size) {
-//        return surfSpotRepository.findAll(PageRequest.of(
-//                page, size, Sort.by("surfSpotId").descending()
-//        ));
-//    }
-
-    // 전체 조회1
+    // 전체 조회
     public Page<SurfSpot> findSurfSpots(String status, int page, int size) {
 
         switch (status) {
@@ -53,8 +46,11 @@ public class SurfSpotService {
                         page, size, Sort.by("surfSpotId").ascending()
                 ));
 
-            // recommend순
-//            case "recommend":
+            // 날씨 데이터 기반 추천순
+            case "recommend":
+                return surfSpotRepository.findAll(PageRequest.of(
+                        page, size, Sort. by("spotData.totalScore").descending()
+                ));
         }
 
         return null;

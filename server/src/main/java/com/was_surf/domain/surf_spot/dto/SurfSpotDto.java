@@ -1,5 +1,6 @@
 package com.was_surf.domain.surf_spot.dto;
 
+import com.was_surf.domain.spot_data.domain.SpotData;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +12,7 @@ public class SurfSpotDto {
     @NoArgsConstructor
     public static class Response {
         private long surfSpotId;
-        private String imgPath;
-        private String name;
-        private String address;
         private String viewCount;
+        private int totalScore;
     }
 }

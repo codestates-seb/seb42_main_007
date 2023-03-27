@@ -2,7 +2,6 @@ package com.was_surf.domain.board_post.application;
 
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.board_post.repository.BoardPostRepository;
-import com.was_surf.domain.lesson_class.domain.LessonClass;
 import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.error.exception.BusinessLogicException;

@@ -20,9 +20,11 @@ import FindId from "./components/Login/FindID";
 import FindPassword from "./components/Login/FIndPassword";
 import WaveFind from "./pages/WaveFind";
 import CardModal from "./components/Board/Card/CardModal";
+import Delete from "./components/Board/Delete";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import PaymentFailure from "./components/Payment/PaymentFailure";
+// import { useCookies } from 'react-cookie';
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
         <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
         <Route path="/Write" element={<Write></Write>}></Route>
         <Route path="/Edit" element={<Edit></Edit>}></Route>
+        <Route path="/Delete" element={<Delete></Delete>}></Route>
         <Route path="/List" element={<List></List>}></Route>
         <Route path="/Detail" element={<Detail></Detail>}></Route>
         <Route path="/login" element={<Login />}></Route>

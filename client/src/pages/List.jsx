@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
+import { format } from "date-fns";
 
 const List = () => {
   const [posts, setPosts] = useState([]);
@@ -43,12 +44,13 @@ const List = () => {
             <PostItem key={post.boardPostId}>
               <PostNumber>{post.boardPostId}</PostNumber>
               <div>
-                <PostTitle>
+              <PostTitle>
                   <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
                 </PostTitle>
-                <PostDate>{post.createdAt}</PostDate>
-                <p>{post.displayName}</p>
-                <p>{post.viewCount} views</p>
+              </div>
+              <div>
+                <RightBox><span>{post.displayName}</span>조회수 {post.viewCount}</RightBox>
+                <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
               </div>
             </PostItem>
           ))}
@@ -79,6 +81,7 @@ const MainContainer = styled.main`
   align-items: center;
   padding: 4rem 0;
   height: 100%;
+  margin: 0 4rem;
 `;
 
 const HeadContainer = styled.div`
@@ -100,17 +103,26 @@ const HeadContainer = styled.div`
 
 const PostItem = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  height: 1rem;
   max-width: 1140px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
   a {
     text-decoration: none;
+    color: #2b2b2b;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
 
     &:hover {
-      /* text-decoration: underline; */
+      color: #7cccdc;
     }
   }
 
@@ -119,12 +131,7 @@ const PostItem = styled.div`
   }
 `;
 
-const PostNumber = styled.span`
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #6b6b6b;
-  margin-right: 1rem;
-`;
+
 
 
 const PostTitle = styled.h2`
@@ -135,9 +142,24 @@ const PostTitle = styled.h2`
   padding: 0;
   line-height: 1.4;
 `;
+const PostNumber = styled.span`
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  margin-right: 1rem;
+`;
+
+const RightBox = styled.p`
+  font-size: 0.8rem;
+  color: gray;
+
+   span {
+    margin-right: 5rem;
+  }
+`
 
 const PostDate = styled.p`
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: #6b6b6b;
   margin: 0;
   padding: 0;
@@ -165,4 +187,3 @@ const AskButton = styled.div`
     }
   }
 `;
-

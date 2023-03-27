@@ -7,7 +7,6 @@ import HomeBack3 from "../components/Board/HomeBack3";
 import styled from "styled-components";
 
 const SectionTwo = styled.div`
-  /* background-color: #3FBED3; */
   background-color: #7BC4C4;
   background-size: cover;
   height: 100vh;

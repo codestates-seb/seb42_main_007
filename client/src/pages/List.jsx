@@ -49,7 +49,7 @@ const List = () => {
                 </PostTitle>
               </div>
               <div>
-                <RightBox><span>{post.displayName}</span>조회수 {post.viewCount}</RightBox>
+                <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
                 <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
               </div>
             </PostItem>
@@ -107,7 +107,7 @@ const PostItem = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 1rem;
+  height: 0.6rem;
   max-width: 1140px;
   margin-bottom: 1rem;
   padding: 2rem;
@@ -153,8 +153,15 @@ const RightBox = styled.p`
   font-size: 0.8rem;
   color: gray;
 
-   span {
-    margin-right: 5rem;
+  .name-left {
+    float: left;
+    margin-left: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+  .name-right {
+    float: right;
+    margin-right: 0.2rem;
+    margin-bottom: 0.2rem;
   }
 `
 
@@ -163,6 +170,7 @@ const PostDate = styled.p`
   color: #6b6b6b;
   margin: 0;
   padding: 0;
+  clear: both;
 `;
 
 const NoPost = styled.div`

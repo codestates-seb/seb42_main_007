@@ -19,8 +19,6 @@ public class MemberResponseDto {
 
     private Member.MemberStatus memberStatus;
 
-    private Member.MemberStatus memberStatus;
-    
     private List<LessonRegister> lessonRegisters;
 
 }

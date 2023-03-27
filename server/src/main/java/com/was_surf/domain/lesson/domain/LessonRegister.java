@@ -21,7 +21,7 @@ public class LessonRegister {
     @Column(nullable = false)
     private LocalDateTime registerDate;
     @Enumerated(value = EnumType.STRING)
-    private PayStatus payStatus = PayStatus.N;
+    private PayStatus payStatus = PayStatus.Y;
     @Column(nullable = false)
     private LocalDate cancelDate;
     @Column(nullable = false)
@@ -33,13 +33,13 @@ public class LessonRegister {
     @JoinColumn(name = "LESSON_CLASS_ID", referencedColumnName = "lessonClassId", nullable = false)
     private LessonClass lessonClass;
 
-//    public void setMember(Member member) {
-//        this.member = member;
-//
-//        if(!this.member.getLessonRegisters().contains(this)) {
-//            this.member.getLessonRegisters().add(this);
-//        }
-//    }
+    public void setMember(Member member) {
+        this.member = member;
+
+        if(!this.member.getLessonRegisters().contains(this)) {
+            this.member.getLessonRegisters().add(this);
+        }
+    }
 
     public void changePayStatus(PayStatus payStatus) {
         Optional.ofNullable(payStatus)

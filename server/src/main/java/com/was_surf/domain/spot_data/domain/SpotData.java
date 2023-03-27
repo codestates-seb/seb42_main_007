@@ -36,9 +36,9 @@ public class SpotData {
     @Column
     private int windSpeedSore;
 
-    @OneToOne
-    @JoinColumn(name = "SURF_SPOT_ID")
-    private SurfSpot surfSpot;
+//    @OneToOne
+//    @JoinColumn(name = "SURF_SPOT_ID")
+//    private SurfSpot surfSpot;
 
     // region의 지역 정보 일대일 참조
 //    @OneToOne

@@ -39,7 +39,7 @@ public class SurfSpot {
     @OneToMany(mappedBy = "surfSpot", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
 
-    @OneToOne(mappedBy = "surfSpot")
-    private SpotData spotData;
+//    @OneToOne(mappedBy = "surfSpot")
+//    private SpotData spotData;
 }
 

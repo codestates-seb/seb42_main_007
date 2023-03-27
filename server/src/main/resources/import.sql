@@ -4,3 +4,16 @@ INSERT INTO surf_spot(SURF_SPOT_ID, IMG_PATH, NAME, ADDRESS, VIEW_COUNT) VALUES 
 INSERT INTO surf_spot(SURF_SPOT_ID, IMG_PATH, NAME, ADDRESS, VIEW_COUNT) VALUES (4, '썸네일주소1', '서울2', '서울광역시어쩌고', 0);
 INSERT INTO surf_spot(SURF_SPOT_ID, IMG_PATH, NAME, ADDRESS, VIEW_COUNT) VALUES (5, '썸네일주소2', '부산2', '부산광역시어쩌고', 0);
 INSERT INTO surf_spot(SURF_SPOT_ID, IMG_PATH, NAME, ADDRESS, VIEW_COUNT) VALUES (6, '썸네일주소3', '대구2', '대구광역시어쩌고', 0);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (1, '강원도', '양양군', 90, 136);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (2, '강원도', '강릉시', 95, 129);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (3, '강원도', '고성군', 86, 144);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (4, '충청남도', '태안시', 46, 109);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (5, '경상북도', '포항시북구', 102, 96);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (6, '제주특별자치도', '서귀포시', 51, 32);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (7, '제주특별자치도', '제주시', 51, 38);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (8, '제주특별자치도', '제주시', 59, 38);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (9, '제주특별자치도', '제주시', 49, 37);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (10, '부산광역시', '해운대구', 61, 126);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (11, '부산광역시', '해운대구', 99, 75);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (12, '경상북도', '영덕군', 102, 100);
+INSERT INTO region(region_id, region_parent, region_child, nx, ny) VALUES (13, '울산광역시', '울주군', 102, 80);

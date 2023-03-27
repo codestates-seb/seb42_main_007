@@ -18,7 +18,9 @@ public class SpotDataService {
     @Scheduled(cron = "0 0 0/3 1/1 * *")
     public void runEveryTenSecondsOne() {
 
-//        Weather weather = new weather.getTemp();
+        Region region = Region.getTemp();
+
+
 //        log.info("3시간에 한번 : " + LocalTime.now());
 //        log.info("thread: " + Thread.currentThread().getName());
 //        log.info("==============================================");

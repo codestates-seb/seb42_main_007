@@ -1,13 +1,14 @@
-package com.was_surf.domain.lesson_class.dto;
+package com.was_surf.domain.lesson.dto;
 
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class LessonClassDto {
         private String content;
         private LocalDateTime registerStart;
         private LocalDateTime registerEnd;
+        private LocalDate lessonDate;
         private int headCount;
         private int price;
     }
@@ -31,6 +33,7 @@ public class LessonClassDto {
         private String content;
         private LocalDateTime registerStart;
         private LocalDateTime registerEnd;
+        private LocalDate lessonDate;
         private int headCount;
         private int price;
         private LessonClass.LessonStatus lessonStatus;
@@ -49,6 +52,8 @@ public class LessonClassDto {
         private LocalDateTime registerStart;
         @NotNull
         private LocalDateTime registerEnd;
+        @NotNull
+        private LocalDate lessonDate;
         @NotNull
         private int headCount;
         @NotNull

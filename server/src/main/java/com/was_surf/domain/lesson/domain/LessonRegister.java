@@ -1,6 +1,5 @@
-package com.was_surf.domain.lesson_register.domain;
+package com.was_surf.domain.lesson.domain;
 
-import com.was_surf.domain.lesson_class.domain.LessonClass;
 import com.was_surf.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -33,13 +33,20 @@ public class LessonRegister {
 
     public void setMember(Member member) {
         this.member = member;
+
         if(!this.member.getLessonRegisters().contains(this)) {
             this.member.getLessonRegisters().add(this);
         }
     }
 
+    public void changePayStatus(PayStatus payStatus) {
+        Optional.ofNullable(payStatus)
+                .ifPresent(status -> this.payStatus = status);
+    }
+
     public void setLessonClass(LessonClass lessonClass) {
         this.lessonClass = lessonClass;
+
         if(this.lessonClass.getLessonRegisters().contains(this)) {
             this.lessonClass.getLessonRegisters().add(this);
         }

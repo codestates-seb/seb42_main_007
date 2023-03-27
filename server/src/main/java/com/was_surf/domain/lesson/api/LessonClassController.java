@@ -1,11 +1,10 @@
-package com.was_surf.domain.lesson_class.api;
+package com.was_surf.domain.lesson.api;
 
-import com.was_surf.domain.lesson_class.application.LessonClassService;
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_class.dto.LessonClassDto;
-import com.was_surf.domain.lesson_class.mapper.LessonClassMapper;
+import com.was_surf.domain.lesson.application.LessonClassService;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.dto.LessonClassDto;
+import com.was_surf.domain.lesson.mapper.LessonClassMapper;
 import com.was_surf.domain.member.application.MemberService;
-import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
 import com.was_surf.global.utils.UriCreator;
@@ -39,14 +38,7 @@ public class LessonClassController {
                                           Principal principal) {
         LessonClass lessonClass = mapper.lessonClassPostDtoToLessonClass(lessonClassPostDto);
 
-        // 현재 로그인된 회원 정보 조회
-        Member member = memberService.findMemberToEmail(principal.getName());
-        log.info("# principal(getName) : " + principal.getName());
-
-        // 회원 정보 주입
-        lessonClass.setMember(member);
-
-        LessonClass createdLessonClass = lessonClassService.createLessonClass(lessonClass);
+        LessonClass createdLessonClass = lessonClassService.createLessonClass(lessonClass, principal.getName());
 
         URI location = UriCreator.createUri(LESSON_CLASS_DEFAULT_URL, createdLessonClass.getLessonClassId());
 
@@ -58,13 +50,9 @@ public class LessonClassController {
     public ResponseEntity patchLessonClass(@PathVariable("lesson-class-id") long lessonClassId,
                                            @RequestBody LessonClassDto.Patch lessonClassPatchDto,
                                            Principal principal) {
-        // 현재 로그인한 회원 정보 조회
-        Member findMember = memberService.findMemberToEmail(principal.getName());
-
-        // 작성한 회원 및 관리자 계정만 수정 가능
         lessonClassPatchDto.setLessonClassId(lessonClassId);
 
-        LessonClass lessonClass = lessonClassService.updateLessonClass(mapper.lessonClassPatchDtoToLessonClass(lessonClassPatchDto), findMember);
+        LessonClass lessonClass = lessonClassService.updateLessonClass(mapper.lessonClassPatchDtoToLessonClass(lessonClassPatchDto), principal.getName());
 
         return new ResponseEntity<>(mapper.lessonClassToLessonClassResponseDto(lessonClass), HttpStatus.OK);
     }
@@ -72,6 +60,7 @@ public class LessonClassController {
     @GetMapping("/{lesson-class-id}")
     public ResponseEntity getLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId) {
         LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
+
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.lessonClassToLessonClassResponseDto(findLessonClass)), HttpStatus.OK);
     }
 
@@ -87,10 +76,7 @@ public class LessonClassController {
     @DeleteMapping("/{lesson-class-id}")
     public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive long lessonClassId,
                                   Principal principal) {
-        // 현재 로그인한 회원 정보 조회
-        Member findMember = memberService.findMemberToEmail(principal.getName());
-
         // 작성한 회원 및 관리자 계정만 삭제 가능
-        lessonClassService.deleteLessonClass(lessonClassId, findMember);
+        lessonClassService.deleteLessonClass(lessonClassId, principal.getName());
     }
 }

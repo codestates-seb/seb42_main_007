@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png";
 import { Menu } from "@styled-icons/ionicons-solid/Menu";
 import { Times } from "@styled-icons/typicons/Times";
 import { Link } from "react-router-dom";
 import Logo_black from "../../images/Logo_black.png";
+
+// import { useAuth } from '../../context/AuthContext';
 
 const HeaderContainer = styled.div`
     width: 100%;
@@ -227,9 +229,16 @@ const MypageButton = styled.button`
   }
 `;
 
+
+
 const Header = () => {
   const [menu, setMenu] = useState(false);
-  const isLoggedIn = localStorage.getItem("token"); // 로그인 상태를 나타내는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <>

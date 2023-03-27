@@ -19,7 +19,9 @@ public enum ExceptionCode {
     LESSON_CLASS_NOT_FOUND(404, "강습 클래스를 찾을 수 없습니다."),
     MEMBER_NOT_MATCH(403, "작성자와 회원정보가 일치하지 않습니다."),
     REGISTER_NOT_FOUND(404, "작성자와 회원정보가 일치하지 않습니다."),
-    IMPOSSIBLE_REGISTER(403, "강습 주최자는 강습 클래스 수강 신청이 불가능합니다.");
+    IMPOSSIBLE_REGISTER(403, "강습 주최자는 강습 클래스 수강 신청이 불가능합니다."),
+    NOT_PERMISSION_MEMBER(403, "강습 클래스 작성 권한이 없습니다."),
+    REGISTER_EXIST(409, "이미 신청한 강습 클래스입니다.");
 
     private int httpStatus;
     private String message;

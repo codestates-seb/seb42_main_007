@@ -45,7 +45,7 @@ public class WeatherApiController {
         StringBuilder urlBuilder =  new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
 
         // 2. 요청 시각 조회
-        LocalDateTime now = LocalDateTime.now().minusHours(3);
+        LocalDateTime now = LocalDateTime.now().minusHours(2);
         String yyyyMMdd = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int hour = now.getHour();
         int min = now.getMinute();
@@ -75,6 +75,7 @@ public class WeatherApiController {
         String nx = Integer.toString(region.getNx());
         String ny = Integer.toString(region.getNy());
         String currentChangeTime = now.format(DateTimeFormatter.ofPattern("yy.MM.dd ")) + hourStr;
+
 
         // 기준 시각 조회 자료가 이미 존재하고 있다면 API 요청 없이 기존 자료 그대로 넘김
         Weather prevWeather = region.getWeather();
@@ -165,7 +166,6 @@ public class WeatherApiController {
                         break;
                 }
             }
-
             Weather weather = new Weather(temp,wave,windSpeed,precipitation,highestTemperature,minimumTemperature,currentChangeTime);
             region.updateRegionWeather(weather); // DB 업데이트
             WeatherResponseDto dto = WeatherResponseDto.builder()

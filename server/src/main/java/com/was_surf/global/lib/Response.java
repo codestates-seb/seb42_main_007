@@ -2,7 +2,6 @@ package com.was_surf.global.lib;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +14,18 @@ import java.util.LinkedList;
 @Component
 @Slf4j
 public class Response {
-
     @Getter
     @Builder
     private static class Body {
+
         private int state;
+
         private String result;
+
         private String message;
+
         private Object data;
+
         private Object error;
     }
 
@@ -34,6 +37,7 @@ public class Response {
                 .message(msg)
                 .error(Collections.emptyList())
                 .build();
+        log.info("# data: " + data);
         return ResponseEntity.ok(body);
     }
     public ResponseEntity<?> success(String msg) {

@@ -1,7 +1,7 @@
-package com.was_surf.domain.lesson_class.dto;
+package com.was_surf.domain.lesson.dto;
 
-import com.was_surf.domain.lesson_class.domain.LessonClass;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
+import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import java.util.List;
 public class LessonClassDto {
     @Getter
     public static class Post {
-        private long lessonClassId;
+        private Long lessonClassId;
         private String title;
         private String content;
         private LocalDateTime registerStart;
@@ -28,7 +28,7 @@ public class LessonClassDto {
     @Getter
     public static class Patch {
         @Setter
-        private long lessonClassId;
+        private Long lessonClassId;
         private String title;
         private String content;
         private LocalDateTime registerStart;
@@ -42,8 +42,8 @@ public class LessonClassDto {
     @Getter
     @Builder
     public static class Response {
-        private String memberId;
-        private long lessonClassId;
+        private Long memberId;
+        private Long lessonClassId;
         @NotBlank
         private String title;
         @NotBlank
@@ -55,9 +55,11 @@ public class LessonClassDto {
         @NotNull
         private LocalDate lessonDate;
         @NotNull
-        private int headCount;
+        private Integer headCount;
         @NotNull
-        private int price;
+        private int currentHeadCount;
+        @NotNull
+        private Integer price;
         private LessonClass.LessonStatus lessonStatus;
         private List<LessonRegister> lessonRegisters;
         public String getLessonStatus() {

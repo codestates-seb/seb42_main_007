@@ -1,11 +1,11 @@
-package com.was_surf.domain.lesson_class.domain;
+package com.was_surf.domain.lesson.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.was_surf.domain.lesson_register.domain.LessonRegister;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @Entity
 public class LessonClass extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long lessonClassId;
+    private Long lessonClassId;
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
@@ -32,20 +33,23 @@ public class LessonClass extends Auditable {
     @Column(nullable = false)
     private LocalDate lessonDate;
     @Column(nullable = false)
-    private int headCount;
+    private Integer headCount;
+    @Column
+    private Integer currentHeadCount;
 
     @Column(nullable = false)
-    private int price;
+    private Integer price;
 
     @Enumerated(value = EnumType.STRING)
     private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
 
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID", referencedColumnName = "memberId", nullable = false)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "MEMBER_ID", nullable = false)
     private Member member;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "lessonClass", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "lessonClass", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
     public void setMember(Member member) {
@@ -84,6 +88,10 @@ public class LessonClass extends Auditable {
         Optional.ofNullable(lessonClass.getHeadCount()).ifPresent(headCount -> this.headCount = headCount);
         // 강습 클래스 가격
         Optional.ofNullable(lessonClass.getPrice()).ifPresent(price -> this.price = price);
+    }
+
+    public void updateCurrentHeadCount(int headCount) {
+        this.currentHeadCount = this.currentHeadCount + headCount;
     }
 
     public enum LessonStatus {

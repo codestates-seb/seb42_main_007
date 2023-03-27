@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -52,20 +51,20 @@ public class SecurityConfig {
                 .antMatchers("/api/region").permitAll()
                 .antMatchers("/members").permitAll()
                 .antMatchers("/board-posts").permitAll()
+                .antMatchers("/lesson-class").permitAll()
                 .antMatchers("/board-comments").permitAll()
                 .antMatchers("/h2-console/**)").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://91c2-219-251-79-133.jp.ngrok.io"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://91c2-219-251-79-133.jp.ngrok.io", "http://43.201.167.13:8080"));
         config.setAllowedOriginPatterns(Arrays.asList("*"));
         config.setAllowedHeaders(Arrays.asList("*"));
         config.addExposedHeader("Authorization");

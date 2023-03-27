@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import LandingSurfer from "../../images/Board/LandingSurfer.png";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
@@ -71,6 +72,26 @@ const MainArea = styled.div`
     }
   }
 `;
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+`;
+const LeftImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100vh;
+  animation: ${slideIn} 0.5s forwards;
+  animation-delay: 1s;
+  z-index: 5;
+`;
+
+
 
 const MainText = styled.p`
   position: relative;
@@ -150,6 +171,7 @@ const HomeBack2 = () => {
             <SubText>서퍼들과의 이야기</SubText>
           </div>
         </div>
+        <LeftImage src={LandingSurfer} alt="서퍼" />
       </MainArea>
     </>
   );

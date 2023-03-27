@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import LandingFooter from "../Footer/LandingFooter";
 
 const BREAK_POINT_MOBILE = 767;
@@ -26,9 +26,9 @@ const MainArea = styled.div`
   }
 
   div.text {
-    width: 1200px;
+    width: 1500px;
     margin: 0 auto;
-    margin-top: 8rem;
+    margin-top: 6rem;
     p {
       position: relative;
       z-index: 3;
@@ -73,6 +73,29 @@ const MainArea = styled.div`
     }
   }
 `;
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+`;
+const SurfingImageWrapper = styled.div`
+  background-image: url("https://ak-d.tripcdn.com/images/0352y120008matupr523E_C_1136_640_Q60.jpg?proc=source/trip;namelogo/d_40");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
+  width: 40%;
+  position: absolute;
+  right: 20rem;
+  bottom: 15rem;
+  border-radius: 6%;
+  animation: ${slideIn} 0.5s forwards;
+`
+
+
 
 const MainText = styled.p`
   position: relative;
@@ -149,6 +172,7 @@ const HomeBack3 = () => {
             <SubText>걱정없이 출발해요</SubText>
           </div>
         </div>
+        <SurfingImageWrapper />
       </MainArea>
       <LandingFooter />
     </>

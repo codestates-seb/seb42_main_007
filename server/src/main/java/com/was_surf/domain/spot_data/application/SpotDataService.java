@@ -18,10 +18,10 @@ public class SpotDataService {
     @Scheduled(cron = "0 0 0/3 1/1 * *")
     public void runEveryTenSecondsOne() {
 
-        Weather weather = new weather.getTemp();
-        log.info("3시간에 한번 : " + LocalTime.now());
-        log.info("thread: " + Thread.currentThread().getName());
-        log.info("==============================================");
+//        Weather weather = new weather.getTemp();
+//        log.info("3시간에 한번 : " + LocalTime.now());
+//        log.info("thread: " + Thread.currentThread().getName());
+//        log.info("==============================================");
 
         // 여기서 온도 / 파고 / 풍속 데이터 3시간에 한번 받아오기
 

@@ -39,13 +39,9 @@ public class Weather {
     @Column(nullable = true)
     private String lastUpdateTime; // 마지막 갱신시각
 
-    @ManyToOne
-    @JoinColumn(name = "SPOT_DATA_ID")
+    @OneToOne
+    @JoinColumn(name = "SURF_SPOT_ID")
     private SpotData spotData;
-
-    public void setSpotData(SpotData spotData) {
-        this.spotData = spotData;
-    }
 
 
     public Weather(String temp, String wave, String windSpeed, String highestTemperature, String minimumTemperature, String precipitation, String lastUpdateTime) {

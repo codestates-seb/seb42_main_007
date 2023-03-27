@@ -35,11 +35,11 @@ public class SpotData {
     @Column
     private int windSpeedSore;
 
-    @OneToMany(mappedBy = "spotData", cascade = CascadeType.ALL)
-    private List<Weather> Weathers = new ArrayList<>();
-
     @OneToOne
     @JoinColumn(name = "SURF_SPOT_ID")
     private SurfSpot surfSpot;
+
+    @OneToOne(mappedBy = "spotData")
+    private Weather weather;
 
 }

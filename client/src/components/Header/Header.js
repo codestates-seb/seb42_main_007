@@ -161,13 +161,14 @@ const MenuItems = styled.div`
     .hidden {
       display: block;
     }
-  } 
+  }
 `;
 
 const MenuItem = styled.div`
   min-width: fit-content;
   margin-left: 20px;
   color: white;
+
   @media screen and (max-width: 768px) {
     background-color: #80dee8;
     border: 1px #3fbed3 solid;
@@ -177,10 +178,10 @@ const MenuItem = styled.div`
     color: black;
 
     /* border-radius: 20px 0 0 20px; */
-    /* text-align: center; */
+    /* t  z-index: 2;
+ext-align: center; */
   }
 `;
-
 
 const ButtonContainer = styled.div`
   width: fit-content;
@@ -263,9 +264,7 @@ const Header = () => {
           </MenuItems>
           <ButtonContainer>
             {isLoggedIn ? (
-              <MypageButton>
-                <Link to="/mypage">마이페이지</Link>
-              </MypageButton>
+              <></>
             ) : (
               <LoginButton>
                 <Link to="/Login">로그인</Link>

@@ -24,6 +24,8 @@ public class LessonRegister {
     private PayStatus payStatus = PayStatus.N;
     @Column(nullable = false)
     private LocalDate cancelDate;
+    @Column(nullable = false)
+    private int headCount;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "memberId", nullable = false)
     private Member member;
@@ -31,13 +33,13 @@ public class LessonRegister {
     @JoinColumn(name = "LESSON_CLASS_ID", referencedColumnName = "lessonClassId", nullable = false)
     private LessonClass lessonClass;
 
-    public void setMember(Member member) {
-        this.member = member;
-
-        if(!this.member.getLessonRegisters().contains(this)) {
-            this.member.getLessonRegisters().add(this);
-        }
-    }
+//    public void setMember(Member member) {
+//        this.member = member;
+//
+//        if(!this.member.getLessonRegisters().contains(this)) {
+//            this.member.getLessonRegisters().add(this);
+//        }
+//    }
 
     public void changePayStatus(PayStatus payStatus) {
         Optional.ofNullable(payStatus)

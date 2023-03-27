@@ -1,13 +1,12 @@
 package com.was_surf.domain.member.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
-import com.was_surf.domain.lesson.domain.LessonRegister;
+import com.was_surf.domain.lesson.domain.LessonClass;
 import com.was_surf.domain.spot_review.domain.SpotReview;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -92,19 +91,18 @@ public class Member implements UserDetails {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<LessonRegister> lessonRegisters = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<LessonClass> lessonClasses = new ArrayList<>();
 
-    public void addLessonRegister(LessonRegister lessonRegister) {
-        lessonRegisters.add(lessonRegister);
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
-        if(lessonRegister.getMember() != this) {
-            lessonRegister.setMember(this);
-        }
-    }
+//    public void addLessonRegister(LessonRegister lessonRegister) {
+//        lessonRegisters.add(lessonRegister);
+//    }
 
-    // 강습클래스 신청 시 개인정보를 제외한 객체 생성자
+    // 개인정보를 제외한 객체 생성자
     public Member(long memberId, String displayName, String email) {
         this.memberId = memberId;
         this.displayName = displayName;

@@ -11,14 +11,15 @@ import java.time.LocalDateTime;
 public class LessonRegisterDto {
     @Getter
     public static class Post {
-        private long lessonClassId;
+        private Long lessonClassId;
+        private Integer headCount;
 
     }
 
     @Getter
     public static class Patch {
         @Setter
-        private long lessonClassId;
+        private Long lessonClassId;
         private LessonRegister.PayStatus payStatus;
 
     }
@@ -26,8 +27,8 @@ public class LessonRegisterDto {
     @Getter
     @Builder
     public static class Response {
-        private long memberId;
-        private long lessonClassId;
+        private Long memberId;
+        private Long lessonClassId;
         private LocalDateTime registerDate;
         private LessonRegister.PayStatus payStatus;
         private LocalDate cancelDate;

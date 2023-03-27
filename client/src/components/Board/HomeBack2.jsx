@@ -4,45 +4,6 @@ const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
 
-const BackgroundVideo = styled.div`
-  background: #eee;
-  height: 100%;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  font-family: "NanumBarunGothic";
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-  list-style: none;
-  text-decoration: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  height: 100%;
-  *::-webkit-scrollbar {
-    display: none;
-  }
-
-  body {
-    height: 100%;
-    overflow: scroll;
-  }
-
-  > iframe { 
-  object-fit: cover;
-  box-sizing: border-box;
-    height: 56.25vw;
-    left: 50%;
-    min-height: 100%;
-    min-width: 100%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    width: 177.77777778vh;
-    z-index:1;
-    }
-`;
-
 const MainArea = styled.div`
   max-height: 864px;
   height: 100vh;
@@ -64,8 +25,6 @@ const MainArea = styled.div`
       text-shadow: 2px 4px 2px gray;
       line-height: 1.2;
       transition: 0.2s;
-      font-family: 'Shantell Sans', cursive; // 폰트를 적용합니다.
-
     }
     // 모바일 : 0~767px :: 767px 이하로 적용되는 css
     @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
@@ -135,24 +94,19 @@ const MainText = styled.p`
   }
 `;
 
-const HomeBack = () => {
-  return (
-    <>
-      <BackgroundVideo>
-      <iframe
-      title="랜딩페이지 배경"
-      src="https://player.vimeo.com/video/538877060?mute=1&loop=1&autoplay=1&controls=0&modestbranding=1&amp;playlist=-fDsOcaR1sQ&loop=1&vq=hd1080" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-      </iframe>
-        <MainArea>
-          <div className="text">
-            <MainText>Surfing</MainText>
-            <MainText>With</MainText>
-            <MainText>Was'surf</MainText>
-          </div>
-        </MainArea>
-      </BackgroundVideo>
-    </>
-  );
-};
-
-export default HomeBack;
+const HomeBack2 = () => {
+    return (
+      <>
+          <MainArea>
+            <div className="text">
+              <MainText>서핑 어디서 하지?</MainText>
+              <MainText>With</MainText>
+              <MainText>Was'surf</MainText>
+            </div>
+          </MainArea>
+      </>
+    );
+  };
+  
+  export default HomeBack2;
+  

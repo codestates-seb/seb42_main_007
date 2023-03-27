@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Spinner from '../../images/LoadingIndicator.gif'
+import Spinner from '../images/LoadingIndicator.gif'
 
 export const Background = styled.div`
   position: absolute;
@@ -17,7 +17,7 @@ export const Background = styled.div`
 `
 
 export const LoadingText = styled.div`
-  font: 1rem 'Noto Sans KR';
+  font-size: 1rem;
   text-align: center;
 `
 

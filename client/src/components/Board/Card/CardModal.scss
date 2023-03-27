@@ -34,13 +34,30 @@
     position: absolute;
     display: flex;
     left: 1rem;
-    bottom: 5rem;
+    bottom: 18rem;
     width: 30%;
-    height: 35%;
+    height: 5%;
     > h2 {
         font-size: 25px;
         margin: 0 auto;
     }
+}
+.modal-body-left-under-text {
+  position: absolute;
+  display: flex;
+  left: 1rem;
+  bottom: 4rem;
+  width: 30%;
+  height: 30%;
+}
+
+.modal-body-left-under-recommand {
+  position: absolute;
+  display: flex;
+  left: 1rem;
+  bottom: 0.2rem;
+  width: 30%;
+  height: 30%;
 }
 
 .modal-body-right {

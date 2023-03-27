@@ -1,45 +1,33 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Detail = () => {
-  const [post, setPost] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { boardPostId } = useParams();
+function Detail(props) {
+  const [boardPost, setBoardPost] = useState(null);
+  const boardPostId = props.match.params.id; // url 파라미터로부터 boardPostId를 추출합니다.
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`
-        );
-        setPost(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setIsLoading(false);
-      }
-    }
-    fetchData();
+    axios.get(`http://43.201.167.13:8080/board-posts/${boardPostId}`)
+      .then(response => {
+        setBoardPost(response.data.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, [boardPostId]);
 
-  if (isLoading) {
+  if (!boardPost) {
     return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
   }
 
   return (
     <div>
-      <h1>{post.title}</h1>
-      <p>{post.createdAt}</p>
-      <p>{post.displayName}</p>
-      <p>{post.content}</p>
+      <h1>{boardPost.title}</h1>
+      <p>{boardPost.content}</p>
+      <p>작성자: {boardPost.displayName}</p>
+      <p>작성일: {boardPost.createdAt}</p>
+      <p>조회수: {boardPost.viewCount}</p>
     </div>
   );
-};
+}
 
 export default Detail;

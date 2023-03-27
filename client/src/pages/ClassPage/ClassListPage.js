@@ -18,8 +18,8 @@ const ClassListPage = () => {
         <ClassListWrapper>
             <Title>오늘 이런 수업 어때요? 🌴</Title>
             <ClassListContainer>
-            {/* <ListSwiper /> */}
-            <SingleClass />
+            <ListSwiper />
+            {/* <SingleClass /> */}
             </ClassListContainer>
             <CreateNewClassButton>
                 <div className="show"><Link to="/newclass">새 강좌 작성하기</Link></div>

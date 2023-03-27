@@ -1,6 +1,5 @@
 package com.was_surf.domain.member.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson.domain.LessonClass;
 import com.was_surf.domain.lesson.domain.LessonRegister;
@@ -103,6 +102,7 @@ public class Member implements UserDetails {
     public void addLessonRegister(LessonRegister lessonRegister) {
         lessonRegisters.add(lessonRegister);
     }
+
 
     // 개인정보를 제외한 객체 생성자
     public Member(long memberId, String displayName, String email) {

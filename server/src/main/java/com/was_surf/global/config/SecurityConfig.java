@@ -51,14 +51,14 @@ public class SecurityConfig {
                 .antMatchers("/api/weather").permitAll()
                 .antMatchers("/api/region").permitAll()
                 .antMatchers("/members").permitAll()
-                .antMatchers("/board-posts").hasAnyRole("USER", "ADMIN", "TEACHER")
-                .antMatchers("/board-comments").hasAnyRole("USER", "ADMIN", "TEACHER")
+                .antMatchers("/board-posts").permitAll()
+                .antMatchers("/lesson-class").permitAll()
+                .antMatchers("/board-comments").permitAll()
                 .antMatchers("/h2-console/**)").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 

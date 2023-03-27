@@ -9,9 +9,12 @@ import lombok.Getter;
 public class MemberResponseDto {
 
     private long memberId;
-    private String displayName;
-    private String email;
-    private String password;
-    private Member.MemberStatus memberStatus;
 
+    private String displayName;
+
+    private String email;
+
+    private String password;
+
+    private Member.MemberStatus memberStatus;
 }

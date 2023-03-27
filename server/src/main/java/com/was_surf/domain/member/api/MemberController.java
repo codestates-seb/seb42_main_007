@@ -33,7 +33,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid@RequestBody MemberDto.Login login, Errors errors) {
+    public ResponseEntity<?> login(@Validated MemberDto.Login login, Errors errors) {
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }
@@ -41,7 +41,7 @@ public class MemberController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@Valid@RequestBody MemberDto.Logout logout, Errors errors) {
+    public ResponseEntity<?> logout(@Validated MemberDto.Logout logout, Errors errors) {
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }

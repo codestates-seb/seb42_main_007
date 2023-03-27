@@ -104,40 +104,42 @@ const Login = () => {
         },
       );
       console.log(response.data);
-
-      const { accessToken, refreshToken } = response.data;
-
-      if (accessToken && refreshToken) {
+      // navigate('/');
+      // const { accessToken, refreshToken } = response.data['data']['accessToken'];
+      const accessToken =  response.data['data']['accessToken'];
+      const refreshToken =  response.data['data']['refreshToken'];
+      // console.log (accessToken);
+      // console.log (refreshToken);
+      if (refreshToken && accessToken) {
         // console.log('Access Token:', accessToken);
         // console.log('Refresh Token:', refreshToken);
         setCookie('accessToken', accessToken, { path: '/', maxAge: 60 * 30000 });
         setCookie('refreshToken', refreshToken, { path: '/', maxAge: 60 * 30000 });
-        setTokens(accessToken, refreshToken);
+        // setTokens(accessToken, refreshToken);
+        localStorage.setItem('accessToken',accessToken);
+        localStorage.setItem('refreshToken',refreshToken);
 
         // setAuth(true);
         setLoggedIn(true);
         alert('로그인이 성공했습니다.');
-        window.location.href = '/'; 
         navigate('/');
         console.log('Access Token:', accessToken);
         console.log('Refresh Token:', refreshToken);
-        // navigate('/');
         // alert('로그인이 성공했습니다.');
         // setTimeout(() => {
         //   navigate('/'); // 일정 시간 후에 '/' 화면으로 이동
         // }, 2000); // 2초 후에 화면 이동
-        
       } else {
-        // setError('로그인 정보가 일치하지 않습니다.');
+        setError('로그인 정보가 일치하지 않습니다.');
       }
     } catch (error) {
       console.error('Error in handleLogin:', error);
       if (error.response) {
         if (error.response.status === 401) {
-          // setError('로그인 정보가 일치하지 않습니다.');
+          setError('로그인 정보가 일치하지 않습니다.');
           console.error(error.response.status)
         } else {
-          setError(`서버 오류: ${error.response.data.message}`);
+          setError(`로그인에 실패하였습니다.: ${error.response.data.message}`);
         }
       } else {
         setError('알 수 없는 에러가 발생했습니다.');
@@ -146,13 +148,6 @@ const Login = () => {
     }
   };
 
-  
-
-  
-
-
-  
-  
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     if (!e.target.value.includes('@')) {

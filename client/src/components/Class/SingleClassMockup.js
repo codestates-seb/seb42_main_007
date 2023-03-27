@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import RandomImage from 'react-random-image';
+import { imagesUrl } from "./RandomImage";
+
 
 const SingleClassMockup = () => {
+    const [photoUrl, setPhotoUrl] = useState("https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80")
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * imagesUrl.length);
+        setPhotoUrl(imagesUrl[randomIndex]);
+      }, []);
+
     return (
         <>
                 <SingleClassContainer>
-                <ClassThumbnail />
-                {/* <RandomImage keyword="surfing" width={250} height={250}/> */}
+                <ClassThumbnail photoUrl={`${photoUrl}`}/>
                 <ClassTitle>와썹in양양 [타이틀]</ClassTitle>
                 <ClassPrice>77,000원</ClassPrice>
                 <ClassReservationButton><Link to="/class/1">바로예약 👉</Link></ClassReservationButton>
@@ -26,16 +33,22 @@ const SingleClassContainer = styled.div`
     align-items: flex-end;
     box-shadow: 0px 0px 7px 0px #CBCBCB;
     margin: 0px 5px;
-
+    z-index: -1;
+    .image-container {
+  background-image: url(photoUrl);
+  background-size: cover;
+  background-position: center;
+}
 `
 
 
 const ClassThumbnail = styled.div`
-    background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+    width: 250px;
+    height: 250px;
+    background-image: url(${props => props.photoUrl});
     background-size: cover;
     background-position: center;
-    width: 250px;
-    min-height: 250px;
+
 `
 
 const ClassTitle = styled.div`

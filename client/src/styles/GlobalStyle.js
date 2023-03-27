@@ -1,6 +1,12 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+    @font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    }
     a {
         text-decoration: none;
         color: inherit;
@@ -18,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
         flex-direction: column;
     }
     body {
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family: 'NanumSquareNeo-Variable';
     }
     h2 {
         margin: 0;

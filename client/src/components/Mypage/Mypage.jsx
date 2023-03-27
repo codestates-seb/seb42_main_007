@@ -20,7 +20,7 @@ function Mypage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
         },
       });
 
@@ -29,7 +29,7 @@ function Mypage() {
       }
 
       // 2. 쿠키 삭제하기
-      Cookies.remove('token');
+      Cookies.remove('accessToken');
 
       // 3. 상태 업데이트하기
       setIsLoggedOut(true);
@@ -44,7 +44,7 @@ function Mypage() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
         },
       });
 
@@ -78,7 +78,7 @@ function Mypage() {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
         },
       });
 
@@ -87,7 +87,7 @@ function Mypage() {
       }
 
       // 2. 쿠키 삭제하기
-      Cookies.remove('token');
+      Cookies.remove('accessToken');
 
       // 3. 상태 업데이트하기
       setIsDeleting(false);

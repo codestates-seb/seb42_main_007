@@ -1,8 +1,8 @@
-import "../App.css";
-import Header from "../components/Header/Header";
+import LandingHeader from "../components/Header/LandingHeader";
 import Footer from "../components/Footer/Footer";
 import {SectionsContainer, Section} from 'react-fullpage';
 import HomeBack from "../components/Board/HomeBack";
+import HomeBack2 from "../components/Board/HomeBack2";
 import styled from "styled-components";
 
 const SectionTwo = styled.div`
@@ -10,6 +10,13 @@ const SectionTwo = styled.div`
   background-size: cover;
   height: 100vh;
 `;
+
+const SectionThree = styled.div`
+  background-color: #FFFFFF;
+  background-size: cover;
+  height: 100vh;
+`;
+
 
 function Home() {
   const options = {
@@ -21,17 +28,18 @@ function Home() {
       
       <SectionsContainer {...options}>
         <Section>
-        <Header />
+        <LandingHeader />
           <HomeBack />
         </Section>
         <SectionTwo>
-          {/* 섹션 2의 내용 */}
+        <LandingHeader />
+          <HomeBack2 />
         </SectionTwo>
-        <Section>
+        <SectionThree>
           {/* 섹션 3의 내용 */}
           <Footer />
 
-        </Section>
+        </SectionThree>
       </SectionsContainer>
     </>
   );

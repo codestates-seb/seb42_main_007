@@ -19,7 +19,7 @@ const CardModal = ({ isOpen, closeModal }) => {
     >
       <div className="modal-wrapper">
         <div className="modal-body">
-        <button className="close-modal-btn" onClick={closeModal}>
+          <button className="close-modal-btn" onClick={closeModal}>
             X
           </button>
           <div className="modal-body-left">
@@ -28,8 +28,16 @@ const CardModal = ({ isOpen, closeModal }) => {
           </div>
           <div className="modal-body-left-under">
             <h2>양양 죽도 해변</h2>
-            {/* 해변 간략한 소개 */}
           </div>
+          <div className="modal-body-left-under-text">
+            {/* 해변 간략한 소개 */}
+            드넓은 모래사장이 있는 서핑 명소로 서핑 매장과 편안한 분위기의 식당이 해안가를 따라 있습니다.
+          </div>
+          <div className="modal-body-left-under-recommand">
+            추천 대상 : 입문자, 초중급자
+            <br />
+            파도 세기 : 다소 빠름
+            </div>
           <div className="modal-body-right">
             {/* 현재 날씨 정보 */}
           </div>

@@ -27,10 +27,11 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Response{
+
         private long memberId;
         private String displayName;
         private String email;
-        private String password;
+
     }
     @Getter
     @AllArgsConstructor

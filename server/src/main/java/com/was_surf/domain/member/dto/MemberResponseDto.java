@@ -14,7 +14,5 @@ public class MemberResponseDto {
 
     private String email;
 
-    private String password;
-
     private Member.MemberStatus memberStatus;
 }

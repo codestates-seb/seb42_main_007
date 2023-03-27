@@ -45,7 +45,7 @@ public class WeatherApiController {
         StringBuilder urlBuilder =  new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
 
         // 2. 요청 시각 조회
-        LocalDateTime now = LocalDateTime.now().minusHours(3);
+        LocalDateTime now = LocalDateTime.now().minusHours(2);
         String yyyyMMdd = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int hour = now.getHour();
         int min = now.getMinute();

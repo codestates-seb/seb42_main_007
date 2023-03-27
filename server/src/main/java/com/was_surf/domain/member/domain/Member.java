@@ -1,7 +1,9 @@
 package com.was_surf.domain.member.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -94,13 +96,13 @@ public class Member implements UserDetails {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<LessonClass> lessonClasses = new ArrayList<>();
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//    private List<LessonRegister> lessonRegisters = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
-//    public void addLessonRegister(LessonRegister lessonRegister) {
-//        lessonRegisters.add(lessonRegister);
-//    }
+    public void addLessonRegister(LessonRegister lessonRegister) {
+        lessonRegisters.add(lessonRegister);
+    }
 
     // 개인정보를 제외한 객체 생성자
     public Member(long memberId, String displayName, String email) {

@@ -74,7 +74,7 @@ function Mypage() {
   const handleDeleteAccount = async () => {
     try {
       // 1. 백엔드 API를 호출하여 회원정보 삭제하기
-      const response = await fetch('members/{member-id}', {
+      const response = await fetch('http://43.201.167.13:8080/members/%7Bmember-id%7D', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

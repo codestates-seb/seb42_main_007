@@ -22,6 +22,7 @@ import WaveFind from "./pages/WaveFind";
 import CardModal from "./components/Board/Card/CardModal";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
+import PaymentFailure from "./components/Payment/PaymentFailure";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/findpassword" element={<FindPassword />}></Route>
         <Route path="/editclass/:lessonId" element={<EditClassPage />}></Route>
         <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
+        <Route path="/payfailed" element={<PaymentFailure />}></Route>
         </Routes>
     </>
     </AuthProvider>

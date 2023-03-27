@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import RandomImage from "react-random-image";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { imagesUrl } from "../../components/Class/RandomImage";
 
 
 const SingleClass = () => {
@@ -12,42 +13,13 @@ const SingleClass = () => {
 
   const [data, setData] = useState([]);
   const [photoUrl, setPhotoUrl] = useState(defaultPhotoUrl);
-  const [name, setName] = useState("anonymous");
 
-  //시간당 50회 제한
-  // const getPhotoUrl = async () => {
-  //     axios
-  //     .get(`https://api.unsplash.com/photos/random?client_id=${process.env.REACT_APP_FETCHPICS_API_KEY}`,
-  //     {
-  //         headers: {
-  //             Authorization: process.env.REACT_APP_FETCHPICS_API_KEY
-  //         },
-  //         params: {
-  //             query: 'surf'
-  //         }
-  //     })
-  //     .then((res) => {
-  //         setPhotoUrl(res.data.urls.regular)
-  //         setName(res.data.user.name)
-  //     })
-  //     .catch((err) => {
-  //         console.log(err)
-  //     })
+  useEffect(() => {
+      const randomIndex = Math.floor(Math.random() * imagesUrl.length);
+      setPhotoUrl(imagesUrl[randomIndex]);
+    }, []);
 
-  // }
-  //카테고리설정이..안됨...
-  // const getPhotoUrl = async () => {
-  //     axios
-  //     .get(`https://random.imagecdn.app/v1/image?width=250&height=250&category=landscape&format=text`)
-  //     .then((res) => {
-  //         setPhotoUrl(res.data)
-  //         // console.log(res)
-  //     })
-  //     .catch((err) => {
-  //         console.log(err)
-  //     })
 
-  // }
   const getLessons = async () => {
     axios
       .get(`http://43.201.167.13:8080/lesson-class/?page=1&size=10`)
@@ -70,9 +42,10 @@ const SingleClass = () => {
       {data &&
         data.map((lessondata) => {
           return (
-            <div className="lesson-data" key={lessondata.lessonClassId}>
+            <SwiperSlide key={lessondata.lessonClassId}>
+                <div className="lesson-data">
               <SingleClassContainer>
-                <ClassThumbnail src={photoUrl} />
+                <ClassThumbnail photoUrl={`${photoUrl}`} />
                 <ClassTitle>{lessondata.title}</ClassTitle>
                 <ClassPrice>{`${lessondata.price}원`}</ClassPrice>
                 <ClassReservationButton>
@@ -81,7 +54,8 @@ const SingleClass = () => {
                   </Link>
                 </ClassReservationButton>
               </SingleClassContainer>
-            </div>
+              </div>
+            </SwiperSlide>
           );
         })}
       {/* <div className="lesson-data" key='1' > 
@@ -106,6 +80,7 @@ const SingleClassContainer = styled.div`
   box-shadow: 0px 0px 7px 1px #cbcbcb;
   border-radius: 20px;
   margin: 5px 0px 5px 5px;
+  z-index: -1;
   .copyright {
     font-size: 5px;
     color: #d4d2d1;
@@ -113,13 +88,13 @@ const SingleClassContainer = styled.div`
   }
 `;
 
-const ClassThumbnail = styled.img`
-  background-size: cover;
-  background-position: center;
-  width: 250px;
-  height: 250px;
-  z-index: -1;
-  border-radius: 20px 20px 0 0;
+const ClassThumbnail = styled.div`
+    width: 250px;
+    height: 250px;
+    background-image: url(${props => props.photoUrl});
+    background-size: cover;
+    background-position: center;
+
 `;
 
 const ClassTitle = styled.div`

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png";
 import { Menu } from "@styled-icons/ionicons-solid/Menu";
 import { Times } from "@styled-icons/typicons/Times";
 import { Link } from "react-router-dom";
 import Logo_black from "../../images/Logo_black.png";
+
+// import { useAuth } from '../../context/AuthContext';
 
 const HeaderContainer = styled.div`
     width: 100%;
@@ -161,13 +163,14 @@ const MenuItems = styled.div`
     .hidden {
       display: block;
     }
-  } 
+  }
 `;
 
 const MenuItem = styled.div`
   min-width: fit-content;
   margin-left: 20px;
   color: white;
+
   @media screen and (max-width: 768px) {
     background-color: #80dee8;
     border: 1px #3fbed3 solid;
@@ -177,10 +180,10 @@ const MenuItem = styled.div`
     color: black;
 
     /* border-radius: 20px 0 0 20px; */
-    /* text-align: center; */
+    /* t  z-index: 2;
+ext-align: center; */
   }
 `;
-
 
 const ButtonContainer = styled.div`
   width: fit-content;
@@ -227,9 +230,16 @@ const MypageButton = styled.button`
   }
 `;
 
+
+
 const Header = () => {
   const [menu, setMenu] = useState(false);
-  const isLoggedIn = localStorage.getItem("token"); // 로그인 상태를 나타내는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <>
@@ -263,9 +273,7 @@ const Header = () => {
           </MenuItems>
           <ButtonContainer>
             {isLoggedIn ? (
-              <MypageButton>
-                <Link to="/mypage">마이페이지</Link>
-              </MypageButton>
+              <></>
             ) : (
               <LoginButton>
                 <Link to="/Login">로그인</Link>

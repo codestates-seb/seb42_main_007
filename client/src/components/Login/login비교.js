@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { REDIRECT_URI } from '../Apiurl';
-import { AuthContext, useAuth, } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 
 
@@ -75,83 +75,50 @@ const Login = () => {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
   const { setTokens } = useAuth();
-  const [, forceUpdate] = useState();
-  // const { setAuth } = useAuth();
-
-  const [loggedIn, setLoggedIn] = useState(false); // 로그인 상태를 관리하는 useState 추가
-
-
-
 
   const API_URL = `${REDIRECT_URI}members/login`;
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const payload = new URLSearchParams();
-      payload.append('email', email);
-      payload.append('password', password);
+      const payload = {
+        email,
+        password,
+      };
 
-  
-      const response = await axios.post(
-        API_URL,
-        payload.toString(),
-        {
-          headers: {
-            'ngrok-skip-browser-warning': '69420',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
+      const response = await axios.post(API_URL, payload, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-      );
-      console.log(response.data);
-
+      });
       const { accessToken, refreshToken } = response.data;
 
       if (accessToken && refreshToken) {
-        // console.log('Access Token:', accessToken);
-        // console.log('Refresh Token:', refreshToken);
+        console.log('Access Token:', accessToken);
+        console.log('Refresh Token:', refreshToken);
         setCookie('accessToken', accessToken, { path: '/', maxAge: 60 * 30000 });
         setCookie('refreshToken', refreshToken, { path: '/', maxAge: 60 * 30000 });
         setTokens(accessToken, refreshToken);
 
-        // setAuth(true);
-        setLoggedIn(true);
         alert('로그인이 성공했습니다.');
-        window.location.href = '/'; 
         navigate('/');
-        console.log('Access Token:', accessToken);
-        console.log('Refresh Token:', refreshToken);
-        // navigate('/');
-        // alert('로그인이 성공했습니다.');
-        // setTimeout(() => {
-        //   navigate('/'); // 일정 시간 후에 '/' 화면으로 이동
-        // }, 2000); // 2초 후에 화면 이동
-        
       } else {
-        // setError('로그인 정보가 일치하지 않습니다.');
+        setError('로그인 정보가 일치하지 않습니다.');
       }
     } catch (error) {
       console.error('Error in handleLogin:', error);
       if (error.response) {
         if (error.response.status === 401) {
-          // setError('로그인 정보가 일치하지 않습니다.');
-          console.error(error.response.status)
+          console.error(error.response.status);
+          setError('로그인 정보가 일치하지 않습니다.');
         } else {
           setError(`서버 오류: ${error.response.data.message}`);
         }
       } else {
         setError('알 수 없는 에러가 발생했습니다.');
-        console.error('Error in handleLogin:', error);
       }
     }
   };
-
-  
-
-  
-
-
-  
   
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -213,7 +180,6 @@ const Login = () => {
         </button>
       </form>
       {/* <div>{JSON.stringify(cookies)}</div> */}
-      {loggedIn && navigate('/')} {/* 로그인 상태가 true이면 페이지 이동 */}
     </LoginWrapper>
   );
 };

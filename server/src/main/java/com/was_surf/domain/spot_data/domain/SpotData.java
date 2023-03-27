@@ -41,7 +41,7 @@ public class SpotData {
     private SurfSpot surfSpot;
 
     // region의 지역 정보 일대일 참조
-    @OneToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
+//    @OneToOne
+//    @JoinColumn(name = "region_id")
+//    private Region region;
 }

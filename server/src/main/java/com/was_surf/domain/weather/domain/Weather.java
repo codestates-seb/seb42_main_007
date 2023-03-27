@@ -11,12 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Embeddable
-//@Entity
 public class Weather {
-//
-//    @Column(name = "weather_id")
-////    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Column(nullable = true)
     private String temp; //온도
@@ -39,17 +34,13 @@ public class Weather {
     @Column(nullable = true)
     private String lastUpdateTime; // 마지막 갱신시각
 
-//    @ManyToOne
-//    @JoinColumn(name = "region_id")
-//    private Region region;
-
-    public Weather(String temp, String wave, String windSpeed, String highestTemperature, String minimumTemperature, String precipitation, String lastUpdateTime) {
-        this.temp = temp;
-        this.wave = wave;
-        this.windSpeed = windSpeed;
-        this.highestTemperature = highestTemperature;
-        this.minimumTemperature = minimumTemperature;
-        this.precipitation = precipitation;
-        this.lastUpdateTime = lastUpdateTime;
-    }
+//    public Weather(String temp, String wave, String windSpeed, String highestTemperature, String minimumTemperature, String precipitation, String lastUpdateTime) {
+//        this.temp = temp;
+//        this.wave = wave;
+//        this.windSpeed = windSpeed;
+//        this.highestTemperature = highestTemperature;
+//        this.minimumTemperature = minimumTemperature;
+//        this.precipitation = precipitation;
+//        this.lastUpdateTime = lastUpdateTime;
+//    }
 }

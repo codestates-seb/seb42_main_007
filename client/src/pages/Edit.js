@@ -1,111 +1,77 @@
-import {
-  InputLabel,
-  EditorInput,
-} from "../components/Board/EditorInputWrapper";
-import { Input } from "../components/Board/Input";
-import { Button } from "../components/Board/Button";
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { useEffect, useState, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import styled from "styled-components";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
-import "../App.css";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
-const Edit = (props) => {
-
+const Edit = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { boardPostId } = useParams();
   const navigate = useNavigate();
-  const [answer, setAnswer] = useState("");
-  const editorRef = useRef();
+  const { state: { post } } = useLocation(); // 이전 페이지에서 전달된 post 데이터 가져오기
 
-  const handleEditorChange = () => {
-    const data = editorRef.current.getInstance().getMarkdown();
-    setAnswer(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        setTitle(post.title); // 이전 페이지에서 전달된 post 데이터 사용
+        setContent(post.content); // 이전 페이지에서 전달된 post 데이터 사용
+        setIsLoading(false);
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+        console.log("게시글을 불러오는데 실패했습니다")
+      }
+    };
+    fetchData();
+  }, [post]); // post 데이터도 useEffect의 의존성 배열에 추가
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
   };
 
-  const cancelButtonClick = () => {
-    navigate(`/Detail`);
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await axios.patch(
+      `${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`,
+      {
+        title: title,
+        content: content,
+      }
+    );
+    navigate(`/detail/${response.data.data.boardPostId}`);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
-    <>
-      <div>
-        <Header></Header>
-      </div>
-      <MainLeft>
-        <h2>게시글 수정</h2>
-        <div>
-          <InputLabel title="제목" />
-          <Input placeholder="" padding="0.78rem 0.91rem" width="calc(100% - 30.12px);" />
-          {/* <Input
-            value={title.questionTitle}
-            onChange={e => setquestionTitle(e.target.value)}
-            padding='0.78rem 0.91rem'
-            width='100%'
-            /> */}
-        </div>
-        <div>
-          <InputLabel title="내용" />
-          {/* <EditorInput ref={editorRef} /> */}
-          <Editor
-            height="30rem"
-            initialEditType="wysiwyg"
-            initialValue=" "
-            useCommandShortcut={true}
-            ref={editorRef}
-            onChange={handleEditorChange}
-          ></Editor>
-          <div>{props.questionContent}</div>
-        </div>
-        <div className="buttonWrapper">
-          <Button
-            //   onClick={saveEditButtonClick}
-            buttonType="type2"
-            buttonName="저장"
-            width="8.04rem"
-            height="3.79rem"
-          />
-          <Button
-              onClick={cancelButtonClick}
-            buttonType="type4"
-            buttonName="취소"
-            width="8.04rem"
-            height="3.79rem"
-          />
-        </div>
-      </MainLeft>
-      <Footer></Footer>
-    </>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          제목:
+          <input type="text" value={title} onChange={handleTitleChange} />
+        </label>
+        <br />
+        <label>
+          내용:
+          <textarea value={content} onChange={handleContentChange} />
+        </label>
+        <br />
+        <button type="submit">수정 완료</button>
+      </form>
+    </div>
   );
 };
 
 export default Edit;
-
-const MainLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin: 6rem 20rem 4rem;
-  padding-top: 2rem;
-
-  .buttonWrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 0.8rem;
-    margin-top: 1.5rem;
-    margin-bottom: 4rem;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  > h2 {
-    display: flex;
-    flex-direction: row;
-    font-size: 30px;
-  }
-`;

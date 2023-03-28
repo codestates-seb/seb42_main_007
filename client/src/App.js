@@ -8,10 +8,8 @@ import Write from "./pages/Write";
 import Login from "./components/Login/Login";
 import Signup from "./components/signUp/SignUp";
 import Mypage from "./components/Mypage/Mypage";
-import BoardList from "./pages/BoardList";
 import Detail from "./pages/Detail";
 import Find from "./pages/Find";
-import Board from "./pages/Board";
 import ClassListPage from "./pages/ClassPage/ClassListPage";
 import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
 import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
@@ -22,6 +20,7 @@ import FindId from "./components/Login/FindID";
 import FindPassword from "./components/Login/FIndPassword";
 import WaveFind from "./pages/WaveFind";
 import CardModal from "./components/Board/Card/CardModal";
+import Delete from "./components/Board/Delete";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import PaymentFailure from "./components/Payment/PaymentFailure";
@@ -38,10 +37,9 @@ function App() {
         <Route path="/CardModal" element={<CardModal></CardModal>}></Route>
         <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
         <Route path="/Write" element={<Write></Write>}></Route>
-        <Route path="/Edit" element={<Edit></Edit>}></Route>
+        <Route path="/edit/:boardPostId" element={<Edit></Edit>}></Route>
+        <Route path="/Delete" element={<Delete></Delete>}></Route>
         <Route path="/List" element={<List></List>}></Route>
-        <Route path="/Board" element={<Board></Board>}></Route>
-        <Route path="/BoardList" element={<BoardList></BoardList>}></Route>
         <Route path="/Detail" element={<Detail></Detail>}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>

@@ -130,7 +130,7 @@ const Login = () => {
         //   navigate('/'); // 일정 시간 후에 '/' 화면으로 이동
         // }, 2000); // 2초 후에 화면 이동
       } else {
-        // setError('로그인 정보가 일치하지 않습니다.');
+        setError('로그인 정보가 일치하지 않습니다.');
       }
     } catch (error) {
       console.error('Error in handleLogin:', error);

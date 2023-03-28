@@ -1,17 +1,19 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem('accessToken') || null);
+  const [token, setToken] = useState(
+    localStorage.getItem("accessToken") || null
+  );
 
   const setAuthToken = (token) => {
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem("accessToken", token);
     setToken(token);
   };
 
   const removeAuthToken = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
     setToken(null);
   };
 
@@ -37,12 +39,11 @@ export const useAuth = () => {
   const auth = useContext(AuthContext);
 
   if (!auth) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
 
   return auth;
 };
-
 
 // import { createContext, useState, useEffect, useContext } from 'react';
 
@@ -55,16 +56,16 @@ export const useAuth = () => {
 //     setIsAuthenticated(authStatus);
 //   };
 
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem('accessToken');
-  //   const refreshToken = localStorage.getItem('refreshToken');
+// useEffect(() => {
+//   const accessToken = localStorage.getItem('accessToken');
+//   const refreshToken = localStorage.getItem('refreshToken');
 
-  //   if (accessToken && refreshToken) {
-  //     setAuth(true);
-  //   } else {
-  //     setAuth(false);
-  //   }
-  // }, []);
+//   if (accessToken && refreshToken) {
+//     setAuth(true);
+//   } else {
+//     setAuth(false);
+//   }
+// }, []);
 
 //   return (
 //     <AuthContext.Provider value={{ isAuthenticated, setAuth }}>

@@ -196,6 +196,7 @@ const LandingHeader = () => {
               </MenuItem>
             )}
           </MenuItems>
+<<<<<<< HEAD
           {/* <ButtonContainer>
             {isLoggedIn ? (
               <></>
@@ -204,6 +205,9 @@ const LandingHeader = () => {
                 <Link to="/Login">로그인</Link>
               </LoginButton>
             )}
+=======
+          <ButtonContainer>
+>>>>>>> feat/FE
             <div className="toggle" onClick={() => setMenu(!menu)}>
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>

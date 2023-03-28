@@ -50,13 +50,13 @@ const JukDo4 = () => {
 export default JukDo4;
 
 const WeatherWrapper = styled.div`
-margin-top: 0.5rem;
+margin-top: 1.2rem;
 `;
 
 const WeatherInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
 
   .temp {
     font-size: 1.4rem;

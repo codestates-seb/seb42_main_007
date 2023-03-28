@@ -50,13 +50,13 @@ const JukDo = () => {
 export default JukDo;
 
 const WeatherWrapper = styled.div`
-margin-top: 0.5rem;
+margin-top: 1.2rem;
 `;
 
 const WeatherInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
 
   .temp {
     font-size: 1.4rem;
@@ -83,7 +83,7 @@ const WeatherInfo = styled.div`
       if (waveHeight >= 2) {
         return '#BD0000'; // 빨간색
       } else if (waveHeight >= 1) {
-        return '#FFA500'; // 주황색
+        return '#BF7C00'; // 주황색
       } else if (waveHeight >= 0.5) {
         return '#187D36'; // 초록색
       } else {
@@ -102,7 +102,7 @@ const WeatherInfo = styled.div`
     } else if (windSpeed <= 10.7) {
       return '#1C6EA4'; // 파랑색
     } else if (windSpeed <= 17.1) {
-      return '#FFA500'; // 주황색
+      return '#BF7C00'; // 주황색
     } else {
       return '#BD0000'; // 빨간색
     }
@@ -119,7 +119,7 @@ const WeatherInfo = styled.div`
     } else if (precipitation <= 10) {
       return '#187D36'; // 초록색
     } else if (precipitation <= 50) {
-      return '#FFA500'; // 주황색
+      return '#BF7C00'; // 주황색
     } else {
       return '#BD0000'; // 빨간색
     }

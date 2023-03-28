@@ -23,10 +23,13 @@ const List = () => {
       );
       setPosts(response.data.data);
       setTotalPages(response.data.pageInfo.totalPages);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000); // 2초 후 로딩 인디케이터를 숨깁니다.
     }
     fetchData();
   }, [currentPage]);
+
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

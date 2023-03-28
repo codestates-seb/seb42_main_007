@@ -66,6 +66,8 @@ const CreateNewClassButton = styled.button`
   margin-bottom: 10px;
   position: relative;
   left: 320px;
+  font-family: "NanumSquareNeo-Variable";
+
   :hover {
     transition: 0.5s;
     background-color: #319fb1;

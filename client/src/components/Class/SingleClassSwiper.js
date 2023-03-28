@@ -191,6 +191,7 @@ const ClassReservationButton = styled.button`
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
+  font-family: "NanumSquareNeo-Variable";
   :hover {
     transition: 0.5s;
     background-color: #319fb1;

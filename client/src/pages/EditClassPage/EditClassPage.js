@@ -21,57 +21,43 @@ const EditClassPage = () => {
   const [initialValue, setInitialValue] = useState("기존강좌내용");
   const [originalData, setOriginalData] = useState({});
   const [price, setPrice] = useState("0");
+  const [registedNumber, setRegisteredNumber] = useState("0");
   const editorRef = useRef();
   const { lessonId } = useParams(); // /class/{lessonId}
+  const navigate = useNavigate();
 
-  const EditLesson = async () => {
-    useEffect(() => {
-      axios
-        .get(
-          `http://43.201.167.13:8080/lesson-class/${lessonId}` // 수정할 클래스 아이디
-        )
-        .then((res) => {
-          setOriginalData(res.data.data);
-          console.log(originalData);
-          setInitialValue(originalData.content);
-          setTitle(originalData.title);
-          setStartDate(originalData.registerStart);
-          setEndDate(originalData.registerEnd);
-          setLessonDate(originalData.lessonDate);
-          setNumber(originalData.headCount);
-          setPrice(originalData.price);
-        });
-    }, []);
-
-    await axios
-      .patch(
-        `http://43.201.167.13:8080/lesson-class/${lessonId}`,
-        {
-          title: title,
-          content: content,
-          registerStart: startDate,
-          registerEnd: endDate,
-          lessonDate: lessonDate,
-          headCount: number,
-          price: price,
-        }
-        //   {
-        //     "memberId": "1",
-        //     "lessonClassId": 1,
-        //     "title": "강습 클래스 제목",
-        //     "content": "강습 클래스 내용",
-        //     "registerStart": "2023-03-18T12:20:00",
-        //     "registerEnd": "2023-03-20T23:30:00",
-        //     "lessonDate": "2023-03-31",
-        //     "headCount": 40,
-        //     "price": 75000,
-        //     "lessonStatus": "현재 강습을 신청할 수 있습니다.",
-        //     "lessonRegisters": []
-        //   },
+  useEffect(() => {
+    axios
+      .get(
+        `http://43.201.167.13:8080/lesson-class/${lessonId}` // 수정할 클래스 아이디
       )
+      .then((res) => {
+        setOriginalData(res.data.data);
+        setInitialValue(originalData.content);
+        setTitle(originalData.title);
+        setStartDate(originalData.registerStart);
+        setEndDate(originalData.registerEnd);
+        setLessonDate(originalData.lessonDate);
+        setNumber(originalData.headCount);
+        setPrice(originalData.price);
+        setRegisteredNumber(originalData.currentHeadCount);
+      });
+  }, []);
+
+  const patchLesson = async () => {
+    await axios
+      .patch(`http://43.201.167.13:8080/lesson-class/${lessonId}`, {
+        title: title,
+        content: content,
+        registerStart: startDate,
+        registerEnd: endDate,
+        lessonDate: lessonDate,
+        headCount: number,
+        price: price,
+      })
       .then(() => {
         // History.back();
-        window.location.replace(`/board-lessons/${lessonId}`);
+        window.location.replace(`/class/${lessonId}`);
       })
       .catch((error) => {
         console.log(error);
@@ -82,20 +68,22 @@ const EditClassPage = () => {
     const instance = editorRef.current.getInstance();
     const data = instance.getMarkdown();
     setContent(data);
-    console.log(content);
   };
-
-  const navigate = useNavigate();
 
   const handleTitleChange = (event) => {
     const value = event.target.value;
     setTitle(value);
-    console.log(value);
   };
   const handleNumberChange = (event) => {
     const numberValue = event.target.value;
-    setNumber(numberValue);
-    console.log(number);
+    if (numberValue > registedNumber) {
+      alert(
+        `이미 강습을 신청한 인원 수보다 더 적게 설정하실 수 없습니다. 최소 ${registedNumber}명 이상으로 설정해 주세요.`
+      );
+      setNumber(registedNumber);
+    } else {
+      setNumber(numberValue);
+    }
   };
   const handlePriceChange = (event) => {
     const priceValue = event.target.value;
@@ -207,7 +195,7 @@ const EditClassPage = () => {
             ></input>
           </div>
           <div className="button-container">
-            <SubmitButton type="submit" onClick={EditLesson}>
+            <SubmitButton type="submit" onClick={patchLesson}>
               등록
             </SubmitButton>
             <CancelButton onClick={cancelClick}>취소</CancelButton>

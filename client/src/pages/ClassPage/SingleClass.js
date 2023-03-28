@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import RandomImage from "react-random-image";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,13 +11,8 @@ const SingleClass = () => {
   const defaultPhotoUrl =
     "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
-  const [data, setData] = useState([]);
+  const [classData, setClassData] = useState([]);
   const [photoUrl, setPhotoUrl] = useState(defaultPhotoUrl);
-
-  useEffect(() => {
-      const randomIndex = Math.floor(Math.random() * imagesUrl.length);
-      setPhotoUrl(imagesUrl[randomIndex]);
-    }, []);
 
 
   const getLessons = async () => {
@@ -25,7 +20,9 @@ const SingleClass = () => {
       .get(`http://43.201.167.13:8080/lesson-class/?page=1&size=10`)
       .then((res) => {
         // console.log(res.data.data)
-        setData(res.data.data);
+        setClassData(res.data.data);
+        setPhotoUrl(imagesUrl[Math.floor(Math.random()*100)])
+        console.log(classData)
       })
       .catch((err) => {
         console.log(err);
@@ -34,13 +31,12 @@ const SingleClass = () => {
 
   useEffect(() => {
     getLessons();
-    // getPhotoUrl();
   }, []);
 
   return (
     <>
-      {data &&
-        data.map((lessondata) => {
+      {classData &&
+        classData.map((lessondata) => {
           return (
             <SwiperSlide key={lessondata.lessonClassId}>
                 <div className="lesson-data">

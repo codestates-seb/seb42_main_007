@@ -35,6 +35,7 @@ public class LessonClassController {
     public ResponseEntity postLessonClass(@RequestBody LessonClassDto.Post lessonClassPostDto,
                                           Principal principal) {
         LessonClass lessonClass = mapper.lessonClassPostDtoToLessonClass(lessonClassPostDto);
+        log.info("# principal" + principal);
 
         LessonClass createdLessonClass = lessonClassService.createLessonClass(lessonClass, principal.getName());
 

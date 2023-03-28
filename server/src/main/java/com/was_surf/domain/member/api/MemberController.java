@@ -35,7 +35,7 @@ public class MemberController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Validated MemberDto.Login login, Errors errors) {
-        if (errors.hasErrors()) {
+        if(errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }
         return memberService.login(login);
@@ -43,25 +43,26 @@ public class MemberController {
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@Validated MemberDto.Logout logout, Errors errors) {
-        if (errors.hasErrors()) {
+        if(errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }
         return memberService.logout(logout);
     }
+
     @PostMapping
-    public ResponseEntity postMember(@Valid@RequestBody MemberPostDto memberPostDto){
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto) {
         Member createMember = memberService.createMember(mapper.memberPostDtoToMember(memberPostDto));
         return new ResponseEntity<>(mapper.memberToMemberResponse(createMember), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id")@Positive long memberId,
-                                      @Valid@RequestBody MemberPatchDto memberPatchDto){
+    public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
+                                      @Valid @RequestBody MemberPatchDto memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
 
         Member updateMember = memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(mapper.memberToMemberResponse(updateMember),HttpStatus.OK);
+        return new ResponseEntity<>(mapper.memberToMemberResponse(updateMember), HttpStatus.OK);
     }
 
 //    @GetMapping("/{member-id}")
@@ -71,14 +72,13 @@ public class MemberController {
 //    }
 
     @GetMapping
-    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId,
-                                    Principal principal){
+    public ResponseEntity getMember(Principal principal) {
         Member findMember = memberService.findMemberToEmail(principal.getName());
-        return new ResponseEntity<>(mapper.memberToMemberResponse(findMember),HttpStatus.OK);
+        return new ResponseEntity<>(mapper.memberToMemberResponse(findMember), HttpStatus.OK);
     }
 
     @DeleteMapping("/{member-id}")
-    public ResponseEntity deleteMember(@PathVariable("member-id") @Positive long memberId){
+    public ResponseEntity deleteMember(@PathVariable("member-id") @Positive long memberId) {
         memberService.deleteMember(memberId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

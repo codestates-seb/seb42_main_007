@@ -18,7 +18,7 @@ const QuestionsList = ({ questions }) => {
       ))}
     </ListContainer>
   ) : (
-    'Loading...'
+    '로딩중...'
   );
 };
 

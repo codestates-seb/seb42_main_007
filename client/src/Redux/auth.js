@@ -1,22 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import { Provider } from 'react-redux';
+// import App from '../App';
+// import store from './store';
 
-const initialAuthState = {
-  isAuthenticated: false,
-};
 
-const authSlice = createSlice({
-  name: 'authentication',
-  initialState: initialAuthState,
-  reducers: {
-    login(state) {
-      state.isAuthenticated = true;
-    },
-    logout(state) {
-      state.isAuthenticated = false;
-    },
-  },
-});
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App/>
+//   </Provider>,
+//   document.getElementById('root')
+// );
 
-export const authActions = authSlice.actions;
+// const initialAuthState = {
+//   isAuthenticated: false,
+// };
 
-export default authSlice.reducer;
+// const authSlice = createSlice({
+//   name: 'authentication',
+//   initialState: initialAuthState,
+//   reducers: {
+//     login(state) {
+//       state.isAuthenticated = true;
+//     },
+//     logout(state) {
+//       state.isAuthenticated = false;
+//     },
+//   },
+// });
+
+// export const authActions = authSlice.actions;
+
+// export default authSlice.reducer;

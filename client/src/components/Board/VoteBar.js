@@ -31,6 +31,7 @@ const VoteButton = styled.button`
 
 const VoteCount = styled.div`
   margin: 2px;
+  margin-top: 0.6rem;
   font-size: 1.6rem;
   display: flex;
   flex-direction: column;

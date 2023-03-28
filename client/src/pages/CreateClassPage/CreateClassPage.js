@@ -9,26 +9,29 @@ import { ko } from 'date-fns/esm/locale';
 import { Editor } from "@toast-ui/react-editor";
 import '@toast-ui/editor/dist/toastui-editor.css';
 
+const navigate = useNavigate;
 
 const CreateClassPage = () => {
 // 새로운 강습 모집글을 작성한다.
 // 제목, 내용, 신청기간, 신청인원, 최초생성일
+
 const createLesson = async () => {
-    // axios.defaults.withCredentials = true;
     await axios
     .post(
-        `/api/board-lessons`,
+        `http://43.201.167.13:8080/lesson-class`,
         {
-            lessonTitle : `${title}`,
-            lessonContent : `${content}`,
-            deadLine : `${endDate}`,
-            headCount : `${number}`,
-            createdAt : new Date(),
-            memberId : 1
-        }
+            title : title,
+            content : content,
+            registerStart : new Date(), 
+            registerEnd : endDate,
+            lessonDate: lessonDate, 
+            headCount : number, 
+            price : price
+        }, 
     )
-    .then(() => {
-        History.back();
+    .then((res) => {
+        console.log(res);
+        navigate('/classlist');
     })
     .catch((error) => {
         console.log(error)
@@ -38,9 +41,12 @@ const createLesson = async () => {
 
 
 const [title, setTitle] = useState('')
+const [startDate, setStartDate] = useState(new Date())
 const [endDate, setEndDate] = useState(new Date())
+const [lessonDate, setLessonDate] = useState(new Date())
 const [number, setNumber] = useState('0')
 const [content, setContent] = useState('');
+const [price, setPrice] = useState('0')
 const editorRef = useRef();
 
 const handleChange = () => {
@@ -60,7 +66,12 @@ const handleTitleChange = (event) => {
 const handleNumberChange = (event) => {
     const numberValue = event.target.value;
     setNumber(numberValue)
-    console.log(number)
+    console.log(numberValue)
+}
+const handlePriceChange = (event) => {
+    const priceValue = event.target.value;
+    setPrice(priceValue)
+    console.log(priceValue)
 }
 const cancelClick = () => {
     navigate('/classlist')
@@ -90,17 +101,37 @@ const cancelClick = () => {
         </div>
         <div className="element-container">
         <h2>모집기한</h2> 
+        <h3>강습 모집 시작일</h3> 
+        <DatePicker 
+        selected={startDate} 
+        onChange={(date) => setStartDate(date)} 
+        locale={ko}
+        dateFormat="yyyy년 MM월 dd일"
+        />
+        <h3>강습 모집 종료일</h3> 
         <DatePicker 
         selected={endDate} 
         onChange={(date) => setEndDate(date)} 
         locale={ko}
         dateFormat="yyyy년 MM월 dd일"
-        minDate={new Date()}
+        // minDate={new Date()}
+        />
+        <h3>강습 날짜</h3> 
+        <DatePicker 
+        selected={lessonDate} 
+        onChange={(date) => setLessonDate(date)} 
+        locale={ko}
+        dateFormat="yyyy년 MM월 dd일"
+        // minDate={new Date()}
         />
         </div>
         <div className="element-container">
             <h2>신청인원</h2>
-        <input className="input-number" type='number' placeholder="숫자만 입력하세요." onChange={handleNumberChange}></input>
+        <input className="input-number" type='number' min='0' placeholder="숫자만 입력하세요." onChange={handleNumberChange}></input>
+        </div>
+        <div className="element-container">
+            <h2>강습 요금</h2>
+        <input className="input-number" type='number' min='0' placeholder="숫자만 입력하세요." onChange={handlePriceChange}></input>
         </div>
         <div className="button-container">
         <SubmitButton type="submit" onClick={createLesson}>등록</SubmitButton>
@@ -137,9 +168,19 @@ const CreateClassPageContainer = styled.div`
     }
     .element-container{
         margin-top: 25px;
+        padding-bottom: 5px;
     }
     h2 {
         margin-bottom: 10px;
+        font-size: 18px;
+        background-color: #a7d7dc;
+        padding: 3px 6px;
+        display: flex;
+        width: fit-content;
+    }
+    h3 {
+        font-size: 15px;
+        margin-bottom: 5px;
     }
     
 `

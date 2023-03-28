@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import Wave from "../../images/Wave.png"
-import Surfer from "../../images/Surfer.png"
+import Wave from "../../images/Wave.png";
+import Surfer from "../../images/Surfer.png";
 import { Link } from "react-router-dom";
-import { Github } from "@styled-icons/boxicons-logos/Github"
+import { Github } from "@styled-icons/boxicons-logos/Github";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -13,6 +13,7 @@ const FooterContainer = styled.div`
   padding-right: 30px; */
   display: flex;
   align-items: stretch;
+
 `;
 
 const FooterItem = styled.div`
@@ -20,14 +21,16 @@ const FooterItem = styled.div`
   flex: 1 1 0;
   /* border: 1px solid red; */
   text-align: center;
-  
+  @media screen and (max-width:600px) {
+        font-size: 0.6rem;
+    }
 `;
 
 const WaveImg = styled.img`
   width: 100%;
   height: 100px;
   position: relative;
-`
+`;
 
 const move = keyframes`
 0%{
@@ -54,7 +57,7 @@ const move = keyframes`
   bottom: 20px;
   right: 170px;
 }
-`
+`;
 
 const SurferImg = styled.img`
   width: 50px;
@@ -66,16 +69,19 @@ const SurferImg = styled.img`
   z-index: 1;
   transition: 1s;
   animation: ${move} 7s 2s infinite;
-`
+`;
 
 const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  .footer-images{
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  .footer-images {
     position: relative;
     top: 5px;
   }
-`
+`;
 
 const GithubIcon = styled(Github)`
   width: 25px;
@@ -83,15 +89,15 @@ const GithubIcon = styled(Github)`
   position: relative;
   top: -2px;
   left: 0;
-`
+`;
 
 const Footer = () => {
   return (
     <>
       <FooterWrapper>
         <div className="footer-images">
-        <SurferImg src={Surfer}/>
-        <WaveImg src={Wave} />
+          <SurferImg src={Surfer} />
+          <WaveImg src={Wave} />
         </div>
         <FooterContainer>
           <FooterItem>

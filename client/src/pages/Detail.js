@@ -1,116 +1,141 @@
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Viewer } from '@toast-ui/react-editor';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import styled from "styled-components";
+import Comments2 from "../components/Board/Comments2";
+// import VoteBar from "../components/Board/VoteBar";
+import DeleteButton from "../components/Board/Delete";
+import { format } from "date-fns";
+import Avvvatars from 'avvvatars-react'
 
-import { FaUser } from 'react-icons/fa';
-import Container from '../components/Board/Container';
-import { MainContainer } from './List';
-import VoteBar from '../components/Board/VoteBar';
-import AnswersList from '../components/Board/AnswersList';
-import AnswerEditor from '../components/Board/AnswerEditor';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import Comments2 from '../components/Board/Comments2';
+const BREAK_POINT_MOBILE = 767;
+const BREAK_POINT_TABLET = 768;
+const BREAK_POINT_PC = 1200;
+
 
 const Detail = () => {
-  const [question, setQuestion] = useState({});
-  const [answers, setAnswers] = useState([]);
-  const { id } = useParams();
+  const { boardPostId } = useParams();
+  const [post, setPost] = useState(null);
 
-//   useEffect(() => {
-//     axios({
-//       method: 'get',
-//       url: `http://3.39.174.236:8080/questions/${id}/1`,
-//     }).then(res => {
-//       setQuestion(res.data.data.question);
-//       setAnswers(res.data.data.answers);
-//     });
-//   }, [id]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.querySelector("body").classList.add("modal-open");
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.querySelector("body").classList.remove("modal-open");
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`
+      );
+      setPost(response.data.data);
+    }
+    fetchData();
+  }, [boardPostId]);
+
+//   const currentUser = {post && currentUser && post.user.id === currentUser.id && (
+//   <EditContainer>
+//     <button>
+//       <Link to="/Edit">수정</Link>
+//     </button>
+//     <button onClick={Delete}>삭제</button>
+//   </EditContainer>
+// )}
 
   return (
     <>
-    <Header></Header>
-      <Container>
-        
-        <QuestionDetailMainContainer>
+      <Header />
+      <MainContainer>
+        {post ? (
+          <>
           <QuestionHeader>
-            <h1>죽도 해변 지금 서핑하기 어떤가요?</h1>
-            <h1>{question.questionTitle}</h1>
-            <AskButton>
-              <Link to="/ask">글쓰기</Link>
-            </AskButton>
+            <h1>{post.title}</h1>
           </QuestionHeader>
-          <QuestionStats>
+          <QuestionStat>
             <div className="asked-at">
-              <span>작성일</span>
-              <time>{question.createdAt}</time>
-            </div>
-            <div className="modified-at">
-              <span>수정됨</span>
-              <time>{question.modifiedAt}</time>
+              <span>작성일 </span>
+              {format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}
             </div>
             <div className="view-stats">
-              <span>조회수</span>
-              <span>{`${question.viewCount}`}</span>
+              <span>조회수 </span>
+              <span>{post.viewCount} 회</span>
             </div>
+          </QuestionStat>
+          <QuestionStats>
+            <EditContainer>
+              <button>
+                {/* <Link to="/Edit">수정</Link> */}
+                <Link to={{ pathname: `/edit/${boardPostId}`, state: { post } }}>수정</Link>
+              </button>
+              <button onClick={openModal}>삭제</button>
+            </EditContainer>
           </QuestionStats>
           <div className="detail-main">
             <QuestionBody>
-              
               <QuestionContent>
                 <DetailContainer>
-                  <div>지금 죽도 해변 가고 있습니다! 날씨는 좋아보이는데 실제로도 서핑하기 좋은가요?</div>
-                  {question.questionContent && (
-                    <Viewer initialValue={question.questionContent}></Viewer>
-                  )}
+                  <div>
+                  {post.content}
+                  </div>
                 </DetailContainer>
                 <InfoContainer>
-                  <EditContainer>
-                    {/* <button>Share</button> */}
-                    <button><Link to="/Edit">수정하기</Link></button>
-                    {/* <button>Follow</button> */}
-                  </EditContainer>
                   <AuthorContainer>
-                    <AuthorAskedTime>
-                      작성자<span>{question.createdAt}</span>
-                    </AuthorAskedTime>
                     <AuthorAvatar>
-                      <FaUser></FaUser>
+                    <Avvvatars value={post.displayName} />
                     </AuthorAvatar>
                     <AuthorDetail>
-                      <a>{question.name}</a>
+                    <span>{post.displayName}</span>
                     </AuthorDetail>
                   </AuthorContainer>
                 </InfoContainer>
               </QuestionContent>
             </QuestionBody>
-            <VoteBar
-                total={question.likeCount - question.hateCount}></VoteBar>
-                <Comments2></Comments2>
-            {/* <AnswersBody>
-              <AnswersList answers={answers}></AnswersList>
-              <AnswerEditor id={id}></AnswerEditor>
-            </AnswersBody> */}
+            {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
+            <Comments2></Comments2>
           </div>
-        </QuestionDetailMainContainer>
-      </Container>
-      <Footer></Footer>
+          <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
+          </>
+        ) : (
+          <NoPost>게시글이 없습니다.</NoPost>
+        )}
+      </MainContainer>
+      
+      <Footer />
     </>
   );
 };
 
 export default Detail;
 
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0;
+  height: 100%;
+  margin: 0 30rem;
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
+    margin: 0 5rem;
+    }
+    @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+      margin: 0 10rem;
+    }
+    @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+      margin: 0 30rem;
+    }
+`;
 
-const QuestionDetailMainContainer = styled(MainContainer)`
-  width: 100%;
-  padding: 8rem;
-
-  > .detail-main {
-    /* width: calc(100% - 324px); */
-  }
+const NoPost = styled.div`
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 3rem;
 `;
 
 const QuestionHeader = styled.div`
@@ -118,23 +143,40 @@ const QuestionHeader = styled.div`
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
 
   h1 {
     font-size: 2rem;
     margin-bottom: 8px;
-    /* flex: 1 auto; */
     overflow-wrap: break-word;
     font-weight: normal;
     color: hsl(210, 8%, 25%);
   }
 `;
 
+const QuestionStat = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  color: gray;
+  padding-right: 1rem;
+  .asked-at,
+  .modified-at {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    margin-right: 1rem;
+  }
+  .view-stats{
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+`;
+
 const QuestionStats = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 8px;
-  margin-bottom: 16px;
+  margin: 4px;
+  padding-bottom: 6px;
   border-bottom: 1px solid hsl(210, 8%, 90%);
 
   .asked-at,
@@ -165,6 +207,7 @@ const DetailContainer = styled.div`
   width: 100%;
   display: flex;
   padding: 2rem 0;
+  min-height: 8rem;
 `;
 
 const InfoContainer = styled.div`
@@ -179,7 +222,6 @@ const InfoContainer = styled.div`
 
 const EditContainer = styled.div`
   margin: 4px;
-  margin-right: 16px;
   margin-left: 0;
   padding-top: 2px;
   width: 96px;
@@ -187,40 +229,32 @@ const EditContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   color: hsl(210, 8%, 45%);
+  justify-content: flex-end;
 
   > button {
     margin: 4px;
     color: hsl(210, 8%, 45%);
     background: transparent;
     border: none;
+    cursor: pointer;
   }
 `;
 
 const AuthorContainer = styled.div`
   margin-top: 4px;
   margin-bottom: 4px;
-  border-radius: 3px;
-  background-color: rgb(
-    216.75,
-    calc(216.75 + 115.6 * 0.15),
-    calc(216.75 + 204 * 0.15)
-  );
-  width: 200px;
+  border-radius: 10px;
+  background-color: #F5F1CB;
+  width: 8rem;
   padding: 5px 6px 7px 7px;
   color: hsl(210, 8%, 45%);
 `;
 
-const AuthorAskedTime = styled.div`
-  margin-top: 1px;
-  margin-bottom: 4px;
-  font-size: 12px;
-`;
 
 const AuthorAvatar = styled.div`
   float: left;
   width: 32px;
   height: 32px;
-  cursor: pointer;
 
   > svg {
     width: 32px;
@@ -232,36 +266,13 @@ const AuthorDetail = styled.div`
   margin-left: 8px;
   width: calc(100% - 40px);
   float: left;
+  padding: 0.4rem 0;
+  
 
   a {
     color: hsl(206, 100%, 40%);
     text-decoration: none;
     cursor: pointer;
     word-wrap: break-word;
-  }
-`;
-
-const AnswersBody = styled.div`
-  width: auto;
-  padding-top: 10px;
-`;
-
-const AskButton = styled.div`
-  margin-bottom: 12px;
-
-  a {
-    background-color: #7CCCDC;
-    color: hsl(0, 0%, 100%);
-    border: 1px solid transparent;
-    border-radius: 3px;
-    box-shadow: inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
-    font-size: 13px;
-    padding: 0.8em;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  a:hover {
-    background-color: #36778B;
   }
 `;

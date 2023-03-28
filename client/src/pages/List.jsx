@@ -16,7 +16,7 @@ const List = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${currentPage}&size=10`
+        `http://43.201.167.13:8080/board-posts?page=1&size=10`
       );
       setPosts(response.data.data);
       setTotalPages(response.data.pageInfo.totalPages);

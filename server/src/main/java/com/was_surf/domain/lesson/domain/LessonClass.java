@@ -40,9 +40,6 @@ public class LessonClass extends Auditable {
     @Column(nullable = false)
     private Integer price;
 
-    @Enumerated(value = EnumType.STRING)
-    private LessonStatus lessonStatus = LessonStatus.POSSIBILITY;
-
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "MEMBER_ID", nullable = false)
@@ -92,17 +89,5 @@ public class LessonClass extends Auditable {
 
     public void updateCurrentHeadCount(int headCount) {
         this.currentHeadCount = this.currentHeadCount + headCount;
-    }
-
-    public enum LessonStatus {
-        POSSIBILITY("현재 강습을 신청할 수 있습니다."),
-        IMPOSSIBILITY("현재 강습을 신청할 수 없습니다.");
-
-        @Getter
-        private String status;
-
-        LessonStatus(String status) {
-            this.status = status;
-        }
     }
 }

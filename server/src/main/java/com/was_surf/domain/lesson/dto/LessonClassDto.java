@@ -1,6 +1,5 @@
 package com.was_surf.domain.lesson.dto;
 
-import com.was_surf.domain.lesson.domain.LessonClass;
 import com.was_surf.domain.lesson.domain.LessonRegister;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,7 +35,6 @@ public class LessonClassDto {
         private LocalDate lessonDate;
         private int headCount;
         private int price;
-        private LessonClass.LessonStatus lessonStatus;
     }
 
     @Getter
@@ -60,10 +58,6 @@ public class LessonClassDto {
         private int currentHeadCount;
         @NotNull
         private Integer price;
-        private LessonClass.LessonStatus lessonStatus;
         private List<LessonRegister> lessonRegisters;
-        public String getLessonStatus() {
-            return lessonStatus.getStatus();
-        }
     }
 }

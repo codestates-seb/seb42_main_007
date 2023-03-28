@@ -200,7 +200,6 @@ const LandingHeader = () => {
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>
           </ButtonContainer>{" "}
-          */}
         </div>
       </HeaderContainer>
     </>

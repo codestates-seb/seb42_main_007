@@ -8,7 +8,6 @@ import Comments2 from "../components/Board/Comments2";
 // import VoteBar from "../components/Board/VoteBar";
 import DeleteButton from "../components/Board/Delete";
 import { format } from "date-fns";
-import Avvvatars from 'avvvatars-react'
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 import Avatar from "../components/Board/Avatar";
 

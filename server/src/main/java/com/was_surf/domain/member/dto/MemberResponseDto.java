@@ -18,7 +18,6 @@ public class MemberResponseDto {
     private String email;
 
     private Member.MemberStatus memberStatus;
-
     private List<LessonRegister> lessonRegisters;
 
 }

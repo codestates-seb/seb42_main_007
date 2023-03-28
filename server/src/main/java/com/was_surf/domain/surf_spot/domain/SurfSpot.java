@@ -1,5 +1,6 @@
 package com.was_surf.domain.surf_spot.domain;
 
+import com.was_surf.domain.spot_data.domain.SpotData;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,14 @@ public class SurfSpot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long surfSpotId;
 
-    @Column(nullable = false)
-    private String imgPath;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String address;
+//    @Column(nullable = false)
+//    private String imgPath;
+//
+//    @Column(nullable = false)
+//    private String name;
+//
+//    @Column(nullable = false)
+//    private String address;
 
     // 조회수
     @Column(nullable = false)
@@ -34,4 +35,14 @@ public class SurfSpot {
 
     @OneToMany(mappedBy = "surfSpot", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "SPOT_DATA_ID")
+    private SpotData spotData;
+
+    public void setSpotData(SpotData spotData) {
+
+        this.spotData = spotData;
+    }
 }
+

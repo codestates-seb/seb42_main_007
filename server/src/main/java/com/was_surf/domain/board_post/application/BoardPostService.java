@@ -2,6 +2,8 @@ package com.was_surf.domain.board_post.application;
 
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.board_post.repository.BoardPostRepository;
+import com.was_surf.domain.member.application.MemberService;
+import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.error.exception.BusinessLogicException;
 import com.was_surf.global.error.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
@@ -16,19 +18,34 @@ import java.util.Optional;
 @Transactional
 public class BoardPostService {
     private final BoardPostRepository boardPostRepository;
+    private final MemberService memberService;
 
-    public BoardPostService(BoardPostRepository boardPostRepository) {
+    public BoardPostService(BoardPostRepository boardPostRepository, MemberService memberService) {
+
         this.boardPostRepository = boardPostRepository;
+        this.memberService = memberService;
     }
 
     // 등록
-    public BoardPost createBoardPost(BoardPost boardPost) {
+    public BoardPost createBoardPost(BoardPost boardPost, String email) {
+
+        // 회원 정보 조회
+        Member member = memberService.findMemberToEmail(email);
+
+        // 회원 정보 주입
+        boardPost.setMember(member);
+
         BoardPost response = boardPostRepository.save(boardPost);
+
         return response;
     }
 
     // 수정
-    public BoardPost updateBoardPost(BoardPost boardPost) {
+    public BoardPost updateBoardPost(BoardPost boardPost, String email) {
+
+        // 회원 정보 조회
+        Member member = memberService.findMemberToEmail(email);
+
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPost.getBoardPostId());
 
         Optional.ofNullable(boardPost.getTitle())
@@ -42,6 +59,7 @@ public class BoardPostService {
 
         Optional.ofNullable(boardPost.getImgPath())
                 .ifPresent(imgPath -> existBoardPost.setImgPath(imgPath));
+
 
         BoardPost response = boardPostRepository.save(existBoardPost);
 
@@ -63,13 +81,16 @@ public class BoardPostService {
     }
 
     // 삭제
-    public void deleteBoardPost(long boardPostId) {
+    public void deleteBoardPost(long boardPostId, String email) {
+        // 회원 정보 조회
+        Member member = memberService.findMemberToEmail(email);
+
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPostId);
         boardPostRepository.delete(existBoardPost);
     }
 
 
-    // findVerifiedExistBoardPost
+    // 기존에 존재하는지 확인
     public BoardPost findVerifiedExistBoardPost(long boardPostId) {
         Optional<BoardPost> optionalBoardPost = boardPostRepository.findById(boardPostId);
         BoardPost existBoardPost = optionalBoardPost.orElseThrow(
@@ -77,5 +98,15 @@ public class BoardPostService {
         );
 
         return existBoardPost;
+    }
+
+    // 로그인된 정보가 접근 권한 있는지 확인
+    public void verifyMatchMember(BoardPost boardPost, Member member) {
+        long boardPostHasMemberId = boardPost.getMember().getMemberId();
+        long currentMemberId = member.getMemberId();
+
+        if (!(boardPostHasMemberId == currentMemberId) || (member.getRoles().toString().equals("USER") && member.getRoles().toString().equals("ADMIN"))) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
     }
 }

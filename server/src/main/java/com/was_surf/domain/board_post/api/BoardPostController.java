@@ -8,6 +8,7 @@ import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.security.Principal;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/board-posts")
 @Slf4j
 @Validated
@@ -32,29 +34,13 @@ public class BoardPostController {
     private final MemberService memberService;
 
 
-    public BoardPostController(BoardPostService boardPostService,
-                               BoardPostMapper mapper,
-                               MemberService memberService) {
-
-
-        this.boardPostService = boardPostService;
-        this.mapper = mapper;
-        this.memberService = memberService;
-
-    }
-
     // 게시글 등록
     @PostMapping
     public ResponseEntity postBoardPost(@RequestBody @Valid BoardPostDto.Post postDto, Principal principal) {
 
         BoardPost boardPost = mapper.boardPostPostDtoToBoardPost(postDto);
 
-        // 회원 정보 검색
-        Member member = memberService.findMemberToEmail(principal.getName());
-
-        // 회원 정보 주입
-        boardPost.setMember(member);
-        BoardPost createdBoardPost = boardPostService.createBoardPost(boardPost);
+        BoardPost createdBoardPost = boardPostService.createBoardPost(boardPost, principal.getName());
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(createdBoardPost);
 
         return ResponseEntity.ok().build();
@@ -63,10 +49,11 @@ public class BoardPostController {
     // 게시글 수정
     @PatchMapping("/{board-post-id}")
     public ResponseEntity patchBoardPost(@RequestBody BoardPostDto.Patch patchDto,
-                                         @PathVariable("board-post-id") Long boardPostId) {
+                                         @PathVariable("board-post-id") Long boardPostId,
+                                         Principal principal) {
 
         patchDto.setBoardPostId(boardPostId);
-        BoardPost updatedBoardPost = boardPostService.updateBoardPost(mapper.boardPostPatchDtoToBoardPost(patchDto));
+        BoardPost updatedBoardPost = boardPostService.updateBoardPost(mapper.boardPostPatchDtoToBoardPost(patchDto), principal.getName());
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(updatedBoardPost);
 
         return ResponseEntity.ok().build();
@@ -74,7 +61,7 @@ public class BoardPostController {
 
     // 게시글 검색 조회
     @GetMapping("/{board-post-id}")
-    public ResponseEntity getBoardPost(@PathVariable("board-post-id") Long boardPostId) {
+    public ResponseEntity getBoardPost(@PathVariable("board-post-id") @Positive Long boardPostId) {
 
         BoardPost foundBoardPost = boardPostService.findBoardPost(boardPostId);
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(foundBoardPost);
@@ -94,9 +81,8 @@ public class BoardPostController {
 
     // 게시글 삭제
     @DeleteMapping("/{board-post-id}")
-    public ResponseEntity deleteBoardPost(@PathVariable("board-post-id") Long boardPostId) {
-        boardPostService.deleteBoardPost(boardPostId);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public void deleteBoardPost(@PathVariable("board-post-id") @Positive Long boardPostId,
+                                          Principal principal) {
+        boardPostService.deleteBoardPost(boardPostId, principal.getName());
     }
 }

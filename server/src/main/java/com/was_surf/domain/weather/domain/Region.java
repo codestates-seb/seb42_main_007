@@ -1,8 +1,12 @@
 package com.was_surf.domain.weather.domain;
 
+import com.was_surf.domain.spot_data.domain.SpotData;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Getter
@@ -28,6 +32,9 @@ public class Region {
 
     @Embedded
     private Weather weather; // 지역 날씨 정보
+
+    @OneToOne(mappedBy = "region")
+    private SpotData spotData;
 
     // 날씨 갱신
     public void updateRegionWeather(Weather weather) {

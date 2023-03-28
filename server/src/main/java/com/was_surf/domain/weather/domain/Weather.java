@@ -1,12 +1,11 @@
 package com.was_surf.domain.weather.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.was_surf.domain.member.domain.Member;
+import com.was_surf.domain.spot_data.domain.SpotData;
+import com.was_surf.domain.surf_spot.domain.SurfSpot;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

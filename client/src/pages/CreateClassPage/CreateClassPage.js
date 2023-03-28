@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker"
 import { ko } from 'date-fns/esm/locale';
 import { Editor } from "@toast-ui/react-editor";
 import '@toast-ui/editor/dist/toastui-editor.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const navigate = useNavigate;
 
@@ -53,7 +54,7 @@ const handleChange = () => {
   const instance = editorRef.current.getInstance();
   const data = instance.getMarkdown();
   setContent(data);
-  console.log(content)
+//   console.log(content)
 };
 
 const navigate = useNavigate()
@@ -61,21 +62,25 @@ const navigate = useNavigate()
 const handleTitleChange = (event) => {
     const value = event.target.value;
     setTitle(value)
-    console.log(value)
+    // console.log(value)
 }
 const handleNumberChange = (event) => {
     const numberValue = event.target.value;
     setNumber(numberValue)
-    console.log(numberValue)
+    // console.log(numberValue)
 }
 const handlePriceChange = (event) => {
     const priceValue = event.target.value;
     setPrice(priceValue)
-    console.log(priceValue)
+    // console.log(priceValue)
 }
 const cancelClick = () => {
     navigate('/classlist')
 }
+//시작일이 마감일, 강습날짜보다 늦거나
+//마감일이 강습날짜보다 늦는 경우 작성불가
+//모집인원수 1명이상
+//금액 1원이상
 
     return (
         <>
@@ -127,11 +132,11 @@ const cancelClick = () => {
         </div>
         <div className="element-container">
             <h2>신청인원</h2>
-        <input className="input-number" type='number' min='0' placeholder="숫자만 입력하세요." onChange={handleNumberChange}></input>
+        <input className="input-number" type='number' min='1' placeholder="숫자만 입력하세요." onChange={handleNumberChange}></input>
         </div>
         <div className="element-container">
             <h2>강습 요금</h2>
-        <input className="input-number" type='number' min='0' placeholder="숫자만 입력하세요." onChange={handlePriceChange}></input>
+        <input className="input-number" type='number' min='1' placeholder="숫자만 입력하세요." onChange={handlePriceChange}></input>
         </div>
         <div className="button-container">
         <SubmitButton type="submit" onClick={createLesson}>등록</SubmitButton>

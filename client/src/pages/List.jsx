@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
+import { format } from "date-fns";
 
 const List = () => {
   const [posts, setPosts] = useState([]);
@@ -43,13 +44,14 @@ const List = () => {
             <PostItem key={post.boardPostId}>
               <PostNumber>{post.boardPostId}</PostNumber>
               <div>
-                <PostTitle>
+              <PostTitle>
                   <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
                 </PostTitle>
-                <PostDate>{post.createdAt}</PostDate>
-                <p>{post.displayName}</p>
-                <p>{post.viewCount} views</p>
               </div>
+              <PostBox>
+                <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
+                <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
+              </PostBox>
             </PostItem>
           ))}
           <Stack spacing={2} direction="row">
@@ -79,6 +81,7 @@ const MainContainer = styled.main`
   align-items: center;
   padding: 4rem 0;
   height: 100%;
+  margin: 0 4rem;
 `;
 
 const HeadContainer = styled.div`
@@ -100,17 +103,26 @@ const HeadContainer = styled.div`
 
 const PostItem = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  height: 0.6rem;
   max-width: 1140px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
   a {
     text-decoration: none;
+    color: #2b2b2b;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
 
     &:hover {
-      /* text-decoration: underline; */
+      color: #7cccdc;
     }
   }
 
@@ -119,6 +131,16 @@ const PostItem = styled.div`
   }
 `;
 
+
+
+
+const PostTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2b2b2b;
+  padding: 0;
+  line-height: 1.4;
+`;
 const PostNumber = styled.span`
   font-size: 1.2rem;
   font-weight: 500;
@@ -126,21 +148,33 @@ const PostNumber = styled.span`
   margin-right: 1rem;
 `;
 
+const PostBox = styled.div`
+  margin-bottom: 0.6rem;
+`
 
-const PostTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 500;
-  color: #2b2b2b;
-  margin: 0 0 1rem 0;
-  padding: 0;
-  line-height: 1.4;
-`;
+
+const RightBox = styled.p`
+  font-size: 0.8rem;
+  color: gray;
+
+  .name-left {
+    float: left;
+    margin-left: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+  .name-right {
+    float: right;
+    margin-right: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+`
 
 const PostDate = styled.p`
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: #6b6b6b;
   margin: 0;
   padding: 0;
+  clear: both;
 `;
 
 const NoPost = styled.div`
@@ -165,4 +199,3 @@ const AskButton = styled.div`
     }
   }
 `;
-

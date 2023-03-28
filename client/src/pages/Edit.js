@@ -83,22 +83,22 @@ const Edit = () => {
           <form onSubmit={handleSubmit}>
             <InputLabel title="제목" />
             <Input
-              placeholder=""
+              placeholder=" "
               padding="0.78rem 0.91rem"
               width="calc(100% - 30.12px);"
               value={title}
               onChange={handleTitleChange}
             />
             <InputLabel title="내용" />
-            <Editor
+            {content&&<Editor
               ref={body1}
-              value={content}
+              initialValue={content}
               previewStyle="tab"
               height="600px"
               initialEditType="markdown"
               useCommandShortcut={true}
               onChange={handleChange}
-            />
+            />}
 
             <div className="buttonWrapper">
               <Button

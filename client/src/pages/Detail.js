@@ -10,6 +10,7 @@ import DeleteButton from "../components/Board/Delete";
 import { format } from "date-fns";
 import Avvvatars from 'avvvatars-react'
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
+import Avatar from "../components/Board/Avatar";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
@@ -101,7 +102,7 @@ const Detail = () => {
                 <InfoContainer>
                   <AuthorContainer>
                     <AuthorAvatar>
-                    <Avvvatars value={post.displayName} />
+                    <Avatar />
                     </AuthorAvatar>
                     <AuthorDetail>
                     <span>{post.displayName}</span>
@@ -142,6 +143,7 @@ const MainContainer = styled.main`
     @media only screen and (min-width: ${BREAK_POINT_PC}px) {
       margin: 0 30rem;
     }
+    
 `;
 
 const NoPost = styled.div`
@@ -257,8 +259,8 @@ const AuthorContainer = styled.div`
   margin-bottom: 4px;
   border-radius: 10px;
   background-color: #F5F1CB;
-  width: 8rem;
-  padding: 5px 6px 7px 7px;
+  width: 10rem;
+  padding: 5px 6px 18px 7px;
   color: hsl(210, 8%, 45%);
 `;
 
@@ -272,19 +274,21 @@ const AuthorAvatar = styled.div`
     width: 32px;
     height: 32px;
   }
+  > span{
+    margin-left: 5rem;
+  }
 `;
 
 const AuthorDetail = styled.div`
-  margin-left: 8px;
-  width: calc(100% - 40px);
-  float: left;
-  padding: 0.4rem 0;
-  
+  margin: 1rem 0 0 2rem;
+  width: calc(100% - 3rem);
+  text-align: center;
+  font-family: 'Righteous', cursive;
+
 
   a {
     color: hsl(206, 100%, 40%);
     text-decoration: none;
-    cursor: pointer;
     word-wrap: break-word;
   }
 `;

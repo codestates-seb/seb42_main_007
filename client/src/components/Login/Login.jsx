@@ -115,20 +115,14 @@ const Login = () => {
         // setTokens(accessToken, refreshToken);
         localStorage.setItem('accessToken',accessToken);
         localStorage.setItem('refreshToken',refreshToken);
-<<<<<<< HEAD
-=======
 
->>>>>>> feat/FE
         // setAuth(true);
         setLoggedIn(true);
         alert('로그인이 성공했습니다.');
         navigate('/');
-<<<<<<< HEAD
 
-=======
         console.log('Access Token:', accessToken);
         console.log('Refresh Token:', refreshToken);
->>>>>>> feat/FE
         // alert('로그인이 성공했습니다.');
         // setTimeout(() => {
         //   navigate('/'); // 일정 시간 후에 '/' 화면으로 이동

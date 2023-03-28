@@ -20,8 +20,8 @@ const ClassDetailPage = () => {
   const [registerStartDate, setRegisterStartdate] = useState("2023년 1월 25일"); // 강습신청 기간 시작
   const [registerEndDate, setRegisterEnddate] = useState("2023년 3월 24일"); // 강습신청 기간 마감
   const [content, setContent] = useState("홍보내용"); // 강습 내용
-  const [isLoading, setIsLoading] = useState("false");
-  const [isAvailable, setIsAvailable] = useState("false"); // 수강신청 가능 여부
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false); // 수강신청 가능 여부
   const { lessonId } = useParams(); // /class/{lessonId}
   const navigate = useNavigate();
 
@@ -72,9 +72,10 @@ const ClassDetailPage = () => {
         setRegisteredNumber(classData.currentHeadCount);
         setIsLoading(false);
         clearTimeout(timer);
+        console(registerEndDate.getDate());
         // 지금 날짜가 수강신청 마감일을 지난 경우 or 총 수강가능인원수 === 수강신청한 인원수인 경우
         // 더이상 수강신청할 수 없음 -> isAvailable = false
-        if (registerEndDate > new Date()) {
+        if (registerEndDate.getDate() > new Date().getDate()) {
           setIsAvailable(false);
           return alert("현재 모집 기간이 종료되었습니다.");
         } else if (classHeadCount === registedNumber) {

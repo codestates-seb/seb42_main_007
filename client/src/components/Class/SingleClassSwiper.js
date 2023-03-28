@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import RandomImage from "react-random-image";
-import { Virtual } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { imagesUrl } from "../../components/Class/RandomImage";
 import "swiper/css";
 import "swiper/css/virtual";
+import AlmostSoldout from "../../images/AlmostSoldout.png";
+import Soldout from "../../images/Soldout.png";
 
 export const SingleClassSwiper = () => {
   const defaultPhotoUrl =
@@ -16,14 +16,31 @@ export const SingleClassSwiper = () => {
 
   const [classData, setClassData] = useState([]);
   const [photoUrl, setPhotoUrl] = useState(defaultPhotoUrl);
-
+  const [isAboutToSoldout, setIsAboutToSoldout] = useState(false);
+  const [isSoldout, setIsSoldout] = useState(false);
   const getLessons = async () => {
     axios
       .get(`http://43.201.167.13:8080/lesson-class/?page=1&size=10`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setClassData(res.data.data);
-        console.log(classData);
+        // console.log(classData);
+        if (
+          classData.currentHeadCount === classData.headCount ||
+          classData.lessonDate.getTime() < new Date().getTime()
+        ) {
+          setIsSoldout(true);
+          // 현재 수강신청된 인원수 === 수강신청 정원 -> 마감
+          // 수강날짜가 현재시간보다 빠른(이미 지나간) 경우 마감
+        }
+        if (
+          classData.headCount - classData.currentHeadCount <= 3 ||
+          classData.lessonDate.getTime() === new Date().getTime()
+        ) {
+          setIsAboutToSoldout(true);
+          //수강신청 정원 - 현재 수강신청된 인원수 <= 3  -> 마감임박
+          //수강 날짜가 현재날짜와 같은 경우 마감임박
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -74,11 +91,19 @@ export const SingleClassSwiper = () => {
                       <ClassThumbnail photoUrl={photoUrl} />
                       <ClassTitle>{lessondata.title}</ClassTitle>
                       <ClassPrice>{`${lessondata.price}원`}</ClassPrice>
-                      <ClassReservationButton>
-                        <Link to={`/class/${lessondata.lessonClassId}`}>
-                          상세보기 👉
-                        </Link>
-                      </ClassReservationButton>
+                      <div className="buttons">
+                        {isAboutToSoldout ? (
+                          <AlmostSoldoutIcon src={AlmostSoldout} />
+                        ) : (
+                          ""
+                        )}
+                        {isSoldout ? <SoldoutIcon src={Soldout} /> : ""}
+                        <ClassReservationButton>
+                          <Link to={`/class/${lessondata.lessonClassId}`}>
+                            상세보기 👉
+                          </Link>
+                        </ClassReservationButton>
+                      </div>
                     </SingleClassContainer>
                   </div>
                 </SwiperSlide>
@@ -108,7 +133,6 @@ const SingleClassContainer = styled.div`
   box-shadow: 0px 0px 7px 1px #cbcbcb;
   border-radius: 20px;
   margin: 5px 0px 5px 5px;
-  z-index: -1;
   .copyright {
     font-size: 5px;
     color: #d4d2d1;
@@ -122,7 +146,6 @@ const ClassThumbnail = styled.div`
   background-image: url(${(props) => props.photoUrl});
   background-size: cover;
   background-position: center;
-  z-index: -1;
   border-radius: 20px 20px 00px 0px;
 `;
 
@@ -131,7 +154,6 @@ const ClassTitle = styled.div`
   padding: 10px;
   width: 100%;
   text-align: right;
-  z-index: -1;
 
   /* border: 1px red solid; */
 `;
@@ -140,14 +162,24 @@ const ClassPrice = styled.div`
   font-weight: bold;
   font-size: 16px;
   padding: 10px;
-  z-index: -1;
 
   /* margin-top: 5px; */
   text-align: right;
   /* border: 1px red solid; */
 `;
 
-//왼쪽 오른쪽 이동하는 아이콘 2개
+const AlmostSoldoutIcon = styled.img`
+  width: 75px;
+  margin-bottom: -6px;
+  margin-right: 55px;
+`;
+
+const SoldoutIcon = styled.img`
+  width: 75px;
+  margin-bottom: -6px;
+  margin-right: 55px;
+`;
+
 const ClassReservationButton = styled.button`
   width: 90px;
   height: 35px;

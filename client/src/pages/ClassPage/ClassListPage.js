@@ -1,18 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styled from "styled-components";
-import { ArrowIosForwardOutline } from "@styled-icons/evaicons-outline";
-import { ArrowIosBackOutline } from "@styled-icons/evaicons-outline/";
 import { Link } from "react-router-dom";
-import ListSwiper from "../../components/Class/ListSwiper";
-import SingleClass from "./SingleClass";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { SingleClassSwiper } from "../../components/Class/SingleClassSwiper";
 
 const ClassListPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
   return (
     <>
       <Header />
@@ -58,20 +51,6 @@ const Title = styled.span`
   font-size: 35px;
   font-weight: bold;
   margin-bottom: 20px;
-`;
-
-const RightArrowIcon = styled(ArrowIosForwardOutline)`
-  width: 30px;
-  height: 30px;
-  color: #3fbed3;
-  /* border: 2px white solid; */
-`;
-
-const LeftArrowIcon = styled(ArrowIosBackOutline)`
-  width: 30px;
-  height: 30px;
-  color: #3fbed3;
-  /* border: 2px white solid; */
 `;
 
 const CreateNewClassButton = styled.button`

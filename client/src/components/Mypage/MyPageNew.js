@@ -46,14 +46,15 @@ const MyPageNew = () => {
 };
 
 const SidebarMenu = styled.div`
-  width: 220px;
+  min-width: 220px;
   height: 50px;
-  border-radius: 2px 25px 25px 2px;
+  border-radius: 25px 25px 25px 25px;
   background-color: #80dee8;
   text-align: center;
   align-items: center;
   line-height: 50px;
   margin-bottom: 20px;
+
   :visited {
     background-color: #2699ac;
     color: white;

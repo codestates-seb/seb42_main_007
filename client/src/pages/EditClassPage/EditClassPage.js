@@ -105,16 +105,34 @@ const EditClassPage = () => {
 
   const cancelClick = () => {
     navigate("/classlist");
-    //해당 강습모집글 페이지로 다시 이동하도록 변경
-    // or History.back(), navigate(-1) ?
   };
-
-  // // useEffect로 컴포넌트 렌더링 시에
-  // const handleInitialValue = (originalData) => {
-  //     setInitialValue(originalData.content)
-  //   // boardlesson GET하여 res.data를 통해
-  //   // 기존 작성 내용을 initialvalue로 지정
-  // }
+  const handleStartDateChange = (event) => {
+    if (event.getTime() > endDate) {
+      alert("강습 모집 시작 날짜는 마감 날짜보다 늦게 설정할 수 없습니다.");
+      setStartDate(new Date());
+    } else {
+      setStartDate(event);
+    }
+  };
+  const handleEndDateChange = (event) => {
+    if (event.getTime() < startDate) {
+      alert("강습 모집 마감 날짜는 시작 날짜보다 늦게 설정할 수 없습니다.");
+      setEndDate(new Date());
+    } else if (event.getTime() > lessonDate) {
+      alert("강습 모집 마감 날짜는 강습 날짜보다 늦게 설정할 수 없습니다.");
+      setEndDate(new Date());
+    } else {
+      setEndDate(event);
+    }
+  };
+  const handleLessonDateChange = (event) => {
+    if (event.getTime() < endDate) {
+      alert("강습 날짜는 강습 모집 마감 날짜보다 이르게 설정할 수 없습니다.");
+      setLessonDate(new Date());
+    } else {
+      setLessonDate(event);
+    }
+  };
 
   return (
     <>
@@ -149,14 +167,14 @@ const EditClassPage = () => {
             <h3>강습 모집 시작일</h3>
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={handleStartDateChange}
               locale={ko}
               dateFormat="yyyy년 MM월 dd일"
             />
             <h3>강습 모집 종료일</h3>
             <DatePicker
               selected={endDate}
-              onChange={(date) => setEndDate(date)}
+              onChange={handleEndDateChange}
               locale={ko}
               dateFormat="yyyy년 MM월 dd일"
               // minDate={new Date()}
@@ -164,7 +182,7 @@ const EditClassPage = () => {
             <h3>강습 날짜</h3>
             <DatePicker
               selected={lessonDate}
-              onChange={(date) => setLessonDate(date)}
+              onChange={handleLessonDateChange}
               locale={ko}
               dateFormat="yyyy년 MM월 dd일"
               // minDate={new Date()}
@@ -269,5 +287,4 @@ const CancelButton = styled.button`
     transition: 0.3s;
   }
 `;
-
 export default EditClassPage;

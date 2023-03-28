@@ -12,7 +12,6 @@ import Detail from "./pages/Detail";
 import Find from "./pages/Find";
 import ClassListPage from "./pages/ClassPage/ClassListPage";
 import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
-import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
 import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
 import EditClassPage from "./pages/EditClassPage/EditClassPage";
 import FindId from "./components/Login/FindID";
@@ -52,7 +51,6 @@ function App() {
           <Route path="/Mypage" element={<Mypage />}></Route>
           <Route path="/classlist" element={<ClassListPage />}></Route>
           <Route path="/class/:lessonId" element={<ClassDetailPage />}></Route>
-          <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
           <Route path="/newclass" element={<CreateClassPage />}></Route>
           <Route path="/findid" element={<FindId />}></Route>
           <Route path="/findpassword" element={<FindPassword />}></Route>

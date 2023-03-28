@@ -7,8 +7,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Kakaopay from "../../images/ClassPaymentPage/Kakaopay.png";
 import Loading from "../../components/Loading";
-// import * as dotenv from "dotenv";
 // import dotenv from "dotenv";
+// import * as dotenv from "dotenv";
 // dotenv.config();
 
 const ClassDetailPage = () => {
@@ -25,9 +25,7 @@ const ClassDetailPage = () => {
   const { lessonId } = useParams(); // /class/{lessonId}
   const navigate = useNavigate();
 
-  const adminKey = process.env.KAKAOPAY_ADMIN_KEY;
-
-  console.log(adminKey);
+  const KAKAOPAY_KEY = process.env.REACT_APP_KAKAOPAY_ADMIN_KEY;
 
   const dateFormatEdit = (str) => {
     if (typeof str === "string") {
@@ -151,7 +149,7 @@ const ClassDetailPage = () => {
           //     cancel_url: "http://localhost:3000/class/1",
           //   },
           headers: {
-            Authorization: `KakaoAK ${process.env.KAKAOPAY_ADMIN_KEY}`,
+            Authorization: `KakaoAK ${KAKAOPAY_KEY}`,
 
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
           },

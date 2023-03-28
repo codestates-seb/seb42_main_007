@@ -8,9 +8,6 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-const navigate = useNavigate;
 
 const CreateClassPage = () => {
   // 새로운 강습 모집글을 작성한다.
@@ -72,6 +69,34 @@ const CreateClassPage = () => {
   const cancelClick = () => {
     navigate("/classlist");
   };
+
+  const handleStartDateChange = (event) => {
+    if (event.getTime() > endDate) {
+      alert("강습 모집 시작 날짜는 마감 날짜보다 늦게 설정할 수 없습니다.");
+      setStartDate(new Date());
+    } else {
+      setStartDate(event);
+    }
+  };
+  const handleEndDateChange = (event) => {
+    if (event.getTime() < startDate) {
+      alert("강습 모집 마감 날짜는 시작 날짜보다 늦게 설정할 수 없습니다.");
+      setEndDate(new Date());
+    } else if (event.getTime() > lessonDate) {
+      alert("강습 모집 마감 날짜는 강습 날짜보다 늦게 설정할 수 없습니다.");
+      setEndDate(new Date());
+    } else {
+      setEndDate(event);
+    }
+  };
+  const handleLessonDateChange = (event) => {
+    if (event.getTime() < endDate) {
+      alert("강습 날짜는 강습 모집 마감 날짜보다 이르게 설정할 수 없습니다.");
+      setLessonDate(new Date());
+    } else {
+      setLessonDate(event);
+    }
+  };
   //시작일이 마감일, 강습날짜보다 늦거나
   //마감일이 강습날짜보다 늦는 경우 작성불가
   //모집인원수 1명이상
@@ -108,14 +133,14 @@ const CreateClassPage = () => {
             <h3>강습 모집 시작일</h3>
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={handleStartDateChange}
               locale={ko}
               dateFormat="yyyy년 MM월 dd일"
             />
             <h3>강습 모집 종료일</h3>
             <DatePicker
               selected={endDate}
-              onChange={(date) => setEndDate(date)}
+              onChange={handleEndDateChange}
               locale={ko}
               dateFormat="yyyy년 MM월 dd일"
               // minDate={new Date()}
@@ -123,7 +148,7 @@ const CreateClassPage = () => {
             <h3>강습 날짜</h3>
             <DatePicker
               selected={lessonDate}
-              onChange={(date) => setLessonDate(date)}
+              onChange={handleLessonDateChange}
               locale={ko}
               dateFormat="yyyy년 MM월 dd일"
               // minDate={new Date()}

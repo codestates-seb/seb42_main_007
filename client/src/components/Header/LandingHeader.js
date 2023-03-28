@@ -188,12 +188,12 @@ const LandingHeader = () => {
             </MenuItem>
             {isLoggedIn ? (
               <MenuItem>
-                <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
-              </MenuItem>
+              <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
+            </MenuItem>
             ) : (
-              <MenuItem className="hidden">
-                <Link to="/Login">💬 로그인</Link>
-              </MenuItem>
+              <LoginButton>
+                <Link to="/Login">로그인</Link>
+              </LoginButton>
             )}
           </MenuItems>
           <ButtonContainer>

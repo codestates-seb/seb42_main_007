@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import LandingSurfer from "../../images/Board/LandingSurfer.png";
 
 const BREAK_POINT_MOBILE = 767;
@@ -11,6 +11,7 @@ const MainArea = styled.div`
   width: 100%;
   overflow: hidden;
   padding: 128px 0px 0 0px;
+  position: relative;
   
   @font-face {
     font-family: 'KOTRA_BOLD-Bold';
@@ -72,23 +73,28 @@ const MainArea = styled.div`
     }
   }
 `;
-const slideIn = keyframes`
-  from {
-    transform: translateX(-100%);
-  }
 
-  to {
-    transform: translateX(0);
-  }
-`;
 const LeftImage = styled.img`
   position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100vh;
-  animation: ${slideIn} 0.5s forwards;
+  top: 10rem;
+  left: 8rem;
+  height: 60vh;
   animation-delay: 1s;
   z-index: 5;
+  opacity: 0.9;
+
+&.slide-in {
+    animation: slide-in 2s ease forwards;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 `;
 
 
@@ -157,21 +163,29 @@ position: relative;
   }
 `;
 
+const SectionTwo = styled.div`
+  background-color: #7BC4C4;
+  background-size: cover;
+  height: 100vh;
+`;
 
 const HomeBack2 = () => {
   return (
     <>
       <MainArea>
+        <SectionTwo>
         <div className="text">
           <MainText>서핑을 즐기는</MainText>
           <MainText>모든 방법</MainText>
           <div>
-            <SubText>오늘 서핑하기 좋은 날씨인지</SubText>
-            <SubText>서핑 할 해변들의 정보와</SubText>
+            <SubText>오늘 서핑하기 좋은 날씨일까?</SubText>
+            <SubText>서핑 해변들의 정보와</SubText>
             <SubText>서퍼들과의 이야기</SubText>
           </div>
         </div>
+        {/* <LeftImage src={LandingSurfer} alt="서퍼" className="slide-in" /> */}
         <LeftImage src={LandingSurfer} alt="서퍼" />
+        </SectionTwo>
       </MainArea>
     </>
   );

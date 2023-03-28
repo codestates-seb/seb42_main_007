@@ -48,10 +48,10 @@ const List = () => {
                   <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
                 </PostTitle>
               </div>
-              <div>
+              <PostBox>
                 <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
                 <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
-              </div>
+              </PostBox>
             </PostItem>
           ))}
           <Stack spacing={2} direction="row">
@@ -138,7 +138,6 @@ const PostTitle = styled.h2`
   font-size: 2rem;
   font-weight: 500;
   color: #2b2b2b;
-  margin: 0 0 1rem 0;
   padding: 0;
   line-height: 1.4;
 `;
@@ -148,6 +147,11 @@ const PostNumber = styled.span`
   color: #6b6b6b;
   margin-right: 1rem;
 `;
+
+const PostBox = styled.div`
+  margin-bottom: 0.6rem;
+`
+
 
 const RightBox = styled.p`
   font-size: 0.8rem;

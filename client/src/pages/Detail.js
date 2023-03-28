@@ -72,7 +72,8 @@ const Detail = () => {
           <QuestionStats>
             <EditContainer>
               <button>
-                <Link to="/Edit">수정</Link>
+                {/* <Link to="/Edit">수정</Link> */}
+                <Link to={{ pathname: `/edit/${boardPostId}`, state: { post } }}>수정</Link>
               </button>
               <button onClick={openModal}>삭제</button>
             </EditContainer>

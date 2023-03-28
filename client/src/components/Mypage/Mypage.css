@@ -202,3 +202,9 @@
     z-index: -1;
     transform: translateX(-50%);
 }
+
+.myfooter {
+    position: absolute;
+
+    bottom: 0px;
+}

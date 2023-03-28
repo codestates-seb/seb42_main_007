@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from 'react';
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png";
 import { Menu } from "@styled-icons/ionicons-solid/Menu";
@@ -162,9 +162,15 @@ const LoginButton = styled.button`
   }
 `;
 
-const LandingHeader = () => {
+
+const Header = () => {
   const [menu, setMenu] = useState(false);
-  const isLoggedIn = localStorage.getItem('accessToken');; // 로그인 상태를 나타내는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <>
@@ -186,7 +192,7 @@ const LandingHeader = () => {
             <MenuItem>
               <Link to="/classlist">🏄‍♀️ 강습예약</Link>
             </MenuItem>
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <MenuItem>
                 <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
               </MenuItem>
@@ -194,11 +200,13 @@ const LandingHeader = () => {
               <MenuItem className="hidden">
                 <Link to="/Login">💬 로그인</Link>
               </MenuItem>
-            )}
+            )} */}
           </MenuItems>
-          {/* <ButtonContainer>
+          <ButtonContainer>
             {isLoggedIn ? (
-              <></>
+              <MenuItem>
+              <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
+            </MenuItem>
             ) : (
               <LoginButton>
                 <Link to="/Login">로그인</Link>
@@ -207,11 +215,11 @@ const LandingHeader = () => {
             <div className="toggle" onClick={() => setMenu(!menu)}>
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>
-          </ButtonContainer> */}
+          </ButtonContainer>
         </div>
       </HeaderContainer>
     </>
   );
 };
 
-export default LandingHeader;
+export default Header;

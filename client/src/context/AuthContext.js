@@ -1,83 +1,147 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(
-    localStorage.getItem("accessToken") || null
-  );
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
-  const setAuthToken = (token) => {
+export function AuthProvider({ children }) {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  const login = (token) => {
     localStorage.setItem("accessToken", token);
-    setToken(token);
+    localStorage.setItem("refreshToken", token);
+    setLoggedIn(true);
+
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   };
 
-  const removeAuthToken = () => {
+  const logout = () => {
     localStorage.removeItem("accessToken");
-    setToken(null);
+    setLoggedIn(false);
+
+    axios.defaults.headers.common["Authorization"] = null;
   };
 
-  return (
-    <AuthContext.Provider value={{ token, setAuthToken, removeAuthToken }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  const value = {
+    loggedIn,
+    login,
+    logout,
+  };
 
-// useEffect(() => {
-//   const accessToken = localStorage.getItem('accessToken');
-//   const refreshToken = localStorage.getItem('refreshToken');
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
 
-//   if (accessToken && refreshToken) {
-//     setAuth(true);
-//   } else {
-//     setAuth(false);
-//   }
-// }, []);
+// import React, { createContext, useState, useEffect } from 'react';
+// import axios from 'axios';
 
-export const useAuth = () => {
-  const auth = useContext(AuthContext);
+// export const AuthContext = createContext();
 
-  if (!auth) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
+// export const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
 
-  return auth;
-};
+//   useEffect(() => {
+//     const accessToken = sessionStorage.getItem('accessToken');
+//     const refreshToken = sessionStorage.getItem('refreshToken');
+//     if (accessToken && refreshToken) {
+//       axios
+//         .get('/api/auth/me', {
+//           headers: { Authorization: `Bearer ${accessToken}` },
+//         })
+//         .then((response) => {
+//           setUser(response.data);
+//           setLoading(false);
+//         })
+//         .catch(() => {
+//           setLoading(false);
+//         });
+//     } else {
+//       setLoading(false);
+//     }
+//   }, []);
 
-// import { createContext, useState, useEffect, useContext } from 'react';
+//   return (
+//     <AuthContext.Provider value={{ user, setUser }}>
+//       {!loading && children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// import { createContext, useState } from 'react';
 
 // const AuthContext = createContext();
 
 // const AuthProvider = ({ children }) => {
 //   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-//   const setAuth = (authStatus) => {
-//     setIsAuthenticated(authStatus);
+//   const setAuthToken = (token) => {
+//     localStorage.setItem('token', token);
+//     setToken(token);
 //   };
 
-// useEffect(() => {
-//   const accessToken = localStorage.getItem('accessToken');
-//   const refreshToken = localStorage.getItem('refreshToken');
-
-//   if (accessToken && refreshToken) {
-//     setAuth(true);
-//   } else {
-//     setAuth(false);
-//   }
-// }, []);
+//   const removeAuthToken = () => {
+//     localStorage.removeItem('token');
+//     setToken(null);
+//   };
 
 //   return (
-//     <AuthContext.Provider value={{ isAuthenticated, setAuth }}>
+//     <AuthContext.Provider value={{ token, setAuthToken, removeAuthToken }}>
 //       {children}
 //     </AuthContext.Provider>
 //   );
 // };
 
-// const useAuth = () => {
-//   const accessToken = localStorage.getItem('accessToken');
-//   const refreshToken = localStorage.getItem('refreshToken');
-//   return useContext(AuthContext);
+// export const useAuth = () => {
+//   const auth = useContext(AuthContext);
+
+//   if (!auth) {
+//     throw new Error('useAuth must be used within an AuthProvider');
+//   }
+
+//   return auth;
 // };
 
-// export { AuthContext, AuthProvider, useAuth };
+import { createContext, useState, useEffect, useContext } from "react";
+
+const AuthContext = createContext();
+
+const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const setAuth = (authStatus) => {
+    setIsAuthenticated(authStatus);
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (accessToken && refreshToken) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, setAuth }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export { AuthContext, AuthProvider, useAuth };

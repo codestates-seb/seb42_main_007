@@ -74,7 +74,7 @@ const FindId = () => {
       }
     };
   
-    const API_URL = `${REDIRECT_URI}members/{member-id}`;
+    const API_URL = `${REDIRECT_URI}members/1`;
 
     return (
         <FindIdWrapper>

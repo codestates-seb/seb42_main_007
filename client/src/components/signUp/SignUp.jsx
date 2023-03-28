@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { REDIRECT_URI } from '../Apiurl';
 import Logo_black from "../../images/Logo_black.png"
 import React from "react";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 
 function SignUp() {
@@ -108,8 +110,9 @@ function SignUp() {
   };
 
   return (
-
+    
     <div className="body">
+      <Header />
       <div className="containerFlex">
         <div className="signBody">
           <p className="signupheader"><img src={Logo_black} alt="logo" /></p>

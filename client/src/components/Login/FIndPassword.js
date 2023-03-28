@@ -59,7 +59,7 @@ const FindPasswordWrapper = styled.div`
   }
 `;
 
-const API_URL = `${REDIRECT_URI}members/{member-id}`;
+const API_URL = `${REDIRECT_URI}members/1`;
 
 const FindPassword = () => {
   const [email, setEmail] = useState('');
@@ -100,7 +100,7 @@ const FindPassword = () => {
           />
         </div>
         <div>
-          <label htmlFor="username">아이디:</label>
+          <label htmlFor="username">닉네임:</label>
           <input
             type="text"
             id="username"

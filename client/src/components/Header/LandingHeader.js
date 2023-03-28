@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from 'react';
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png";
 import { Menu } from "@styled-icons/ionicons-solid/Menu";
@@ -162,9 +162,15 @@ const LoginButton = styled.button`
   }
 `;
 
+
 const LandingHeader = () => {
   const [menu, setMenu] = useState(false);
-  const isLoggedIn = localStorage.getItem('accessToken');; // 로그인 상태를 나타내는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <>

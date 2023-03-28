@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import { AuthProvider, useAuth } from './context/AuthContext';
 import "./App.css";
 import Edit from "./pages/Edit";
 import Home from "./pages/Home";
@@ -15,7 +15,6 @@ import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
 import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
 import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
 import EditClassPage from './pages/EditClassPage/EditClassPage';
-import { AuthProvider } from './context/AuthContext';
 import FindId from "./components/Login/FindID";
 import FindPassword from "./components/Login/FIndPassword";
 import WaveFind from "./pages/WaveFind";
@@ -27,8 +26,10 @@ import PaymentFailure from "./components/Payment/PaymentFailure";
 // import { useCookies } from 'react-cookie';
 
 function App() {
+  const { accessToken } = useAuth();
+  console.log(accessToken);
   return (
-    <AuthProvider>
+      <AuthProvider>
     <>
     <GlobalStyle />
       <Routes>
@@ -56,8 +57,10 @@ function App() {
         <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
         <Route path="/payfailed" element={<PaymentFailure />}></Route>
         </Routes>
-    </>
-    </AuthProvider>
+      </>
+        </AuthProvider>
   );
 }
+
+
 export default App;

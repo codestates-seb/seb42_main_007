@@ -13,7 +13,7 @@ public interface LessonRegisterMapper {
 
     LessonRegister lessonRegisterPatchDtoToLessonRegister(LessonRegisterDto.Patch lessonRegisterPatchDto);
 
-    @Mapping(source = "member.memberId", target = "memberId")
+//    @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "lessonClass.lessonClassId", target = "lessonClassId")
     LessonRegisterDto.Response lessonRegisterToLessonRegisterResponseDto(LessonRegister lessonRegister);
 

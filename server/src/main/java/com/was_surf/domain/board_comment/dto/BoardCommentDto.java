@@ -7,7 +7,7 @@ import lombok.Setter;
 public class BoardCommentDto {
     @Getter
     public static class Post {
-        private long boardCommentId;
+        private long boardPostId;
         private String comment;
     }
 
@@ -23,8 +23,7 @@ public class BoardCommentDto {
     public static class Response {
         private long boardCommentId;
         private String comment;
-
-//    private long boardPostId;
-//    private long memberId;
+        private long boardPostId;
+        private long memberId;
     }
 }

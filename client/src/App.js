@@ -24,6 +24,7 @@ import CardModal from "./components/Board/Card/CardModal";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import PaymentFailure from "./components/Payment/PaymentFailure";
+// import { useCookies } from 'react-cookie';
 
 function App() {
   const { accessToken } = useAuth();
@@ -33,30 +34,35 @@ function App() {
       <>
         <GlobalStyle />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Find" element={<Find />} />
-          <Route path="/CardModal" element={<CardModal />} />
-          <Route path="/WaveFind" element={<WaveFind />} />
-          <Route path="/Write" element={<Write />} />
-          <Route path="/Edit" element={<Edit />} />
-          <Route path="/List" element={<List />} />
-          <Route path="/Board" element={<Board />} />
-          <Route path="/BoardList" element={<BoardList />} />
-          <Route path="/Detail" element={<Detail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/Mypage" element={<Mypage />} />
-          <Route path="/detail/:boardPostId" element={<Detail />} />
-          <Route path="/Mypage" element={<Mypage />} />
-          <Route path="/classlist" element={<ClassListPage />} />
-          <Route path="/class/:lessonId" element={<ClassDetailPage />} />
-          <Route path="/pay/:lessonId" element={<ClassPaymentPage />} />
-          <Route path="/newclass" element={<CreateClassPage />} />
-          <Route path="/findid" element={<FindId />} />
-          <Route path="/findpassword" element={<FindPassword />} />
-          <Route path="/editclass/:lessonId" element={<EditClassPage />} />
-          <Route path="/paysuccess" element={<PaymentSuccess />} />
-          <Route path="/payfailed" element={<PaymentFailure />} />
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/Find" element={<Find></Find>}></Route>
+          <Route path="/CardModal" element={<CardModal></CardModal>}></Route>
+          <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
+          <Route path="/Write" element={<Write></Write>}></Route>
+          <Route path="/edit/:boardPostId" element={<Edit></Edit>}></Route>
+          <Route path="/Delete" element={<Delete></Delete>}></Route>
+          <Route path="/List" element={<List></List>}></Route>
+          <Route path="/Detail" element={<Detail></Detail>}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/Mypage" element={<Mypage />}></Route>
+          <Route
+            path="/detail/:boardPostId"
+            element={<Detail></Detail>}
+          ></Route>
+          <Route path="/Mypage" element={<Mypage />}></Route>
+          <Route path="/classlist" element={<ClassListPage />}></Route>
+          <Route path="/class/:lessonId" element={<ClassDetailPage />}></Route>
+          <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
+          <Route path="/newclass" element={<CreateClassPage />}></Route>
+          <Route path="/findid" element={<FindId />}></Route>
+          <Route path="/findpassword" element={<FindPassword />}></Route>
+          <Route
+            path="/editclass/:lessonId"
+            element={<EditClassPage />}
+          ></Route>
+          <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
+          <Route path="/payfailed" element={<PaymentFailure />}></Route>
         </Routes>
       </>
     </AuthProvider>

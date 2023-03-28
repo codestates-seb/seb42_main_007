@@ -23,7 +23,7 @@ function Mypage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken','refreshToken')}`, // 저장된 토큰 가져오기
         },
       });
   
@@ -32,8 +32,8 @@ function Mypage() {
       }
   
       // 2. 쿠키 삭제하기
-      Cookies.remove('token');
-
+      Cookies.remove('accessToken','refreshToken');
+  
       // 3. 상태 업데이트하기
       setIsLoggedOut(true);
   
@@ -44,15 +44,14 @@ function Mypage() {
     }
   };
 
-  async function getDisplayName() {
-    try {
-      const response = await fetch('/members/{member-id}', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
-        },
-      });
+  function getDisplayName() {
+    return fetch('http://43.201.167.13:8080/members/1', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('accessToken')}`, // 올바른 토큰 값 사용
+      },
+    })
 
     .then((response) => {
       if (!response.ok) {
@@ -84,7 +83,7 @@ useEffect(() => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('token')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken','refreshToken')}`, // 저장된 토큰 가져오기
         },
       });
   
@@ -93,8 +92,8 @@ useEffect(() => {
       }
   
       // 2. 쿠키 삭제하기
-      Cookies.remove('token');
-
+      Cookies.remove('accessToken','refreshToken');
+  
       // 3. 상태 업데이트하기
       setIsDeleting(false);
       setIsLoggedOut(true);

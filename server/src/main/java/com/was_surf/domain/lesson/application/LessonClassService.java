@@ -28,15 +28,13 @@ public class LessonClassService {
         log.info("# create LessonClass");
 
         // 현재 로그인된 회원 정보 조회
-        Member member = memberService.findMemberToEmail(email);
+        Member findMember = memberService.findMemberToEmail(email);
 
         // 권한이 있는 계정인지 확인
-        verifyMemberRole(member);
-
-        Member newMember = new Member(member.getMemberId(), member.getDisplayName(), member.getEmail());
+        verifyMemberRole(findMember);
 
         // 회원 정보 주입
-        lessonClass.setMember(newMember);
+        lessonClass.setMember(findMember);
         lessonClass.setCurrentHeadCount(0);
 
         return lessonClassRepository.save(lessonClass);
@@ -117,7 +115,7 @@ public class LessonClassService {
         long lessonClassHasMemberId = lessonClass.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if(!(lessonClassHasMemberId == currentMemberId) || member.getRoles().contains("ADMIN")) {
+        if(lessonClassHasMemberId != currentMemberId || member.getRoles().contains("ADMIN")) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

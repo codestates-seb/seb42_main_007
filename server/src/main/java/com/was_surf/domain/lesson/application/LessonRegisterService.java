@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -35,16 +36,16 @@ public class LessonRegisterService {
         // 입력된 강습 클래스 조회
         LessonClass findLessonClass = lessonClassService.findLessonClass(lessonClassId);
 
-        // 감습클래스 주최자일 경우 신청 불가
+        // 강습클래스 주최자일 경우 신청 불가
         hostMemberCheck(findLessonClass, findMember);
 
-        // 개인정보를 제외한 Member 객체 생성
-        Member newMember = new Member(findMember.getMemberId(), findMember.getDisplayName(), findMember.getEmail());
+        // 현재 신청 인원이 다 찼는지 확인
+        checkHeadCountFull(findLessonClass);
 
         // 해당 강습 클래스를 이미 신청했는지 확인
-        existRegisterCheck(findLessonClass, findMember);
+        existRegisterCheck(findLessonClass, findMember.getMemberId());
 
-        lessonRegister.setMember(newMember);
+        lessonRegister.setMemberId(findMember.getMemberId());
         lessonRegister.setLessonClass(findLessonClass);
         lessonRegister.getLessonClass().updateCurrentHeadCount(lessonRegister.getHeadCount());
         lessonRegister.setRegisterDate(LocalDateTime.now());
@@ -84,7 +85,7 @@ public class LessonRegisterService {
 
         Member findMember = memberService.findMemberToEmail(email);
 
-        return lessonRegisterRepository.findAllByMember(findMember, PageRequest.of(page - 1, size, Sort.by("lessonClass").ascending()));
+        return lessonRegisterRepository.findAllByMemberId(findMember.getMemberId(), PageRequest.of(page - 1, size, Sort.by("lessonClass").ascending()));
     }
 
     // 강습 클래스 신청 취소
@@ -115,23 +116,30 @@ public class LessonRegisterService {
     }
 
     public void verifyMatchMember(LessonRegister lessonRegister, Member member) {
-        long lessonRegisterHasMemberId = lessonRegister.getMember().getMemberId();
+        long lessonRegisterHasMemberId = lessonRegister.getMemberId();
         long currentMemberId = member.getMemberId();
 
         // 작성자 계정 또는 관리자 계정인지 확인
-        if(!(lessonRegisterHasMemberId == currentMemberId) || member.getRoles().contains("ADMIN")) {
+        if(lessonRegisterHasMemberId == currentMemberId || member.getRoles().contains("ADMIN")) {
             // 아닐 경우 에러 발생
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }
 
     // 해당 강습 클래스를 이미 신청했는지 확인
-    public void existRegisterCheck(LessonClass lessonClass, Member member) {
-        Optional<LessonRegister> optionalLessonRegister = lessonRegisterRepository.findByLessonClassAndMember(lessonClass, member);
+    public void existRegisterCheck(LessonClass lessonClass, long memberId) {
+        Optional<LessonRegister> optionalLessonRegister = lessonRegisterRepository.findByLessonClassAndMemberId(lessonClass, memberId);
 
         // 이미 신청한 강습 클래스라면 에러 발생
         if(optionalLessonRegister.isPresent()) {
             throw new BusinessLogicException(ExceptionCode.REGISTER_EXIST);
+        }
+    }
+
+    // 해당 클래스에 인원이 마감 됐을 경우 신청 불가
+    public void checkHeadCountFull(LessonClass lessonClass) {
+        if(Objects.equals(lessonClass.getHeadCount(), lessonClass.getCurrentHeadCount())) {
+            throw new BusinessLogicException(ExceptionCode.FULL_HEADCOUNT);
         }
     }
 }

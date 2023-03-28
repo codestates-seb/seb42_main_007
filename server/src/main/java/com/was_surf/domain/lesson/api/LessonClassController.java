@@ -36,7 +36,7 @@ public class LessonClassController {
                                           Principal principal) {
         LessonClass lessonClass = mapper.lessonClassPostDtoToLessonClass(lessonClassPostDto);
 
-        LessonClass createdLessonClass = lessonClassService.createLessonClass(lessonClass, principal.getName());
+        LessonClass createdLessonClass = lessonClassService.createLessonClass(lessonClass, "teacher@gmail.com");
 
         URI location = UriCreator.createUri(LESSON_CLASS_DEFAULT_URL, createdLessonClass.getLessonClassId());
 

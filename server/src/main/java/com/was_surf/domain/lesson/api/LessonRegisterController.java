@@ -32,7 +32,7 @@ public class LessonRegisterController {
 
         LessonRegister lessonRegister = mapper.lessonRegisterPostDtoToLessonRegister(lessonRegisterPostDto);
 
-        LessonRegister createdLessonRegister = lessonRegisterService.createRegister(lessonRegister, principal.getName() , lessonRegisterPostDto.getLessonClassId());
+        LessonRegister createdLessonRegister = lessonRegisterService.createRegister(lessonRegister, "hgd@gmail.com", lessonRegisterPostDto.getLessonClassId());
 
         return new ResponseEntity<>(mapper.lessonRegisterToLessonRegisterResponseDto(createdLessonRegister), HttpStatus.CREATED);
     }

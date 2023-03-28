@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wassurf_white from "../../images/Wassurf_white.png";
 import { Menu } from "@styled-icons/ionicons-solid/Menu";
@@ -21,85 +21,80 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   z-index: 2;
 
-    .header-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        height: 100px;
-        max-width: 800px;
-        margin: 0;
-        padding: 0;
-        padding-right: 30px;
-    }
-    .header-wrapper > .toggle {
-        position: absolute;
-    }
-    .logo-container {
-        display: flex;
-        justify-content: center;
-        margin-left: 10px;
-        min-width: 210px;
-        width: fit-content;
-        top: 3px;
-        position: relative;
-    }
-    @media screen and (max-width:375px) {
-        display: none;
-    }
-
-`
-const LogoImage = styled.img`
-    height: 40px;
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100px;
+    max-width: 800px;
+    margin: 0;
+    padding: 0;
+    padding-right: 30px;
+  }
+  .header-wrapper > .toggle {
+    position: absolute;
+  }
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    min-width: 210px;
     width: fit-content;
-    cursor: pointer;
-    margin: 5px;
-    @media screen and (max-width:375px) {
-        display: none;
-    }
-
-`
- 
-const MenuIcon = styled(Menu)`
-    height: 30px;
-    width: 30px;
-    color: white;
-    margin-left: 20px;
-    display: none;
+    top: 3px;
     position: relative;
-    transition: 0.5s;
-    @media screen and (max-width:768px) {
-        display: flex;
-        margin-right: 50px;
-    }
-    @media screen and (max-width:375px) {
-        position: relative;
-        top: 0px;
-        left: 0px;
-        background-color: red;
-        margin-right: 20px;
-    }
-
-
-`
-const TimesIcon = styled(Times)`
-    height: 30px;
-    width: 30px;
-    color: white;
-    margin-left: 20px;
+  }
+  @media screen and (max-width: 375px) {
     display: none;
-    @media screen and (max-width:768px) {
-        display: flex;
-        margin-right: 50px;        
-    }
-    @media screen and (max-width:375px) {
-        position: relative;
-        top: 0px;
-        left: 0px;
-        color: red;
-        margin-right: 20px;
-    }
+  }
+`;
+const LogoImage = styled.img`
+  height: 40px;
+  width: fit-content;
+  cursor: pointer;
+  margin: 5px;
+  @media screen and (max-width: 375px) {
+    display: none;
+  }
+`;
 
-`
+const MenuIcon = styled(Menu)`
+  height: 30px;
+  width: 30px;
+  color: white;
+  margin-left: 20px;
+  display: none;
+  position: relative;
+  transition: 0.5s;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    margin-right: 50px;
+  }
+  @media screen and (max-width: 375px) {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-color: red;
+    margin-right: 20px;
+  }
+`;
+const TimesIcon = styled(Times)`
+  height: 30px;
+  width: 30px;
+  color: white;
+  margin-left: 20px;
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    margin-right: 50px;
+  }
+  @media screen and (max-width: 375px) {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    color: red;
+    margin-right: 20px;
+  }
+`;
 const MenuItems = styled.div`
   display: flex;
   min-width: fit-content;
@@ -118,7 +113,7 @@ const MenuItems = styled.div`
     .hidden {
       display: block;
     }
-  } 
+  }
 `;
 
 const MenuItem = styled.div`
@@ -134,7 +129,6 @@ const MenuItem = styled.div`
     color: black;
   }
 `;
-
 
 const ButtonContainer = styled.div`
   width: fit-content;
@@ -164,7 +158,12 @@ const LoginButton = styled.button`
 
 const LandingHeader = () => {
   const [menu, setMenu] = useState(false);
-  const isLoggedIn = localStorage.getItem('accessToken');; // 로그인 상태를 나타내는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <>
@@ -200,7 +199,8 @@ const LandingHeader = () => {
             <div className="toggle" onClick={() => setMenu(!menu)}>
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>
-          </ButtonContainer>
+          </ButtonContainer>{" "}
+          */}
         </div>
       </HeaderContainer>
     </>

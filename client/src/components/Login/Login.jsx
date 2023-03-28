@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { REDIRECT_URI } from '../Apiurl';
 import { AuthContext, useAuth, } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 
 
@@ -77,11 +78,7 @@ const Login = () => {
   const { setTokens } = useAuth();
   const [, forceUpdate] = useState();
   // const { setAuth } = useAuth();
-
   const [loggedIn, setLoggedIn] = useState(false); // 로그인 상태를 관리하는 useState 추가
-
-
-
 
   const API_URL = `${REDIRECT_URI}members/login`;
   
@@ -118,13 +115,20 @@ const Login = () => {
         // setTokens(accessToken, refreshToken);
         localStorage.setItem('accessToken',accessToken);
         localStorage.setItem('refreshToken',refreshToken);
+<<<<<<< HEAD
+=======
 
+>>>>>>> feat/FE
         // setAuth(true);
         setLoggedIn(true);
         alert('로그인이 성공했습니다.');
         navigate('/');
+<<<<<<< HEAD
+
+=======
         console.log('Access Token:', accessToken);
         console.log('Refresh Token:', refreshToken);
+>>>>>>> feat/FE
         // alert('로그인이 성공했습니다.');
         // setTimeout(() => {
         //   navigate('/'); // 일정 시간 후에 '/' 화면으로 이동
@@ -203,7 +207,7 @@ const Login = () => {
             회원가입 페이지로
           </button>
         </div>
-        <button type="submit" disabled={!email || !password}>
+        <button type="submit" disabled={!email || !password} onClick={handleLogin}>
           로그인
         </button>
       </form>

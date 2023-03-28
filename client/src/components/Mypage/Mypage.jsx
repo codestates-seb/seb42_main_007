@@ -1,106 +1,114 @@
 import './Mypage.css'
 import unnamed from "../../images/unnamed.jpg"
 import { Link, Route, Routes } from 'react-router-dom';
-import GlobalStyle from '../../styles/GlobalStyle';
 import { MyLessons, MyPosts, MyAppliedLessons } from './MyComponents';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import { useNavigate } from 'react-router-dom';
+import { useContext} from 'react';
 
 function Mypage() {
 
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState('');
-
+  const navigate = useNavigate(); // useNavigate 인스턴스 생성
+  
   const handleLogout = async () => {
     try {
       // 1. 백엔드 API를 호출하여 토큰 무효화하기
-      const response = await fetch('/members/logout', {
+      const response = await fetch('http://43.201.167.13:8080/members/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken','refreshToken')}`, // 저장된 토큰 가져오기
         },
       });
-
-      if (!response.ok) {
+  
+      if (!response.data['data']['accessToken']) {
         throw new Error('Failed to log out');
       }
-
+  
       // 2. 쿠키 삭제하기
-      Cookies.remove('accessToken');
-
+      Cookies.remove('accessToken','refreshToken');
+  
       // 3. 상태 업데이트하기
       setIsLoggedOut(true);
+  
+      // 4. 홈화면으로 이동하기
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
   };
 
-  async function getDisplayName() {
-    try {
-      const response = await fetch('/members/{member-id}', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
-        },
-      });
+  function getDisplayName() {
+    return fetch('http://43.201.167.13:8080/members/1', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('accessToken')}`, // 올바른 토큰 값 사용
+      },
+    })
 
+    .then((response) => {
       if (!response.ok) {
         throw new Error('Failed to get display name');
       }
 
-      const data = await response.json();
-      return data.displayName;
-    } catch (error) {
+      return response.json();
+    })
+    .then((data) => {
+      return data['data']['displayName'];
+    })
+    .catch((error) => {
       console.error(error);
-    }
-  }
+    });
+}
+const [displayName, setDisplayName] = useState('');
 
-  const [displayName, setDisplayName] = useState('');
-
-  async function fetchDisplayName() {
-    const displayName = await getDisplayName();
+useEffect(() => {
+  getDisplayName().then((displayName) => {
     setDisplayName(displayName);
-  }
-
-  useEffect(() => {
-    fetchDisplayName();
-  }, []);
+  });
+}, []);
 
 
   const handleDeleteAccount = async () => {
     try {
       // 1. 백엔드 API를 호출하여 회원정보 삭제하기
-      const response = await fetch('http://43.201.167.13:8080/members/%7Bmember-id%7D', {
+      const response = await fetch('http://43.201.167.13:8080/members/1', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
+          Authorization: `Bearer ${Cookies.get('accessToken','refreshToken')}`, // 저장된 토큰 가져오기
         },
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to delete account');
       }
-
+  
       // 2. 쿠키 삭제하기
-      Cookies.remove('accessToken');
-
+      Cookies.remove('accessToken','refreshToken');
+  
       // 3. 상태 업데이트하기
       setIsDeleting(false);
       setIsLoggedOut(true);
+  
+      // 4. 홈화면으로 이동하기
+
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   if (isLoggedOut) {
     return <div>Logged out successfully!</div>;
   }
-
+  
   if (isDeleting) {
     return (
       <div>
@@ -115,7 +123,7 @@ function Mypage() {
 
   return (
     <>
-      <GlobalStyle />
+      <Header />
       <div class="Mypagecontainer">
         <div class="commonMypage">
           <section class="commonmypagese">
@@ -172,6 +180,7 @@ function Mypage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

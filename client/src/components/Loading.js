@@ -19,6 +19,7 @@ export const Background = styled.div`
 export const LoadingText = styled.div`
   font-size: 1rem;
   text-align: center;
+  margin-top: 15px;
 `
 
 export const Loading = () => {

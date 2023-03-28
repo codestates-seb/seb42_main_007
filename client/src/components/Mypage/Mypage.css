@@ -1,10 +1,10 @@
 .Mypagecontainer {
     height: 100%;
     width: auto;
-    min-width: px;
+    min-height: 100%;
     max-width: 1880px;
     padding: 0px 40px;
-    margin: 0px auto;
+    margin-bottom: 100px ;
     box-sizing: border-box;
 }
 
@@ -201,4 +201,10 @@
     content: "";
     z-index: -1;
     transform: translateX(-50%);
+}
+
+.myfooter {
+    position: absolute;
+
+    bottom: 0px;
 }

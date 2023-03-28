@@ -237,7 +237,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     setIsLoggedIn(!!token);
   }, []);
 
@@ -261,7 +261,7 @@ const Header = () => {
             <MenuItem>
               <Link to="/classlist">🏄‍♀️ 강습예약</Link>
             </MenuItem>
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <MenuItem>
                 <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
               </MenuItem>
@@ -269,11 +269,13 @@ const Header = () => {
               <MenuItem className="hidden">
                 <Link to="/Login">💬 로그인</Link>
               </MenuItem>
-            )}
+            )} */}
           </MenuItems>
           <ButtonContainer>
             {isLoggedIn ? (
-              <></>
+              <MenuItem>
+              <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
+            </MenuItem>
             ) : (
               <LoginButton>
                 <Link to="/Login">로그인</Link>

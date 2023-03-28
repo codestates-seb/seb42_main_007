@@ -164,7 +164,7 @@ const LoginButton = styled.button`
 
 const LandingHeader = () => {
   const [menu, setMenu] = useState(false);
-  const isLoggedIn = localStorage.getItem("token"); // 로그인 상태를 나타내는 변수
+  const isLoggedIn = localStorage.getItem('accessToken');; // 로그인 상태를 나타내는 변수
 
   return (
     <>
@@ -196,7 +196,7 @@ const LandingHeader = () => {
               </MenuItem>
             )}
           </MenuItems>
-          <ButtonContainer>
+          {/* <ButtonContainer>
             {isLoggedIn ? (
               <></>
             ) : (
@@ -207,7 +207,7 @@ const LandingHeader = () => {
             <div className="toggle" onClick={() => setMenu(!menu)}>
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>
-          </ButtonContainer>
+          </ButtonContainer> */}
         </div>
       </HeaderContainer>
     </>

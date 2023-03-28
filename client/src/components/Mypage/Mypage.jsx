@@ -5,6 +5,8 @@ import GlobalStyle from '../../styles/GlobalStyle';
 import { MyLessons, MyPosts, MyAppliedLessons } from './MyComponents';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 
 function Mypage() {
@@ -115,7 +117,7 @@ function Mypage() {
 
   return (
     <>
-      <GlobalStyle />
+      <Header />
       <div class="Mypagecontainer">
         <div class="commonMypage">
           <section class="commonmypagese">
@@ -172,6 +174,7 @@ function Mypage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

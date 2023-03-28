@@ -25,6 +25,7 @@ import CardModal from "./components/Board/Card/CardModal";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import PaymentFailure from "./components/Payment/PaymentFailure";
+// import { useCookies } from 'react-cookie';
 
 function App() {
   return (

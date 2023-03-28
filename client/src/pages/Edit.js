@@ -5,9 +5,11 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 import { Input } from "../components/Board/Input";
-import {
-  InputLabel,
-} from "../components/Board/EditorInputWrapper";
+import { InputLabel } from "../components/Board/EditorInputWrapper";
+import { Button } from "../components/Board/Button";
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { useRef } from "react";
 
 const Edit = () => {
   const [title, setTitle] = useState("");
@@ -16,7 +18,10 @@ const Edit = () => {
   const [error, setError] = useState(null);
   const { boardPostId } = useParams();
   const navigate = useNavigate();
-  const { state: { post } } = useLocation(); // 이전 페이지에서 전달된 post 데이터 가져오기
+  const {
+    state: { post },
+  } = useLocation(); // 이전 페이지에서 전달된 post 데이터 가져오기
+  const body1 = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +33,7 @@ const Edit = () => {
       } catch (error) {
         setError(error);
         setIsLoading(false);
-        console.log("게시글을 불러오는데 실패했습니다")
+        console.log("게시글을 불러오는데 실패했습니다");
       }
     };
     fetchData();
@@ -38,8 +43,11 @@ const Edit = () => {
     setTitle(event.target.value);
   };
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
+  const handleChange = () => {
+    const instance = body1.current.getInstance();
+    const data = instance.getMarkdown();
+    setContent(data);
+    console.log(content);
   };
 
   const handleSubmit = async (event) => {
@@ -62,32 +70,61 @@ const Edit = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const cancelButtonClick = () => {
+    navigate(`/detail/${boardPostId}`);
+  };
+
   return (
     <>
-    <Header />
-    <MainLeft>
-    <h2>게시글 수정</h2>
-    <div>
-      <form onSubmit={handleSubmit}>
-      <InputLabel title="제목" />
-          <input type="text" value={title} onChange={handleTitleChange} />
-        <br />
-        <label>
-          내용:
-          <textarea value={content} onChange={handleContentChange} />
-        </label>
-        <br />
-        <button type="submit">수정 완료</button>
-      </form>
-    </div>
-    </MainLeft>
-    <Footer />
+      <Header />
+      <MainLeft>
+        <h2>게시글 수정</h2>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <InputLabel title="제목" />
+            <Input
+              placeholder=""
+              padding="0.78rem 0.91rem"
+              width="calc(100% - 30.12px);"
+              value={title}
+              onChange={handleTitleChange}
+            />
+            <InputLabel title="내용" />
+            <Editor
+              ref={body1}
+              value={content}
+              previewStyle="tab"
+              height="600px"
+              initialEditType="markdown"
+              useCommandShortcut={true}
+              onChange={handleChange}
+            />
+
+            <div className="buttonWrapper">
+              <Button
+                type="submit"
+                buttonType="type2"
+                buttonName="수정"
+                width="8.04rem"
+                height="3.79rem"
+              />
+              <Button
+                onClick={cancelButtonClick}
+                buttonType="type4"
+                buttonName="취소"
+                width="8.04rem"
+                height="3.79rem"
+              />
+            </div>
+          </form>
+        </div>
+      </MainLeft>
+      <Footer />
     </>
   );
 };
 
 export default Edit;
-
 
 const MainLeft = styled.div`
   display: flex;

@@ -9,6 +9,7 @@ import Comments2 from "../components/Board/Comments2";
 import DeleteButton from "../components/Board/Delete";
 import { format } from "date-fns";
 import Avvvatars from 'avvvatars-react'
+import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
@@ -18,6 +19,8 @@ const BREAK_POINT_PC = 1200;
 const Detail = () => {
   const { boardPostId } = useParams();
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -33,10 +36,17 @@ const Detail = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`
-      );
-      setPost(response.data.data);
+      try {
+        setLoading(true); // 데이터 가져오기 전 로딩 상태 true로 변경
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`
+        );
+        setPost(response.data.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false); // 데이터 가져온 후 로딩 상태 false로 변경
+      }
     }
     fetchData();
   }, [boardPostId]);
@@ -54,7 +64,9 @@ const Detail = () => {
     <>
       <Header />
       <MainContainer>
-        {post ? (
+      {loading ? (
+          <LoadingIndicator /> // 로딩 중일 때 LoadingIndicator 컴포넌트 출력
+        ) : post ? (
           <>
           <QuestionHeader>
             <h1>{post.title}</h1>

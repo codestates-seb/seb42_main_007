@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/members")
@@ -63,9 +64,16 @@ public class MemberController {
         return new ResponseEntity<>(mapper.memberToMemberResponse(updateMember),HttpStatus.OK);
     }
 
-    @GetMapping("/{member-id}")
-    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId){
-        Member findMember = memberService.findMember(memberId);
+//    @GetMapping("/{member-id}")
+//    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId){
+//        Member findMember = memberService.findMember(memberId);
+//        return new ResponseEntity<>(mapper.memberToMemberResponse(findMember),HttpStatus.OK);
+//    }
+
+    @GetMapping
+    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId,
+                                    Principal principal){
+        Member findMember = memberService.findMemberToEmail(principal.getName());
         return new ResponseEntity<>(mapper.memberToMemberResponse(findMember),HttpStatus.OK);
     }
 

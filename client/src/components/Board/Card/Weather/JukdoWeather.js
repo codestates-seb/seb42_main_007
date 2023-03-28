@@ -1,8 +1,8 @@
 import Header from "react-fullpage/dist/Header";
 import Footer from "react-fullpage/dist/Footer";
-import JukDo from "../components/Board/Card/Weather/Jukdo";
+import JukDo from "./Jukdo";
 
-const WaveFind = () => {
+const JukdoWeather = () => {
     return (
         <>
         <Header />
@@ -12,4 +12,4 @@ const WaveFind = () => {
     )
 }
 
-export default WaveFind;
+export default JukdoWeather;

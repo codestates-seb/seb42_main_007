@@ -1,6 +1,7 @@
 import "./card.scss";
 import { useState } from "react";
 import CardModal from "./CardModal";
+import JukdoWeather from "./Weather/JukdoWeather";
 
 export const Card = ({board_id, title, content, img_url, username, date}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +25,7 @@ export const Card = ({board_id, title, content, img_url, username, date}) => {
       <div className="card-body-text">
         <div className="card-body-text-title">양양 죽도해변</div>
         <div className="card-body-text-content">서핑하기 좋은 날씨</div>
+        <JukdoWeather />
       </div>
 
       <div className="card-footer">

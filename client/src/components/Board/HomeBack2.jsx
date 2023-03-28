@@ -183,8 +183,8 @@ const HomeBack2 = () => {
             <SubText>서퍼들과의 이야기</SubText>
           </div>
         </div>
-        {/* <LeftImage src={LandingSurfer} alt="서퍼" className="slide-in" /> */}
-        <LeftImage src={LandingSurfer} alt="서퍼" />
+        <LeftImage src={LandingSurfer} alt="서퍼" className="slide-in" />
+        {/* <LeftImage src={LandingSurfer} alt="서퍼" /> */}
         </SectionTwo>
       </MainArea>
     </>

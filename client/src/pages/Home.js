@@ -17,7 +17,7 @@ function Home() {
       const currentImg = currentSection.querySelector('.slide-in');
 
       // 이미지에 slide-in 클래스 추가
-      if (currentImg && destination.index === 2) {
+      if (currentImg && destination.index === 1) {
         currentImg.classList.add('slide-in');
       }
     }

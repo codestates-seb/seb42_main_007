@@ -83,7 +83,7 @@ const LeftImage = styled.img`
   z-index: 5;
   opacity: 0.9;
 
-&.slide-in {
+  &.slide-in {
     animation: slide-in 2s ease forwards;
   }
 
@@ -94,6 +94,24 @@ const LeftImage = styled.img`
     to {
       transform: translateX(0);
     }
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
+    left: 0;
+    right: 0;
+    top: 30rem;
+    margin: auto;
+    max-width: 60%;
+    height: auto;
+  }
+
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    height: 35vh;
+    top: 20rem;
+  }
+
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    height: 60vh;
   }
 `;
 

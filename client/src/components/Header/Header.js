@@ -171,6 +171,11 @@ const MenuItem = styled.div`
   margin-left: 20px;
   color: white;
 
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+
   @media screen and (max-width: 768px) {
     background-color: #80dee8;
     border: 1px #3fbed3 solid;

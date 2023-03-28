@@ -3,34 +3,20 @@ import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
-import { useState } from "react";
 import "swiper/swiper-bundle.css";
 import "../components/Board/FindList.scss";
 import { Card, Card2, Card3, Card4, Card5, Card6, Card7, Card8 } from "../components/Board";
-import GradeButton from "../components/Board/GradeButton";
+
 
 SwiperCore.use([Autoplay]);
 
 const Find = () => {
-  const [spotGrade, setSpotGrade] = useState([
-    { name: 'A', grade: 3 },
-    { name: 'B', grade: 5 },
-    { name: 'C', grade: 1 },
-  ]);
-
-
   return (
     <>
       <Header />
       <Main>
         <FindListWrapper>
           <FindListHeader>서핑장소 찾기</FindListHeader>
-          <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper>
-          {/* {spotGrade.map((spot) => (
-          <li key={spot.name}>
-            {spot.name} - {spot.grade}
-          </li>
-        ))} */}
           <FindListBody>
             <StyledSwiper
               loop={true}
@@ -121,10 +107,7 @@ const Main = styled.div`
     width: 1400px;
   }
 `;
-const GradeButtonWrapper = styled.div`
-  margin-left: auto;
-  margin-right: 2rem;
-`
+
 const FindListWrapper = styled.div`
   display: flex;
   align-items: center;

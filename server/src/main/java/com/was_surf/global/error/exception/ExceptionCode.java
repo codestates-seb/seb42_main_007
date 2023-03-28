@@ -23,6 +23,8 @@ public enum ExceptionCode {
     REGISTER_NOT_FOUND(404, "작성자와 회원정보가 일치하지 않습니다."),
     IMPOSSIBLE_REGISTER(403, "강습 주최자는 강습 클래스 수강 신청이 불가능합니다."),
     NOT_PERMISSION_MEMBER(403, "강습 클래스 작성 권한이 없습니다."),
+    FULL_HEADCOUNT(403, "신청 인원이 다 찼습니다."),
+    OVER_HEADCOUNT(403, "신청 가능한 인원보다 많습니다."),
     REGISTER_EXIST(409, "이미 신청한 강습 클래스입니다.");
 
     private int httpStatus;

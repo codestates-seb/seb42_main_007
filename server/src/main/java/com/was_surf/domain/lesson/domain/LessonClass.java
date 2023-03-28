@@ -3,6 +3,8 @@ package com.was_surf.domain.lesson.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.audit.Auditable;
+import com.was_surf.global.error.exception.BusinessLogicException;
+import com.was_surf.global.error.exception.ExceptionCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -50,7 +52,12 @@ public class LessonClass extends Auditable {
     private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
     public void setMember(Member member) {
-        this.member = member;
+        Member newMember = new Member();
+        newMember.setMemberId(member.getMemberId());
+        newMember.setEmail(member.getEmail());
+        newMember.setDisplayName(member.getDisplayName());
+
+        this.member = newMember;
     }
 
     public void addLessonRegister(LessonRegister lessonRegister) {
@@ -58,16 +65,6 @@ public class LessonClass extends Auditable {
         if(lessonRegister.getLessonClass() != this) {
             lessonRegister.setLessonClass(this);
         }
-    }
-
-    public LessonClass(String title, String content, LocalDateTime registerStart, LocalDateTime registerEnd, LocalDate lessonDate, int headCount, int price) {
-        this.title = title;
-        this.content = content;
-        this.registerStart = registerStart;
-        this.registerEnd = registerEnd;
-        this.lessonDate = lessonDate;
-        this.headCount = headCount;
-        this.price = price;
     }
 
     public void updateLessonClass(LessonClass lessonClass) {
@@ -88,6 +85,9 @@ public class LessonClass extends Auditable {
     }
 
     public void updateCurrentHeadCount(int headCount) {
+        if(this.currentHeadCount + headCount > this.headCount) {
+            throw new BusinessLogicException(ExceptionCode.OVER_HEADCOUNT);
+        }
         this.currentHeadCount = this.currentHeadCount + headCount;
     }
 }

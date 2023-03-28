@@ -105,7 +105,7 @@ public class BoardPostService {
         long boardPostHasMemberId = boardPost.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if (!(boardPostHasMemberId == currentMemberId) || (member.getRoles().toString().equals("USER") && member.getRoles().toString().equals("ADMIN"))) {
+        if (!(boardPostHasMemberId == currentMemberId) || (member.getRoles().contains("USER") && member.getRoles().contains("ADMIN"))) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

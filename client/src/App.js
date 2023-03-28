@@ -8,10 +8,8 @@ import Write from "./pages/Write";
 import Login from "./components/Login/Login";
 import Signup from "./components/signUp/SignUp";
 import Mypage from "./components/Mypage/Mypage";
-import BoardList from "./pages/BoardList";
 import Detail from "./pages/Detail";
 import Find from "./pages/Find";
-import Board from "./pages/Board";
 import ClassListPage from "./pages/ClassPage/ClassListPage";
 import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
 import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
@@ -24,6 +22,7 @@ import CardModal from "./components/Board/Card/CardModal";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import PaymentFailure from "./components/Payment/PaymentFailure";
+import MyPageNew from "./components/Mypage/MyPageNew";
 // import { useCookies } from 'react-cookie';
 
 function App() {
@@ -40,7 +39,7 @@ function App() {
           <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
           <Route path="/Write" element={<Write></Write>}></Route>
           <Route path="/edit/:boardPostId" element={<Edit></Edit>}></Route>
-          <Route path="/Delete" element={<Delete></Delete>}></Route>
+          {/* <Route path="/Delete" element={<Delete></Delete>}></Route> */}
           <Route path="/List" element={<List></List>}></Route>
           <Route path="/Detail" element={<Detail></Detail>}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -63,6 +62,7 @@ function App() {
           ></Route>
           <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
           <Route path="/payfailed" element={<PaymentFailure />}></Route>
+          <Route path="/mypagetest" element={<MyPageNew />}></Route>
         </Routes>
       </>
     </AuthProvider>

@@ -7,6 +7,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Kakaopay from "../../images/ClassPaymentPage/Kakaopay.png";
 import Loading from "../../components/Loading";
+// import * as dotenv from "dotenv";
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const ClassDetailPage = () => {
   const [date, setDate] = useState("2023년 4월 7일");
@@ -23,6 +26,8 @@ const ClassDetailPage = () => {
   const navigate = useNavigate();
 
   const adminKey = process.env.KAKAOPAY_ADMIN_KEY;
+
+  console.log(adminKey);
 
   const dateFormatEdit = (str) => {
     if (typeof str === "string") {
@@ -146,7 +151,8 @@ const ClassDetailPage = () => {
           //     cancel_url: "http://localhost:3000/class/1",
           //   },
           headers: {
-            Authorization: `KakaoAK 96b2b8ecaf66cbe0b9ddaaa9fb1fda29`,
+            Authorization: `KakaoAK ${process.env.KAKAOPAY_ADMIN_KEY}`,
+
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
           },
         }
@@ -408,6 +414,7 @@ const RegistrationButton = styled.button`
   font-size: 16px;
   flex: 3 1 0;
   padding: 0px 25px;
+  cursor: pointer;
   :hover {
     border: solid 3px #3fbed3;
     background-color: transparent;
@@ -445,6 +452,7 @@ const ClassDetailDeleteButton = styled.button`
   height: 50px;
   font-size: 14px;
   flex: 1 1 0;
+  cursor: pointer;
   :hover {
     border: solid 3px #3fbed3;
     background-color: transparent;

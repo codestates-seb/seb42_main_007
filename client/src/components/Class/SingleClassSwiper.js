@@ -123,6 +123,7 @@ const ClassThumbnail = styled.div`
   background-size: cover;
   background-position: center;
   z-index: -1;
+  border-radius: 20px 20px 00px 0px;
 `;
 
 const ClassTitle = styled.div`

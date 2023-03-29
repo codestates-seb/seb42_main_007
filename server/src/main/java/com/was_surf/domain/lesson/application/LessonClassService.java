@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -91,6 +92,7 @@ public class LessonClassService {
     }
 
     // 강습클래스가 유효한지 확인
+    @Transactional(readOnly = true)
     public LessonClass findVerifiedLessonClass(Long lessonClassId) {
         Optional<LessonClass> optionalLessonClass = lessonClassRepository.findById(lessonClassId);
 
@@ -100,6 +102,7 @@ public class LessonClassService {
     }
 
     // 로그인된 계정이 강습클래스를 주최할 권한이 있는지 확인
+    @Transactional(readOnly = true)
     public void verifyMemberRole(Member member) {
         List<String> roles = member.getRoles();
 
@@ -111,6 +114,7 @@ public class LessonClassService {
     }
 
     // 로그인된 정보가 수정 권한을 가지는지 확인
+    @Transactional(readOnly = true)
     public void verifyMatchMember(LessonClass lessonClass, Member member) {
         long lessonClassHasMemberId = lessonClass.getMember().getMemberId();
         long currentMemberId = member.getMemberId();

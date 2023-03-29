@@ -52,6 +52,7 @@ public class LessonClass extends Auditable {
     private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
     public void addLessonRegister(LessonRegister lessonRegister) {
+        LessonRegister newLessonRegister = new LessonRegister();
         lessonRegisters.add(lessonRegister);
 
         if(lessonRegister.getLessonClass() != this) {

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class LessonRegisterService {
     private final LessonRegisterRepository lessonRegisterRepository;
     private final MemberService memberService;
@@ -78,6 +80,7 @@ public class LessonRegisterService {
     }
 
     // 강습 클래스 신청 내역 조회
+    @Transactional(readOnly = true)
     public LessonRegister findRegister(long lessonRegisterId) {
         log.info("# findRegister");
 

@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.was_surf.global.config.jwt.JwtToken;
 import com.was_surf.global.config.jwt.JwtTokenProvider;
@@ -126,6 +127,7 @@ public class MemberService {
     }
 
     // 이메일로 회원 찾기
+    @Transactional(readOnly = true)
     public Member findMemberToEmail(String email) {
         Optional<Member> optionalMember =  memberRepository.findByEmail(email);
         Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));

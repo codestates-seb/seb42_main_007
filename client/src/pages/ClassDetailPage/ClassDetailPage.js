@@ -129,13 +129,13 @@ const ClassDetailPage = () => {
             total_amount: classData.price * number,
             vat_amount: 0,
             tax_free_amount: 0,
-            approval_url: `http://localhost:3000/paysuccess?lesson_id=${
+            approval_url: `http://43.201.167.13:8080/paysuccess?lesson_id=${
               classData.lessonClassId
             }&item_name=${classData.title}&quantity=${number}&price=${
               classData.price * number
             }`,
-            fail_url: "http://localhost:3000/payfailure",
-            cancel_url: `http://localhost:3000/class/${classData.lessonClassId}`,
+            fail_url: "http://43.201.167.13:8080/payfailure",
+            cancel_url: `http://43.201.167.13:8080/class/${classData.lessonClassId}`,
           },
           // params : {
           //     cid: "TC0ONETIME",

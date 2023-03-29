@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { REDIRECT_URI } from '../Apiurl';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Cookies from 'js-cookie';
 
 const FindIdWrapper = styled.div`
   display: flex;
@@ -10,7 +13,7 @@ const FindIdWrapper = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  background-color: #f8f8f8;
+  background-color: #fff;
 
   form {
     background-color: #ffffff;
@@ -66,17 +69,25 @@ const FindId = () => {
     const handleFindIdSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post(API_URL, { email });
-        const { username } = response.data;
+        const response = await axios.post(API_URL, { email },
+          {
+            headers: {
+            Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
+          }
+        },);
+        const { username } = response.data.email;
+        console(response.data.email)
         setMessage(`회원님의 아이디는 ${username} 입니다.`);
       } catch (error) {
         setMessage('해당 이메일로 가입된 아이디를 찾을 수 없습니다.');
       }
     };
   
-    const API_URL = `${REDIRECT_URI}members/1`;
+    const API_URL = `${REDIRECT_URI}members/login`;
 
     return (
+      <>
+      <Header/>
         <FindIdWrapper>
           <form onSubmit={handleFindIdSubmit}>
             <h1>아이디 찾기</h1>
@@ -94,6 +105,8 @@ const FindId = () => {
             </button>
           </form>
         </FindIdWrapper>
+        <Footer/>
+        </>
       );
     };
     

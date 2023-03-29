@@ -14,7 +14,7 @@ import getDisplayName from '../Mypage/displayName';
 
 
 const LoginWrapper = styled.div`
-  background-color: #f4f4f4;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import styled from "styled-components";
 import { format } from "date-fns";
 import LoadingIndicator from "../Board/Card/LoadingIndicator";
+import Cookies from "js-cookie";
 
 const MyList = () => {
   const [posts, setPosts] = useState([]);
@@ -17,7 +18,12 @@ const MyList = () => {
     async function fetchData() {
       setIsLoading(true);
       const response = await axios.get(
-        `http://43.201.167.13:8080/board-posts?page=1&size=10`
+        `http://43.201.167.13:8080/board-posts?page=1&size=10`,
+        {
+            headers: {
+              Authorization: `Bearer ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
+            },
+          }
       );
       setPosts(response.data.data);
       setTotalPages(response.data.pageInfo.totalPages);
@@ -84,8 +90,8 @@ const HeadContainer = styled.div`
 
   h1 {
     font-size: 1rem;
-    margin: 0;
-    padding: 0;
+    margin: 1;
+    padding: 1;
     font-weight: 30px;
     color: #2b2b2b;
   }
@@ -98,7 +104,7 @@ const PostItem = styled.div`
   align-items: center;
   width: 100%;
   height: 0.6rem;
-  max-width: 1140px;
+  max-width: 890px;
   margin-bottom: 1rem;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -173,19 +179,3 @@ const NoPost = styled.div`
   margin-top: 3rem;
 `;
 
-const AskButton = styled.div`
-  a {
-    background-color: #7cccdc;
-    color: white;
-    border-radius: 0.5rem;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.2rem;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: #36778b;
-    }
-  }
-`;

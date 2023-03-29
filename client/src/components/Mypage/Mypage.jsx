@@ -80,7 +80,7 @@ function Mypage() {
   const handleDeleteAccount = async () => {
     try {
       // 1. 백엔드 API를 호출하여 회원정보 삭제하기
-      const response = await fetch('http://43.201.167.13:8080/members/{members-id}', {
+      const response = await fetch('http://43.201.167.13:8080/members', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -89,27 +89,28 @@ function Mypage() {
       });
   
       if (!response.ok) {
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('refreshToken', '');
+        navigate('/');
         throw new Error('Failed to delete account');
       }
   
       // 2. 쿠키 삭제하기
       Cookies.remove('accessToken','refreshToken');
+      localStorage.setItem('accessToken', '');
+      localStorage.setItem('refreshToken', '');
+      navigate('/');
   
       // 3. 상태 업데이트하기
       setIsDeleting(false);
       setIsLoggedOut(true);
   
       // 4. 홈화면으로 이동하기
-
     } catch (error) {
       console.error(error);
     }
   };
-  
-  if (isLoggedOut) {
-    return <div>Logged out successfully!</div>;
-  }
-  
+
   if (isDeleting) {
     return (
       <div>
@@ -162,7 +163,11 @@ function Mypage() {
                 나의 강습정보 보기
               </SidebarMenu>
             </div>
-            <QuitButton>회원탈퇴</QuitButton>
+            <QuitButton 
+            onClick={handleDeleteAccount}
+            >
+              회원탈퇴
+              </QuitButton>
           </SidebarContainer>
           <BodyContainer>
             {activeMenu === 'my-posts' && <MyList />}

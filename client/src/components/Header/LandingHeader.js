@@ -128,7 +128,12 @@ const MenuItem = styled.div`
     padding: 12px 17px;
     color: black;
   }
+  &:hover {
+    color: black;
+    padding-bottom: 0.2rem;
+  }
 `;
+
 
 const ButtonContainer = styled.div`
   width: fit-content;
@@ -140,6 +145,7 @@ const ButtonContainer = styled.div`
 `;
 
 const LoginButton = styled.button`
+margin-left: 1rem;
   height: 30px;
   width: 60px;
   background-color: transparent;
@@ -185,6 +191,17 @@ const LandingHeader = () => {
             <MenuItem>
               <Link to="/classlist">🏄‍♀️ 강습예약</Link>
             </MenuItem>
+            {/* {isLoggedIn ? (
+              <MenuItem>
+              <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
+            </MenuItem>
+            ) : (
+              <MenuItem className="hidden">
+                <Link to="/Login">💬 로그인</Link>
+              </MenuItem>
+            )} */}
+          </MenuItems>
+          <ButtonContainer>
             {isLoggedIn ? (
               <MenuItem>
               <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
@@ -194,8 +211,6 @@ const LandingHeader = () => {
                 <Link to="/Login">로그인</Link>
               </LoginButton>
             )}
-          </MenuItems>
-          <ButtonContainer>
             <div className="toggle" onClick={() => setMenu(!menu)}>
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>

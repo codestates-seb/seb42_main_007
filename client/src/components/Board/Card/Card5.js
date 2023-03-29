@@ -1,25 +1,40 @@
 import "./card.scss";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
+import CardModal from "./CardModal";
+import JukDo5 from "./Weather/Jukdo5";
 
 export const Card5 = ({board_id, title, content, img_url, username, date}) => {
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.querySelector("body").classList.add("modal-open");
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.querySelector("body").classList.remove("modal-open");
+  };
+
   return (
-    <div className="card-wrapper" onClick={() => {
-      navigate(`/board/${board_id}`)
-    }}>
+    <>
+    <div className="card-wrapper" onClick={openModal}>
       <div className="card-body-img">
-        <img src={"https://mblogthumb-phinf.pstatic.net/MjAyMjA4MzBfOTgg/MDAxNjYxODYwODI0Mzkx.Mm5SdO0_hQ9Ui-xsa4zLzwb6GqGap4gEvD2bHsfBpXEg.NKVIiNcP9NZb0JqI4799M4-EGd3RkTdHhgZRNmzqSCcg.JPEG.joara127/%EB%8F%99%ED%95%B4_%EC%84%9C%ED%95%9112.JPG?type=w800"} alt="동해 대진해변" />
+        <img src={"https://cdn.kbmaeil.com/news/photo/201910/828615_849621_2521.jpg"} alt="포항 용한리해변" />
       </div>
       <div className="card-body-text">
-        <div className="card-body-text-title">동해 대진해변</div>
+        <div className="card-body-text-title">포항 용한리해변</div>
         <div className="card-body-text-content">서핑하기 좋은 날씨</div>
+        <JukDo5 />
       </div>
 
       <div className="card-footer">
-        <div className="username">중급자 추천</div>
+        <div className="username">상급자 추천</div>
         <div className="date">⭐⭐⭐</div>
-      </div>
+        </div>
     </div>
+    <CardModal isOpen={isModalOpen} closeModal={closeModal} />
+    </>
   );
 };
 

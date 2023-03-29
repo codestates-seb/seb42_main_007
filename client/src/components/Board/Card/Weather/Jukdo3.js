@@ -3,10 +3,10 @@ import axios from "axios";
 import LoadingIndicator from "../LoadingIndicator";
 import styled from "styled-components";
 
-const JukDo = () => {
+const JukDo3 = () => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
-  const regionId = "1";
+  const regionId = "3";
 
   useEffect(() => {
     async function fetchWeather() {
@@ -47,7 +47,7 @@ const JukDo = () => {
   );
 }
 
-export default JukDo;
+export default JukDo3;
 
 const WeatherWrapper = styled.div`
 margin-top: 1.2rem;

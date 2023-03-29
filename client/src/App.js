@@ -3,7 +3,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import "./App.css";
 import Edit from "./pages/Edit";
 import Home from "./pages/Home";
-import { List } from "./pages/List";
+import List from "./pages/List";
 import Write from "./pages/Write";
 import Login from "./components/Login/Login";
 import Signup from "./components/signUp/SignUp";
@@ -13,7 +13,6 @@ import Find from "./pages/Find";
 import Delete from "./components/Board/Delete";
 import ClassListPage from "./pages/ClassPage/ClassListPage";
 import ClassDetailPage from "./pages/ClassDetailPage/ClassDetailPage";
-import ClassPaymentPage from "./pages/ClassPaymentPage/ClassPaymentPage";
 import CreateClassPage from "./pages/CreateClassPage/CreateClassPage";
 import EditClassPage from "./pages/EditClassPage/EditClassPage";
 import FindId from "./components/Login/FindID";
@@ -23,6 +22,7 @@ import CardModal from "./components/Board/Card/CardModal";
 import GlobalStyle from "./styles/GlobalStyle";
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import PaymentFailure from "./components/Payment/PaymentFailure";
+import MyPageNew from "./components/Mypage/MyPageNew";
 // import { useCookies } from 'react-cookie';
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
           <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
           <Route path="/Write" element={<Write></Write>}></Route>
           <Route path="/edit/:boardPostId" element={<Edit></Edit>}></Route>
-          <Route path="/Delete" element={<Delete></Delete>}></Route>
+          {/* <Route path="/Delete" element={<Delete></Delete>}></Route> */}
           <Route path="/List" element={<List></List>}></Route>
           <Route path="/Detail" element={<Detail></Detail>}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -52,7 +52,6 @@ function App() {
           <Route path="/Mypage" element={<Mypage />}></Route>
           <Route path="/classlist" element={<ClassListPage />}></Route>
           <Route path="/class/:lessonId" element={<ClassDetailPage />}></Route>
-          <Route path="/pay/:lessonId" element={<ClassPaymentPage />}></Route>
           <Route path="/newclass" element={<CreateClassPage />}></Route>
           <Route path="/findid" element={<FindId />}></Route>
           <Route path="/findpassword" element={<FindPassword />}></Route>
@@ -62,6 +61,7 @@ function App() {
           ></Route>
           <Route path="/paysuccess" element={<PaymentSuccess />}></Route>
           <Route path="/payfailed" element={<PaymentFailure />}></Route>
+          <Route path="/mypagetest" element={<MyPageNew />}></Route>
         </Routes>
       </>
     </AuthProvider>

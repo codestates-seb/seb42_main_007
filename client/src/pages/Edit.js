@@ -10,6 +10,7 @@ import { Button } from "../components/Board/Button";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { useRef } from "react";
+import Cookies from "js-cookie";
 
 const Edit = () => {
   const [title, setTitle] = useState("");
@@ -57,7 +58,12 @@ const Edit = () => {
       {
         title: title,
         content: content,
+      },
+      {
+        headers: {
+        Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
       }
+    },
     );
     navigate(`/detail/${boardPostId}`);
   };
@@ -83,22 +89,22 @@ const Edit = () => {
           <form onSubmit={handleSubmit}>
             <InputLabel title="제목" />
             <Input
-              placeholder=""
+              placeholder=" "
               padding="0.78rem 0.91rem"
               width="calc(100% - 30.12px);"
               value={title}
               onChange={handleTitleChange}
             />
             <InputLabel title="내용" />
-            <Editor
+            {content&&<Editor
               ref={body1}
-              value={content}
+              initialValue={content}
               previewStyle="tab"
               height="600px"
               initialEditType="markdown"
               useCommandShortcut={true}
               onChange={handleChange}
-            />
+            />}
 
             <div className="buttonWrapper">
               <Button

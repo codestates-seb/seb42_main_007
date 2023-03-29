@@ -31,16 +31,21 @@
   }
 }
 .modal-body-left-under {
-    position: absolute;
-    display: flex;
-    left: 1rem;
-    bottom: 18rem;
-    width: 30%;
-    height: 5%;
-    > h2 {
-        font-size: 25px;
-        margin: 0 auto;
+  position: absolute;
+  display: flex;
+  left: 1rem;
+  bottom: 18rem;
+  width: 30%;
+  height: 5%;
+  @media screen and (max-width: 768px) {
+    .modal-body-left-under {
+      font-size: 20px;
     }
+  }
+  > h2 {
+    font-size: 25px;
+    margin: 0 auto;
+  }
 }
 .modal-body-left-under-text {
   position: absolute;
@@ -49,23 +54,51 @@
   bottom: 4rem;
   width: 30%;
   height: 30%;
+  @media screen and (max-width: 768px) {
+    .modal-body-left-under-text {
+      font-size: 10px;
+    }
+  }
 }
 
 .modal-body-left-under-recommand {
   position: absolute;
   display: flex;
   left: 1rem;
-  bottom: 0.2rem;
-  width: 30%;
-  height: 30%;
+  bottom: 8rem;
+  width: 40%;
+  height: 10%;
+  flex-direction: column;
+  /* 추천 대상, 파도 세기 텍스트 스타일 */
+  font-size: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .modal-body-left-under-recommand {
+    bottom: 9rem;
+    width: 60%;
+    height: 5%;
+    font-size: 0.9rem;
+  }
+
+  .modal-body-left-under-recommand > div:first-child {
+    font-size: 0.8rem;
+  }
+
+  .modal-body-left-under-recommand > div:last-child {
+    font-size: 0.8rem;
+  }
 }
 
 .modal-body-right {
+  position: absolute;
+  top: 3.5rem;
+  right: 2.5rem;
+  width: 63%;
   flex: 1;
 }
 
 .modal-footer {
-  display: flex;
+  // display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0.5rem;

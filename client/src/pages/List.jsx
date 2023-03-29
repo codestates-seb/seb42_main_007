@@ -19,14 +19,17 @@ const List = () => {
     async function fetchData() {
       setIsLoading(true);
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${currentPage}&size=10`
+        `http://43.201.167.13:8080/board-posts?page=1&size=10`
       );
       setPosts(response.data.data);
       setTotalPages(response.data.pageInfo.totalPages);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000); // 2초 후 로딩 인디케이터를 숨깁니다.
     }
     fetchData();
   }, [currentPage]);
+
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

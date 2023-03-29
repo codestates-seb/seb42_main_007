@@ -12,6 +12,7 @@ import Footer from "../components/Footer/Footer";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Editor } from "@toast-ui/react-editor";
+import Cookies from "js-cookie";
 
 const Write = () => {
   const [title, setTitle] = useState("");
@@ -66,13 +67,18 @@ const Write = () => {
     
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/board-posts`,
+        `http://43.201.167.13:8080/board-posts`,
         {
           title: data?.title,
           content: content,
           createAt: TodayTime(),
           imgPath: "",
+        },
+        {
+          headers: {
+          Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
         }
+      },
       );
       console.log("서버에서 내려온값:", response);
       window.alert("등록 완료");

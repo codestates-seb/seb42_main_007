@@ -3,10 +3,9 @@ import axios from "axios";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PaymentSuccess = () => {
-  // const { params } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const [lessonId, setLessonId] = useState("1");

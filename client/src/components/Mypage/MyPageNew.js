@@ -1,90 +1,9 @@
-import './Mypage.css'
-import unnamed from "../../images/unnamed.jpg"
-import { Link, Route, Routes } from 'react-router-dom';
-import { MyLessons, MyPosts, MyAppliedLessons } from './MyComponents';
-import Cookies from 'js-cookie';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getDisplayName } from '@mui/utils';
+import React from "react";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import axios from 'axios';
 
-function Mypage() {
-
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState('');
-  const navigate = useNavigate(); // useNavigate 인스턴스 생성
-  const [displayName, setDisplayName] = useState('');
-
-  function handleClearTokens() {
-    localStorage.setItem('accessToken', '');
-    localStorage.setItem('refreshToken', '');
-    navigate('/');
-  }
-
-  useEffect(() => {
-    async function fetchDisplayName() {
-      try {
-        const response = await axios.get('http://43.201.167.13:8080/members',
-        {
-          headers: {
-            Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
-          },
-        }); console.log(response.data.displayName)
-        setDisplayName(response.data.displayName);
-      } catch (error) {
-        // console.error(error);
-      }
-    }
-    fetchDisplayName();
-  }, []);
-
-  const handleDeleteAccount = async () => {
-    try {
-      // 1. 백엔드 API를 호출하여 회원정보 삭제하기
-      const response = await fetch('http://43.201.167.13:8080/members', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Cookies.get('accessToken','refreshToken')}`, // 저장된 토큰 가져오기
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to delete account');
-      }
-  
-      // 2. 쿠키 삭제하기
-      Cookies.remove('accessToken','refreshToken');
-  
-      // 3. 상태 업데이트하기
-      setIsDeleting(false);
-      setIsLoggedOut(true);
-  
-      // 4. 홈화면으로 이동하기
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  if (isLoggedOut) {
-    return <div>Logged out successfully!</div>;
-  }
-  
-  if (isDeleting) {
-    return (
-      <div>
-        <p>정말 삭제하시겠습니까?</p>
-        <button onClick={handleDeleteAccount}>예</button>
-        <button onClick={() => setIsDeleting(false)}>아니요</button>
-      </div>
-    );
-  }
-
+const MyPageNew = () => {
   return (
     <>
       <Header />
@@ -93,15 +12,14 @@ function Mypage() {
           <div>
             <h1>🏄 마이페이지</h1>
           </div>
-          <LogoutButton onClick={handleClearTokens}>
-                로그아웃</LogoutButton>
+          <LogoutButton>로그아웃</LogoutButton>
         </MypageHeader>
         <ProfileContainer>
           <div className="profile-wrapper">
             <ProfilePicture />
             <div className="text">
               <div className="welcome-message">환영합니다!</div>
-              <div className="display-name">{displayName}님!</div>
+              <div className="display-name">displayName 님</div>
             </div>
           </div>
         </ProfileContainer>
@@ -136,6 +54,7 @@ const SidebarMenu = styled.div`
   align-items: center;
   line-height: 50px;
   margin-bottom: 20px;
+
   :visited {
     background-color: #2699ac;
     color: white;
@@ -272,4 +191,4 @@ const ProfilePicture = styled.div`
     height: 150px;
   } */
 `;
-export default Mypage;
+export default MyPageNew;

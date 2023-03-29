@@ -1,8 +1,29 @@
 import ReactModal from "react-modal";
 import "./CardModal.scss";
+import CardComment from "./CardComment";
+import CardCommentList from "./CardCommentList";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 
-const CardModal = ({ isOpen, closeModal }) => {
+
+const CardModal = ({ isOpen, closeModal, surfSpotId  }) => {
+    const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/spot-reviews?page=1&size=10&surfSpotId=1`)
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("해변리뷰 불러오기 실패:", err);
+      });
+  }, [surfSpotId]);
+
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -34,11 +55,12 @@ const CardModal = ({ isOpen, closeModal }) => {
             드넓은 모래사장이 있는 서핑 명소로 서핑 매장과 편안한 분위기의 식당이 해안가를 따라 있습니다.
           </div>
           <div className="modal-body-left-under-recommand">
-            추천 대상 : 입문자, 초중급자
+            <div>추천 대상 : 초중급자</div>
             <br />
-            파도 세기 : 다소 빠름
+            <div>파도 세기 : 다소 빠름</div>
             </div>
           <div className="modal-body-right">
+            <CardCommentList />
             {/* 현재 날씨 정보 */}
           </div>
           <div className="modal-body-right-counts">
@@ -50,8 +72,8 @@ const CardModal = ({ isOpen, closeModal }) => {
         </div>
         <hr width="100%" />
         <div className="modal-footer">
-          <div className="comments">댓글 창</div>
-          <div className="stars">⭐4</div>
+          <div className="comments"><CardComment /></div>
+          {/* <div className="stars">⭐4</div> */}
         </div>
       </div>
     </ReactModal>

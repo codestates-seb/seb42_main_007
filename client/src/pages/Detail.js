@@ -8,8 +8,9 @@ import Comments2 from "../components/Board/Comments2";
 // import VoteBar from "../components/Board/VoteBar";
 import DeleteButton from "../components/Board/Delete";
 import { format } from "date-fns";
-import Avvvatars from 'avvvatars-react'
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
+import Avatar from "../components/Board/Avatar";
+import CommentList from "../components/Board/CommentList";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
@@ -64,8 +65,9 @@ const Detail = () => {
     <>
       <Header />
       <MainContainer>
-      {loading ? (
-          <LoadingIndicator /> // 로딩 중일 때 LoadingIndicator 컴포넌트 출력
+      {loading ? (<>
+          <LoadingIndicator />
+          <span>게시글 불러오는중..</span></>
         ) : post ? (
           <>
           <QuestionHeader>
@@ -101,7 +103,7 @@ const Detail = () => {
                 <InfoContainer>
                   <AuthorContainer>
                     <AuthorAvatar>
-                    <Avvvatars value={post.displayName} />
+                    <Avatar />
                     </AuthorAvatar>
                     <AuthorDetail>
                     <span>{post.displayName}</span>
@@ -112,6 +114,7 @@ const Detail = () => {
             </QuestionBody>
             {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
             <Comments2></Comments2>
+            <CommentList />
           </div>
           <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
           </>
@@ -142,6 +145,13 @@ const MainContainer = styled.main`
     @media only screen and (min-width: ${BREAK_POINT_PC}px) {
       margin: 0 30rem;
     }
+    @font-face {
+    font-family: 'OAGothic-ExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
 `;
 
 const NoPost = styled.div`
@@ -257,8 +267,8 @@ const AuthorContainer = styled.div`
   margin-bottom: 4px;
   border-radius: 10px;
   background-color: #F5F1CB;
-  width: 8rem;
-  padding: 5px 6px 7px 7px;
+  width: 10rem;
+  padding: 5px 6px 18px 7px;
   color: hsl(210, 8%, 45%);
 `;
 
@@ -272,19 +282,21 @@ const AuthorAvatar = styled.div`
     width: 32px;
     height: 32px;
   }
+  > span{
+    margin-left: 5rem;
+  }
 `;
 
 const AuthorDetail = styled.div`
-  margin-left: 8px;
-  width: calc(100% - 40px);
-  float: left;
-  padding: 0.4rem 0;
-  
+  margin: 1rem 0 0 2rem;
+  width: calc(100% - 3rem);
+  text-align: center;
+  font-family: 'OAGothic-ExtraBold';
+
 
   a {
     color: hsl(206, 100%, 40%);
     text-decoration: none;
-    cursor: pointer;
     word-wrap: break-word;
   }
 `;

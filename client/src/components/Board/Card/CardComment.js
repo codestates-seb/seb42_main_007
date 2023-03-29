@@ -10,27 +10,27 @@ import {
 import styled from "styled-components";
 import Cookies from "js-cookie";
 
-const Comments = ({ board_id }) => {
+const CardComment = ({ board_id }) => {
   const [commentText, setCommentText] = useState("");
 
   const handleCommentSubmit = () => {
     axios
       .post(
-        `${process.env.REACT_APP_SERVER_URL}/board-comments`,
-        { comment: commentText, boardPostId: 1 },
+        `${process.env.REACT_APP_SERVER_URL}/spot-reviews`,
+        { comment: commentText, surfSpotId: 1, spotGrade: 5, },
         {
           headers: {
             Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기
           },
         },
-        { withCredentials: true }, // 추가
+        { withCredentials: true } // 추가
       )
       .then((res) => {
-        console.log("댓글 작성 성공:", res.data);
-        window.alert("댓글 작성 완료");
+        console.log("리뷰 작성 성공:", res.data);
+        window.alert("리뷰 작성 완료");
       })
       .catch((err) => {
-        console.error("댓글 작성 실패:", err);
+        console.error("리뷰 작성 실패:", err);
         window.alert("작성 실패");
       });
   };
@@ -47,7 +47,7 @@ const Comments = ({ board_id }) => {
             className="commentsHeaderTextarea"
             maxRows={3}
             multiline
-            placeholder="댓글을 입력해주세요✏️"
+            placeholder="해변 리뷰를 입력해주세요✏️"
             value={commentText}
             onChange={handleCommentTextChange}
           />
@@ -60,7 +60,7 @@ const Comments = ({ board_id }) => {
   );
 };
 
-export default Comments;
+export default CardComment;
 
 const CommentsWrapper = styled.div`
   .commentsHeader {

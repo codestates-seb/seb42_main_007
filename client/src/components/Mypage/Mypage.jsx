@@ -10,6 +10,10 @@ import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import axios from 'axios';
+import MyAvatar from './myAvatar';
+import MyList from './MyList';
+import Myreservation from './Myreservation';
+
 
 function Mypage() {
 
@@ -18,6 +22,37 @@ function Mypage() {
   const [selectedMenu, setSelectedMenu] = useState('');
   const navigate = useNavigate(); // useNavigate 인스턴스 생성
   const [displayName, setDisplayName] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [activeMenu, setActiveMenu] = useState('my-posts'); // define a state variable for the active menu item
+  
+
+
+      const handleLogout = async (accessToken, refreshToken) => {
+        try {
+          await axios.post(
+            'http://43.201.167.13:8080/members/logout',
+            { accessToken, refreshToken },
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              
+            }
+          );
+          navigate('/');
+          handleClearTokens();
+        } catch (err) {
+          console.error(err);
+        }
+      };
+    
+
+  // function handleClearTokens() {
+  //   localStorage.setItem('accessToken', '');
+  //   localStorage.setItem('refreshToken', '');
+
+  // }
+
 
   function handleClearTokens() {
     localStorage.setItem('accessToken', '');
@@ -36,7 +71,7 @@ function Mypage() {
         }); console.log(response.data.displayName)
         setDisplayName(response.data.displayName);
       } catch (error) {
-        // console.error(error);
+        console.error(error);
       }
     }
     fetchDisplayName();
@@ -45,10 +80,10 @@ function Mypage() {
   const handleDeleteAccount = async () => {
     try {
       // 1. 백엔드 API를 호출하여 회원정보 삭제하기
-      const response = await fetch('http://43.201.167.13:8080/members', {
+      const response = await fetch('http://43.201.167.13:8080/members/{members-id}', {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: `Bearer ${Cookies.get('accessToken','refreshToken')}`, // 저장된 토큰 가져오기
         },
       });
@@ -85,6 +120,7 @@ function Mypage() {
     );
   }
 
+
   return (
     <>
       <Header />
@@ -93,12 +129,13 @@ function Mypage() {
           <div>
             <h1>🏄 마이페이지</h1>
           </div>
-          <LogoutButton onClick={handleClearTokens}>
-                로그아웃</LogoutButton>
+          <LogoutButton onClick={handleLogout}>
+            로그아웃
+          </LogoutButton>
         </MypageHeader>
         <ProfileContainer>
           <div className="profile-wrapper">
-            <ProfilePicture />
+            <MyAvatar />
             <div className="text">
               <div className="welcome-message">환영합니다!</div>
               <div className="display-name">{displayName}님!</div>
@@ -108,17 +145,28 @@ function Mypage() {
         <div className="Sidebar-body-wrapper">
           <SidebarContainer>
             <div className="my-information">
-              <SidebarMenu className="class-registration-information">
+              <SidebarMenu
+                className={`class-registration-information ${
+                  activeMenu === 'my-posts' ? 'active' : ''
+                }`}
+                onClick={() => setActiveMenu('my-posts')}
+              >
                 나의 작성글 보기
               </SidebarMenu>
-              <SidebarMenu className="my-board-posts">
+              <SidebarMenu
+                className={`my-board-posts ${
+                  activeMenu === 'my-board' ? 'active' : ''
+                }`}
+                onClick={() => setActiveMenu('my-board')}
+              >
                 나의 강습정보 보기
               </SidebarMenu>
             </div>
             <QuitButton>회원탈퇴</QuitButton>
           </SidebarContainer>
           <BodyContainer>
-            <h1>원하는 기능을 구현해보세요.</h1>
+            {activeMenu === 'my-posts' && <MyList />}
+            {activeMenu === 'my-board' && <Myreservation />}
           </BodyContainer>
         </div>
       </MypageWrapper>
@@ -145,6 +193,7 @@ const SidebarMenu = styled.div`
     background-color: #2699ac;
     color: white;
     transition: 0.3s;
+    cursor: pointer;
   }
 `;
 
@@ -163,7 +212,7 @@ const SidebarContainer = styled.div`
 
 const BodyContainer = styled.div`
   border: 3px #80dee8 solid;
-  border-radius: 30px;
+  border-radius: 25px 25px 25px 25px;
   min-height: 700px;
   height: fit-content;
   min-width: 200px;
@@ -262,14 +311,4 @@ const ProfileContainer = styled.div`
   }
 `;
 
-const ProfilePicture = styled.div`
-  width: 170px;
-  height: 170px;
-  background-color: #80dee8;
-  border-radius: 100px;
-  /* @media screen and (max-width: 600px) {
-    width: 150px;
-    height: 150px;
-  } */
-`;
 export default Mypage;

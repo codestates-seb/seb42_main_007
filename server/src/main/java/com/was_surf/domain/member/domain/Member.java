@@ -1,8 +1,10 @@
 package com.was_surf.domain.member.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.was_surf.domain.board_comment.domain.BoardComment;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.lesson.domain.LessonClass;
+import com.was_surf.domain.lesson.domain.LessonRegister;
 import com.was_surf.domain.spot_review.domain.SpotReview;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -94,6 +96,14 @@ public class Member implements UserDetails {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<LessonClass> lessonClasses = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<LessonRegister> lessonRegisters = new ArrayList<>();
+
+    public void addLessonRegister(LessonRegister lessonRegister) {
+        lessonRegisters.add(lessonRegister);
+    }
 
     public enum MemberStatus{
         MEMBER_NOT_EXIST("존재하지 않는 회원"),

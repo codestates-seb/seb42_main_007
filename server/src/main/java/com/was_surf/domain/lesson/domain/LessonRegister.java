@@ -1,5 +1,6 @@
 package com.was_surf.domain.lesson.domain;
 
+import com.was_surf.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,8 +26,9 @@ public class LessonRegister {
     private LocalDate cancelDate;
     @Column(nullable = false)
     private int headCount;
-    @Column(nullable = false)
-    private long memberId;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID", nullable = false)
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name = "LESSON_CLASS_ID", referencedColumnName = "lessonClassId", nullable = false)
@@ -35,6 +37,10 @@ public class LessonRegister {
     public void changePayStatus(PayStatus payStatus) {
         Optional.ofNullable(payStatus)
                 .ifPresent(status -> this.payStatus = status);
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public void setLessonClass(LessonClass lessonClass) {

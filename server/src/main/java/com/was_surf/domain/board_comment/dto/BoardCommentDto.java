@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 public class BoardCommentDto {
     @Getter
     public static class Post {
@@ -24,6 +26,7 @@ public class BoardCommentDto {
         private long boardCommentId;
         private String comment;
         private long boardPostId;
+        private LocalDateTime createdAt;
         private String displayName;
     }
 }

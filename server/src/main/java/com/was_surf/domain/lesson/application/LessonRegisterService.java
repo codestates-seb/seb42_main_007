@@ -2,6 +2,7 @@ package com.was_surf.domain.lesson.application;
 
 import com.was_surf.domain.lesson.domain.LessonClass;
 import com.was_surf.domain.lesson.domain.LessonRegister;
+import com.was_surf.domain.lesson.mapper.LessonRegisterMapper;
 import com.was_surf.domain.lesson.repository.LessonRegisterRepository;
 import com.was_surf.domain.member.application.MemberService;
 import com.was_surf.domain.member.domain.Member;
@@ -25,6 +26,7 @@ public class LessonRegisterService {
     private final LessonRegisterRepository lessonRegisterRepository;
     private final MemberService memberService;
     private final LessonClassService lessonClassService;
+    private final LessonRegisterMapper mapper;
 
     // 강습 클래스 신청 생성
     public LessonRegister createRegister(LessonRegister lessonRegister, String email, long lessonClassId) {
@@ -43,14 +45,17 @@ public class LessonRegisterService {
         checkHeadCountFull(findLessonClass);
 
         // 해당 강습 클래스를 이미 신청했는지 확인
-        existRegisterCheck(findLessonClass, findMember.getMemberId());
+        existRegisterCheck(findLessonClass, findMember);
 
-        lessonRegister.setMemberId(findMember.getMemberId());
+        lessonRegister.setMember(findMember);
         lessonRegister.setLessonClass(findLessonClass);
         lessonRegister.getLessonClass().updateCurrentHeadCount(lessonRegister.getHeadCount());
         lessonRegister.setRegisterDate(LocalDateTime.now());
         // 신청 마감일 3일전까지 취소가능
         lessonRegister.setCancelDate(findLessonClass.getRegisterEnd().minusDays(3).toLocalDate());
+
+        findMember.addLessonRegister(lessonRegister);
+        findLessonClass.addLessonRegister(lessonRegister);
 
         return lessonRegisterRepository.save(lessonRegister);
     }
@@ -85,7 +90,7 @@ public class LessonRegisterService {
 
         Member findMember = memberService.findMemberToEmail(email);
 
-        return lessonRegisterRepository.findAllByMemberId(findMember.getMemberId(), PageRequest.of(page - 1, size, Sort.by("lessonClass").ascending()));
+        return lessonRegisterRepository.findAllByMember(findMember, PageRequest.of(page - 1, size, Sort.by("lessonClass").ascending()));
     }
 
     // 강습 클래스 신청 취소
@@ -116,7 +121,7 @@ public class LessonRegisterService {
     }
 
     public void verifyMatchMember(LessonRegister lessonRegister, Member member) {
-        long lessonRegisterHasMemberId = lessonRegister.getMemberId();
+        long lessonRegisterHasMemberId = lessonRegister.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
         // 작성자 계정 또는 관리자 계정인지 확인
@@ -127,8 +132,8 @@ public class LessonRegisterService {
     }
 
     // 해당 강습 클래스를 이미 신청했는지 확인
-    public void existRegisterCheck(LessonClass lessonClass, long memberId) {
-        Optional<LessonRegister> optionalLessonRegister = lessonRegisterRepository.findByLessonClassAndMemberId(lessonClass, memberId);
+    public void existRegisterCheck(LessonClass lessonClass, Member member) {
+        Optional<LessonRegister> optionalLessonRegister = lessonRegisterRepository.findByLessonClassAndMember(lessonClass, member);
 
         // 이미 신청한 강습 클래스라면 에러 발생
         if(optionalLessonRegister.isPresent()) {

@@ -26,7 +26,7 @@ public class LessonClass extends Auditable {
     private Long lessonClassId;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
     @Column(nullable = false)
     private LocalDateTime registerStart;
@@ -51,17 +51,9 @@ public class LessonClass extends Auditable {
     @OneToMany(mappedBy = "lessonClass", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<LessonRegister> lessonRegisters = new ArrayList<>();
 
-    public void setMember(Member member) {
-        Member newMember = new Member();
-        newMember.setMemberId(member.getMemberId());
-        newMember.setEmail(member.getEmail());
-        newMember.setDisplayName(member.getDisplayName());
-
-        this.member = newMember;
-    }
-
     public void addLessonRegister(LessonRegister lessonRegister) {
         lessonRegisters.add(lessonRegister);
+
         if(lessonRegister.getLessonClass() != this) {
             lessonRegister.setLessonClass(this);
         }

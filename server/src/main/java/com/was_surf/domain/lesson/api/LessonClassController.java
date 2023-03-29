@@ -73,9 +73,11 @@ public class LessonClassController {
     }
 
     @DeleteMapping("/{lesson-class-id}")
-    public void deleteLessonClass(@PathVariable("lesson-class-id") @Positive Long lessonClassId,
+    public ResponseEntity deleteLessonClass(@PathVariable("lesson-class-id") @Positive Long lessonClassId,
                                   Principal principal) {
         // 작성한 회원 및 관리자 계정만 삭제 가능
         lessonClassService.deleteLessonClass(lessonClassId, principal.getName());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

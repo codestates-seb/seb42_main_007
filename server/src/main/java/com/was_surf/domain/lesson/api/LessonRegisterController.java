@@ -67,8 +67,10 @@ public class LessonRegisterController {
     }
 
     @DeleteMapping("/{lesson-register-id}")
-    public void cancelLessonRegister(@Positive @PathVariable("lesson-register-id") Long lessonRegisterId,
+    public ResponseEntity cancelLessonRegister(@Positive @PathVariable("lesson-register-id") Long lessonRegisterId,
                                      Principal principal) {
         lessonRegisterService.cancelRegister(lessonRegisterId, principal.getName());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

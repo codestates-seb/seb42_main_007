@@ -76,9 +76,9 @@ public class MemberService {
     public Member findMember(long memberId){
         return findVerifiedMember(memberId);
     }
-    public Member updateMember(Member member){
+    public Member updateMember(Member member, String email){
 
-        Member findMember = findVerifiedMember(member.getMemberId());
+        Member findMember = findMemberToEmail(email);
 
         Optional.ofNullable(member.getDisplayName())
                 .ifPresent(memberDisplayName->findMember.setDisplayName(memberDisplayName));
@@ -87,8 +87,8 @@ public class MemberService {
 
         return memberRepository.save(findMember);
     }
-    public void deleteMember(Long memberId){
-        Member member = findVerifiedMember(memberId);
+    public void deleteMember(String email){
+        Member member = findMemberToEmail(email);
 
         memberRepository.delete(member);
     }

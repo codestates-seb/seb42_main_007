@@ -145,7 +145,13 @@ const MainContainer = styled.main`
     @media only screen and (min-width: ${BREAK_POINT_PC}px) {
       margin: 0 30rem;
     }
-    
+    @font-face {
+    font-family: 'OAGothic-ExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
 `;
 
 const NoPost = styled.div`
@@ -285,7 +291,7 @@ const AuthorDetail = styled.div`
   margin: 1rem 0 0 2rem;
   width: calc(100% - 3rem);
   text-align: center;
-  font-family: 'Righteous', cursive;
+  font-family: 'OAGothic-ExtraBold';
 
 
   a {

@@ -23,8 +23,8 @@ public class SpotDataService {
     private final RegionRepository regionRepository;
     private final SpotDataRepository spotDataRepository;
 
-    // 3시간에 한번씩 업데이트(API 제공 시간에서 1분 뒤)
-    @Scheduled(cron = "0 11 2-23/3 1/1 * *")
+    // 3시간에 한번씩 업데이트(API 제공 시간에서 2초 뒤)
+    @Scheduled(cron = "2 10 2-23/3 1/1 * *")
     public void runEveryTenSecondsOne() {
 
         for (long i=1; i<=8; i++) {
@@ -84,11 +84,23 @@ public class SpotDataService {
 
     // 풍속
     public int classifyWindSpeedScore (Float windSpeed) {
-        if (windSpeed<=2.57) { // 5knots = 2.57m/s 이하
+        if (windSpeed<=0.2) { // 0.2m/s 이하
+            return 8;
+        } else if (0.2<windSpeed && windSpeed<=1.5) { // 0.3~1.5m/s
+            return 7;
+        } else if (1.5<windSpeed && windSpeed<=3.3) { // 1.6~3.3m/s
+            return 6;
+        } else if (3.3<windSpeed && windSpeed<=5.4) { // 3.3~5.4m/s
+            return 5;
+        } else if (5.4<windSpeed && windSpeed<=7.9) { // 5.5~7.9m/s
+            return 4;
+        } else if (7.9<windSpeed && windSpeed<=10.7) { // 8.0~10.7m/s
+            return 3;
+        } else if (10.7<windSpeed && windSpeed<=13.8) { // 10.8~13.8m/s
             return 2;
-        } else if (2.57<windSpeed && windSpeed<=7.20) { // ~ 14knots = 7.20m/s
+        } else if (13.8<windSpeed && windSpeed<=17.1) { // 13.9~17.1m/s
             return 1;
-        } else return 0; // 15knots 이상
+        } else  return 0; // 17.2m/s 이상
     }
 }
 

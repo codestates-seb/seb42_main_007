@@ -30,7 +30,7 @@ export const Card6 = ({board_id, title, content, img_url, username, date}) => {
 
       <div className="card-footer">
         <div className="username">중급자 추천</div>
-        <div className="date">⭐⭐⭐</div>
+        <div className="date">⭐⭐⭐⭐⭐</div>
         </div>
     </div>
     <CardModal isOpen={isModalOpen} closeModal={closeModal} />

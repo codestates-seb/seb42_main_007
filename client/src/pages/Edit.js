@@ -10,6 +10,7 @@ import { Button } from "../components/Board/Button";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { useRef } from "react";
+import Cookies from "js-cookie";
 
 const Edit = () => {
   const [title, setTitle] = useState("");
@@ -57,7 +58,12 @@ const Edit = () => {
       {
         title: title,
         content: content,
+      },
+      {
+        headers: {
+        Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
       }
+    },
     );
     navigate(`/detail/${boardPostId}`);
   };

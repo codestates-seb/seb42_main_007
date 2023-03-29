@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
+import Cookies from "js-cookie";
 
 const DeleteButton = ({ isOpen, closeModal }) => {
   const { boardPostId } = useParams();
@@ -9,7 +10,13 @@ const DeleteButton = ({ isOpen, closeModal }) => {
   
   const handleDelete = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`);
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/board-posts/${boardPostId}`,
+      {
+        headers: {
+        Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
+      }
+    },
+    );
       window.alert("삭제 완료");
       closeModal();
       navigate("/List");

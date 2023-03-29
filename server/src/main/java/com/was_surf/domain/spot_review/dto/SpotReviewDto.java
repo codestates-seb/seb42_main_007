@@ -12,7 +12,7 @@ public class SpotReviewDto {
 
     @Getter
     public static class Post {
-        private int spotGrade;
+        private int rating;
         private String review;
         private LocalDateTime createdAt;
         private long memberId;
@@ -23,7 +23,7 @@ public class SpotReviewDto {
     public static class Patch {
         @Setter
         private long spotReviewId;
-        private int spotGrade;
+        private int rating;
         private String review;
         private LocalDateTime updatedAt;
     }
@@ -33,7 +33,7 @@ public class SpotReviewDto {
     @NoArgsConstructor
     public static class Response {
         private long spotReviewId;
-        private int spotGrade;
+        private int rating;
         private String review;
         private long memberId;
         private String email;

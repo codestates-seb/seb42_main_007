@@ -14,7 +14,7 @@ public interface BoardCommentMapper {
 
     BoardComment commentPatchDtoToComment(BoardCommentDto.Patch commentPatchDto);
 
-    @Mapping(source = "member.memberId", target = "memberId")
+    @Mapping(source = "member.displayName", target = "displayName")
     @Mapping(source = "boardPost.boardPostId", target = "boardPostId")
     BoardCommentDto.Response commentToCommentResponseDto(BoardComment comment);
 

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -18,8 +19,11 @@ const PaymentSuccess = () => {
     setLessonId(obj.get("lesson_id"));
     setTotalPrice(obj.get("price"));
     setRegisteredHeadcount(obj.get("quantity"));
-    // console.log(location);
-
+    console.log(`lessonClassId: ${obj.get("lesson_id")}`);
+    console.log(obj.get("price"));
+    console.log(`headCount: ${obj.get("quantity")}`);
+    console.log(`title: ${obj.get("item_name")}`);
+    console.log(location);
     // (obj.get("item_name")) 강좌이름title
   }
 
@@ -27,16 +31,26 @@ const PaymentSuccess = () => {
 
   const registerLesson = async () => {
     await axios
-      .post(`http://43.201.167.13:8080/lesson-register`, {
-        lessonClassId: lessonId,
-        headCount: registedHeadcount,
-        // 신청인원 : content,
-        // 총금액 : new Date(),
-        // 강습일자: lessonDate,
-        // 결제여부변경 - 자동?
-      })
+      .post(
+        `http://43.201.167.13:8080/lesson-register`,
+        {
+          lessonClassId: `${new URLSearchParams(location.search).get(
+            "lesson_id"
+          )}`,
+          headCount: `${new URLSearchParams(location.search).get("quantity")}`,
+          // 신청인원 : content,
+          // 총금액 : new Date(),
+          // 강습일자: lessonDate,
+          // 결제여부변경 - 자동?
+        },
+        {
+          headers: {
+            Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기
+          },
+        }
+      )
       .then((res) => {
-        // console.log(res);
+        console.log("결제가 완료되었습니다.");
       })
       .catch((error) => {
         console.log(error);
@@ -45,9 +59,6 @@ const PaymentSuccess = () => {
 
   useEffect(() => {
     getParamsFromUrl();
-    console.log("lessonClassId : " + lessonId);
-    console.log("총 지불금액 : " + totalPrice);
-    console.log("신청 인원 수 : " + registedHeadcount);
     registerLesson();
     const timer = setTimeout(() => {
       navigate("/"); // 이동할 경로
@@ -56,7 +67,7 @@ const PaymentSuccess = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [navigate]);
+  }, []);
 
   return (
     <>

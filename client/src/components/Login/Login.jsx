@@ -7,13 +7,14 @@ import { REDIRECT_URI } from '../Apiurl';
 import { AuthContext, useAuth, } from '../../context/AuthContext';
 import { useContext } from 'react';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import getDisplayName from '../Mypage/displayName';
 
 
 
 const LoginWrapper = styled.div`
-  background-color: #f4f4f4;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -174,6 +175,8 @@ const Login = () => {
   }
 
   return (
+    <>
+      <Header/>
     <LoginWrapper>
       <form onSubmit={handleLogin}>
         <h1>로그인</h1>
@@ -214,6 +217,8 @@ const Login = () => {
       {/* <div>{JSON.stringify(cookies)}</div> */}
       {loggedIn && navigate('/')} {/* 로그인 상태가 true이면 페이지 이동 */}
     </LoginWrapper>
+      <Footer/>
+      </>
   );
 };
 

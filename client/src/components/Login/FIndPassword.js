@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { REDIRECT_URI } from '../Apiurl';
+import Cookies from 'js-cookie';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 
 const FindPasswordWrapper = styled.div`
   display: flex;
@@ -10,7 +14,9 @@ const FindPasswordWrapper = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  background-color: #f8f8f8;
+  background-color: #fff;
+  border:1px
+  border-color: hsl(0, 0%, 0%);
 
   form {
     background-color: #ffffff;
@@ -59,11 +65,11 @@ const FindPasswordWrapper = styled.div`
   }
 `;
 
-const API_URL = `${REDIRECT_URI}members/1`;
+const API_URL = `${REDIRECT_URI}members/login`;
 
 const FindPassword = () => {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [displayname, setdisplayname] = useState('');
 
 
   const handleFindPasswordSubmit = async (e) => {
@@ -71,9 +77,13 @@ const FindPassword = () => {
 
     try {
       const response = await axios.post(API_URL, {
-        email,
-        username,
-      });
+        'email': email,
+       'displayname': displayname,
+      },{
+      headers: {
+        Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
+      }},
+      );
 
       if (response.status === 200) {
         alert('비밀번호 찾기 이메일이 발송되었습니다.');
@@ -87,6 +97,8 @@ const FindPassword = () => {
   };
 
   return (
+    <>
+    <Header/>
     <FindPasswordWrapper>
       <form onSubmit={handleFindPasswordSubmit}>
         <h1>비밀번호 찾기</h1>
@@ -104,15 +116,17 @@ const FindPassword = () => {
           <input
             type="text"
             id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={displayname}
+            onChange={(e) => setdisplayname(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={!email || !username}>
+        <button type="submit" disabled={!email || !displayname}>
           비밀번호 찾기
         </button>
       </form>
     </FindPasswordWrapper>
+    <Footer/>
+        </>
   );
 };
 

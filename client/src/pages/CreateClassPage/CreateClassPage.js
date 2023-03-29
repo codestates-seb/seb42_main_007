@@ -7,7 +7,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import { Editor } from "@toast-ui/react-editor";
-import '@toast-ui/editor/dist/toastui-editor.css';
+import "@toast-ui/editor/dist/toastui-editor.css";
 import Cookies from "js-cookie";
 
 const navigate = useNavigate;
@@ -18,24 +18,24 @@ const CreateClassPage = () => {
 
   const createLesson = async () => {
     await axios
-    .post(
+      .post(
         `http://43.201.167.13:8080/lesson-class`,
-        {        
-            title : title,
-            content : content,
-            registerStart : new Date(), 
-            registerEnd : endDate,
-            lessonDate: lessonDate, 
-            headCount : number, 
-            price : price
-        }, 
         {
-            headers: {
-            Authorization: `Bearer: ${Cookies.get('accessToken')}`, // 저장된 토큰 가져오기
-          }
+          title: title,
+          content: content,
+          registerStart: new Date(),
+          registerEnd: endDate,
+          lessonDate: lessonDate,
+          headCount: number,
+          price: price,
         },
-    )
-    .then((res) => {
+        {
+          headers: {
+            Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기
+          },
+        }
+      )
+      .then((res) => {
         console.log(res);
         navigate("/classlist");
       })
@@ -57,7 +57,7 @@ const CreateClassPage = () => {
     const instance = editorRef.current.getInstance();
     const data = instance.getMarkdown();
     setContent(data);
-    //   console.log(content)
+    console.log(content);
   };
 
   const navigate = useNavigate();

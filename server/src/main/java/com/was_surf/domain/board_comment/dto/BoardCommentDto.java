@@ -24,6 +24,6 @@ public class BoardCommentDto {
         private long boardCommentId;
         private String comment;
         private long boardPostId;
-        private long displayName;
+        private String displayName;
     }
 }

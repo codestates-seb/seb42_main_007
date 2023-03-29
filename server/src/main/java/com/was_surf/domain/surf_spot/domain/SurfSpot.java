@@ -31,7 +31,11 @@ public class SurfSpot {
 
     // 조회수
     @Column(nullable = false)
-    private String viewCount;
+    private int viewCount;
+
+    // 평균별점
+    @Column(nullable = false)
+    private int averageRating;
 
     @OneToMany(mappedBy = "surfSpot", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();

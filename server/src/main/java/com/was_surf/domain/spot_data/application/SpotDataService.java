@@ -56,19 +56,23 @@ public class SpotDataService {
 
     // 온도
     public int classifyTempScore (Float temp) {
-        if ( temp<=10 ) { // 10도 이하
+        if ( temp<=11 ) { // 11도 이하
             return 0;
-        } else if (10<temp && temp<=12) { // 11~12도
+        } else if (11<temp && temp<=15) { // 12~15도
             return 1;
-        } else if (12<temp && temp<=14) { // 13~14도
+        } else if (15<temp && temp<=17) { // 16~17도
             return 2;
-        } else if (14<temp && temp<=17) { // 15~17도
+        } else if (17<temp && temp<=20) { // 18~20도
             return 3;
-        } else if (17<temp && temp<=21) { // 18~21도
+        } else if (20<temp && temp<=23) { // 21~23도
             return 4;
-        } else { // 22도 이상
+        } else if (23<temp && temp<=26) { // 24~26도
             return 5;
-        }
+        } else if (26<temp && temp<=29) { // 27~29도
+            return 6;
+        } else if (29<temp && temp<=32) { // 30~32도 이상 => 적정 온도
+            return 7;
+        } else return 6;
     }
 
     // 파고
@@ -78,13 +82,15 @@ public class SpotDataService {
         } else if (0.3<wave && wave<=0.8) { // 0.4~0.8m
             return 1;
         } else if (0.8<wave && wave<=1.4) { // 0.9~1.4m
-            return 3; // 난이도 분류가 없기 때문에 제일 무난한 코스가 점수 높음
+            return 4; // 난이도 분류가 없기 때문에 제일 무난한 코스가 점수 높음
+        } else if (1.4<wave && wave<=1.8) { // 1.5m~1.8
+            return 3;
         } else return 2; // 1.5m 이상
     }
 
     // 풍속
     public int classifyWindSpeedScore (Float windSpeed) {
-        if (windSpeed<=0.2) { // 0.2m/s 이하
+        if (windSpeed<=0.2) { // 0.2m/s 이하 => 바람은 안 불수록 좋다
             return 8;
         } else if (0.2<windSpeed && windSpeed<=1.5) { // 0.3~1.5m/s
             return 7;

@@ -22,7 +22,7 @@ public class SpotReview extends Auditable {
     // 별점: int 1 ~ 5 사이
     @NotNull
     @Column(nullable = false)
-    private int spotGrade;
+    private int rating;
 
     // 후기: 비어도 등록 가능
     @Column(nullable = false)

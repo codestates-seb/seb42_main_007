@@ -46,7 +46,7 @@ export const Card = () => {
           <JukDo onWaveHeightChange={setWaveHeight} />
         </div>
         <div className="card-footer">
-          <div className="recommendation">{waveHeight && renderRecommendation(waveHeight)}</div>
+          <div className="recommendation">초보자 추천{waveHeight && renderRecommendation(waveHeight)}</div>
           <div className="date">⭐⭐⭐⭐⭐</div>
         </div>
       </div>

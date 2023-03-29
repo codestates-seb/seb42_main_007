@@ -40,7 +40,7 @@ const JukDo8 = () => {
       <div className="temp">{temp}℃</div>
       <div className="wave">파고: {wave}m</div>
       <div className="windSpeed">풍속: {windSpeed}m/s</div>
-      <div className="precipitation">강수량: {precipitation}mm</div>
+      <div className="precipitation">강수확률: {precipitation}%</div>
     </WeatherInfo>
   </WeatherWrapper>
 

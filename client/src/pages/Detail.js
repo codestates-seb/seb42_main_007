@@ -10,6 +10,7 @@ import DeleteButton from "../components/Board/Delete";
 import { format } from "date-fns";
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 import Avatar from "../components/Board/Avatar";
+import CommentList from "../components/Board/CommentList";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
@@ -64,8 +65,9 @@ const Detail = () => {
     <>
       <Header />
       <MainContainer>
-      {loading ? (
-          <LoadingIndicator /> // 로딩 중일 때 LoadingIndicator 컴포넌트 출력
+      {loading ? (<>
+          <LoadingIndicator />
+          <span>게시글 불러오는중..</span></>
         ) : post ? (
           <>
           <QuestionHeader>
@@ -112,6 +114,7 @@ const Detail = () => {
             </QuestionBody>
             {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
             <Comments2></Comments2>
+            <CommentList />
           </div>
           <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
           </>

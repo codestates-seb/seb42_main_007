@@ -72,7 +72,8 @@ const Write = () => {
           content: content,
           createAt: TodayTime(),
           imgPath: "",
-        }
+        },
+        
       );
       console.log("서버에서 내려온값:", response);
       window.alert("등록 완료");

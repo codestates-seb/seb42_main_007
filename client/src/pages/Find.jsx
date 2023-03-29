@@ -25,7 +25,7 @@ const Find = () => {
       <Main>
         <FindListWrapper>
           <FindListHeader>서핑장소 찾기</FindListHeader>
-          <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper>
+          {/* <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper> */}
           {/* {spotGrade.map((spot) => (
           <li key={spot.name}>
             {spot.name} - {spot.grade}

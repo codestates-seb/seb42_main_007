@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -26,14 +26,15 @@ const EditClassPage = () => {
   const { lessonId } = useParams(); // /class/{lessonId}
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
+  const getPrevLesson = async () => {
+    await axios
       .get(
         `http://43.201.167.13:8080/lesson-class/${lessonId}` // 수정할 클래스 아이디
       )
       .then((res) => {
         setOriginalData(res.data.data);
-        setInitialValue(originalData.content);
+        console.log(res.data.data);
+        setInitialValue(res.data.data.content);
         setTitle(originalData.title);
         setStartDate(originalData.registerStart);
         setEndDate(originalData.registerEnd);
@@ -42,6 +43,10 @@ const EditClassPage = () => {
         setPrice(originalData.price);
         setRegisteredNumber(originalData.currentHeadCount);
       });
+  };
+
+  useEffect(() => {
+    getPrevLesson();
   }, []);
 
   const patchLesson = async () => {
@@ -130,15 +135,17 @@ const EditClassPage = () => {
           <h1>강습 모집글 수정</h1>
           <div className="element-container">
             <h2>제목</h2>
-            <input
-              className="title-input"
-              value={title}
-              onChange={handleTitleChange}
-            />
+            {originalData && (
+              <input
+                className="title-input"
+                value={originalData.title}
+                onChange={handleTitleChange}
+              />
+            )}
           </div>
           <div className="element-container">
             <h2>내용</h2>
-            {content && (
+            {originalData && (
               <Editor
                 ref={editorRef}
                 initialValue={initialValue}

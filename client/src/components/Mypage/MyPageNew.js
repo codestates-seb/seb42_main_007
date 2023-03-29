@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
 const MyPageNew = () => {
+  const [photoUrl, setPhotoUrl] = useState("https://i.pravatar.cc/170");
+
   return (
     <>
       <Header />
@@ -16,7 +18,7 @@ const MyPageNew = () => {
         </MypageHeader>
         <ProfileContainer>
           <div className="profile-wrapper">
-            <ProfilePicture />
+            <ProfilePicture photoUrl={photoUrl} />
             <div className="text">
               <div className="welcome-message">환영합니다!</div>
               <div className="display-name">displayName 님</div>
@@ -182,9 +184,9 @@ const ProfileContainer = styled.div`
 `;
 
 const ProfilePicture = styled.div`
+  background-image: url(https://i.pravatar.cc/150?u=memberId);
   width: 170px;
   height: 170px;
-  background-color: #80dee8;
   border-radius: 100px;
   /* @media screen and (max-width: 600px) {
     width: 150px;

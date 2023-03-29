@@ -18,6 +18,7 @@ export const SingleClassSwiper = () => {
   const [photoUrl, setPhotoUrl] = useState(defaultPhotoUrl);
   const [isAboutToSoldout, setIsAboutToSoldout] = useState(false);
   const [isSoldout, setIsSoldout] = useState(false);
+
   const getLessons = async () => {
     axios
       .get(`http://43.201.167.13:8080/lesson-class/?page=1&size=10`)
@@ -26,16 +27,18 @@ export const SingleClassSwiper = () => {
         setClassData(res.data.data);
         // console.log(classData);
         if (
-          classData.currentHeadCount === classData.headCount ||
-          classData.lessonDate.getTime() < new Date().getTime()
+          classData.currentHeadCount - classData.headCount ===
+          0
+          //   || classData.lessonDate.getTime() < new Date().getTime()
         ) {
           setIsSoldout(true);
           // 현재 수강신청된 인원수 === 수강신청 정원 -> 마감
           // 수강날짜가 현재시간보다 빠른(이미 지나간) 경우 마감
         }
         if (
-          classData.headCount - classData.currentHeadCount <= 3 ||
-          classData.lessonDate.getTime() === new Date().getTime()
+          classData.headCount - classData.currentHeadCount <=
+          3
+          //||classData.lessonDate.getTime() === new Date().getTime()
         ) {
           setIsAboutToSoldout(true);
           //수강신청 정원 - 현재 수강신청된 인원수 <= 3  -> 마감임박
@@ -50,6 +53,7 @@ export const SingleClassSwiper = () => {
   useEffect(() => {
     getLessons();
     handlePhotoUrl();
+    console.log(classData);
   }, []);
 
   const handlePhotoUrl = (lessonClassId) => {
@@ -64,20 +68,20 @@ export const SingleClassSwiper = () => {
         modules={[Navigation, Pagination]}
         navigation={{ clickable: true }}
         pagination={{ clickable: true }}
-        breakpoints={{
-          0: {
-            slidesPerView: 1, //브라우저가 280보다 클 때
-            spaceBetween: 10,
-          },
-          560: {
-            slidesPerView: 2, //브라우저가 480보다 클 때
-            spaceBetween: 10,
-          },
-          940: {
-            slidesPerView: 3, //브라우저가 768보다 클 때
-            spaceBetween: 10,
-          },
-        }}
+        // breakpoints={{
+        //   0: {
+        //     slidesPerView: 1, //브라우저가 280보다 클 때
+        //     spaceBetween: 0,
+        //   },
+        //   560: {
+        //     slidesPerView: 2, //브라우저가 480보다 클 때
+        //     spaceBetween: 0,
+        //   },
+        //   940: {
+        //     slidesPerView: 3, //브라우저가 768보다 클 때
+        //     spaceBetween: 0,
+        //   },
+        // }}
         className="classlistswiper"
       >
         <div className="container">
@@ -95,9 +99,9 @@ export const SingleClassSwiper = () => {
                         {isAboutToSoldout ? (
                           <AlmostSoldoutIcon src={AlmostSoldout} />
                         ) : (
-                          ""
+                          <div />
                         )}
-                        {isSoldout ? <SoldoutIcon src={Soldout} /> : ""}
+                        {isSoldout ? <SoldoutIcon src={Soldout} /> : <div />}
                         <ClassReservationButton>
                           <Link to={`/class/${lessondata.lessonClassId}`}>
                             상세보기 👉
@@ -125,7 +129,7 @@ export const SingleClassSwiper = () => {
 
 const SingleClassContainer = styled.div`
   /* border: solid red 1px; */
-  min-height: 400px;
+  min-height: 450px;
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -151,8 +155,9 @@ const ClassThumbnail = styled.div`
 
 const ClassTitle = styled.div`
   font-size: 17px;
-  padding: 10px;
-  width: 100%;
+  padding: 13px;
+  width: fit-content;
+  min-height: 70px;
   text-align: right;
 
   /* border: 1px red solid; */
@@ -162,7 +167,9 @@ const ClassPrice = styled.div`
   font-weight: bold;
   font-size: 16px;
   padding: 10px;
-
+  position: absolute;
+  bottom: 80px;
+  right: 13px;
   /* margin-top: 5px; */
   text-align: right;
   /* border: 1px red solid; */
@@ -192,6 +199,9 @@ const ClassReservationButton = styled.button`
   margin-right: 10px;
   margin-bottom: 20px;
   font-family: "NanumSquareNeo-Variable";
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
   :hover {
     transition: 0.5s;
     background-color: #319fb1;

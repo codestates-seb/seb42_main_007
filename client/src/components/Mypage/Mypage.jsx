@@ -316,4 +316,14 @@ const ProfileContainer = styled.div`
   }
 `;
 
+const ProfilePicture = styled.div`
+  width: 170px;
+  height: 170px;
+  background-color: #80dee8;
+  border-radius: 100px;
+  /* @media screen and (max-width: 600px) {
+    width: 150px;
+    height: 150px;
+  } */
+`;
 export default Mypage;

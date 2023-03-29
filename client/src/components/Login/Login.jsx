@@ -122,10 +122,12 @@ const Login = () => {
         // setTokens(accessToken, refreshToken);
         localStorage.setItem('accessToken',accessToken);
         localStorage.setItem('refreshToken',refreshToken);
+
         // setAuth(true);
         setLoggedIn(true);
         alert('로그인이 성공했습니다.');
         navigate('/');
+
         console.log('Access Token:', accessToken);
         console.log('Refresh Token:', refreshToken);
         // alert('로그인이 성공했습니다.');

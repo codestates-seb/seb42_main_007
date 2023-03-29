@@ -82,6 +82,7 @@ const slideIn = keyframes`
     transform: translateX(0);
   }
 `;
+
 const SurfingImageWrapper = styled.div`
   background-image: url("https://ak-d.tripcdn.com/images/0352y120008matupr523E_C_1136_640_Q60.jpg?proc=source/trip;namelogo/d_40");
   background-size: cover;
@@ -93,6 +94,28 @@ const SurfingImageWrapper = styled.div`
   bottom: 15rem;
   border-radius: 6%;
   animation: ${slideIn} 0.5s forwards;
+
+  // 모바일 : 0~767px :: 767px 이하로 적용되는 css
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
+    height: 30vh;
+    width: 70%;
+    right: 5rem;
+    bottom: 12rem;
+  }
+  // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    height: 40vh;
+    width: 50%;
+    right: 10rem;
+    bottom: 15rem;
+  }
+  // PC : 1200px 이상 :: 1200px 이상 적용되는 css
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    height: 50vh;
+    width: 40%;
+    right: 20rem;
+    bottom: 15rem;
+  }
 `
 
 

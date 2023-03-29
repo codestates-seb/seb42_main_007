@@ -7,6 +7,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Kakaopay from "../../images/ClassPaymentPage/Kakaopay.png";
 import Loading from "../../components/Loading";
+// import dotenv from "dotenv";
+// import * as dotenv from "dotenv";
+// dotenv.config();
 
 const ClassDetailPage = () => {
   const [date, setDate] = useState("2023년 4월 7일");
@@ -17,12 +20,12 @@ const ClassDetailPage = () => {
   const [registerStartDate, setRegisterStartdate] = useState("2023년 1월 25일"); // 강습신청 기간 시작
   const [registerEndDate, setRegisterEnddate] = useState("2023년 3월 24일"); // 강습신청 기간 마감
   const [content, setContent] = useState("홍보내용"); // 강습 내용
-  const [isLoading, setIsLoading] = useState("false");
-  const [isAvailable, setIsAvailable] = useState("false"); // 수강신청 가능 여부
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false); // 수강신청 가능 여부
   const { lessonId } = useParams(); // /class/{lessonId}
   const navigate = useNavigate();
 
-  const adminKey = process.env.KAKAOPAY_ADMIN_KEY;
+  const KAKAOPAY_KEY = process.env.REACT_APP_KAKAOPAY_ADMIN_KEY;
 
   const dateFormatEdit = (str) => {
     if (typeof str === "string") {
@@ -69,9 +72,10 @@ const ClassDetailPage = () => {
         setRegisteredNumber(classData.currentHeadCount);
         setIsLoading(false);
         clearTimeout(timer);
+        console(registerEndDate.getDate());
         // 지금 날짜가 수강신청 마감일을 지난 경우 or 총 수강가능인원수 === 수강신청한 인원수인 경우
         // 더이상 수강신청할 수 없음 -> isAvailable = false
-        if (registerEndDate > new Date()) {
+        if (registerEndDate.getDate() > new Date().getDate()) {
           setIsAvailable(false);
           return alert("현재 모집 기간이 종료되었습니다.");
         } else if (classHeadCount === registedNumber) {
@@ -146,7 +150,8 @@ const ClassDetailPage = () => {
           //     cancel_url: "http://localhost:3000/class/1",
           //   },
           headers: {
-            Authorization: `KakaoAK 96b2b8ecaf66cbe0b9ddaaa9fb1fda29`,
+            Authorization: `KakaoAK ${KAKAOPAY_KEY}`,
+
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
           },
         }
@@ -408,6 +413,7 @@ const RegistrationButton = styled.button`
   font-size: 16px;
   flex: 3 1 0;
   padding: 0px 25px;
+  cursor: pointer;
   :hover {
     border: solid 3px #3fbed3;
     background-color: transparent;
@@ -445,6 +451,7 @@ const ClassDetailDeleteButton = styled.button`
   height: 50px;
   font-size: 14px;
   flex: 1 1 0;
+  cursor: pointer;
   :hover {
     border: solid 3px #3fbed3;
     background-color: transparent;

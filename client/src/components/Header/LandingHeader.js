@@ -191,6 +191,17 @@ const LandingHeader = () => {
             <MenuItem>
               <Link to="/classlist">🏄‍♀️ 강습예약</Link>
             </MenuItem>
+            {/* {isLoggedIn ? (
+              <MenuItem>
+              <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
+            </MenuItem>
+            ) : (
+              <MenuItem className="hidden">
+                <Link to="/Login">💬 로그인</Link>
+              </MenuItem>
+            )} */}
+          </MenuItems>
+          <ButtonContainer>
             {isLoggedIn ? (
               <MenuItem>
               <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
@@ -200,8 +211,6 @@ const LandingHeader = () => {
                 <Link to="/Login">로그인</Link>
               </LoginButton>
             )}
-          </MenuItems>
-          <ButtonContainer>
             <div className="toggle" onClick={() => setMenu(!menu)}>
               {!menu ? <MenuIcon /> : <TimesIcon />}
             </div>

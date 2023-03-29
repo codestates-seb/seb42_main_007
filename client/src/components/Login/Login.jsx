@@ -6,6 +6,9 @@ import { useCookies } from 'react-cookie';
 import { REDIRECT_URI } from '../Apiurl';
 import { AuthContext, useAuth, } from '../../context/AuthContext';
 import { useContext } from 'react';
+import Header from '../Header/Header';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import getDisplayName from '../Mypage/displayName';
 
 
 
@@ -88,6 +91,9 @@ const Login = () => {
       const payload = new URLSearchParams();
       payload.append('email', email);
       payload.append('password', password);
+      // localStorage.setItem('email',email);
+      // localStorage.setItem('password',password);
+      // localStorage.setItem('DisplayName',displayname)
 
   
       const response = await axios.post(

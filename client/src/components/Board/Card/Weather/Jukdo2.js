@@ -6,7 +6,7 @@ import styled from "styled-components";
 const JukDo = () => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
-  const regionId = "1";
+  const regionId = "2";
 
   useEffect(() => {
     async function fetchWeather() {

@@ -55,9 +55,11 @@
   position: absolute;
   display: flex;
   left: 1rem;
-  bottom: 0.2rem;
+  bottom: 2rem;
   width: 30%;
-  height: 30%;
+  height: 20%;
+  gap: 0.1rem;
+  flex-direction: column;
 }
 
 .modal-body-right {

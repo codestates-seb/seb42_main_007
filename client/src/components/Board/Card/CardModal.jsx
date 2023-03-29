@@ -34,9 +34,9 @@ const CardModal = ({ isOpen, closeModal }) => {
             드넓은 모래사장이 있는 서핑 명소로 서핑 매장과 편안한 분위기의 식당이 해안가를 따라 있습니다.
           </div>
           <div className="modal-body-left-under-recommand">
-            추천 대상 : 입문자, 초중급자
+            <div>추천 대상 : 입문자, 초중급자</div>
             <br />
-            파도 세기 : 다소 빠름
+            <div>파도 세기 : 다소 빠름</div>
             </div>
           <div className="modal-body-right">
             {/* 현재 날씨 정보 */}

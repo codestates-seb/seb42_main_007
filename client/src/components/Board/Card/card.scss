@@ -49,6 +49,7 @@
     flex-direction: column;
     justify-content: space-between;
     transition: width 1s, height 1s, box-shadow 1s;
+
     cursor: pointer;
   
     .card-body-img {
@@ -69,6 +70,7 @@
       word-break: break-all;
       overflow: auto;
       padding: 0.6rem;
+      font-family: 'NanumSquareNeo-Variable';
   
       &::-webkit-scrollbar {
         display: none;

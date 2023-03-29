@@ -128,7 +128,12 @@ const MenuItem = styled.div`
     padding: 12px 17px;
     color: black;
   }
+  &:hover {
+    color: black;
+    padding-bottom: 0.2rem;
+  }
 `;
+
 
 const ButtonContainer = styled.div`
   width: fit-content;
@@ -140,6 +145,7 @@ const ButtonContainer = styled.div`
 `;
 
 const LoginButton = styled.button`
+margin-left: 1rem;
   height: 30px;
   width: 60px;
   background-color: transparent;

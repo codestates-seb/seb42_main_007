@@ -13,7 +13,7 @@ const CommentList = ({ board_id }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/board-comments/1?page=1&size=10`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/board-comments?1?page=${currentPage}&size=10`)
       .then((res) => {
         setComments((prevComments) => [...prevComments, ...res.data.data]);
         setTotalPages(res.data.pageInfo.totalPages);

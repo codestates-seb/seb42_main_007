@@ -7,19 +7,23 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 import { format } from "date-fns";
+import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 
 const List = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
       const response = await axios.get(
         `http://43.201.167.13:8080/board-posts?page=1&size=10`
       );
       setPosts(response.data.data);
       setTotalPages(response.data.pageInfo.totalPages);
+      setIsLoading(false);
     }
     fetchData();
   }, [currentPage]);
@@ -30,43 +34,46 @@ const List = () => {
 
   return (
     <>
-    <Header />
-    <MainContainer>
-      <HeadContainer>
-        <h1>커뮤니티 게시판</h1>
-        <AskButton>
-          <Link to="/Write">게시글 작성</Link>
-        </AskButton>
-      </HeadContainer>
-      {posts.length > 0 ? (
-        <>
-          {posts.map((post, index) => (
-            <PostItem key={post.boardPostId}>
-              <PostNumber>{post.boardPostId}</PostNumber>
-              <div>
-              <PostTitle>
-                  <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
-                </PostTitle>
-              </div>
-              <PostBox>
-                <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
-                <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
-              </PostBox>
-            </PostItem>
-          ))}
-          <Stack spacing={2} direction="row">
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-            />
-          </Stack>
-        </>
-      ) : (
-        <NoPost>게시글이 없습니다. 글을 작성해 주세요!</NoPost>
-      )}
-    </MainContainer>
-    <Footer />
+      <Header />
+      <MainContainer>
+        <HeadContainer>
+          <h1>커뮤니티 게시판</h1>
+          <AskButton>
+            <Link to="/Write">게시글 작성</Link>
+          </AskButton>
+        </HeadContainer>
+        {isLoading ? (<>
+          <LoadingIndicator />
+          <span>게시글 불러오는중..</span></>
+        ) : posts.length > 0 ? (
+          <>
+            {posts.map((post, index) => (
+              <PostItem key={post.boardPostId}>
+                <PostNumber>{post.boardPostId}</PostNumber>
+                <div>
+                  <PostTitle>
+                    <Link to={`/Detail/${post.boardPostId}`}>{post.title}</Link>
+                  </PostTitle>
+                </div>
+                <PostBox>
+                  <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
+                  <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
+                </PostBox>
+              </PostItem>
+            ))}
+            <Stack spacing={2} direction="row">
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+              />
+            </Stack>
+          </>
+        ) : (
+          <NoPost>게시글이 없습니다. 글을 작성해 주세요!</NoPost>
+        )}
+      </MainContainer>
+      <Footer />
     </>
   );
 };

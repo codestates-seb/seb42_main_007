@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import LoadingIndicator from "../LoadingIndicator";
 
 const JukDo = () => {
   const [weather, setWeather] = useState(null);
@@ -23,21 +24,21 @@ const JukDo = () => {
   }, [regionId]);
   
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><LoadingIndicator /></div>;
   }
   
   if (!weather) {
-    return <div>Error: Unable to retrieve weather data</div>;
+    return <div>에러: 날씨 데이터에 접근 할 수 없습니다</div>;
   }
   
 
-  const { lastUpdateTime, temp, humid, rainAmount } = weather;
+  const { wave, temp, windSpeed, precipitation } = weather;
 
   return (
     <div>
       <p>
-        온도: {temp}℃, 습도: {humid}%,
-        강수량: {rainAmount}mm (기준 시점: {lastUpdateTime}시)
+        온도: {temp}℃, 파고: {wave}m<br />
+        강수량: {precipitation}mm, 풍속: {windSpeed}m/s
       </p>
     </div>
   );

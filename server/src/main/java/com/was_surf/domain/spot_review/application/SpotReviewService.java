@@ -35,8 +35,8 @@ public class SpotReviewService {
 
         SpotReview existSpotReview = findVerifiedExistSpotReview(spotReview.getSpotReviewId());
 
-        Optional.ofNullable(spotReview.getSpotGrade())
-                .ifPresent(spotGrade -> existSpotReview.setSpotGrade(spotGrade));
+        Optional.ofNullable(spotReview.getRating())
+                .ifPresent(rating -> existSpotReview.setRating(rating));
 
         Optional.ofNullable(spotReview.getReview())
                 .ifPresent(review -> existSpotReview.setReview(review));

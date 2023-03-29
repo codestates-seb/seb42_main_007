@@ -143,7 +143,7 @@ const MenuItems = styled.div`
   display: flex;
   /* border: solid red 1px; */
   min-width: fit-content;
-  margin-right: -20px;
+  margin-right: -30px;
   margin-left: -20px;
   transition: 0.5s;
   .hidden {
@@ -163,6 +163,7 @@ const MenuItems = styled.div`
 
 const MenuItem = styled.div`
   min-width: fit-content;
+  line-height: 30px;
   margin-left: 20px;
   color: white;
 
@@ -273,9 +274,11 @@ const Header = () => {
                 <Link to="/mypage">🙋‍♀️ 마이페이지</Link>
               </MenuItem>
             ) : (
-              <LoginButton>
-                <Link to="/Login">로그인</Link>
-              </LoginButton>
+              <MenuItem>
+                <LoginButton>
+                  <Link to="/Login">로그인</Link>
+                </LoginButton>
+              </MenuItem>
             )}
           </MenuItems>
           <ButtonContainer>

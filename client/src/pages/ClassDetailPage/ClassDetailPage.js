@@ -7,9 +7,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Kakaopay from "../../images/ClassPaymentPage/Kakaopay.png";
 import Loading from "../../components/Loading";
-// import dotenv from "dotenv";
-// import * as dotenv from "dotenv";
-// dotenv.config();
+import Cookies from "js-cookie";
+import { Viewer } from "@toast-ui/react-editor";
 
 const ClassDetailPage = () => {
   const [date, setDate] = useState("2023년 4월 7일");
@@ -21,25 +20,20 @@ const ClassDetailPage = () => {
   const [registerEndDate, setRegisterEnddate] = useState("2023년 3월 24일"); // 강습신청 기간 마감
   const [content, setContent] = useState("홍보내용"); // 강습 내용
   const [isLoading, setIsLoading] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(false); // 수강신청 가능 여부
+  const [isAvailable, setIsAvailable] = useState(true); // 수강신청 가능 여부
   const { lessonId } = useParams(); // /class/{lessonId}
   const navigate = useNavigate();
 
   const KAKAOPAY_KEY = process.env.REACT_APP_KAKAOPAY_ADMIN_KEY;
 
   const dateFormatEdit = (str) => {
-    if (typeof str === "string") {
-      const year = `${str.slice(0, 4)}년`;
-      const month = `${str.slice(5, 7)}월`;
-      const day = `${str.slice(8, 10)}일`;
-      return year + " " + month + " " + day;
-    } else {
-      const stringifiedStr = String(str);
-      const year = `${stringifiedStr.slice(0, 4)}년`;
-      const month = `${stringifiedStr.slice(5, 7)}월`;
-      const day = `${stringifiedStr.slice(8, 10)}일`;
-      return year + " " + month + " " + day;
-    }
+    const dateObj = new Date(str);
+    const year = dateObj.getFullYear();
+    const month = dateObj.getMonth() + 1;
+    const day = dateObj.getDate();
+
+    const formattedDate = `${year}년 ${month}월 ${day}일`;
+    return formattedDate;
   };
 
   const handleNumberChange = (event) => {
@@ -72,18 +66,10 @@ const ClassDetailPage = () => {
         setRegisteredNumber(classData.currentHeadCount);
         setIsLoading(false);
         clearTimeout(timer);
-        console(registerEndDate.getDate());
-        // 지금 날짜가 수강신청 마감일을 지난 경우 or 총 수강가능인원수 === 수강신청한 인원수인 경우
-        // 더이상 수강신청할 수 없음 -> isAvailable = false
-        if (registerEndDate.getDate() > new Date().getDate()) {
-          setIsAvailable(false);
-          return alert("현재 모집 기간이 종료되었습니다.");
-        } else if (classHeadCount === registedNumber) {
-          setIsAvailable(false);
-          return alert("현재 수강 인원이 모두 찼습니다.");
-        }
-        //신청가능한 날짜가 아닌 경우
-
+        // if (classData.headCount === classData.currentHeadCount) {
+        //   setIsAvailable(false);
+        //   return alert("현재 수강 인원이 모두 찼습니다.");
+        // }
         // "data": {
         //     "memberId": 2,
         //     "lessonClassId": 1,
@@ -103,9 +89,22 @@ const ClassDetailPage = () => {
       });
   }, []);
 
+  // 지금 날짜가 수강신청 마감일을 지난 경우 or 총 수강가능인원수 === 수강신청한 인원수인 경우
+  // 더이상 수강신청할 수 없음 -> isAvailable = false
+  //   if (classData.registerEnd.getTime() > new Date().getTime()) {
+  //     setIsAvailable(false);
+  //     return alert("현재 모집 기간이 종료되었습니다.");
+  //   }
+
+  //신청가능한 날짜가 아닌 경우
+
   const deleteClass = async () => {
     await axios
-      .delete(`http://43.201.167.13:8080/lesson-class/${lessonId}`)
+      .delete(`http://43.201.167.13:8080/lesson-class/${lessonId}`, {
+        headers: {
+          Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기
+        },
+      })
       //1 -> LessonId
       .then(() => {
         alert("강습 모집글이 삭제되었습니다.");
@@ -123,18 +122,20 @@ const ClassDetailPage = () => {
         {
           params: {
             cid: "TC0ONETIME",
-            partner_order_id: lessonId,
+            partner_order_id: "partner_order_id",
             partner_user_id: "partner_user_id",
             item_name: classData.title,
             quantity: number,
             total_amount: classData.price * number,
             vat_amount: 0,
             tax_free_amount: 0,
-            approval_url: `http://localhost:3000/paysuccess?lesson_id=${lessonId}item_name=${
-              classData.title
-            }&quantity=${number}&price=${classData.price * number}`,
-            fail_url: "http://localhost:3000/payfailure",
-            cancel_url: `http://localhost:3000/class/${lessonId}`,
+            approval_url: `http://43.201.167.13:8080/paysuccess?lesson_id=${
+              classData.lessonClassId
+            }&item_name=${classData.title}&quantity=${number}&price=${
+              classData.price * number
+            }`,
+            fail_url: "http://43.201.167.13:8080/payfailure",
+            cancel_url: `http://43.201.167.13:8080/class/${classData.lessonClassId}`,
           },
           // params : {
           //     cid: "TC0ONETIME",
@@ -181,12 +182,12 @@ const ClassDetailPage = () => {
               <div className="registering-date">
                 <h2>강습 신청 가능 기간</h2>
                 <div className="register-period">
-                  {classData
-                    ? dateFormatEdit(registerStartDate)
+                  {classData.registerStart
+                    ? dateFormatEdit(classData.registerStart)
                     : "2023년 1월 25일"}{" "}
                   ~{" "}
                   {classData.registerEnd
-                    ? dateFormatEdit(registerEndDate)
+                    ? dateFormatEdit(classData.registerEnd)
                     : "2023년 3월 24일"}
                 </div>
                 <h2>강습 일자</h2>
@@ -196,11 +197,15 @@ const ClassDetailPage = () => {
                 <h2>현재 신청 가능 인원 / 총 모집 인원</h2>
                 <div className="lesson-date">
                   {classData
-                    ? `${classHeadCount - registedNumber} / ${classHeadCount}`
+                    ? `${classData.headCount - classData.currentHeadCount} / ${
+                        classData.headCount
+                      }`
                     : "4 / 10"}
                 </div>
               </div>
-              <ClassDetailBody>{content}</ClassDetailBody>
+              <ClassDetailBody>
+                <Viewer initialValue={classData.content} />
+              </ClassDetailBody>
               <RegistrationDetail>
                 <div className="column-left">
                   <div className="date-text">강습 날짜</div>
@@ -234,7 +239,7 @@ const ClassDetailPage = () => {
                 </div>
               </RegistrationDetail>
               <ButtonsContainer>
-                {isAvailable ? (
+                {classData.headCount - classData.currentHeadCount !== 0 ? (
                   <RegistrationButton onClick={requestPayment}>
                     카카오페이로 강좌신청하기
                     <KakaopayButton src={Kakaopay} />

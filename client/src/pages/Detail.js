@@ -11,7 +11,7 @@ import { format } from "date-fns";
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 import Avatar from "../components/Board/Avatar";
 import CommentList from "../components/Board/CommentList";
-import BoardComments from "../components/Board/BoardComments";
+import CommentApp from "../components/Board/Comment/CommentApp";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
@@ -116,7 +116,8 @@ const Detail = () => {
             {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
             {/* <Comments2 boardPostId={boardPostId} />
             <CommentList boardPostId={boardPostId} /> */}
-            <BoardComments boardPostId={boardPostId} />
+            {/* <BoardComments boardPostId={boardPostId} /> */}
+            <CommentApp boardPostId={boardPostId} />
           </div>
           <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
           </>

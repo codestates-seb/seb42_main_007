@@ -4,14 +4,14 @@ import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
 import Cookies from "js-cookie";
 
-const Comments = ({ boardPostId, comments, updateComments }) => {
+const Comments = ({ boardPostId, comments, updateComments, displayName }) => {
   const [commentText, setCommentText] = useState("");
 
   const handleCommentSubmit = () => {
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/board-comments`,
-        { comment: commentText, boardPostId: boardPostId },
+        { comment: commentText, boardPostId: boardPostId, createdAt: new Date().toLocaleString(), displayName: displayName },
         {
           headers: {
             Authorization: `Bearer: ${Cookies.get("accessToken")}`,

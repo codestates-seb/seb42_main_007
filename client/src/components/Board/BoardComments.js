@@ -3,9 +3,9 @@ import axios from 'axios';
 import Comments from './Comments2';
 import CommentList from './CommentList';
 
-const BoardComments = ({ boardPostId }) => {
+const BoardComments = ({ boardPostId, displayName }) => {
   const [comments, setComments] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
@@ -38,8 +38,8 @@ const BoardComments = ({ boardPostId }) => {
   
   const loadMoreComments = () => {
     return new Promise((resolve) => {
-      if (currentPage < totalPages) {
-        setCurrentPage((prevPage) => prevPage + 1);
+      if (page < totalPages) {
+        setPage((prePage) => prePage + 1);
         resolve();
       }
     });
@@ -52,13 +52,15 @@ const BoardComments = ({ boardPostId }) => {
         boardPostId={boardPostId}
         comments={comments}
         updateComments={updateComments}
+        displayName={displayName}
       />
       <CommentList
         boardPostId={boardPostId}
         comments={comments}
         loadMoreComments={loadMoreComments}
-        currentPage={currentPage} // Pass the currentPage state as a prop
+        page={page} // Pass the page state as a prop
         setComments={setComments}
+        displayName={displayName}
       />
     </>
   );

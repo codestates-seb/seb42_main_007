@@ -3,12 +3,18 @@ import styled from "styled-components";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const CommentList = ({ boardPostId, comments, loadMoreComments, currentPage }) => {
+const CommentList = ({
+  boardPostId,
+  comments,
+  loadMoreComments,
+  page,
+  setComments,
+}) => {
   const [loading, setLoading] = useState(false);
 
   const handleLoadMore = () => {
     setLoading(true);
-    loadMoreComments(currentPage + 1)
+    loadMoreComments(page + 1)
       .then(() => setLoading(false))
       .catch((err) => {
         console.error("댓글 리스트 불러오기 실패:", err);
@@ -18,14 +24,21 @@ const CommentList = ({ boardPostId, comments, loadMoreComments, currentPage }) =
 
   const handleDeleteComment = (boardCommentId) => {
     axios
-      .delete(`${process.env.REACT_APP_SERVER_URL}/board-comments/${boardCommentId}`, {
-        headers: {
-          Authorization: `Bearer: ${Cookies.get("accessToken")}`,
-        },
-      })
+      .delete(
+        `${process.env.REACT_APP_SERVER_URL}/board-comments/${boardCommentId}`,
+        {
+          headers: {
+            Authorization: `Bearer: ${Cookies.get("accessToken")}`,
+          },
+        }
+      )
       .then(() => {
         setLoading(false);
-        // setComments(comments.filter((comment) => comment.boardCommentId !== boardCommentId));
+        setComments(
+          comments.filter(
+            (comment) => comment.boardCommentId !== boardCommentId
+          )
+        );
       })
       .catch((err) => {
         console.error("댓글 삭제 실패:", err);
@@ -36,10 +49,12 @@ const CommentList = ({ boardPostId, comments, loadMoreComments, currentPage }) =
   return (
     <>
       {comments.length === 0 && (
-        <div className="no-reply">작성된 댓글이 없습니다. 댓글을 작성해주세요!</div>
+        <div className="no-reply">
+          작성된 댓글이 없습니다. 댓글을 작성해주세요!
+        </div>
       )}
       <CommentsWrapper>
-        {comments.map((comment, key) => (
+        {comments.map((comment) => (
           <div className="commentsBody" key={comment.boardCommentId}>
             <div className="commentsComment">
               <div className="commentContent">{comment.comment}</div>
@@ -51,7 +66,7 @@ const CommentList = ({ boardPostId, comments, loadMoreComments, currentPage }) =
                 <button
                   onClick={() => handleDeleteComment(comment.boardCommentId)}
                 >
-                  삭제
+                  X
                 </button>
               </div>
             </div>
@@ -151,4 +166,17 @@ const CommentsWrapper = styled.div`
     cursor: pointer;
     align-items: center;
   }
+  button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.8;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
 `;

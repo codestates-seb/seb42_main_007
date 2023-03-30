@@ -10,7 +10,7 @@ const BoardComments = ({ boardPostId }) => {
 
   useEffect(() => {
     fetchComments();
-  }, [comments]);
+  }, []);
 
   const fetchComments = (page = 1) => {
     axios
@@ -36,12 +36,15 @@ const BoardComments = ({ boardPostId }) => {
     });
   };
   
-  const loadMoreComments = async (page) => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-      fetchComments(currentPage + 1);
-    }
+  const loadMoreComments = () => {
+    return new Promise((resolve) => {
+      if (currentPage < totalPages) {
+        setCurrentPage((prevPage) => prevPage + 1);
+        resolve();
+      }
+    });
   };
+  
 
   return (
     <>
@@ -54,6 +57,8 @@ const BoardComments = ({ boardPostId }) => {
         boardPostId={boardPostId}
         comments={comments}
         loadMoreComments={loadMoreComments}
+        currentPage={currentPage} // Pass the currentPage state as a prop
+        setComments={setComments}
       />
     </>
   );

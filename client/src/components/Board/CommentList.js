@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const CommentList = ({ boardPostId, comments, loadMoreComments }) => {
+const CommentList = ({ boardPostId, comments, loadMoreComments, currentPage, setComments }) => {
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1); // Add this line
-
 
   const handleLoadMore = () => {
     setLoading(true);
-    setCurrentPage((prevPage) => prevPage + 1); // Add this line
-    loadMoreComments(currentPage) // Pass the current page to the function
+    loadMoreComments(currentPage + 1)
       .then(() => setLoading(false))
       .catch((err) => {
         console.error("댓글 리스트 불러오기 실패:", err);
         setLoading(false);
       });
   };
-  
-  
-  
+
+  const handleDeleteComment = (boardCommentId) => {
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/board-comments/${boardCommentId}`, {
+        headers: {
+          Authorization: `Bearer: ${Cookies.get("accessToken")}`,
+        },
+      })
+      .then(() => {
+        setLoading(false);
+        setComments(comments.filter((comment) => comment.boardCommentId !== boardCommentId));
+      })
+      .catch((err) => {
+        console.error("댓글 삭제 실패:", err);
+        setLoading(false);
+      });
+  };
 
   return (
     <>
@@ -35,6 +48,11 @@ const CommentList = ({ boardPostId, comments, loadMoreComments }) => {
                   {new Date(comment.createdAt).toLocaleString()}
                 </div>
                 <div className="commentUsername">{comment.displayName}</div>
+                <button
+                  onClick={() => handleDeleteComment(comment.boardCommentId)}
+                >
+                  삭제
+                </button>
               </div>
             </div>
             <hr />

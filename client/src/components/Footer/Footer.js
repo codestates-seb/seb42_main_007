@@ -76,7 +76,8 @@ const FooterWrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  position:fixed;
+  height: 200px;
+  /* position:fixed; */
   z-index: 1;
   .footer-images {
     position: relative;

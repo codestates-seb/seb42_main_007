@@ -71,6 +71,7 @@ const List = () => {
                 </PostBox>
               </PostItem>
             ))}
+            
             <Stack spacing={2} direction="row">
               <Pagination
                 count={totalPages}
@@ -78,7 +79,7 @@ const List = () => {
                 onChange={handlePageChange}
               />
             </Stack>
-          </>
+            </>
         ) : (
           <NoPost>게시글이 없습니다. 글을 작성해 주세요!</NoPost>
         )}
@@ -148,7 +149,9 @@ const PostItem = styled.div`
   }
 `;
 
-
+const ListWrapper = styled.div`
+  margin-bottom: 20rem;
+`
 
 
 const PostTitle = styled.h2`

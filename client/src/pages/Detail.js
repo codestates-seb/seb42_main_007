@@ -124,8 +124,7 @@ const Detail = () => {
           <NoPost>게시글이 없습니다.</NoPost>
         )}
       </MainContainer>
-
-      <Footer />
+      <FooterWrapper><Footer /></FooterWrapper>
     </>
   );
 };
@@ -136,9 +135,8 @@ const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   padding: 4rem 0;
-  height: 100%;
+  min-height: 100%;
   margin: 0 30rem;
-  margin-bottom: 20rem;
   @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     margin: 0 5rem;
   }
@@ -162,6 +160,12 @@ const NoPost = styled.div`
   font-size: 1.5rem;
   margin-top: 3rem;
 `;
+
+const FooterWrapper = styled.div`
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+`
 
 const QuestionHeader = styled.div`
   display: flex;

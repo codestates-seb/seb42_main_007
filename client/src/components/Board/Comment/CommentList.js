@@ -20,5 +20,5 @@ const CommentList = ({ comments, onUpdate, onDelete }) => {
 export default CommentList;
 
 const Wrapper = styled.div`
-  margin-bottom: 14rem;
+  padding-bottom: 14rem;
 `

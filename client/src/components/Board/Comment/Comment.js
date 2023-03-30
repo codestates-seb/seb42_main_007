@@ -1,6 +1,4 @@
 import React from 'react';
-import { addHours, format } from "date-fns";
-import ko from "date-fns/locale/ko";
 
 const Comment = ({ comment, onUpdate, onDelete }) => {
   const [editing, setEditing] = React.useState(false);
@@ -17,11 +15,7 @@ const Comment = ({ comment, onUpdate, onDelete }) => {
         <>
           <p>{comment.comment}</p>
           <p>{comment.displayName}</p>
-          <p>{format(
-                  addHours(new Date(comment.createdAt), 9),
-                  "yyyy년 M월 d일 a h:mm",
-                  { locale: ko }
-                )}</p>
+          <p>{comment.createdAt}</p>
           <button onClick={() => setEditing(true)}>수정</button>
           <button onClick={() => onDelete(comment.boardCommentId)}>삭제</button>
         </>

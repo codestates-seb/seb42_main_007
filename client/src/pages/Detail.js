@@ -4,12 +4,10 @@ import axios from "axios";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
-import Comments2 from "../components/Board/Comments2";
 // import VoteBar from "../components/Board/VoteBar";
 import DeleteButton from "../components/Board/Delete";
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 import Avatar from "../components/Board/Avatar";
-import CommentList from "../components/Board/CommentList";
 import CommentApp from "../components/Board/Comment/CommentApp";
 import { addHours, format } from "date-fns";
 import ko from "date-fns/locale/ko";
@@ -93,7 +91,6 @@ const Detail = () => {
             <QuestionStats>
               <EditContainer>
                 <button>
-                  {/* <Link to="/Edit">수정</Link> */}
                   <Link to={`/edit/${boardPostId}`} state={{ post }}>
                     수정
                   </Link>
@@ -119,10 +116,6 @@ const Detail = () => {
                   </InfoContainer>
                 </QuestionContent>
               </QuestionBody>
-              {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
-              {/* <Comments2 boardPostId={boardPostId} />
-            <CommentList boardPostId={boardPostId} /> */}
-              {/* <BoardComments boardPostId={boardPostId} /> */}
               <CommentApp boardPostId={boardPostId} />
             </div>
             <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
@@ -145,6 +138,7 @@ const MainContainer = styled.main`
   padding: 4rem 0;
   height: 100%;
   margin: 0 30rem;
+  margin-bottom: 20rem;
   @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     margin: 0 5rem;
   }

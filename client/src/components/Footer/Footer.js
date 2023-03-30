@@ -13,7 +13,6 @@ const FooterContainer = styled.div`
   padding-right: 30px; */
   display: flex;
   align-items: stretch;
-
 `;
 
 const FooterItem = styled.div`
@@ -77,6 +76,8 @@ const FooterWrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
+  position:fixed;
+  z-index: 1;
   .footer-images {
     position: relative;
     top: 5px;

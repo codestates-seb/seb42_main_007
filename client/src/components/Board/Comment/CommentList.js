@@ -1,9 +1,10 @@
 import React from 'react';
 import Comment from './Comment';
+import styled from 'styled-components';
 
 const CommentList = ({ comments, onUpdate, onDelete }) => {
   return (
-    <div>
+    <Wrapper>
       {comments.map((comment) => (
         <Comment
           key={comment.boardCommentId}
@@ -12,8 +13,12 @@ const CommentList = ({ comments, onUpdate, onDelete }) => {
           onDelete={onDelete}
         />
       ))}
-    </div>
+    </Wrapper>
   );
 };
 
 export default CommentList;
+
+const Wrapper = styled.div`
+  margin-bottom: 14rem;
+`

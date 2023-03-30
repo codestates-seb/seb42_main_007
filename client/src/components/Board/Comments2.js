@@ -33,7 +33,7 @@ const Comments = ({ boardPostId, comments, updateComments }) => {
       })
       .catch((err) => {
         console.error("댓글 작성 실패:", err);
-        window.alert("작성 실패");
+        window.alert("작성 실패, 로그인이 되어있는지 마이페이지에서 닉네임을 확인해주세요, 닉네임이 안보이면 로그인이 풀린 상태입니다. 로그아웃 버튼을 누르고 다시 로그인해주세요.");
       });
   };
 

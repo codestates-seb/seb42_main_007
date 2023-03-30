@@ -3,16 +3,21 @@ import styled from "styled-components";
 
 const CommentList = ({ boardPostId, comments, loadMoreComments }) => {
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Add this line
+
 
   const handleLoadMore = () => {
     setLoading(true);
-    loadMoreComments()
+    setCurrentPage((prevPage) => prevPage + 1); // Add this line
+    loadMoreComments(currentPage) // Pass the current page to the function
       .then(() => setLoading(false))
       .catch((err) => {
         console.error("댓글 리스트 불러오기 실패:", err);
         setLoading(false);
       });
   };
+  
+  
   
 
   return (

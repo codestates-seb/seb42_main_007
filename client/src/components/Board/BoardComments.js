@@ -10,7 +10,7 @@ const BoardComments = ({ boardPostId }) => {
 
   useEffect(() => {
     fetchComments();
-  }, [boardPostId]);
+  }, [comments]);
 
   const fetchComments = (page = 1) => {
     axios
@@ -31,11 +31,12 @@ const BoardComments = ({ boardPostId }) => {
   const updateComments = (newComment) => {
     return new Promise((resolve) => {
       setComments((prevComments) => [newComment, ...prevComments]);
-      resolve();
+      resolve()
+      .then(() => console.log(comments));
     });
   };
   
-  const loadMoreComments = () => {
+  const loadMoreComments = async (page) => {
     if (currentPage < totalPages) {
       setCurrentPage((prevPage) => prevPage + 1);
       fetchComments(currentPage + 1);

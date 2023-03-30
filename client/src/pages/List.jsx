@@ -6,14 +6,17 @@ import Stack from "@mui/material/Stack";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
-import { format } from "date-fns";
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
+import { addHours, format } from "date-fns";
+import ko from "date-fns/locale/ko";
+
 
 const List = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -25,7 +28,7 @@ const List = () => {
       setTotalPages(response.data.pageInfo.totalPages);
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000); // 2초 후 로딩 인디케이터를 숨깁니다.
+      }, 1000); // 2초 후 로딩 인디케이터를 숨깁니다.
     }
     fetchData();
   }, [currentPage]);
@@ -60,7 +63,11 @@ const List = () => {
                 </div>
                 <PostBox>
                   <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
-                  <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
+                  <PostDate>{format(
+                    addHours(new Date(post.createdAt), 9),
+                    "yyyy년 M월 d일 a h:mm",
+                    { locale: ko }
+                  )}</PostDate>
                 </PostBox>
               </PostItem>
             ))}

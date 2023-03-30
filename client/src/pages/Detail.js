@@ -7,22 +7,22 @@ import styled from "styled-components";
 import Comments2 from "../components/Board/Comments2";
 // import VoteBar from "../components/Board/VoteBar";
 import DeleteButton from "../components/Board/Delete";
-import { format } from "date-fns";
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
 import Avatar from "../components/Board/Avatar";
 import CommentList from "../components/Board/CommentList";
 import CommentApp from "../components/Board/Comment/CommentApp";
+import { addHours, format } from "date-fns";
+import ko from "date-fns/locale/ko";
 
 const BREAK_POINT_MOBILE = 767;
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
 
-
 const Detail = () => {
   const { boardPostId } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
-
+  const [viewCount, setViewCount] = useState(0);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -53,79 +53,85 @@ const Detail = () => {
     fetchData();
   }, [boardPostId]);
 
-//   const currentUser = {post && currentUser && post.user.id === currentUser.id && (
-//   <EditContainer>
-//     <button>
-//       <Link to="/Edit">수정</Link>
-//     </button>
-//     <button onClick={Delete}>삭제</button>
-//   </EditContainer>
-// )}
+  //   const currentUser = {post && currentUser && post.user.id === currentUser.id && (
+  //   <EditContainer>
+  //     <button>
+  //       <Link to="/Edit">수정</Link>
+  //     </button>
+  //     <button onClick={Delete}>삭제</button>
+  //   </EditContainer>
+  // )}
 
   return (
     <>
       <Header />
       <MainContainer>
-      {loading ? (<>
-          <LoadingIndicator />
-          <span>게시글 불러오는중..</span></>
+        {loading ? (
+          <>
+            <LoadingIndicator />
+            <span>게시글 불러오는중..</span>
+          </>
         ) : post ? (
           <>
-          <QuestionHeader>
-            <h1>{post.title}</h1>
-          </QuestionHeader>
-          <QuestionStat>
-            <div className="asked-at">
-              <span>작성일 </span>
-              {format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}
-            </div>
-            <div className="view-stats">
-              <span>조회수 </span>
-              <span>{post.viewCount} 회</span>
-            </div>
-          </QuestionStat>
-          <QuestionStats>
-            <EditContainer>
-              <button>
-                {/* <Link to="/Edit">수정</Link> */}
-               <Link to={`/edit/${boardPostId}`} state={{ post }}>수정</Link>
-              </button>
-              <button onClick={openModal}>삭제</button>
-            </EditContainer>
-          </QuestionStats>
-          <div className="detail-main">
-            <QuestionBody>
-              <QuestionContent>
-                <DetailContainer>
-                  <div>
-                  {post.content}
-                  </div>
-                </DetailContainer>
-                <InfoContainer>
-                  <AuthorContainer>
-                    <AuthorAvatar>
-                    <Avatar />
-                    </AuthorAvatar>
-                    <AuthorDetail>
-                    <span>{post.displayName}</span>
-                    </AuthorDetail>
-                  </AuthorContainer>
-                </InfoContainer>
-              </QuestionContent>
-            </QuestionBody>
-            {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
-            {/* <Comments2 boardPostId={boardPostId} />
+            <QuestionHeader>
+              <h1>{post.title}</h1>
+            </QuestionHeader>
+            <QuestionStat>
+              <div className="asked-at">
+                <span>작성일 </span>
+                {format(
+                  addHours(new Date(post.createdAt), 9),
+                  "yyyy년 M월 d일 a h:mm",
+                  { locale: ko }
+                )}
+              </div>
+              <div className="view-stats">
+                <span>조회수 </span>
+                <span>{post.viewCount} 회</span>
+              </div>
+            </QuestionStat>
+            <QuestionStats>
+              <EditContainer>
+                <button>
+                  {/* <Link to="/Edit">수정</Link> */}
+                  <Link to={`/edit/${boardPostId}`} state={{ post }}>
+                    수정
+                  </Link>
+                </button>
+                <button onClick={openModal}>삭제</button>
+              </EditContainer>
+            </QuestionStats>
+            <div className="detail-main">
+              <QuestionBody>
+                <QuestionContent>
+                  <DetailContainer>
+                    <div>{post.content}</div>
+                  </DetailContainer>
+                  <InfoContainer>
+                    <AuthorContainer>
+                      <AuthorAvatar>
+                        <Avatar />
+                      </AuthorAvatar>
+                      <AuthorDetail>
+                        <span>{post.displayName}</span>
+                      </AuthorDetail>
+                    </AuthorContainer>
+                  </InfoContainer>
+                </QuestionContent>
+              </QuestionBody>
+              {/* <VoteBar total={post.likeCount || 0}></VoteBar> */}
+              {/* <Comments2 boardPostId={boardPostId} />
             <CommentList boardPostId={boardPostId} /> */}
-            {/* <BoardComments boardPostId={boardPostId} /> */}
-            <CommentApp boardPostId={boardPostId} />
-          </div>
-          <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
+              {/* <BoardComments boardPostId={boardPostId} /> */}
+              <CommentApp boardPostId={boardPostId} />
+            </div>
+            <DeleteButton isOpen={isModalOpen} closeModal={closeModal} />
           </>
         ) : (
           <NoPost>게시글이 없습니다.</NoPost>
         )}
       </MainContainer>
-      
+
       <Footer />
     </>
   );
@@ -141,20 +147,20 @@ const MainContainer = styled.main`
   margin: 0 30rem;
   @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     margin: 0 5rem;
-    }
-    @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
-      margin: 0 10rem;
-    }
-    @media only screen and (min-width: ${BREAK_POINT_PC}px) {
-      margin: 0 30rem;
-    }
-    @font-face {
-    font-family: 'OAGothic-ExtraBold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    margin: 0 10rem;
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    margin: 0 30rem;
+  }
+  @font-face {
+    font-family: "OAGothic-ExtraBold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2")
+      format("woff2");
     font-weight: 800;
     font-style: normal;
-}
-
+  }
 `;
 
 const NoPost = styled.div`
@@ -191,7 +197,7 @@ const QuestionStat = styled.div`
     margin-bottom: 0.2rem;
     margin-right: 1rem;
   }
-  .view-stats{
+  .view-stats {
     font-size: 0.8rem;
     margin-bottom: 0.2rem;
   }
@@ -269,12 +275,11 @@ const AuthorContainer = styled.div`
   margin-top: 4px;
   margin-bottom: 4px;
   border-radius: 10px;
-  background-color: #F5F1CB;
+  background-color: #f5f1cb;
   width: 10rem;
   padding: 5px 6px 18px 7px;
   color: hsl(210, 8%, 45%);
 `;
-
 
 const AuthorAvatar = styled.div`
   float: left;
@@ -285,7 +290,7 @@ const AuthorAvatar = styled.div`
     width: 32px;
     height: 32px;
   }
-  > span{
+  > span {
     margin-left: 5rem;
   }
 `;
@@ -294,8 +299,7 @@ const AuthorDetail = styled.div`
   margin: 1rem 0 0 2rem;
   width: calc(100% - 3rem);
   text-align: center;
-  font-family: 'OAGothic-ExtraBold';
-
+  font-family: "OAGothic-ExtraBold";
 
   a {
     color: hsl(206, 100%, 40%);

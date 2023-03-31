@@ -20,7 +20,7 @@ const Detail = () => {
   const { boardPostId } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
-  const [viewCount, setViewCount] = useState(0);
+  // const [viewCount, setViewCount] = useState(0);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -50,15 +50,6 @@ const Detail = () => {
     }
     fetchData();
   }, [boardPostId]);
-
-  //   const currentUser = {post && currentUser && post.user.id === currentUser.id && (
-  //   <EditContainer>
-  //     <button>
-  //       <Link to="/Edit">수정</Link>
-  //     </button>
-  //     <button onClick={Delete}>삭제</button>
-  //   </EditContainer>
-  // )}
 
   return (
     <>

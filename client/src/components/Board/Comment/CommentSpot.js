@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Comment = ({ comment, onUpdate, onDelete }) => {
+const CommentSpot = ({ comment, onUpdate, onDelete }) => {
   const [editing, setEditing] = React.useState(false);
   const [updatedComment, setUpdatedComment] = React.useState(comment.comment);
 
@@ -17,7 +17,7 @@ const Comment = ({ comment, onUpdate, onDelete }) => {
           <CommentsWrapper>
             <div className="commentsBody">
               <div className="commentsComment">
-                <div className="commentContent">{comment.comment}</div>
+                <div className="commentContent">{comment.review}</div>
                 <div className="commentUsernameDate">
                   <div className="commentDate">
                     {new Date(comment.createdAt).toLocaleString(
@@ -26,7 +26,7 @@ const Comment = ({ comment, onUpdate, onDelete }) => {
                     )}
                   </div>
                   <button onClick={() => setEditing(true)}>수정</button>
-                  <button onClick={() => onDelete(comment.boardCommentId)}>
+                  <button onClick={() => onDelete(comment.spotReviewId)}>
                     삭제
                   </button>
                   <div className="commentUsername">{comment.displayName}</div>
@@ -58,7 +58,7 @@ const Comment = ({ comment, onUpdate, onDelete }) => {
   );
 };
 
-export default Comment;
+export default CommentSpot;
 
 const CommentsWrapper = styled.div`
   .commentsHeader {

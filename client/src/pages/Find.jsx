@@ -105,6 +105,7 @@ const Main = styled.div`
   justify-content: center;
   width: 100%;
   z-index: 0;
+  padding-bottom: 3rem;
 
   @media screen and (min-width: 0px) {
     width: 270px;

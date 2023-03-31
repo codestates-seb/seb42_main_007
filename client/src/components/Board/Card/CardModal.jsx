@@ -1,14 +1,17 @@
 import ReactModal from "react-modal";
 import "./CardModal.scss";
-import CardComment from "./CardComment";
+// import CardComment from "./CardComment";
+import CommentAppSpot from "../Comment/CommentAppSpot";
 import CardCommentList from "./CardCommentList";
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 
 
-const CardModal = ({ isOpen, closeModal, surfSpotId  }) => {
+const CardModal = ({ isOpen, closeModal }) => {
     const [loading, setLoading] = useState(false);
+    const { surfSpotId } = useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -60,7 +63,7 @@ const CardModal = ({ isOpen, closeModal, surfSpotId  }) => {
             <div>파도 세기 : 다소 빠름</div>
             </div>
           <div className="modal-body-right">
-            <CardCommentList />
+            {/* <CardCommentList /> */}
             {/* 현재 날씨 정보 */}
           </div>
           <div className="modal-body-right-counts">
@@ -72,7 +75,7 @@ const CardModal = ({ isOpen, closeModal, surfSpotId  }) => {
         </div>
         <hr width="100%" />
         <div className="modal-footer">
-          <div className="comments"><CardComment /></div>
+          <div className="comments"><CommentAppSpot surfSpotId={1}/></div>
           {/* <div className="stars">⭐4</div> */}
         </div>
       </div>

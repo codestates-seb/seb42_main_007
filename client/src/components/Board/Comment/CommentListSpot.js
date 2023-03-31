@@ -1,13 +1,13 @@
 import React from 'react';
-import Comment from './Comment';
+import CommentSpot from './CommentSpot';
 import styled from 'styled-components';
 
-const CommentList = ({ comments, onUpdate, onDelete }) => {
+const CommentListSpot = ({ comments, onUpdate, onDelete }) => {
   return (
     <Wrapper>
       {comments.map((comment) => (
-        <Comment
-          key={comment.boardPostId}
+        <CommentSpot
+          key={comment.spotReviewId}
           comment={comment}
           onUpdate={onUpdate}
           onDelete={onDelete}
@@ -17,8 +17,8 @@ const CommentList = ({ comments, onUpdate, onDelete }) => {
   );
 };
 
-export default CommentList;
+export default CommentListSpot;
 
 const Wrapper = styled.div`
-  padding-bottom: 14rem;
+  padding-bottom: 0rem;
 `

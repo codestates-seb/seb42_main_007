@@ -8,6 +8,8 @@ import styled from "styled-components";
 const CommentApp = ({ boardPostId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [pageInfo, setPageInfo] = useState({ page: 1, size: 10, totalElements: 0, totalPages: 0 });
+
 
   axios.interceptors.request.use(
     (config) => {
@@ -22,33 +24,49 @@ const CommentApp = ({ boardPostId }) => {
     }
   );
 
-  const fetchComments = async () => {
+  const fetchComments = async (page) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/board-comments/${boardPostId}?page=1&size=10`
+        `${process.env.REACT_APP_SERVER_URL}/board-comments/${boardPostId}?page=${page}&size=${pageInfo.size}`
       );
-      setComments(response.data.data);
+      if (page === 1) {
+        // 첫번째 페이지인 경우, 기존 댓글 리스트 대신에 새로 가져온 댓글 리스트를 저장
+        setComments(response.data.data);
+      } else {
+        // 두번째 페이지 이상인 경우, 기존 댓글 리스트와 새로 가져온 댓글 리스트를 합쳐서 저장
+        setComments([...comments, ...response.data.data]);
+      }
+      setPageInfo(response.data.pageInfo);
     } catch (error) {
       console.error("Failed to fetch comments:", error);
     }
   };
+  
+
 
   useEffect(() => {
-    fetchComments();
-  }, [newComment]);
+  fetchComments(pageInfo.page);
+}, []);
 
-  const addComment = async (commentData) => {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/board-comments`,
-        commentData
-      );
-      setComments([...comments, response.data]);
-      setNewComment("");
-    } catch (error) {
-      console.error("Failed to add comment:", error);
-    }
-  };
+const handleLoadMore = () => {
+  fetchComments(pageInfo.page + 1);
+};
+
+
+const addComment = async (commentData) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/board-comments`,
+      commentData,
+    );
+    setNewComment(""); // 댓글 내용 초기화
+    fetchComments(pageInfo.page); // 최신 댓글 리스트 가져오기
+  } catch (error) {
+    console.error("Failed to add comment:", error);
+  }
+};
+
+
 
   const updateComment = async (id, updatedText) => {
     try {
@@ -83,42 +101,45 @@ const CommentApp = ({ boardPostId }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const commentData = {
       comment: newComment,
       boardPostId: `${boardPostId}`,
-      // displayName: "한준", // Replace with the actual user's display name
     };
     addComment(commentData);
   };
+  
 
   return (
     <>
-      <CommentsWrapper>
-        <form onSubmit={handleSubmit}>
-        <div className="commentsHeader">
-          <TextField
-            type="text"
-            className="commentsHeaderTextarea"
-            maxRows={3}
-            multiline
-            placeholder="댓글을 입력해주세요✏️"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <Button variant="outlined" type="submit">
-            등록하기
-          </Button>
-        </div>
-        </form>
-        </CommentsWrapper>
-        <CommentList
-          comments={comments}
-          onUpdate={updateComment}
-          onDelete={deleteComment}
+  <CommentsWrapper>
+    <form onSubmit={handleSubmit}>
+      <div className="commentsHeader">
+        <TextField
+          type="text"
+          className="commentsHeaderTextarea"
+          maxRows={3}
+          multiline
+          placeholder="댓글을 입력해주세요✏️"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
         />
-    </>
+        <Button variant="outlined" type="submit">
+          등록하기
+        </Button>
+      </div>
+    </form>
+  </CommentsWrapper>
+  <CommentList
+    comments={comments}
+    onUpdate={updateComment}
+    onDelete={deleteComment}
+    onLoadMore={handleLoadMore}
+    pageInfo={pageInfo}
+  />
+</>
+
   );
 };
 

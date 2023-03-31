@@ -92,6 +92,7 @@ const CommentsWrapper = styled.div`
     display: flex;
     margin-left: auto;
     float: right;
+    font-size: 1rem;
   }
   .commentContent {
     display: flex;

@@ -17,7 +17,7 @@ const CardComment = ({ board_id }) => {
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/spot-reviews`,
-        { comment: commentText, surfSpotId: 1, spotGrade: 5, },
+        { review: commentText, surfSpotId: 1, rating: 5, },
         {
           headers: {
             Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기

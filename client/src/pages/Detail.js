@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
+// import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 // import VoteBar from "../components/Board/VoteBar";
 import DeleteButton from "../components/Board/Delete";
@@ -124,7 +124,7 @@ const Detail = () => {
           <NoPost>게시글이 없습니다.</NoPost>
         )}
       </MainContainer>
-      <FooterWrapper><Footer /></FooterWrapper>
+      {/* <FooterWrapper><Footer /></FooterWrapper> */}
     </>
   );
 };

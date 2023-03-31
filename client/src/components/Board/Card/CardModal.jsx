@@ -75,7 +75,7 @@ const CardModal = ({ isOpen, closeModal }) => {
         </div>
         <hr width="100%" />
         <div className="modal-footer">
-          <div className="comments"><CommentAppSpot surfSpotId={1}/></div>
+          <div className="comments"><CommentAppSpot surfSpotId={surfSpotId}/></div>
           {/* <div className="stars">⭐4</div> */}
         </div>
       </div>

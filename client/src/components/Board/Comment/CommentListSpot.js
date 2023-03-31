@@ -7,7 +7,7 @@ const CommentListSpot = ({ comments, onUpdate, onDelete }) => {
     <Wrapper>
       {comments.map((comment) => (
         <CommentSpot
-          key={comment.spotReviewId}
+          key={comment.surfSpotId}
           comment={comment}
           onUpdate={onUpdate}
           onDelete={onDelete}

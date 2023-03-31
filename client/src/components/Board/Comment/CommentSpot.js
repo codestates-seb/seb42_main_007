@@ -6,7 +6,7 @@ const CommentSpot = ({ comment, onUpdate, onDelete }) => {
   const [updatedComment, setUpdatedComment] = React.useState(comment.comment);
 
   const handleUpdate = () => {
-    onUpdate(comment.boardCommentId, updatedComment);
+    onUpdate(comment.spotReviewId, updatedComment);
     setEditing(false);
   };
 

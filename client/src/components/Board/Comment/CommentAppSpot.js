@@ -54,9 +54,9 @@ const CommentAppSpot = ({ surfSpotId }) => {
   const updateComment = async (id, updatedText) => {
     try {
       await axios.patch(
-        `${process.env.REACT_APP_SERVER_URL}/spot-reviews?/${id}`,
+        `${process.env.REACT_APP_SERVER_URL}/spot-reviews/${id}`,
         {
-          comment: updatedText,
+          review: updatedText,
         }
       );
       const updatedComments = comments.map((comment) =>
@@ -73,7 +73,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
   const deleteComment = async (id) => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_SERVER_URL}/spot-reviews?/${id}`
+        `${process.env.REACT_APP_SERVER_URL}/spot-reviews/${id}`
       );
       const updatedComments = comments.filter(
         (comment) => comment.spotReviewId !== id
@@ -88,7 +88,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
     e.preventDefault();
     const commentData = {
       review: newComment,
-      surfSpotId: 1,
+      surfSpotId: `${surfSpotId}`,
       rating: 5,
       // displayName: "한준", // Replace with the actual user's display name
     };
@@ -115,7 +115,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
         </div>
         </form>
         </CommentsWrapper>
-        <CommentListWrapper>
+        <CommentListWrapper> 
         <CommentListSpot
           comments={comments}
           onUpdate={updateComment}

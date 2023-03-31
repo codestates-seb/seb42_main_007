@@ -49,7 +49,7 @@ public class BoardCommentService {
         // 댓글 조회
         BoardComment findBoardComment = findVerifiedBoardComment(boardComment.getBoardCommentId());
 
-        verifyMatchMember(boardComment, findMember);
+        verifyMatchMember(findBoardComment, findMember);
 
         findBoardComment.updateBoardComment(boardComment);
 

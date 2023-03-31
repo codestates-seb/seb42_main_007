@@ -23,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardCommentController {
     private final static String BOARD_COMMENT_DEFAULT_URL = "/board-comments";
+
     private final BoardCommentService boardCommentService;
     private final BoardCommentMapper mapper;
 

@@ -1,0 +1,31 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://was-surf.cbz4x14wbhcl.ap-northeast-2.rds.amazonaws.com:13306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: admin
+    password: 1q2w3e4r
+  jpa:
+    hibernate:
+      ddl-auto: update
+      generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+jwt:
+  secret: fsdfsdgd1fwevewg34123fsdfsggdasdaddawd112f3Bfbff2f24dsgvdfbtrh45t23f34fg3r1e1esd
+mail:
+  address:
+    admin: example@admin.com
+    teacher: teacher@gmail.com
+redis:
+  host: localhost
+  port: 6379
+resources:
+  location: /Users/yong/Desktop/codestates/main-project/seb42_main_007/server/src/storage/
+weatherApi:
+  serviceKey: jbBfi%2F8uEOt%2BVNqaQ6O3IxIeLX4R%2FmcUZOdwx44kzNHOp7bYxfK20I%2BoXHP%2BxcA0PmtfxHCcSxW3YjU7PmC9AA%3D%3D

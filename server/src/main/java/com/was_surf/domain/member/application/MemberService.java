@@ -89,6 +89,11 @@ public class MemberService {
         return memberRepository.save(findMember);
     }
     public void deleteMember(String email){
+        // teacher 계정 및 user 계정 탈퇴 불가
+        if(email.equals("teacher@gmail.com") || email.equals("user@email.com")) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_DELETE);
+        }
+
         Member member = findMemberToEmail(email);
 
         memberRepository.delete(member);

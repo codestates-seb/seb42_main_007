@@ -6,7 +6,6 @@
 *.class
 .idea/
 server/src/main/resources/application.yml
-*.yml
 build/
 .gradle/
 

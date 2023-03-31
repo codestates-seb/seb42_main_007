@@ -43,7 +43,7 @@ public class LessonClass extends Auditable {
     private Integer price;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "MEMBER_ID", nullable = false)
     private Member member;
 

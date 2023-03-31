@@ -4,11 +4,16 @@ import CommentListSpot from "./CommentListSpot";
 import Cookies from "js-cookie";
 import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
+import Rating from "@mui/lab/Rating";
+import StarIcon from "@mui/icons-material/Star";
+
 
 const CommentAppSpot = ({ surfSpotId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [pageInfo, setPageInfo] = useState({});
+  const [rating, setRating] = useState(5);
+
 
 
   axios.interceptors.request.use(
@@ -55,17 +60,18 @@ const CommentAppSpot = ({ surfSpotId }) => {
     }
   };
 
-  const updateComment = async (id, updatedText) => {
+  const updateComment = async (id, updatedText, updatedRating) => {
     try {
       await axios.patch(
         `${process.env.REACT_APP_SERVER_URL}/spot-reviews/${id}`,
         {
           review: updatedText,
+          rating: updatedRating // 수정된 rating 추가
         }
       );
       const updatedComments = comments.map((comment) =>
         comment.spotReviewId === id
-          ? { ...comment, review: updatedText }
+          ? { ...comment, review: updatedText, rating: updatedRating } // 수정된 rating 반영
           : comment
       );
       setComments(updatedComments);
@@ -73,6 +79,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
       console.error("Failed to update comment:", error);
     }
   };
+
 
   const deleteComment = async (id) => {
     try {
@@ -93,7 +100,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
     const commentData = {
       review: newComment,
       surfSpotId: 1,
-      rating: 5,
+      rating: rating,
     };
     addComment(commentData);
   };
@@ -112,6 +119,14 @@ const CommentAppSpot = ({ surfSpotId }) => {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
+          <Rating
+  value={rating}
+  onChange={(event, newValue) => {
+    setRating(newValue);
+  }}
+  precision={1}
+  icon={<StarIcon fontSize="inherit" />}
+/>
           <Button variant="outlined" type="submit">
             등록하기
           </Button>
@@ -206,6 +221,6 @@ const CommentsWrapper = styled.div`
 const CommentListWrapper = styled.div`
   position: absolute;
   right: 2rem;
-  top: 3rem;
+  top: 1rem;
   width: 63%;
 `

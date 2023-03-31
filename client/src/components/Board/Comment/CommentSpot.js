@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Rating from "@mui/lab/Rating";
+import StarIcon from "@mui/icons-material/Star";
 
 const CommentSpot = ({ comment, onUpdate, onDelete }) => {
   const [editing, setEditing] = React.useState(false);
   const [updatedComment, setUpdatedComment] = React.useState(comment.comment);
+  const [editedRating, setEditedRating] = useState(comment.rating);
 
   const handleUpdate = () => {
-    onUpdate(comment.spotReviewId, updatedComment);
+    onUpdate(comment.spotReviewId, updatedComment, editedRating);
     setEditing(false);
   };
 
@@ -20,12 +23,26 @@ const CommentSpot = ({ comment, onUpdate, onDelete }) => {
                 <div className="commentContent">{comment.review}</div>
                 <div className="commentUsernameDate">
                   <div className="commentDate">
+                  <Rating
+              value={comment.rating}
+              readOnly
+              precision={1}
+              icon={<StarIcon fontSize="inherit" />}
+            />
                     {new Date(comment.createdAt).toLocaleString(
                       "ko-KR",
                       "Asia/Seoul"
                     )}
                   </div>
-                  <button onClick={() => setEditing(true)}>수정</button>
+                  <button
+                    onClick={() => {
+                      setEditedRating(comment.rating); // 수정 대상 댓글의 rating 값으로 초기화
+                      setEditing(true);
+                    }}
+                  >
+                    수정
+                  </button>
+
                   <button onClick={() => onDelete(comment.spotReviewId)}>
                     삭제
                   </button>
@@ -44,7 +61,15 @@ const CommentSpot = ({ comment, onUpdate, onDelete }) => {
               placeholder="수정 내용 입력"
               value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
-            />
+            /><Rating
+            value={editedRating}
+            onChange={(event, newValue) => {
+              setEditedRating(newValue);
+            }}
+            precision={1}
+            icon={<StarIcon fontSize="inherit" />}
+          />
+            
             <ButtonWrapper>
               <SaveButton onClick={handleUpdate}>저장</SaveButton>
               <CancelButton onClick={() => setEditing(false)}>
@@ -90,9 +115,10 @@ const CommentsWrapper = styled.div`
   .commentDate {
     color: rgb(156, 156, 156);
     display: flex;
+    margin: auto 0;
     margin-left: auto;
     float: right;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   .commentContent {
     display: flex;
@@ -204,4 +230,8 @@ const CancelButton = styled.button`
   &:hover {
     background-color: #555;
   }
+`;
+
+const StarWrapper = styled.div`
+  display: flex;
 `;

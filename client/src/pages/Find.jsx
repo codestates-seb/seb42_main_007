@@ -18,6 +18,36 @@ const Find = () => {
     { name: 'C', grade: 1 },
   ]);
 
+//   const sortedSpots = spotGrade.sort((a, b) => b.grade - a.grade);
+
+// const renderSpots = () => {
+//   return sortedSpots.map((spot) => {
+//     switch (spot.name) {
+//       case 'A':
+//         return <SwiperSlide key={spot.name}><Card waveHeight={spot.grade} /></SwiperSlide>;
+//       case 'B':
+//         return <SwiperSlide key={spot.name}><Card2 waveHeight={spot.grade} /></SwiperSlide>;
+//       // 다른 카드 컴포넌트들도 이렇게 추가 ...
+//       default:
+//         return null;
+//     }
+//   });
+// };
+
+// <StyledSwiper
+//   loop={true}
+//   slidesPerView={1}
+//   spaceBetween={0}
+//   autoplay={{
+//     delay: 3000,
+//     disableOnInteraction: false,
+//   }}
+//   breakpoints={{
+//     // ...
+//   }}
+// >
+//   {renderSpots()}
+// </StyledSwiper>
 
   return (
     <>

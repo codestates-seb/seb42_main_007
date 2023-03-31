@@ -6,6 +6,7 @@ import CardCommentList from "./CardCommentList";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+// import AverageRating from "../Comment/AverageRating";
 
 
 
@@ -62,6 +63,7 @@ const CardModal = ({ isOpen, closeModal }) => {
             <br />
             <div>파도 세기 : 다소 빠름</div>
             </div>
+            {/* <AverageRating /> */}
           <div className="modal-body-right">
             {/* <CardCommentList /> */}
             {/* 현재 날씨 정보 */}
@@ -76,7 +78,6 @@ const CardModal = ({ isOpen, closeModal }) => {
         <hr width="100%" />
         <div className="modal-footer">
           <div className="comments"><CommentAppSpot surfSpotId={surfSpotId}/></div>
-          {/* <div className="stars">⭐4</div> */}
         </div>
       </div>
     </ReactModal>

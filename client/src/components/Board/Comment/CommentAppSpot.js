@@ -14,7 +14,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
   const [pageInfo, setPageInfo] = useState({});
   const [rating, setRating] = useState(5);
 
-
+  
 
   axios.interceptors.request.use(
     (config) => {

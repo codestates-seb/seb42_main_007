@@ -8,6 +8,8 @@ import styled from "styled-components";
 const CommentAppSpot = ({ surfSpotId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [pageInfo, setPageInfo] = useState({});
+
 
   axios.interceptors.request.use(
     (config) => {
@@ -28,11 +30,13 @@ const CommentAppSpot = ({ surfSpotId }) => {
         `${process.env.REACT_APP_SERVER_URL}/spot-reviews?page=1&size=10&surfSpotId=1`
       );
       setComments(response.data.data);
+      setPageInfo(response.data.pageInfo);
       console.log(comments)
     } catch (error) {
       console.error("Failed to fetch comments:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchComments();
@@ -88,9 +92,8 @@ const CommentAppSpot = ({ surfSpotId }) => {
     e.preventDefault();
     const commentData = {
       review: newComment,
-      surfSpotId: `${surfSpotId}`,
+      surfSpotId: 1,
       rating: 5,
-      // displayName: "한준", // Replace with the actual user's display name
     };
     addComment(commentData);
   };
@@ -120,6 +123,9 @@ const CommentAppSpot = ({ surfSpotId }) => {
           comments={comments}
           onUpdate={updateComment}
           onDelete={deleteComment}
+          pageInfo={pageInfo}
+          setComments={setComments}
+          setPageInfo={setPageInfo}
         /></CommentListWrapper>
     </>
   );

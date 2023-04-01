@@ -1,0 +1,127 @@
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 20px;
+}
+
+.modal-body-left {
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.modal-body-left-under {
+  position: absolute;
+  display: flex;
+  left: 1rem;
+  bottom: 18rem;
+  width: 30%;
+  height: 5%;
+  @media screen and (max-width: 768px) {
+    .modal-body-left-under {
+      font-size: 20px;
+    }
+  }
+  > h2 {
+    font-size: 25px;
+    margin: 0 auto;
+  }
+}
+.modal-body-left-under-text {
+  position: absolute;
+  display: flex;
+  left: 1rem;
+  bottom: 4rem;
+  width: 30%;
+  height: 30%;
+  @media screen and (max-width: 768px) {
+    .modal-body-left-under-text {
+      font-size: 10px;
+    }
+  }
+}
+
+.modal-body-left-under-recommand {
+  position: absolute;
+  display: flex;
+  left: 1rem;
+  bottom: 8rem;
+  width: 40%;
+  height: 10%;
+  flex-direction: column;
+  /* 추천 대상, 파도 세기 텍스트 스타일 */
+  font-size: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .modal-body-left-under-recommand {
+    bottom: 9rem;
+    width: 60%;
+    height: 5%;
+    font-size: 0.9rem;
+  }
+
+  .modal-body-left-under-recommand > div:first-child {
+    font-size: 0.8rem;
+  }
+
+  .modal-body-left-under-recommand > div:last-child {
+    font-size: 0.8rem;
+  }
+}
+
+.modal-body-right {
+  position: absolute;
+  top: 3.5rem;
+  right: 2.5rem;
+  width: 63%;
+  flex: 1;
+}
+
+.modal-footer {
+  // display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem;
+  font-size: 20px;
+  > .comments {
+    margin-right: auto;
+  }
+}
+
+.close-modal-btn {
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 28px;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  transform: translate(50%, -50%);
+  z-index: 2;
+
+  &:hover {
+    color: #3fbed3;
+    transition: all 0.3s ease;
+  }
+}

@@ -37,6 +37,7 @@ public class SpotReviewDto {
         private String review;
         private long memberId;
         private String email;
+        private String displayName;
         private long surfSpotId;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;

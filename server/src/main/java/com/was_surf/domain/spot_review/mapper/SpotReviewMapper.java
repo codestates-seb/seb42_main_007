@@ -19,6 +19,7 @@ public interface SpotReviewMapper {
     // entity -> responseDto
     @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "member.email", target = "email")
+    @Mapping(source = "member.displayName", target = "displayName")
     @Mapping(source = "surfSpot.surfSpotId", target = "surfSpotId")
     SpotReviewDto.Response spotReviewToSpotReviewResponseDto(SpotReview spotReview);
 

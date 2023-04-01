@@ -21,7 +21,7 @@ const GradeButton = ({ spotGrade, setSpotGrade }) => {
   const [sortOrder, setSortOrder] = useState('desc');
 
   const handleClick = () => {
-    const sortedGrade = spotGrade.sort((a, b) => {
+    const sortedGrade = [...spotGrade].sort((a, b) => {
       if (sortOrder === 'desc') {
         return b.grade - a.grade;
       } else {
@@ -31,10 +31,11 @@ const GradeButton = ({ spotGrade, setSpotGrade }) => {
     setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
     setSpotGrade(sortedGrade);
   };
+  
 
   return (
     <StyledButton onClick={handleClick}>
-      {sortOrder === 'desc' ? '높은 순으로 정렬' : '낮은 순으로 정렬'}
+      {sortOrder === 'desc' ? '상급자 추천 스팟' : '초보자 추천 스팟'}
     </StyledButton>
   );
 };

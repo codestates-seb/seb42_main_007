@@ -24,10 +24,9 @@ const Find = () => {
   ]);
   
 
-  const sortedSpots = spotGrade.sort((a, b) => b.grade - a.grade);
 
   const renderSpots = () => {
-    return sortedSpots.map((spot) => {
+    return spotGrade.map((spot) => {
       switch (spot.name) {
         case 'A':
           return <SwiperSlide key={spot.name}><Card waveHeight={spot.grade} /></SwiperSlide>;
@@ -58,8 +57,8 @@ const Find = () => {
       <Main>
         <FindListWrapper>
           <FindListHeader>서핑장소 찾기</FindListHeader>
-          {/* <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper>
-          {spotGrade.map((spot) => (
+          <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper>
+          {/* {spotGrade.map((spot) => (
           <li key={spot.name}>
             {spot.name} - {spot.grade}
           </li>

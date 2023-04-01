@@ -16,38 +16,41 @@ const Find = () => {
     { name: 'A', grade: 3 },
     { name: 'B', grade: 5 },
     { name: 'C', grade: 1 },
+    { name: 'D', grade: 4 },
+    { name: 'E', grade: 2 },
+    { name: 'F', grade: 3 },
+    { name: 'G', grade: 2 },
+    { name: 'H', grade: 1 },
   ]);
+  
 
-//   const sortedSpots = spotGrade.sort((a, b) => b.grade - a.grade);
+  const sortedSpots = spotGrade.sort((a, b) => b.grade - a.grade);
 
-// const renderSpots = () => {
-//   return sortedSpots.map((spot) => {
-//     switch (spot.name) {
-//       case 'A':
-//         return <SwiperSlide key={spot.name}><Card waveHeight={spot.grade} /></SwiperSlide>;
-//       case 'B':
-//         return <SwiperSlide key={spot.name}><Card2 waveHeight={spot.grade} /></SwiperSlide>;
-//       // 다른 카드 컴포넌트들도 이렇게 추가 ...
-//       default:
-//         return null;
-//     }
-//   });
-// };
+  const renderSpots = () => {
+    return sortedSpots.map((spot) => {
+      switch (spot.name) {
+        case 'A':
+          return <SwiperSlide key={spot.name}><Card waveHeight={spot.grade} /></SwiperSlide>;
+        case 'B':
+          return <SwiperSlide key={spot.name}><Card2 waveHeight={spot.grade} /></SwiperSlide>;
+        case 'C':
+          return <SwiperSlide key={spot.name}><Card3 waveHeight={spot.grade} /></SwiperSlide>;
+        case 'D':
+          return <SwiperSlide key={spot.name}><Card4 waveHeight={spot.grade} /></SwiperSlide>;
+        case 'E':
+          return <SwiperSlide key={spot.name}><Card5 waveHeight={spot.grade} /></SwiperSlide>;
+        case 'F':
+          return <SwiperSlide key={spot.name}><Card6 waveHeight={spot.grade} /></SwiperSlide>;
+        case 'G':
+          return <SwiperSlide key={spot.name}><Card7 waveHeight={spot.grade} /></SwiperSlide>;
+        case 'H':
+          return <SwiperSlide key={spot.name}><Card8 waveHeight={spot.grade} /></SwiperSlide>;
+        default:
+          return null;
+      }
+    });
+  };
 
-// <StyledSwiper
-//   loop={true}
-//   slidesPerView={1}
-//   spaceBetween={0}
-//   autoplay={{
-//     delay: 3000,
-//     disableOnInteraction: false,
-//   }}
-//   breakpoints={{
-//     // ...
-//   }}
-// >
-//   {renderSpots()}
-// </StyledSwiper>
 
   return (
     <>
@@ -55,8 +58,8 @@ const Find = () => {
       <Main>
         <FindListWrapper>
           <FindListHeader>서핑장소 찾기</FindListHeader>
-          {/* <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper> */}
-          {/* {spotGrade.map((spot) => (
+          {/* <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper>
+          {spotGrade.map((spot) => (
           <li key={spot.name}>
             {spot.name} - {spot.grade}
           </li>
@@ -72,50 +75,27 @@ const Find = () => {
               }}
               breakpoints={{
                 0: {
-                  slidesPerView: 1,  //브라우저가 280보다 클 때
+                  slidesPerView: 1, 
                   spaceBetween: 0,
                 },
                 560: {
-                  slidesPerView: 2,  //브라우저가 480보다 클 때
+                  slidesPerView: 2,
                   spaceBetween: 1,
 
                 },
                 940: {
-                  slidesPerView: 3,  //브라우저가 768보다 클 때
+                  slidesPerView: 3, 
                   spaceBetween: 1,
                   slidesOffsetAfter: 20,
 
                 },
                 1400: {
-                  slidesPerView: 4,  //브라우저가 1400보다 클 때
+                  slidesPerView: 4,
                   spaceBetween: 1,
                 }
               }}
             >
-              <SwiperSlide>
-                <Card />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card2 />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card3 />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card4 />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card5 />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card6 />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card7 />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card8 />
-              </SwiperSlide>
+              {renderSpots()}
             </StyledSwiper>
           </FindListBody>
           <div className="FindList-footer"></div>

@@ -58,6 +58,12 @@ public class SurfSpotService {
                 return surfSpotRepository.findAll(PageRequest.of(
                         page, size, Sort.by("averageRating").descending()
                 ));
+
+            // 조회순
+            case "view":
+                return surfSpotRepository.findAll(PageRequest.of(
+                        page, size, Sort.by("viewCount").descending()
+                ));
         }
 
         return null;

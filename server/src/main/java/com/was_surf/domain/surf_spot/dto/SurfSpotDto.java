@@ -14,5 +14,6 @@ public class SurfSpotDto {
         private long surfSpotId;
         private int viewCount;
         private int totalScore;
+        private int averageRating;
     }
 }

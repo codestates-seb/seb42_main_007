@@ -82,6 +82,15 @@ public class BoardPostService {
         ));
     }
 
+    // 내가 쓴 글 전체 조회
+    public Page<BoardPost> findMyBoardPosts(int page, int size, String email) {
+        Member findMember = memberService.findMemberToEmail(email);
+
+        return boardPostRepository.findAllByMember(findMember, PageRequest.of(
+                page, size, Sort.by("boardPostId").descending()
+        ));
+    }
+
     // 삭제
     public void deleteBoardPost(long boardPostId, String email) {
         // 회원 정보 조회

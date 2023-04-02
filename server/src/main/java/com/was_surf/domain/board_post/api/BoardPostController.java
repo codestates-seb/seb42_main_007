@@ -80,6 +80,17 @@ public class BoardPostController {
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.boardPostsToBoardPostResponseDtos(boardPostList), pageBoardPosts), HttpStatus.OK);
     }
 
+    // 마이페이지 내가 쓴 글 전체 조회
+    @GetMapping("/my-page")
+    public ResponseEntity getMyBoardPosts(@RequestParam int page,
+                                        @RequestParam @Positive int size,
+                                        Principal principal) {
+        Page<BoardPost> pageBoardPosts = boardPostService.findMyBoardPosts(page - 1, size, principal.getName());
+        List<BoardPost> boardPostList = pageBoardPosts.getContent();
+
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.boardPostsToBoardPostResponseDtos(boardPostList), pageBoardPosts), HttpStatus.OK);
+    }
+
     // 게시글 삭제
     @DeleteMapping("/{board-post-id}")
     public void deleteBoardPost(@PathVariable("board-post-id") @Positive long boardPostId,

@@ -29,7 +29,7 @@ export const Card5 = ({board_id, title, content, img_url, username, date}) => {
       </div>
 
       <div className="card-footer">
-        <div className="username">중급자 추천</div>
+        <div className="username">상급자 추천</div>
         <div className="date">⭐⭐⭐</div>
         </div>
     </div>

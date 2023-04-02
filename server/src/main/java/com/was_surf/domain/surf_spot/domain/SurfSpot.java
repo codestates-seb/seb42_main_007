@@ -48,5 +48,6 @@ public class SurfSpot {
 
         this.spotData = spotData;
     }
+
 }
 

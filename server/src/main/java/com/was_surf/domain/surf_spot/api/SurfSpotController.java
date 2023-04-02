@@ -37,8 +37,12 @@ public class SurfSpotController {
     // 스팟 개별 조회
     @GetMapping("/{surf-spot-id}")
     public ResponseEntity getSurfSpot(@PathVariable("surf-spot-id") Long surfSpotId) {
+
         SurfSpot findSurfSpot = surfSpotService.findSurfSpot(surfSpotId);
         SurfSpotDto.Response response = mapper.surfSpotToSurfSpotResponseDto(findSurfSpot);
+
+        // 조회수 증가
+        surfSpotService.updateViewCount(surfSpotId);
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }

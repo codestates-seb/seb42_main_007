@@ -12,7 +12,7 @@ public class SurfSpotDto {
     @NoArgsConstructor
     public static class Response {
         private long surfSpotId;
-        private String viewCount;
+        private int viewCount;
         private int totalScore;
     }
 }

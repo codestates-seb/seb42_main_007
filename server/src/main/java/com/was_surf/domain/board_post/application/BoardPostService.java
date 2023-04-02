@@ -66,7 +66,7 @@ public class BoardPostService {
         return response;
     }
 
-    // 검색 조회
+    // 개별 조회
     public BoardPost findBoardPost(long boardPostId) {
         BoardPost response = findVerifiedExistBoardPost(boardPostId);
 
@@ -87,6 +87,19 @@ public class BoardPostService {
 
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPostId);
         boardPostRepository.delete(existBoardPost);
+    }
+
+    // 조회수 1씩 카운트
+    public BoardPost updateViewCount(long boardPostId) {
+        Optional<BoardPost> optionalBoardPost = boardPostRepository.findById(boardPostId);
+        if (optionalBoardPost.isEmpty()) {
+            throw new BusinessLogicException(ExceptionCode.POST_NOT_FOUND);
+        }
+
+        BoardPost boardPost = optionalBoardPost.get();
+        boardPost.setViewCount(boardPost.getViewCount() + 1);
+
+        return boardPostRepository.save(boardPost);
     }
 
 

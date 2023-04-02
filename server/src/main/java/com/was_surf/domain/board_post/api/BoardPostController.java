@@ -49,7 +49,7 @@ public class BoardPostController {
     // 게시글 수정
     @PatchMapping("/{board-post-id}")
     public ResponseEntity patchBoardPost(@RequestBody BoardPostDto.Patch patchDto,
-                                         @PathVariable("board-post-id") Long boardPostId,
+                                         @PathVariable("board-post-id") long boardPostId,
                                          Principal principal) {
 
         patchDto.setBoardPostId(boardPostId);
@@ -59,12 +59,15 @@ public class BoardPostController {
         return ResponseEntity.ok().build();
     }
 
-    // 게시글 검색 조회
+    // 게시글 개별 조회
     @GetMapping("/{board-post-id}")
-    public ResponseEntity getBoardPost(@PathVariable("board-post-id") @Positive Long boardPostId) {
+    public ResponseEntity getBoardPost(@PathVariable("board-post-id") @Positive long boardPostId) {
 
         BoardPost foundBoardPost = boardPostService.findBoardPost(boardPostId);
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(foundBoardPost);
+
+        // 조회수 증가
+        boardPostService.updateViewCount(boardPostId);
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
@@ -81,7 +84,7 @@ public class BoardPostController {
 
     // 게시글 삭제
     @DeleteMapping("/{board-post-id}")
-    public void deleteBoardPost(@PathVariable("board-post-id") @Positive Long boardPostId,
+    public void deleteBoardPost(@PathVariable("board-post-id") @Positive long boardPostId,
                                           Principal principal) {
         boardPostService.deleteBoardPost(boardPostId, principal.getName());
     }

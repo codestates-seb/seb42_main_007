@@ -34,6 +34,7 @@ const Detail = () => {
     document.querySelector("body").classList.remove("modal-open");
   };
 
+
   useEffect(() => {
     async function fetchData() {
       try {

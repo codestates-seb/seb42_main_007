@@ -3,7 +3,7 @@ import { useState } from "react";
 import CardModal from "./CardModal";
 import JukDo from "./Weather/Jukdo";
 
-export const Card = () => {
+export const Card = ({ viewCount, comments}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [waveHeight, setWaveHeight] = useState(null);
   
@@ -50,7 +50,7 @@ export const Card = () => {
           <div className="date">⭐⭐⭐⭐⭐</div>
         </div>
       </div>
-      <CardModal isOpen={isModalOpen} closeModal={closeModal} />
+      <CardModal isOpen={isModalOpen} closeModal={closeModal} viewCount={viewCount} comments={comments} />
     </>
   );
 };

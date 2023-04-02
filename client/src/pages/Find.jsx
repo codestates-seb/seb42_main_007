@@ -3,7 +3,8 @@ import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "swiper/swiper-bundle.css";
 import "../components/Board/FindList.scss";
 import { Card, Card2, Card3, Card4, Card5, Card6, Card7, Card8 } from "../components/Board";
@@ -12,6 +13,21 @@ import GradeButton from "../components/Board/GradeButton";
 SwiperCore.use([Autoplay]);
 
 const Find = () => {
+  const [viewCount, setViewCount] = useState(0);
+  const [surfSpots, setSurfSpots] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://43.201.167.13:8080/surf-spots?status=recommend&page=1&size=10")
+      .then((res) => {
+        setSurfSpots(res.data.data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch surf spots:", err);
+      });
+  }, []);
+  
+  
   const [spotGrade, setSpotGrade] = useState([
     { name: 'A', grade: 3 },
     { name: 'B', grade: 5 },
@@ -25,30 +41,59 @@ const Find = () => {
   
 
 
+  // const renderSpots = () => {
+  //   return spotGrade.map((spot) => {
+  //     switch (spot.name) {
+  //       case 'A':
+  //         return <SwiperSlide key={spot.name}><Card waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'B':
+  //         return <SwiperSlide key={spot.name}><Card2 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'C':
+  //         return <SwiperSlide key={spot.name}><Card3 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'D':
+  //         return <SwiperSlide key={spot.name}><Card4 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'E':
+  //         return <SwiperSlide key={spot.name}><Card5 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'F':
+  //         return <SwiperSlide key={spot.name}><Card6 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'G':
+  //         return <SwiperSlide key={spot.name}><Card7 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       case 'H':
+  //         return <SwiperSlide key={spot.name}><Card8 waveHeight={spot.grade} {...viewCount} /></SwiperSlide>;
+  //       default:
+  //         return null;
+  //     }
+  //   });
+  // };
   const renderSpots = () => {
-    return spotGrade.map((spot) => {
-      switch (spot.name) {
-        case 'A':
-          return <SwiperSlide key={spot.name}><Card waveHeight={spot.grade} /></SwiperSlide>;
-        case 'B':
-          return <SwiperSlide key={spot.name}><Card2 waveHeight={spot.grade} /></SwiperSlide>;
-        case 'C':
-          return <SwiperSlide key={spot.name}><Card3 waveHeight={spot.grade} /></SwiperSlide>;
-        case 'D':
-          return <SwiperSlide key={spot.name}><Card4 waveHeight={spot.grade} /></SwiperSlide>;
-        case 'E':
-          return <SwiperSlide key={spot.name}><Card5 waveHeight={spot.grade} /></SwiperSlide>;
-        case 'F':
-          return <SwiperSlide key={spot.name}><Card6 waveHeight={spot.grade} /></SwiperSlide>;
-        case 'G':
-          return <SwiperSlide key={spot.name}><Card7 waveHeight={spot.grade} /></SwiperSlide>;
-        case 'H':
-          return <SwiperSlide key={spot.name}><Card8 waveHeight={spot.grade} /></SwiperSlide>;
-        default:
-          return null;
+    return surfSpots.map((spot) => {
+      const key = `Card${spot.surfSpotId}`;
+      const CardComponent = {
+        Card1: Card,
+        Card2: Card2,
+        Card3: Card3,
+        Card4: Card4,
+        Card5: Card5,
+        Card6: Card6,
+        Card7: Card7,
+        Card8: Card8,
+      }[key];
+  
+      if (CardComponent) {
+        return (
+          <SwiperSlide key={spot.surfSpotId}>
+            <CardComponent
+              waveHeight={spot.totalScore}
+              viewCount={spot.viewCount}
+            />
+          </SwiperSlide>
+        );
       }
+  
+      return null;
     });
   };
+  
 
 
   return (
@@ -57,7 +102,8 @@ const Find = () => {
       <Main>
         <FindListWrapper>
           <FindListHeader>서핑장소 찾기</FindListHeader>
-          <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper>
+          <div>날씨에 따라 자동으로 서핑하기 좋은 추천순으로 표시</div>
+          {/* <GradeButtonWrapper><GradeButton spotGrade={spotGrade} setSpotGrade={setSpotGrade} /></GradeButtonWrapper> */}
           {/* {spotGrade.map((spot) => (
           <li key={spot.name}>
             {spot.name} - {spot.grade}
@@ -65,7 +111,7 @@ const Find = () => {
         ))} */}
           <FindListBody>
             <StyledSwiper
-              loop={true}
+              // loop={true}
               slidesPerView={1}
               spaceBetween={0}
               autoplay={{

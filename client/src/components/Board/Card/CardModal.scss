@@ -97,6 +97,17 @@
   flex: 1;
 }
 
+.modal-body-right-counts {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.modal-body-right-under {
+  position: absolute;
+  left: 10rem;
+  bottom: 10rem;
+}
+
 .modal-footer {
   // display: flex;
   justify-content: flex-end;

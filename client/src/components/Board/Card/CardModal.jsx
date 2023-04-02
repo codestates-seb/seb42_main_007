@@ -6,11 +6,11 @@ import CardCommentList from "./CardCommentList";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-// import AverageRating from "../Comment/AverageRating";
+import AverageRating from "../Comment/AverageRating";
 
 
 
-const CardModal = ({ isOpen, closeModal }) => {
+const CardModal = ({ isOpen, closeModal, viewCount, comments }) => {
     const [loading, setLoading] = useState(false);
     const { surfSpotId } = useParams();
 
@@ -69,10 +69,11 @@ const CardModal = ({ isOpen, closeModal }) => {
             {/* 현재 날씨 정보 */}
           </div>
           <div className="modal-body-right-counts">
-            {/* 조회수 */}
-          </div>
+  {/* 조회수: {viewCount} */}
+</div>
           <div className="modal-body-right-under">
             {/* 3시간마다 날씨 정보를 보여주는 컴포넌트 */}
+            {/* <AverageRating comments={comments}/> */}
           </div>
         </div>
         <hr width="100%" />

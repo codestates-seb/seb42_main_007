@@ -13,6 +13,12 @@ const CommentSpot = ({ comment, onUpdate, onDelete }) => {
     setEditing(false);
   };
 
+  const createdAt = new Date(comment.createdAt).toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
   return (
     <div>
       {!editing ? (
@@ -29,10 +35,8 @@ const CommentSpot = ({ comment, onUpdate, onDelete }) => {
               precision={1}
               icon={<StarIcon fontSize="inherit" />}
             />
-                    {new Date(comment.createdAt).toLocaleString(
-                      "ko-KR",
-                      "Asia/Seoul"
-                    )}
+                    {createdAt}
+
                   </div>
                   <button
                     onClick={() => {

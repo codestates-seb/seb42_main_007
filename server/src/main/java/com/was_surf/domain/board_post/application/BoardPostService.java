@@ -89,6 +89,19 @@ public class BoardPostService {
         boardPostRepository.delete(existBoardPost);
     }
 
+    // 조회수 1씩 카운트
+    public BoardPost updateViewCount(long boardPostId) {
+        Optional<BoardPost> optionalBoardPost = boardPostRepository.findById(boardPostId);
+        if (optionalBoardPost.isEmpty()) {
+            throw new BusinessLogicException(ExceptionCode.POST_NOT_FOUND);
+        }
+
+        BoardPost boardPost = optionalBoardPost.get();
+        boardPost.setViewCount(boardPost.getViewCount() + 1);
+
+        return boardPostRepository.save(boardPost);
+    }
+
 
     // 기존에 존재하는지 확인
     public BoardPost findVerifiedExistBoardPost(long boardPostId) {

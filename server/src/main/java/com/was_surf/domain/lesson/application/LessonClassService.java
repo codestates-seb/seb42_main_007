@@ -119,7 +119,11 @@ public class LessonClassService {
         long lessonClassHasMemberId = lessonClass.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if(lessonClassHasMemberId != currentMemberId || member.getRoles().contains("ADMIN")) {
+        if(lessonClassHasMemberId == currentMemberId || member.getRoles().contains("ADMIN")) {
+            return;
+
+            // 아닐 경우 에러 발생
+        } else {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

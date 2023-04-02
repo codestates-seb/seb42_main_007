@@ -87,8 +87,11 @@ public class BoardCommentService {
         long currentMemberId = member.getMemberId();
 
         // 작성자 계정 또는 관리자 계정인지 확인
-        if(boardCommentHasMemberId != currentMemberId || member.getRoles().contains("ADMIN")) {
+        if(boardCommentHasMemberId == currentMemberId || member.getRoles().contains("ADMIN")) {
+            return;
+
             // 아닐 경우 에러 발생
+        } else {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

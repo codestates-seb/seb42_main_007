@@ -56,8 +56,8 @@ public class BoardPostService {
         Optional.ofNullable(boardPost.getContent())
                 .ifPresent(content -> existBoardPost.setContent(content));
 
-        Optional.ofNullable(boardPost.getUpdatedAt())
-                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
+//        Optional.ofNullable(boardPost.getUpdatedAt())
+//                .ifPresent(updatedAt -> existBoardPost.setUpdatedAt(updatedAt));
 
         Optional.ofNullable(boardPost.getImgPath())
                 .ifPresent(imgPath -> existBoardPost.setImgPath(imgPath));
@@ -123,7 +123,11 @@ public class BoardPostService {
         long boardPostHasMemberId = boardPost.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if (boardPostHasMemberId != currentMemberId || member.getRoles().contains("ADMIN")) {
+        if (boardPostHasMemberId == currentMemberId || member.getRoles().contains("ADMIN")) {
+            return;
+
+            // 아닐 경우 에러 발생
+        } else {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

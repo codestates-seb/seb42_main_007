@@ -59,8 +59,8 @@ public class SpotReviewService {
         Optional.ofNullable(spotReview.getReview())
                 .ifPresent(review -> existSpotReview.setReview(review));
 
-        Optional.ofNullable(spotReview.getUpdatedAt())
-                .ifPresent(updatedAt -> existSpotReview.setUpdatedAt(updatedAt));
+//        Optional.ofNullable(spotReview.getUpdatedAt())
+//                .ifPresent(updatedAt -> existSpotReview.setUpdatedAt(updatedAt));
 
         SpotReview response = spotReviewRepository.save(existSpotReview);
 
@@ -102,7 +102,11 @@ public class SpotReviewService {
         long spotReviewHasMemberId = spotReview.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if (spotReviewHasMemberId != currentMemberId || member.getRoles().contains("ADMIN")) {
+        if (spotReviewHasMemberId == currentMemberId || member.getRoles().contains("ADMIN")) {
+            return;
+
+            // 아닐 경우 에러 발생
+        } else {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

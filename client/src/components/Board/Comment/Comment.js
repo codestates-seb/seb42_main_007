@@ -10,6 +10,13 @@ const Comment = ({ comment, onUpdate, onDelete }) => {
     setEditing(false);
   };
 
+
+  const createdAt = new Date(comment.createdAt).toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
   return (
     <div>
       {!editing ? (
@@ -20,10 +27,7 @@ const Comment = ({ comment, onUpdate, onDelete }) => {
                 <div className="commentContent">{comment.comment}</div>
                 <div className="commentUsernameDate">
                   <div className="commentDate">
-                    {new Date(comment.createdAt).toLocaleString(
-                      "ko-KR",
-                      "Asia/Seoul"
-                    )}
+                    {createdAt}
                   </div>
                   <button onClick={() => setEditing(true)}>수정</button>
                   <button onClick={() => onDelete(comment.boardCommentId)}>

@@ -6,15 +6,13 @@ import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
 import Rating from "@mui/lab/Rating";
 import StarIcon from "@mui/icons-material/Star";
-
+import AverageRating from "./AverageRating";
 
 const CommentAppSpot = ({ surfSpotId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [pageInfo, setPageInfo] = useState({});
   const [rating, setRating] = useState(5);
-
-  
 
   axios.interceptors.request.use(
     (config) => {
@@ -36,12 +34,11 @@ const CommentAppSpot = ({ surfSpotId }) => {
       );
       setComments(response.data.data);
       setPageInfo(response.data.pageInfo);
-      console.log(comments)
+      console.log(comments);
     } catch (error) {
       console.error("Failed to fetch comments:", error);
     }
   };
-  
 
   useEffect(() => {
     fetchComments();
@@ -66,7 +63,7 @@ const CommentAppSpot = ({ surfSpotId }) => {
         `${process.env.REACT_APP_SERVER_URL}/spot-reviews/${id}`,
         {
           review: updatedText,
-          rating: updatedRating // 수정된 rating 추가
+          rating: updatedRating, // 수정된 rating 추가
         }
       );
       const updatedComments = comments.map((comment) =>
@@ -79,7 +76,6 @@ const CommentAppSpot = ({ surfSpotId }) => {
       console.error("Failed to update comment:", error);
     }
   };
-
 
   const deleteComment = async (id) => {
     try {
@@ -109,31 +105,31 @@ const CommentAppSpot = ({ surfSpotId }) => {
     <>
       <CommentsWrapper>
         <form onSubmit={handleSubmit}>
-        <div className="commentsHeader">
-          <TextField
-            type="text"
-            className="commentsHeaderTextarea"
-            maxRows={3}
-            multiline
-            placeholder="해변 리뷰를 입력해주세요✏️"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <Rating
-  value={rating}
-  onChange={(event, newValue) => {
-    setRating(newValue);
-  }}
-  precision={1}
-  icon={<StarIcon fontSize="inherit" />}
-/>
-          <Button variant="outlined" type="submit">
-            등록하기
-          </Button>
-        </div>
+          <div className="commentsHeader">
+            <TextField
+              type="text"
+              className="commentsHeaderTextarea"
+              maxRows={3}
+              multiline
+              placeholder="해변 리뷰를 입력해주세요✏️"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <Rating
+              value={rating}
+              onChange={(event, newValue) => {
+                setRating(newValue);
+              }}
+              precision={1}
+              icon={<StarIcon fontSize="inherit" />}
+            />
+            <Button variant="outlined" type="submit">
+              등록하기
+            </Button>
+          </div>
         </form>
-        </CommentsWrapper>
-        <CommentListWrapper> 
+      </CommentsWrapper>
+      <CommentListWrapper>
         <CommentListSpot
           comments={comments}
           onUpdate={updateComment}
@@ -141,7 +137,9 @@ const CommentAppSpot = ({ surfSpotId }) => {
           pageInfo={pageInfo}
           setComments={setComments}
           setPageInfo={setPageInfo}
-        /></CommentListWrapper>
+        />
+      </CommentListWrapper>
+      <AverageRatingWrapper><AverageRating comments={comments} /></AverageRatingWrapper>
     </>
   );
 };
@@ -223,4 +221,10 @@ const CommentListWrapper = styled.div`
   right: 2rem;
   top: 1rem;
   width: 63%;
+`;
+
+const AverageRatingWrapper = styled.div`
+  position: absolute;
+  left: 14rem;
+  bottom: 9.3rem;
 `

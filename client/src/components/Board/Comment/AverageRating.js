@@ -6,22 +6,22 @@ import Box from "@mui/material/Box";
 
 const AverageRating = ({ comments }) => {
 
-    // const calculateAverageRating = (comments) => {
-    //     if (comments.rating === 0) {
-    //       return 0;
-    //     }
-      
-    //     const sum = comments.reduce((acc, comment) => acc + comment.rating, 0);
-    //     return sum / comments.rating;
-    //   };
-      
-//   const averageRating = calculateAverageRating(comments);
+  const calculateAverageRating = (comments) => {
+    if (comments?.length === 0) {
+      return 0;
+    }
+
+    const sum = comments?.reduce((acc, comment) => acc + comment?.rating, 0);
+    return sum / comments?.length;
+  };
+
+  const averageRating = calculateAverageRating(comments);
 
   return (
     <Box>
       <Typography component="legend">평균 평점</Typography>
       <Rating
-        // value={averageRating}
+        value={averageRating}
         precision={0.1}
         icon={<StarIcon fontSize="inherit" />}
         readOnly

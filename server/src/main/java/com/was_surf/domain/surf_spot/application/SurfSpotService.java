@@ -92,7 +92,7 @@ public class SurfSpotService {
         }
 
         int count = reviews.size();
-        int average = count == 0 ? 0 : sum / count;
+        double average = count == 0 ? 0 : (double)sum / count;
 
         surfSpot.setAverageRating(average);
     }

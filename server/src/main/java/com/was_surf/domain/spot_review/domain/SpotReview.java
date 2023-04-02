@@ -25,7 +25,6 @@ public class SpotReview extends Auditable {
     private int rating;
 
     // 후기: 비어도 등록 가능
-    @Column(nullable = false)
     private String review;
 
     @ManyToOne

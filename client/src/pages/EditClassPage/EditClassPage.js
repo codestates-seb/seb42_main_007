@@ -8,24 +8,24 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
+import Cookies from "js-cookie";
 
 const EditClassPage = () => {
   // 새로운 강습 모집글을 작성한다.
   // 제목, 내용, 신청기간, 신청인원, 최초생성일
-  const [title, setTitle] = useState("기존강좌명");
+  const [originalData, setOriginalData] = useState({});
+  const [title, setTitle] = useState("기존 강좌 제목");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [lessonDate, setLessonDate] = useState(new Date());
   const [number, setNumber] = useState("0");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("기존 강좌 내용");
   const [initialValue, setInitialValue] = useState("기존강좌내용");
-  const [originalData, setOriginalData] = useState({});
   const [price, setPrice] = useState("0");
   const [registedNumber, setRegisteredNumber] = useState("0");
   const editorRef = useRef();
   const { lessonId } = useParams(); // /class/{lessonId}
   const navigate = useNavigate();
-
   const getPrevLesson = async () => {
     await axios
       .get(
@@ -34,7 +34,6 @@ const EditClassPage = () => {
       .then((res) => {
         setOriginalData(res.data.data);
         console.log(res.data.data);
-        setInitialValue(res.data.data.content);
         setTitle(originalData.title);
         setStartDate(originalData.registerStart);
         setEndDate(originalData.registerEnd);
@@ -47,21 +46,36 @@ const EditClassPage = () => {
 
   useEffect(() => {
     getPrevLesson();
+    console.log(title);
+    console.log(number);
   }, []);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.getInstance().setMarkdown(originalData.content || "");
+    }
+  }, [originalData.content]);
 
   const patchLesson = async () => {
     await axios
-      .patch(`http://43.201.167.13:8080/lesson-class/${lessonId}`, {
-        title: title,
-        content: content,
-        registerStart: startDate,
-        registerEnd: endDate,
-        lessonDate: lessonDate,
-        headCount: number,
-        price: price,
-      })
+      .patch(
+        `http://43.201.167.13:8080/lesson-class/${lessonId}`,
+        {
+          title: title,
+          content: content,
+          registerStart: startDate,
+          registerEnd: endDate,
+          lessonDate: lessonDate,
+          headCount: number,
+          price: price,
+        },
+        {
+          headers: {
+            Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기
+          },
+        }
+      )
       .then(() => {
-        // History.back();
         window.location.replace(`/class/${lessonId}`);
       })
       .catch((error) => {
@@ -74,21 +88,20 @@ const EditClassPage = () => {
     const data = instance.getMarkdown();
     setContent(data);
   };
-
   const handleTitleChange = (event) => {
-    const value = event.target.value;
-    setTitle(value);
+    setTitle(event.target.value);
+    // console.log(title);
   };
   const handleNumberChange = (event) => {
     const numberValue = event.target.value;
-    if (numberValue > registedNumber) {
-      alert(
-        `이미 강습을 신청한 인원 수보다 더 적게 설정하실 수 없습니다. 최소 ${registedNumber}명 이상으로 설정해 주세요.`
-      );
-      setNumber(registedNumber);
-    } else {
-      setNumber(numberValue);
-    }
+    // if (numberValue > registedNumber) {
+    //   alert(
+    //     `이미 강습을 신청한 인원 수보다 더 적게 설정하실 수 없습니다. 최소 ${registedNumber}명 이상으로 설정해 주세요.`
+    //   );
+    //   setNumber(registedNumber);
+    // } else {
+    setNumber(numberValue);
+    // }
   };
   const handlePriceChange = (event) => {
     const priceValue = event.target.value;
@@ -116,6 +129,7 @@ const EditClassPage = () => {
       setEndDate(new Date());
     } else {
       setEndDate(event);
+      console.log(event);
     }
   };
   const handleLessonDateChange = (event) => {
@@ -125,6 +139,10 @@ const EditClassPage = () => {
     } else {
       setLessonDate(event);
     }
+  };
+
+  const handleClickChange = (event) => {
+    event.target.value = originalData.title;
   };
 
   return (
@@ -138,7 +156,8 @@ const EditClassPage = () => {
             {originalData && (
               <input
                 className="title-input"
-                value={originalData.title}
+                value={title}
+                placeholder={originalData.title}
                 onChange={handleTitleChange}
               />
             )}
@@ -148,7 +167,7 @@ const EditClassPage = () => {
             {originalData && (
               <Editor
                 ref={editorRef}
-                initialValue={initialValue}
+                initialValue=""
                 previewStyle="tab"
                 height="400px"
                 initialEditType="markdown"
@@ -196,8 +215,8 @@ const EditClassPage = () => {
               className="input-price"
               type="number"
               min="0"
-              value={price}
-              placeholder="숫자만 입력하세요."
+              placeholder={originalData.price}
+              //   placeholder="숫자만 입력하세요."
               onChange={handlePriceChange}
             ></input>
           </div>

@@ -1,16 +1,12 @@
 package com.was_surf.domain.spot_data.domain;
 
-import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.surf_spot.domain.SurfSpot;
 import com.was_surf.domain.weather.domain.Region;
-import com.was_surf.domain.weather.domain.Weather;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,22 +16,20 @@ public class SpotData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long spotDataId;
-
-//    @Column
-//    private int temp; //온도
+    
+    // 온도점수
     @Column
     private Integer tempScore;
 
-//    @Column
-//    private int wave; //파고
+    // 파고점수
     @Column
     private Integer waveScore;
 
-//    @Column
-//    private int windSpeed; //풍속
+    // 풍속점수
     @Column
     private Integer windSpeedScore;
 
+    // 합계
     @Column
     private Integer totalScore;
 

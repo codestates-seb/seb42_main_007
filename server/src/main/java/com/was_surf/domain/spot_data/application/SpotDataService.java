@@ -3,7 +3,6 @@ package com.was_surf.domain.spot_data.application;
 import com.was_surf.domain.spot_data.domain.SpotData;
 import com.was_surf.domain.spot_data.repository.SpotDataRepository;
 import com.was_surf.domain.weather.domain.Region;
-import com.was_surf.domain.weather.domain.Weather;
 import com.was_surf.domain.weather.repository.RegionRepository;
 import com.was_surf.global.error.exception.BusinessLogicException;
 import com.was_surf.global.error.exception.ExceptionCode;

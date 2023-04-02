@@ -41,14 +41,7 @@ public class SpotReviewController {
 
         SpotReview spotReview = mapper.spotReviewPostDtoToSpotReview(postDto);
 
-        // 회원 정보 검색
-        Member member = memberService.findMemberToEmail(principal.getName());
-        SurfSpot surfSpot = surfSpotService.findSurfSpot(postDto.getSurfSpotId());
-
-        // 회원 정보 주입
-        spotReview.setMember(member);
-        spotReview.setSurfSpot(surfSpot);
-        SpotReview createdSpotReview = spotReviewService.createSpotReview(spotReview);
+        SpotReview createdSpotReview = spotReviewService.createSpotReview(spotReview, principal.getName(), postDto);
         SpotReviewDto.Response response = mapper.spotReviewToSpotReviewResponseDto(createdSpotReview);
 
         return ResponseEntity.ok().build();
@@ -57,9 +50,12 @@ public class SpotReviewController {
     // 후기 수정
     @PatchMapping("/{spot-review-id}")
     public ResponseEntity patchSpotReview(@RequestBody SpotReviewDto.Patch patchDto,
-                                          @PathVariable("spot-review-id") Long spotReviewId) {
+                                          @PathVariable("spot-review-id") long spotReviewId,
+                                          Principal principal) {
+
         patchDto.setSpotReviewId(spotReviewId);
-        SpotReview updatedSpotReview = spotReviewService.updateSpotReview(mapper.spotReviewPatchDtoToSpotReview(patchDto));
+
+        SpotReview updatedSpotReview = spotReviewService.updateSpotReview(mapper.spotReviewPatchDtoToSpotReview(patchDto), principal.getName());
         SpotReviewDto.Response response = mapper.spotReviewToSpotReviewResponseDto(updatedSpotReview);
 
         return ResponseEntity.ok().build();
@@ -82,8 +78,9 @@ public class SpotReviewController {
 
     // 후기 삭제
     @DeleteMapping("/{spot-review-id}")
-    public ResponseEntity deleteSpotReview(@PathVariable("spot-review-id") Long spotReviewId) {
-        spotReviewService.deleteSpotReview(spotReviewId);
+    public ResponseEntity deleteSpotReview(@PathVariable("spot-review-id") long spotReviewId,
+                                           Principal principal) {
+        spotReviewService.deleteSpotReview(spotReviewId, principal.getName());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

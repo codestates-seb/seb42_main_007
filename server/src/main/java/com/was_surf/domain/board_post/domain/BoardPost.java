@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +23,22 @@ public class BoardPost extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long boardPostId;
 
+    // 제목
+    @NotBlank
+    @Size(min = 1, max = 100)
     @Column(nullable = false)
     private String title;
 
+    // 내용
+    @NotBlank
     @Column(nullable = false)
     private String content;
 
+    // 이미지첨부경로
     @Column(nullable = false)
     private String imgPath;
 
+    // 조회수
     @Column(nullable = false)
     private long viewCount;
 

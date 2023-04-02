@@ -20,22 +20,9 @@ public class SurfSpot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long surfSpotId;
 
-//    @Column(nullable = false)
-//    private String imgPath;
-//
-//    @Column(nullable = false)
-//    private String name;
-//
-//    @Column(nullable = false)
-//    private String address;
-
     // 조회수
     @Column(nullable = false)
     private int viewCount;
-
-    // 평균별점
-    @Column(nullable = false)
-    private int averageRating;
 
     @OneToMany(mappedBy = "surfSpot", cascade = CascadeType.ALL)
     private List<SpotReview> spotReviews = new ArrayList<>();
@@ -49,5 +36,9 @@ public class SurfSpot {
         this.spotData = spotData;
     }
 
+    public void addSpotReview(SpotReview spotReview) {
+        spotReviews.add(spotReview);
+        spotReview.setSurfSpot(this);
+    }
 }
 

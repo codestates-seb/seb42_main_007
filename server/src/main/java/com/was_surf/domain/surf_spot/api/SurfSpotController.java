@@ -1,16 +1,14 @@
 package com.was_surf.domain.surf_spot.api;
 
-import com.was_surf.domain.spot_review.domain.SpotReview;
 import com.was_surf.domain.surf_spot.application.SurfSpotService;
 import com.was_surf.domain.surf_spot.domain.SurfSpot;
 import com.was_surf.domain.surf_spot.dto.SurfSpotDto;
 import com.was_surf.domain.surf_spot.mapper.SurfSpotMapper;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +18,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/surf-spots")
 @Slf4j
 @Validated
@@ -27,12 +26,6 @@ public class SurfSpotController {
 
     private final SurfSpotService surfSpotService;
     private final SurfSpotMapper mapper;
-
-    public SurfSpotController(SurfSpotService surfSpotService,
-                              SurfSpotMapper mapper) {
-        this.surfSpotService = surfSpotService;
-        this.mapper = mapper;
-    }
 
     // 스팟 개별 조회
     @GetMapping("/{surf-spot-id}")

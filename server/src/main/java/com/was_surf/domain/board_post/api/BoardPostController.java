@@ -4,8 +4,6 @@ import com.was_surf.domain.board_post.application.BoardPostService;
 import com.was_surf.domain.board_post.dto.BoardPostDto;
 import com.was_surf.domain.board_post.domain.BoardPost;
 import com.was_surf.domain.board_post.mapper.BoardPostMapper;
-import com.was_surf.domain.member.application.MemberService;
-import com.was_surf.domain.member.domain.Member;
 import com.was_surf.global.common.response.MultiResponseDto;
 import com.was_surf.global.common.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +29,6 @@ public class BoardPostController {
 
     private final BoardPostService boardPostService;
     private final BoardPostMapper mapper;
-    private final MemberService memberService;
 
 
     // 게시글 등록
@@ -53,6 +50,7 @@ public class BoardPostController {
                                          Principal principal) {
 
         patchDto.setBoardPostId(boardPostId);
+
         BoardPost updatedBoardPost = boardPostService.updateBoardPost(mapper.boardPostPatchDtoToBoardPost(patchDto), principal.getName());
         BoardPostDto.Response response = mapper.boardPostToBoardPostResponseDto(updatedBoardPost);
 

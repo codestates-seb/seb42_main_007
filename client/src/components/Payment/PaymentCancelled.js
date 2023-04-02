@@ -28,7 +28,7 @@ const PaymentCancelled = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/"); // 이동할 경로
+      navigate("/classlist"); // 이동할 경로
     }, 5000);
 
     return () => {
@@ -43,7 +43,7 @@ const PaymentCancelled = () => {
           <div className="message">
             <h1> 😌 결제 요청이 취소되었습니다. </h1>
           </div>
-          <div>5초 후 메인화면으로 이동합니다.</div>
+          <div>5초 후 강좌 리스트화면으로 이동합니다.</div>
         </PaymentCancelledContainer>
       </PaymentCancelledWrapper>
     </>

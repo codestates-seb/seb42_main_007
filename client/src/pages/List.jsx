@@ -6,8 +6,10 @@ import Stack from "@mui/material/Stack";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
-import { format } from "date-fns";
 import LoadingIndicator from "../components/Board/Card/LoadingIndicator";
+import { addHours, format } from "date-fns";
+import ko from "date-fns/locale/ko";
+
 
 const List = () => {
   const [posts, setPosts] = useState([]);
@@ -15,17 +17,18 @@ const List = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
       const response = await axios.get(
-        `http://43.201.167.13:8080/board-posts?page=1&size=10`
+        `${process.env.REACT_APP_SERVER_URL}/board-posts?page=${currentPage}&size=10`
       );
       setPosts(response.data.data);
       setTotalPages(response.data.pageInfo.totalPages);
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000); // 2초 후 로딩 인디케이터를 숨깁니다.
+      }, 1000); // 2초 후 로딩 인디케이터를 숨깁니다.
     }
     fetchData();
   }, [currentPage]);
@@ -60,10 +63,15 @@ const List = () => {
                 </div>
                 <PostBox>
                   <RightBox><div className="name-left">{post.displayName}</div><div className="name-right">조회수 {post.viewCount}</div></RightBox>
-                  <PostDate>{format(new Date(post.createdAt), "yyyy년 M월 d일 a h:mm")}</PostDate>
+                  <PostDate>{format(
+                    addHours(new Date(post.createdAt), 9),
+                    "yyyy년 M월 d일 a h:mm",
+                    { locale: ko }
+                  )}</PostDate>
                 </PostBox>
               </PostItem>
             ))}
+            
             <Stack spacing={2} direction="row">
               <Pagination
                 count={totalPages}
@@ -71,7 +79,7 @@ const List = () => {
                 onChange={handlePageChange}
               />
             </Stack>
-          </>
+            </>
         ) : (
           <NoPost>게시글이 없습니다. 글을 작성해 주세요!</NoPost>
         )}
@@ -141,7 +149,9 @@ const PostItem = styled.div`
   }
 `;
 
-
+const ListWrapper = styled.div`
+  margin-bottom: 20rem;
+`
 
 
 const PostTitle = styled.h2`

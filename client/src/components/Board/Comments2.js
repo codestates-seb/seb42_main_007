@@ -1,44 +1,48 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  IconButton,
-  TextField,
-} from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
 import Cookies from "js-cookie";
 
-const Comments = ({ board_id }) => {
+const Comments = ({ boardPostId, comments, updateComments, displayName }) => {
   const [commentText, setCommentText] = useState("");
 
   const handleCommentSubmit = () => {
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/board-comments`,
-        { comment: commentText, boardPostId: 1 },
+        { comment: commentText, boardPostId: boardPostId, createdAt: new Date().toLocaleString(), displayName: displayName },
         {
           headers: {
-            Authorization: `Bearer: ${Cookies.get("accessToken")}`, // 저장된 토큰 가져오기
+            Authorization: `Bearer: ${Cookies.get("accessToken")}`,
           },
         },
-        { withCredentials: true }, // 추가
+        { withCredentials: true },
       )
       .then((res) => {
         console.log("댓글 작성 성공:", res.data);
         window.alert("댓글 작성 완료");
+        setCommentText("");
+        updateComments({
+          boardCommentId: res.data.boardCommentId,
+          comment: commentText,
+          displayName: res.data.displayName,
+          createdAt: res.data.createdAt,
+        });
+         // Update comments with the new comment
       })
       .catch((err) => {
         console.error("댓글 작성 실패:", err);
-        window.alert("작성 실패");
+        window.alert("작성 실패, 로그인이 되어있는지 마이페이지에서 닉네임을 확인해주세요, 닉네임이 안보이면 로그인이 풀린 상태입니다. 로그아웃 버튼을 누르고 다시 로그인해주세요.");
       });
   };
 
+  
   const handleCommentTextChange = (e) => {
     setCommentText(e.target.value);
   };
 
+  
   return (
     <>
       <CommentsWrapper>
@@ -61,7 +65,6 @@ const Comments = ({ board_id }) => {
 };
 
 export default Comments;
-
 const CommentsWrapper = styled.div`
   .commentsHeader {
     margin: 1rem 0;

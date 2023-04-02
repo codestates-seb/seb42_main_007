@@ -39,7 +39,7 @@ function App() {
           <Route path="/WaveFind" element={<WaveFind></WaveFind>}></Route>
           <Route path="/Write" element={<Write></Write>}></Route>
           <Route path="/edit/:boardPostId" element={<Edit></Edit>}></Route>
-          {/* <Route path="/Delete" element={<Delete></Delete>}></Route> */}
+          <Route path="/Delete" element={<Delete></Delete>}></Route>
           <Route path="/List" element={<List></List>}></Route>
           <Route path="/Detail" element={<Detail></Detail>}></Route>
           <Route path="/login" element={<Login />}></Route>

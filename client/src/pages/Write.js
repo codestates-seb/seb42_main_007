@@ -67,7 +67,7 @@ const Write = () => {
     
     try {
       const response = await axios.post(
-        `http://43.201.167.13:8080/board-posts`,
+        `${process.env.REACT_APP_SERVER_URL}/board-posts`,
         {
           title: data?.title,
           content: content,

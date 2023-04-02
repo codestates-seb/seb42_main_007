@@ -29,7 +29,7 @@ public class BoardPost extends Auditable {
     @Column(nullable = false)
     private String imgPath;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
+    @Column(nullable = false)
     private long viewCount;
 
     @ManyToOne

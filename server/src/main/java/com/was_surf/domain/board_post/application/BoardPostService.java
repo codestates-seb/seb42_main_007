@@ -66,7 +66,7 @@ public class BoardPostService {
         return response;
     }
 
-    // 검색 조회
+    // 개별 조회
     public BoardPost findBoardPost(long boardPostId) {
         BoardPost response = findVerifiedExistBoardPost(boardPostId);
 

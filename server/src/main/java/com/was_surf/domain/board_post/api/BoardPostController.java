@@ -88,7 +88,4 @@ public class BoardPostController {
                                           Principal principal) {
         boardPostService.deleteBoardPost(boardPostId, principal.getName());
     }
-    
-    // 조회수 세기
-    
 }

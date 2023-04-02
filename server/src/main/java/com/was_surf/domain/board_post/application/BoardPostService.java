@@ -46,7 +46,9 @@ public class BoardPostService {
         // 회원 정보 조회
         Member member = memberService.findMemberToEmail(email);
 
+        // 확인
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPost.getBoardPostId());
+        verifyMatchMember(existBoardPost, member);
 
         Optional.ofNullable(boardPost.getTitle())
                 .ifPresent(title -> existBoardPost.setTitle(title));
@@ -85,7 +87,10 @@ public class BoardPostService {
         // 회원 정보 조회
         Member member = memberService.findMemberToEmail(email);
 
+        // 확인
         BoardPost existBoardPost = findVerifiedExistBoardPost(boardPostId);
+        verifyMatchMember(existBoardPost, member);
+
         boardPostRepository.delete(existBoardPost);
     }
 
@@ -118,7 +123,7 @@ public class BoardPostService {
         long boardPostHasMemberId = boardPost.getMember().getMemberId();
         long currentMemberId = member.getMemberId();
 
-        if (!(boardPostHasMemberId == currentMemberId) || (member.getRoles().contains("USER") && member.getRoles().contains("ADMIN"))) {
+        if (boardPostHasMemberId != currentMemberId || member.getRoles().contains("ADMIN")) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
     }

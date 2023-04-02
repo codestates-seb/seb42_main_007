@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -20,11 +22,13 @@ public class SpotReview extends Auditable {
     private long spotReviewId;
 
     // 별점: int 1 ~ 5 사이
-    @NotNull
+    @Min(1)
+    @Max(5)
     @Column(nullable = false)
     private int rating;
 
     // 후기: 비어도 등록 가능
+    @Size(max = 500, message = "최대 100자까지 입력 가능합니다.")
     private String review;
 
     @ManyToOne
@@ -46,6 +50,7 @@ public class SpotReview extends Auditable {
     }
 
     public void setSurfSpot(SurfSpot surfSpot) {
+
         this.surfSpot = surfSpot;
     }
 }
